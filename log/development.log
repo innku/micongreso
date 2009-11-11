@@ -12292,3 +12292,224 @@ Rendering news/index
 Rendered users/_user_bar (1.7ms)
 Rendered layouts/_menu (0.1ms)
 Completed in 22ms (View: 8, DB: 5) | 200 OK [http://diputado.local/news]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UsersController#index (for 127.0.0.1 at 2009-11-11 16:14:30) [GET]
+  [4;36;1mUser Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM `users` [0m
+Rendering template within layouts/application
+Rendering users/index
+Rendered users/_user_bar (1.2ms)
+Rendered layouts/_menu (0.6ms)
+Completed in 42ms (View: 21, DB: 2) | 200 OK [http://diputado.local/users]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UsersController#new (for 127.0.0.1 at 2009-11-11 16:14:32) [GET]
+  [4;35;1mUser Columns (1.2ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering template within layouts/application
+Rendering users/new
+Rendered users/_user_bar (0.4ms)
+Rendered layouts/_menu (0.1ms)
+Completed in 12ms (View: 7, DB: 2) | 200 OK [http://diputado.local/users/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NewsController#index (for 127.0.0.1 at 2009-11-11 16:14:35) [GET]
+  [4;35;1mUser Columns (21.7ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (8.5ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mNews Load (0.3ms)[0m   [0mSELECT * FROM `news` [0m
+Rendering template within layouts/application
+Rendering news/index
+  [4;36;1mNews Columns (1.1ms)[0m   [0;1mSHOW FIELDS FROM `news`[0m
+  [4;35;1mTagging Columns (1.2ms)[0m   [0mSHOW FIELDS FROM `taggings`[0m
+  [4;36;1mTag Load (0.4ms)[0m   [0;1mSELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.id = `taggings`.tag_id WHERE ((`taggings`.taggable_id = 1) AND (`taggings`.taggable_type = 'News')) [0m
+  [4;35;1mTag Columns (1.8ms)[0m   [0mSHOW FIELDS FROM `tags`[0m
+  [4;36;1mTag Load (0.6ms)[0m   [0;1mSELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.id = `taggings`.tag_id WHERE ((`taggings`.taggable_id = 2) AND (`taggings`.taggable_type = 'News')) [0m
+Rendered users/_user_bar (1.9ms)
+Rendered layouts/_menu (0.1ms)
+Completed in 92ms (View: 37, DB: 36) | 200 OK [http://diputado.local/news]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NewsController#new (for 127.0.0.1 at 2009-11-11 16:14:38) [GET]
+  [4;35;1mUser Columns (1110.4ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (4.6ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mNews Columns (11.7ms)[0m   [0mSHOW FIELDS FROM `news`[0m
+Rendering template within layouts/application
+Rendering news/new
+Rendered users/_user_bar (2.4ms)
+Rendered layouts/_menu (0.1ms)
+Completed in 1169ms (View: 34, DB: 1127) | 200 OK [http://diputado.local/news/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UsersController#index (for 127.0.0.1 at 2009-11-11 16:32:49) [GET]
+  [4;36;1mUser Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM `users` [0m
+Rendering template within layouts/application
+Rendering users/index
+Rendered users/_user_bar (1.4ms)
+Rendered layouts/_menu (0.6ms)
+Completed in 43ms (View: 22, DB: 2) | 200 OK [http://diputado.local/users]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UsersController#new (for 127.0.0.1 at 2009-11-11 16:32:52) [GET]
+  [4;35;1mUser Columns (1.2ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering template within layouts/application
+Rendering users/new
+Rendered users/_user_bar (0.4ms)
+Rendered layouts/_menu (0.1ms)
+Completed in 12ms (View: 7, DB: 2) | 200 OK [http://diputado.local/users/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UsersController#create (for 127.0.0.1 at 2009-11-11 16:33:04) [POST]
+  Parameters: {"commit"=>"Guardar Usuario", "authenticity_token"=>"IgTuEpUEavXK8lJjoItIF8IcvwTxq+Kgl5K9VqqASDQ=", "user"=>{"name"=>"Alberto Padilla", "password_confirmation"=>"secret", "password"=>"secret", "email"=>"alberto@innku.com"}}
+  [4;35;1mUser Columns (1.2ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mUser Exists (0.2ms)[0m   [0;1mSELECT `users`.id FROM `users` WHERE (`users`.`email` = BINARY 'alberto@innku.com') LIMIT 1[0m
+  [4;35;1mUser Create (0.3ms)[0m   [0mINSERT INTO `users` (`name`, `salt`, `created_at`, `activated_at`, `crypted_password`, `remember_token_expires_at`, `updated_at`, `activation_code`, `role`, `remember_token`, `email`) VALUES('Alberto Padilla', 'ed829f95b8467d7d7f8f4ebad9474d522bb57791', '2009-11-11 22:33:04', NULL, '721757a8bde86956d5ac9fe41b5a56ad26dacfd2', NULL, '2009-11-11 22:33:04', 'f6035c0ef08638fdf4ddbafb8c5b0ba2049c5626', 'admin', NULL, 'alberto@innku.com')[0m
+Sent mail to alberto@innku.com
+
+Date: Wed, 11 Nov 2009 16:33:04 -0600
+From: no-responder@diputadorvirtual.mx
+To: alberto@innku.com
+Subject: Diputado Virtual Por favor activa tu cuenta
+Mime-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Tu cuenta ha sido creada.
+
+  Correo Electronico: alberto@innku.com
+  Contraseña: 				secret
+
+Visita la siguiente liga para activar tu cuenta:
+
+  diputado.local//activate/f6035c0ef08638fdf4ddbafb8c5b0ba2049c5626
+  [4;36;1mSQL (0.4ms)[0m   [0;1mCOMMIT[0m
+Redirected to http://diputado.local/users
+Completed in 96ms (DB: 3) | 302 Found [http://diputado.local/users]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UsersController#index (for 127.0.0.1 at 2009-11-11 16:33:04) [GET]
+  [4;35;1mUser Columns (1.2ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM `users` [0m
+Rendering template within layouts/application
+Rendering users/index
+Rendered users/_user_bar (0.3ms)
+Rendered layouts/_menu (0.1ms)
+Completed in 9ms (View: 4, DB: 2) | 200 OK [http://diputado.local/users]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UsersController#activate (for 127.0.0.1 at 2009-11-11 16:35:05) [GET]
+  [4;36;1mUser Columns (1.2ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mCOMMIT[0m
+Redirected to http://diputado.local/
+Completed in 7ms (DB: 2) | 302 Found [http://diputado.local/activate/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2009-11-11 16:35:05) [GET]
+Rendering template within layouts/application
+Rendering sessions/new
+Rendered users/_user_bar (0.3ms)
+Rendered layouts/_menu (0.1ms)
+Completed in 64ms (View: 63, DB: 0) | 200 OK [http://diputado.local/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UsersController#activate (for 127.0.0.1 at 2009-11-11 16:35:11) [GET]
+  Parameters: {"activation_code"=>"f6035c0ef08638fdf4ddbafb8c5b0ba2049c5626"}
+Redirected to http://diputado.local/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://diputado.local/activate/f6035c0ef08638fdf4ddbafb8c5b0ba2049c5626]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2009-11-11 16:35:11) [GET]
+Rendering template within layouts/application
+Rendering sessions/new
+Rendered users/_user_bar (0.3ms)
+Rendered layouts/_menu (0.1ms)
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://diputado.local/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UsersController#activate (for 127.0.0.1 at 2009-11-11 16:35:45) [GET]
+  Parameters: {"activation_code"=>"f6035c0ef08638fdf4ddbafb8c5b0ba2049c5626"}
+Redirected to http://diputado.local/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://diputado.local/activate/f6035c0ef08638fdf4ddbafb8c5b0ba2049c5626]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2009-11-11 16:35:45) [GET]
+Rendering template within layouts/application
+Rendering sessions/new
+Rendered users/_user_bar (0.3ms)
+Rendered layouts/_menu (0.1ms)
+Completed in 4ms (View: 2, DB: 0) | 200 OK [http://diputado.local/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UsersController#activate (for 127.0.0.1 at 2009-11-11 16:36:55) [GET]
+  Parameters: {"activation_code"=>"f6035c0ef08638fdf4ddbafb8c5b0ba2049c5626"}
+  [4;36;1mUser Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`activation_code` = 'f6035c0ef08638fdf4ddbafb8c5b0ba2049c5626') LIMIT 1[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mUser Update (0.3ms)[0m   [0mUPDATE `users` SET `updated_at` = '2009-11-11 22:36:55', `activated_at` = '2009-11-11 22:36:55', `activation_code` = NULL WHERE `id` = 3[0m
+Sent mail to alberto@innku.com
+
+Date: Wed, 11 Nov 2009 16:36:55 -0600
+From: no-responder@diputadorvirtual.mx
+To: alberto@innku.com
+Subject: Diputado Virtual Tu cuenta ha sido activada!
+Mime-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Estimado Alberto Padilla,
+
+¡Tu cuenta en diputado virtual ha sido activada!
+
+  diputado.local//
+  [4;36;1mSQL (13.1ms)[0m   [0;1mCOMMIT[0m
+Redirected to http://diputado.local/login
+Completed in 142ms (DB: 15) | 302 Found [http://diputado.local/activate/f6035c0ef08638fdf4ddbafb8c5b0ba2049c5626]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2009-11-11 16:36:55) [GET]
+Rendering template within layouts/application
+Rendering sessions/new
+Rendered users/_user_bar (0.3ms)
+Rendered layouts/_menu (0.1ms)
+Completed in 4ms (View: 3, DB: 0) | 200 OK [http://diputado.local/login]

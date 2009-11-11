@@ -2,6 +2,8 @@ class UsersController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
   
+  skip_before_filter  :login_required, :only => :activate
+  
   def index
     @users = User.all
   end
@@ -45,10 +47,10 @@ class UsersController < ApplicationController
     case
     when (!params[:activation_code].blank?) && user && !user.active?
       user.activate!
-      flash[:notice] = "Signup complete! Please sign in to continue."
+      flash[:notice] = "Ha completado su registro, ingrese su correo y contraseña."
       redirect_to '/login'
     when params[:activation_code].blank?
-      flash[:error] = "The activation code was missing.  Please follow the URL from your email."
+      flash[:error] = "No encontramos el código de activación. Por favor haga clic en el correo que le enviamos."
       redirect_back_or_default('/')
     else 
       flash[:error]  = "We couldn't find a user with that activation code -- check your email? Or maybe you've already activated -- try signing in."
