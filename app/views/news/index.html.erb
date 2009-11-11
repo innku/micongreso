@@ -1,0 +1,19 @@
+<% title "News" %>
+
+
+<% for news in @news %>
+	<div class="news">
+		<div class="title">
+			<h3><%= link_to news.title, news %></h3>
+			<span><%=h news.date %></span>
+			<span><%= link_to "Edit", edit_news_path(news) %></span>
+		</div>
+		
+		<p><%=h news.abstract %></p>
+		<% unless news.tag_list.empty? %>
+			<p>Tags: <%= news.tag_list.join(', ') %></p>
+		<% end %>
+	</div>
+<% end %>
+
+<p><%= link_to "Nueva Noticia", new_news_path %></p>

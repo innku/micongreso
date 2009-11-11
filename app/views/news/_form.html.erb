@@ -1,0 +1,50 @@
+<% content_for :jQuery do -%>
+	<%= javascript_include_tag 'jquery-1.3.2.min', 'jquery-ui-1.7.2.min', 'jquery.apTextCounter.min', 'ui.datepicker-es', 'application' %>
+	<%= stylesheet_link_tag 'jquery-ui-1.7.2' %>
+<% end -%>
+
+<% form_for @news, :html => { :multipart => true } do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :title, "Título" %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :abstract, "Resumen" %><br />
+    <%= f.text_area :abstract, :rows => 4, :cols => 60 %>
+		<div id="chars_left"></div>
+  </p>
+  <p>
+    <%= f.label :body, "Cuerpo" %><br />
+    <%= f.text_area :body, :rows => 20, :class => "rte-zone" %>
+  </p>
+  <p>
+    <%= f.label :date, "Fecha" %>
+		<%= f.text_field :formatted_date, :class => "input_text datepicker", :id => "datepicker" %>
+		<%= f.text_field :date, :id => "actualDate", :style => "display: none;" %>
+  </p>
+  <p>
+    <%= f.label :source, "Fuente" %> <%= f.text_field :source %>
+  </p>
+	<p>
+		<%= f.label :photo, "Imagen / Fotografía" %>
+		<%= f.file_field :photo %>
+	</p>
+	<p>
+		<%= f.label :tag_list, "Tags" %> <%= f.text_field :tag_list %>
+	</p>
+  <p><%= f.submit "Guardar Noticia" %></p>
+<% end %>
+
+<%= javascript_include_tag 'jquery', 'jquery.rte', 'jquery.rte.tb' %>
+
+<%= stylesheet_link_tag 'jquery.rte' %>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	var arr = $('.rte-zone').rte({
+		controls_rte: rte_toolbar,
+		controls_html: html_toolbar
+	});
+});
+</script>

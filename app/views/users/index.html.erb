@@ -1,0 +1,18 @@
+<% title("Usuarios") %>
+
+<table>
+	<tr>
+		<th>Nombre</th>
+		<th>Correo</th>
+		<th></th>
+	</tr>
+	<% for user in @users %>
+		<tr>
+			<td><%= user.name %></td>
+			<td><%= user.email %></td>
+			<th><%= link_to "Editar", edit_user_path(user) %></th>
+		</tr>
+	<% end %>
+</table>
+
+<%= link_to "Nuevo Usuario", new_user_path %>

@@ -1,0 +1,15 @@
+<% title @news.title %>
+
+<div><%=h @news.date %>, Fuente: <%=h @news.source %></div>
+
+<div class="news_body">
+	<%= image_tag(@news.photo.url(:medium), :class => "photo") if @news.photo? %>
+	<%= @news.body %>
+</div>
+
+
+<p>
+  <%= link_to "Editar", edit_news_path(@news) %> |
+  <%= link_to "Eliminar", @news, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "Regresar a noticias", news_index_path %>
+</p>

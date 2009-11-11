@@ -1,0 +1,8 @@
+<% if logged_in? %>
+	<div id="menu">
+		<ul>
+			<li><%= link_to "Usuarios", users_path %></li>
+			<li><%= link_to "Noticias", news_index_path %></li>
+		</ul>
+	</div>
+<% end %>

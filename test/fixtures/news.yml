@@ -1,0 +1,13 @@
+one:
+  title: MyString
+  abstract: MyText
+  body: MyText
+  date: 2009-11-11
+  source: MyString
+
+two:
+  title: MyString
+  abstract: MyText
+  body: MyText
+  date: 2009-11-11
+  source: MyString
