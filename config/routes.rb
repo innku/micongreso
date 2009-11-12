@@ -5,13 +5,13 @@ ActionController::Routing::Routes.draw do |map|
   map.register '/register', :controller => 'users', :action => 'create'
   map.signup '/signup', :controller => 'users', :action => 'new'
   
-  map.resources :news
+  map.resources :news, :has_many => :comments
   map.resources :users
   map.resource :session
   
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil
   
-  map.root :controller => "sessions", :action => "new"
+  map.root :controller => "news", :action => "index"
 
   # The priority is based upon order of creation: first created -> highest priority.
 

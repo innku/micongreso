@@ -6,7 +6,9 @@
 		<div class="title">
 			<h3><%= link_to news.title, news %></h3>
 			<span><%=h news.date %></span>
-			<span><%= link_to "Edit", edit_news_path(news) %></span>
+			<% if admin?(current_user) %>
+				<span><%= link_to "Edit", edit_news_path(news) %></span>
+			<% end %>
 		</div>
 		
 		<p><%=h news.abstract %></p>
@@ -16,4 +18,6 @@
 	</div>
 <% end %>
 
-<p><%= link_to "Nueva Noticia", new_news_path %></p>
+<% if admin?(current_user) %>
+	<p><%= link_to "Nueva Noticia", new_news_path %></p>
+<% end %>

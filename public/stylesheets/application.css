@@ -41,6 +41,34 @@ NEWS
 }
 
 /*-------------------------------------------------
+COMMENTS
+-------------------------------------------------*/
+
+.comments {
+	width: 400px;
+	padding: 10px;
+	background: #ececec;
+	border: 1px solid #bfbfbf;
+}
+
+.comment {
+	padding: 10px 0;
+	border-bottom: 1px solid #bfbfbf;
+}
+
+.comment h4 {
+	margin: 2px 0;
+}
+
+.comment p {
+	margin: 2px 0;
+}
+
+#flash_recaptcha_error {
+	display: none;
+}
+
+/*-------------------------------------------------
 FLASH MESSAGES
 -------------------------------------------------*/
 

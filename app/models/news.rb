@@ -5,6 +5,7 @@ class News < ActiveRecord::Base
   validates_presence_of :body, :message => "^Te faltó el cuerpo de la noticia"
   
   acts_as_taggable
+  acts_as_commentable
   
   production = ENV['RAILS_ENV'] == 'production'
   

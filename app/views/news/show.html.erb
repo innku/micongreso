@@ -9,7 +9,46 @@
 
 
 <p>
-  <%= link_to "Editar", edit_news_path(@news) %> |
-  <%= link_to "Eliminar", @news, :confirm => 'Are you sure?', :method => :delete %> |
+	<% if admin?(current_user) %>
+	  <%= link_to "Editar", edit_news_path(@news) %> |
+	  <%= link_to "Eliminar", @news, :confirm => 'Are you sure?', :method => :delete %> |
+	<% end %>
+
   <%= link_to "Regresar a noticias", news_index_path %>
 </p>
+
+<h3>Comentarios (<%= @news.comments.size %>)</h3>
+<div class="comments">
+	<% for comment in @news.comments %>
+		<div class="comment">
+			<h4><%=h comment.title %></h4>
+			<p><%=h comment.comment %></p>
+			<% if admin?(current_user) %>
+				<%= link_to "Eliminar", news_comment_path(@news, comment), :method => :delete, :confirm => "¿Esta seguro que lo desea eliminar?" %>
+			<% end %>
+		</div>
+	<% end %>
+</div>
+
+
+<div id="comment_form">
+	<h4>Envíanos tus comentarios:</h4>
+	
+	<% form_for [@news, Comment.new] do |f| %>
+		<%= f.error_messages %>
+		<p>
+			<%= f.label :title, "Título" %> <br />
+			<%= f.text_field :title %>
+		</p>
+		<p>
+			<%= f.label :comment, "Comentario" %> <br />
+			<%= f.text_area :comment, :rows => 4, :cols => 40 %>
+		</p>
+		<p>
+			<%= recaptcha_tags(:display => {:theme => "clean"}) %>
+		</p>
+		<p>
+			<%= f.submit "Enviar Comentario" %>
+		</p>
+	<% end %>
+</div>

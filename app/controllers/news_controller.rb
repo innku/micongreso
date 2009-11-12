@@ -1,4 +1,7 @@
 class NewsController < ApplicationController
+  
+  skip_before_filter :login_required, :only => [:index, :show]
+  
   def index
     @news = News.all
   end

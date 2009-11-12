@@ -38,6 +38,10 @@ class User < ActiveRecord::Base
     # the existence of an activation code means they have not activated yet
     activation_code.nil?
   end
+  
+  def admin?
+    role == "admin"
+  end
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   #
