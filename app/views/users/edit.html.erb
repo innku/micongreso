@@ -17,3 +17,5 @@
 
 	<p><%= submit_tag 'Guardar Usuario' %></p>
 <% end -%>
+
+<%= link_to "Eliminar", @user, :method => :delete, :confirm => "¿Estas seguro que lo deseas eliminar?" %>

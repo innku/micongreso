@@ -9,7 +9,41 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091111214649) do
+ActiveRecord::Schema.define(:version => 20091113191304) do
+
+  create_table "comments", :force => true do |t|
+    t.string   "title",            :limit => 50, :default => ""
+    t.text     "comment"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"
+  add_index "comments", ["commentable_type"], :name => "index_comments_on_commentable_type"
+  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
+
+  create_table "members", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "party_id"
+    t.string   "commission"
+    t.string   "state_id"
+    t.integer  "district"
+    t.string   "head"
+    t.string   "election"
+    t.date     "birthdate"
+    t.string   "birthplace"
+    t.string   "substitute"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size",    :default => 0
+    t.datetime "picture_updated_at"
+  end
 
   create_table "news", :force => true do |t|
     t.string   "title"
@@ -23,6 +57,18 @@ ActiveRecord::Schema.define(:version => 20091111214649) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size",    :default => 0
     t.datetime "photo_updated_at"
+  end
+
+  create_table "parties", :force => true do |t|
+    t.string "name"
+    t.string "abbr"
+  end
+
+  create_table "states", :force => true do |t|
+    t.string "name"
+    t.string "abbr"
+    t.string "short2"
+    t.string "short3"
   end
 
   create_table "taggings", :force => true do |t|
