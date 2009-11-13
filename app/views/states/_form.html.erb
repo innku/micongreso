@@ -1,0 +1,20 @@
+<% form_for @state do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :abbr %><br />
+    <%= f.text_field :abbr %>
+  </p>
+  <p>
+    <%= f.label :short2 %><br />
+    <%= f.text_field :short2 %>
+  </p>
+  <p>
+    <%= f.label :short3 %><br />
+    <%= f.text_field :short3 %>
+  </p>
+  <p><%= f.submit "Guardar Estado" %></p>
+<% end %>

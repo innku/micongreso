@@ -1,0 +1,12 @@
+<% form_for @party do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :name, "Nombre" %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :abbr, "Abreviación" %><br />
+    <%= f.text_field :abbr %>
+  </p>
+  <p><%= f.submit "Guardar Partido" %></p>
+<% end %>

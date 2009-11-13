@@ -1,0 +1,11 @@
+<% title "Editar Estado" %>
+
+<%= render :partial => 'form' %>
+
+<p>
+	<%= link_to "Eliminar", @state, :method => :delete, :confirm => "¿Estas seguro que lo deseas eliminar?" %>
+</p>
+
+<p>
+  <%= link_to "Regresar a estados", states_path %>
+</p>

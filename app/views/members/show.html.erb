@@ -1,0 +1,49 @@
+<% title @member.name %>
+
+
+<%= image_tag(@member.picture.url(:medium)) %>
+<p>
+  <strong>Correo Electrónico:</strong>
+  <%=h @member.email %>
+</p>
+<p>
+  <strong>Partido:</strong>
+  <%=h @member.party.name %>
+</p>
+<p>
+  <strong>Comisión:</strong>
+  <%=h @member.commission %>
+</p>
+<p>
+  <strong>Estado:</strong>
+  <%=h @member.state.name %>
+</p>
+<p>
+  <strong>Distrito:</strong>
+  <%=h @member.district %>
+</p>
+<p>
+  <strong>Cabecera:</strong>
+  <%=h @member.head %>
+</p>
+<p>
+  <strong>Tipo de Elección:</strong>
+  <%=h @member.election %>
+</p>
+<p>
+  <strong>Fecha de Nacimiento:</strong>
+  <%=h @member.birthdate %>
+</p>
+<p>
+  <strong>Lugar de Nacimiento:</strong>
+  <%=h @member.birthplace %>
+</p>
+<p>
+  <strong>Suplente:</strong>
+  <%=h @member.substitute %>
+</p>
+
+<p>
+  <%= link_to "Editar", edit_member_path(@member) %> |
+  <%= link_to "Regresar a diputados", members_path %>
+</p>

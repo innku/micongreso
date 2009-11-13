@@ -1,0 +1,53 @@
+<% form_for @member, :html => { :multipart => true } do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :name, "Nombre" %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :email, "Correo Electrónico" %><br />
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :party_id, "Partido" %><br />
+    <%= f.select :party_id, Party.all.collect {|p| [p.name, p.id]} %>
+  </p>
+  <p>
+    <%= f.label :commission, "Comisión" %><br />
+    <%= f.text_field :commission %>
+  </p>
+  <p>
+    <%= f.label :state_id, "Entidad" %><br />
+    <%= f.select :state_id, State.all.collect {|s| [s.name, s.id]} %>
+  </p>
+  <p>
+    <%= f.label :district, "Distrito" %><br />
+    <%= f.text_field :district %>
+  </p>
+  <p>
+    <%= f.label :head, "Cabecera" %><br />
+    <%= f.text_field :head %>
+  </p>
+  <p>
+    <%= f.label :election, "Tipo de elección" %><br />
+    <%= f.radio_button :election, "Mayoría Relativa", :checked => true %> Mayoría Relativa
+		<%= f.radio_button :election, "Representación Proporcional" %> Representación Proporcional
+  </p>
+  <p>
+    <%= f.label :birthdate, "Fecha de Nacimiento" %><br />
+    <%= f.date_select :birthdate %>
+  </p>
+  <p>
+    <%= f.label :birthplace, "Lugar de Nacimiento" %><br />
+    <%= f.text_field :birthplace %>
+  </p>
+	<p>
+		<%= f.label :picture %> <br />
+		<%= f.file_field :picture %>
+	</p>
+  <p>
+    <%= f.label :substitute, "Suplente" %><br />
+    <%= f.text_field :substitute %>
+  </p>
+  <p><%= f.submit "Guardar Diputado" %></p>
+<% end %>

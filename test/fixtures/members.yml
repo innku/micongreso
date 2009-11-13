@@ -1,0 +1,25 @@
+one:
+  name: MyString
+  email: MyString
+  party: MyString
+  commission: MyString
+  state: MyString
+  district: 1
+  head: MyString
+  election: MyString
+  birthdate: 2009-11-13 12:09:29
+  birthplace: MyString
+  substitute: MyString
+
+two:
+  name: MyString
+  email: MyString
+  party: MyString
+  commission: MyString
+  state: MyString
+  district: 1
+  head: MyString
+  election: MyString
+  birthdate: 2009-11-13 12:09:29
+  birthplace: MyString
+  substitute: MyString

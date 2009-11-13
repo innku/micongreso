@@ -17,7 +17,7 @@ class News < ActiveRecord::Base
 
   validates_attachment_size         :photo, :less_than => 10.megabytes, :message => "^El archivo debe ser menor a 10 MegaBytes"
   validates_attachment_content_type :photo, :content_type => ['image/jpeg','image/jpg','image/jpeg','image/pjpeg','image/png','image/x-png','image/gif'], 
-                                              :message => "^Solo están permitidos documentos tipo JPEG, PNG, y GIF."
+                                              :message => "^Solo están permitidas las imágenes tipo JPEG, PNG y GIF."
   
   def formatted_date
     if self.new_record?
