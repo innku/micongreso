@@ -41,7 +41,7 @@ class NewsController < ApplicationController
   def destroy
     @news = News.find(params[:id])
     @news.destroy
-    flash[:notice] = "Successfully destroyed news."
-    redirect_to news_url
+    flash[:notice] = "La noticia se eliminó correctamente."
+    redirect_to news_index_url
   end
 end
