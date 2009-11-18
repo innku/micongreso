@@ -11,6 +11,15 @@ class UserMailer < ActionMailer::Base
     @body[:url]  = "#{$global_url}/"
   end
   
+  def message_to_member(message, member)
+    @recipients  = "#{member.email}, mensajes@diputadovirtual.mx"
+    @from        = "no-responder@diputadorvirtual.mx"
+    @subject     = "Diputado Virtual "
+    @sent_on     = Time.now
+    @body[:message] = message
+    @body[:member] = member
+  end
+  
   protected
     def setup_email(user)
       @recipients  = "#{user.email}"

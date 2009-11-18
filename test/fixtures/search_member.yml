@@ -1,0 +1,9 @@
+one:
+  name: MyString
+  party_id: 1
+  state_id: 1
+
+two:
+  name: MyString
+  party_id: 1
+  state_id: 1

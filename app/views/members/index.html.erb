@@ -14,9 +14,15 @@
       <td><%=h member.party.abbr %></td>
       <td><%=h member.state.name %></td>
       <td><%=h member.district %></td>
-      <td><%= link_to "Editar", edit_member_path(member) %></td>
+      <td> 
+				<% if admin?(current_user) %>
+					<%= link_to "Editar", edit_member_path(member) %>
+				<% end %>
+			</td>
     </tr>
   <% end %>
 </table>
 
-<p><%= link_to "Nuevo Diputado", new_member_path %></p>
+<% if admin?(current_user) %>
+	<p><%= link_to "Nuevo Diputado", new_member_path %></p>
+<% end %>

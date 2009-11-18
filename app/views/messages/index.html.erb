@@ -1,0 +1,9 @@
+<% title "Mensajes a #{@member.name}" %>
+
+<% for message in @messages %>
+	<div>
+		<p><%= message.text %></p>
+		<div><%= message.name %>, <%= message.email %></div>
+		<div><%= message.created_at.to_s(:short) %></div>
+	</div>
+<% end %>

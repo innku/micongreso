@@ -1,0 +1,16 @@
+<% form_for @search_member do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :name, "Nombre" %>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :party_id, "Partido" %>
+    <%= f.collection_select :party_id, Party.all, :id_as_string, :name, {:prompt => "Todos"} %>
+  </p>
+  <p>
+    <%= f.label :state_id, "Entidad" %>
+    <%= f.collection_select :state_id, State.all, :id_as_string, :name, {:prompt => "Todos"} %>
+  </p>
+  <p><%= f.submit "Buscar" %></p>
+<% end %>

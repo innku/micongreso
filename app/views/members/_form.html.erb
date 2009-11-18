@@ -10,7 +10,7 @@
   </p>
   <p>
     <%= f.label :party_id, "Partido" %><br />
-    <%= f.select :party_id, Party.all.collect {|p| [p.name, p.id]} %>
+    <%= f.collection_select :party_id, Party.all, :id_as_string, :name %>
   </p>
   <p>
     <%= f.label :commission, "Comisión" %><br />
@@ -18,7 +18,7 @@
   </p>
   <p>
     <%= f.label :state_id, "Entidad" %><br />
-    <%= f.select :state_id, State.all.collect {|s| [s.name, s.id]} %>
+    <%= f.collection_select :state_id, State.all, :id_as_string, :name %>
   </p>
   <p>
     <%= f.label :district, "Distrito" %><br />
@@ -35,7 +35,7 @@
   </p>
   <p>
     <%= f.label :birthdate, "Fecha de Nacimiento" %><br />
-    <%= f.date_select :birthdate %>
+    <%= f.date_select :birthdate, :start_year => Time.now.year - 80, :end_year => Time.now.year - 20, :default => Date.today - 40.years %>
   </p>
   <p>
     <%= f.label :birthplace, "Lugar de Nacimiento" %><br />

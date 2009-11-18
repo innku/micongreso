@@ -1,3 +1,5 @@
+require 'feedzirra'
+
 class News < ActiveRecord::Base
   
   validates_presence_of :title, :message => "^Te faltó el título"
@@ -29,4 +31,33 @@ class News < ActiveRecord::Base
   
   def formatted_date=(date)
   end
+  
+  def self.read_new_feed
+    feed = Feedzirra::Feed.fetch_and_parse("http://www3.diputados.gob.mx/camara/rss/feed/Noticias09.xml")
+    create_news_from_feed(feed.entries, "Cámara de Diputados")
+  end
+  
+  def self.update_feeds
+    feed = Feedzirra::Feed.fetch_and_parse("http://www3.diputados.gob.mx/camara/rss/feed/Noticias09.xml")
+    updated_feed = Feedzirra::Feed.update(feed)
+    
+    RAILS_DEFAULT_LOGGER.debug "Se actualizo? #{updated_feed.updated?}"
+    RAILS_DEFAULT_LOGGER.debug "Nuevas entradas: #{updated_feed.new_entries.inspect}"
+    
+    create_news_from_feed(updated_feed.new_entries, "Cámara de Diputados")
+  end
+  
+  private
+  def self.create_news_from_feed(entries, tags="")
+    for entry in entries
+      news = News.new
+      news.title = entry.title
+      news.abstract = entry.summary.strip.gsub(/<\/?[^>]*>/, "")[0,295] << "..."
+      news.body = entry.summary
+      news.date = Date.today
+      news.tag_list = tags
+      news.save
+    end
+  end
+  
 end

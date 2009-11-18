@@ -3,6 +3,8 @@ class Member < ActiveRecord::Base
   belongs_to  :state
   belongs_to  :party
   
+  has_many    :messages
+  
   production = ENV['RAILS_ENV'] == 'production'
   
   has_attached_file :picture, :styles => { :medium => "360x240>", :thumb => "150x100>" },
@@ -20,4 +22,5 @@ class Member < ActiveRecord::Base
   validates_presence_of :party_id, :message => "^Por favor seleccione el partido"
   validates_presence_of :state_id, :message => "^Por favor seleccione el estado"
   validates_presence_of :district, :message => "^Por favor ingrese el distrito del diputado"
+  
 end

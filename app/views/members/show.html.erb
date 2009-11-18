@@ -43,7 +43,35 @@
   <%=h @member.substitute %>
 </p>
 
-<p>
-  <%= link_to "Editar", edit_member_path(@member) %> |
-  <%= link_to "Regresar a diputados", members_path %>
-</p>
+<div id="message">
+	<h3>Enviar mensaje a diputado</h3>
+	
+	<% form_for [@member, @message] do |f| %>
+		<%= f.error_messages %>
+		<p>
+			<%= f.text_area :text, :rows => 6 %>
+		</p>
+		<p>
+			<%= f.label :name, "Nombre" %>
+			<%= f.text_field :name %>
+		</p>
+		<p>
+			<%= f.label :email, "Correo electrónico" %>
+			<%= f.text_field :email %>
+		</p>
+		<p>
+			<%= recaptcha_tags(:display => {:theme => "clean"}) %>
+		</p>
+		<p>
+			<%= f.submit "Enviar mensaje" %>
+		</p>
+	<% end %>
+</div>
+
+<% if admin?(current_user) %>
+	<p>
+	  <%= link_to "Editar", edit_member_path(@member) %> |
+	  <%= link_to "Regresar a diputados", members_path %> |
+		<%= link_to "Mensajes a diputado", member_messages_path(@member) %>
+	</p>
+<% end %>

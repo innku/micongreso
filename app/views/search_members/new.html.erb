@@ -1,0 +1,18 @@
+<% title "Buscar diputados" %>
+
+<%= render :partial => 'form' %>
+
+<div id="parties">
+	<h4>Partidos</h4>
+	
+	<%= Party.all.collect {|party| link_to party.name, group_search_members_path(:party_id => party.id )}.join(', ')  %>
+</div>
+
+<div id="states">
+	<h4>Estados</h4>
+	<%= State.all.collect {|state| link_to state.name, group_search_members_path(:state_id => state.id )}.join(', ')  %>
+</div>
+
+<br />
+
+<%= link_to "Listar todos los diputados", members_path %>

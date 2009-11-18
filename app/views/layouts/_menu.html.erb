@@ -3,9 +3,16 @@
 		<ul>
 			<li><%= link_to "Usuarios", users_path %></li>
 			<li><%= link_to "Noticias", news_index_path %></li>
-			<li><%= link_to "Diputados", members_path %></li>
+			<li><%= link_to "Diputados", new_search_member_path %></li>
 			<li><%= link_to "Partidos", parties_path %></li>
 			<li><%= link_to "Estados", states_path %></li>
+		</ul>
+	</div>
+<% else %>
+	<div id="menu">
+		<ul>
+			<li><%= link_to "Inicio", news_index_path %></li>
+			<li><%= link_to "Diputados", new_search_member_path %></li>
 		</ul>
 	</div>
 <% end %>

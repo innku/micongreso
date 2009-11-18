@@ -1,0 +1,22 @@
+<h3>Enviar mensaje a diputado</h3>
+
+<% form_for [@member, @message] do |f| %>
+	<%= f.error_messages %>
+	<p>
+		<%= f.text_area :text, :rows => 6 %>
+	</p>
+	<p>
+		<%= f.label :name, "Nombre" %>
+		<%= f.text_field :name %>
+	</p>
+	<p>
+		<%= f.label :email, "Correo electrónico" %>
+		<%= f.text_field :email %>
+	</p>
+	<p>
+		<%= recaptcha_tags(:display => {:theme => "clean"}) %>
+	</p>
+	<p>
+		<%= f.submit "Enviar mensaje" %>
+	</p>
+<% end %>

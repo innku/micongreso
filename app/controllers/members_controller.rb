@@ -1,10 +1,14 @@
 class MembersController < ApplicationController
+  
+  skip_before_filter :login_required, :only => [:index, :show]
+  
   def index
     @members = Member.all
   end
   
   def show
     @member = Member.find(params[:id])
+    @message = Message.new
   end
   
   def new
