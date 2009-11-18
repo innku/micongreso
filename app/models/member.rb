@@ -11,7 +11,8 @@ class Member < ActiveRecord::Base
                             :storage => (production ? :s3 : :filesystem),
                             :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
                             :path => (production ? ":attachment/:id/:style/:basename.:extension" : "public/system/:attachment/:id/:style/:basename.:extension"),
-                            :bucket => $paperclip_bucket
+                            :bucket => $paperclip_bucket,
+                            :default_url => "/images/missing.png"
 
   validates_attachment_size         :picture, :less_than => 10.megabytes, :message => "^El archivo debe ser menor a 10 MegaBytes"
   validates_attachment_content_type :picture, :content_type => ['image/jpeg','image/jpg','image/jpeg','image/pjpeg','image/png','image/x-png','image/gif'], 
