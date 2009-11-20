@@ -1,0 +1,14 @@
+<% title "Propuestas" %>
+
+
+<% for bill in @bills %>
+	<div class="bills">
+		<h4><%= link_to bill.name, bill %></h4>
+		<p><%= bill.date.to_s(:short) %></p>
+		<div>Tags: <%= bill.tag_list %></div>
+	</div>
+<% end %>
+
+<% if admin?(current_user) %>
+	<p><%= link_to "Nueva Propuesta", new_bill_path %></p>
+<% end %>

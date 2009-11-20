@@ -1,0 +1,25 @@
+<% content_for :jQuery do -%>
+	<%= javascript_include_tag 'jquery-1.3.2.min', 'jquery-ui-1.7.2.min', 'ui.datepicker-es', 'application' %>
+	<%= stylesheet_link_tag 'jquery-ui-1.7.2' %>
+<% end -%>
+
+<% form_for @bill do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :name, "Nombre" %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :description, "Descripción" %><br />
+    <%= f.text_area :description, :rows => 4, :cols => 60 %>
+  </p>
+  <p>
+    <%= f.label :date, "Fecha" %>
+		<%= f.text_field :formatted_date, :class => "input_text datepicker", :id => "datepicker" %>
+		<%= f.text_field :date, :id => "actualDate", :style => "display: none;" %>
+  </p>
+	<p>
+		<%= f.label :tag_list, "Tags" %> <%= f.text_field :tag_list %>
+	</p>
+  <p><%= f.submit "Guardar Propuesta" %></p>
+<% end %>

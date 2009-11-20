@@ -1,0 +1,17 @@
+<% title @bill.name %>
+<p>
+  <%=h @bill.description %>
+</p>
+<p>
+  <strong>Fecha:</strong>
+  <%=h @bill.date.to_s(:long) %>
+</p>
+
+
+<p>
+	<% if admin?(current_user) %>
+  	<%= link_to "Editar", edit_bill_path(@bill) %> |
+  	<%= link_to "Eliminar", @bill, :confirm => 'Are you sure?', :method => :delete %> |
+	<% end %>
+  <%= link_to "Regresar a todas las propuestas", bills_path %>
+</p>

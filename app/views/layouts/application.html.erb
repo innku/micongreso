@@ -7,9 +7,9 @@
     <%= yield(:head) %>
 		<%= yield(:jQuery) %>
   </head>
-  <body>
+  <body <%= yield(:body_class) %>>
     <div id="container">
-			
+
 			<%= render :partial => "users/user_bar" %>
 			<%= render :partial => "layouts/menu" %>
 		

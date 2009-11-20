@@ -1,5 +1,61 @@
 <% title "Diputados" %>
 
+<% unless @incomplete_members.empty? %>
+	<h3>Diputados con información incompleta</h3>
+
+	<table>
+	  <tr>
+	    <th>Nombre</th>
+	    <th>Partido</th>
+	    <th>Estado</th>
+	    <th>Distrito</th>
+			<th></th>
+	  </tr>
+	  <% for member in @incomplete_members %>
+	    <tr>
+	      <td><%= link_to member.name, member %></td>
+	      <td><%=h member.party.abbr %></td>
+	      <td><%=h member.state.name %></td>
+	      <td><%=h member.district %></td>
+	      <td> 
+					<% if admin?(current_user) %>
+						<%= link_to "Editar", edit_member_path(member) %>
+					<% end %>
+				</td>
+	    </tr>
+	  <% end %>
+	</table>
+<% end %>
+
+<% unless @duplicate_members.empty? %>
+	<h3>Diputados duplicados</h3>
+
+	<table>
+	  <tr>
+	    <th>Nombre</th>
+	    <th>Partido</th>
+	    <th>Estado</th>
+	    <th>Distrito</th>
+			<th></th>
+	  </tr>
+	  <% for member in @duplicate_members %>
+	    <tr>
+	      <td><%= link_to member.name, member %></td>
+	      <td><%=h member.party.abbr %></td>
+	      <td><%=h member.state.name %></td>
+	      <td><%=h member.district %></td>
+	      <td> 
+					<% if admin?(current_user) %>
+						<%= link_to "Editar", edit_member_path(member) %>
+					<% end %>
+				</td>
+	    </tr>
+	  <% end %>
+	</table>
+<% end %>
+
+<h3>Diputados</h3>
+
 <table>
   <tr>
     <th>Nombre</th>
@@ -25,4 +81,18 @@
 
 <% if admin?(current_user) %>
 	<p><%= link_to "Nuevo Diputado", new_member_path %></p>
+	
+	<h3>Importar Diputados</h3>
+	
+	<% form_tag ({:action => 'import'}, :multipart => true) do %>
+		<h3>
+			<strong><%= label_tag :file, "Seleccione el archivo csv" %></strong>
+		</h3>
+		<p>
+			<%= file_field_tag :file %>
+		</p>
+		
+		<%= submit_tag "Importar Diputados" %>
+	<% end %>
+
 <% end %>

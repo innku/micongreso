@@ -15,4 +15,6 @@
 
 <br />
 
-<%= link_to "Listar todos los diputados", members_path %>
+<% if admin?(current_user) %>
+	<%= link_to "Listar todos los diputados", members_path %>
+<% end %>

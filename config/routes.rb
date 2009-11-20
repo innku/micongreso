@@ -1,9 +1,11 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :bills
+
   
   map.resources :search_members, :collection => {:group => :get}
   map.resources :states
   map.resources :parties
-  map.resources :members, :has_many => :messages
+  map.resources :members, :collection => {:import => :post}, :has_many => :messages
 
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'

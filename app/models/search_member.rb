@@ -10,6 +10,10 @@ class SearchMember < ActiveRecord::Base
     Member.find(:all, :include => [:party, :state], :conditions => conditions)
   end
   
+  def complete_conditions
+    ["members.complete = ?", true]
+  end
+  
   def name_conditions
     ["members.name LIKE ?", "%#{name}%"] unless name.blank?
   end

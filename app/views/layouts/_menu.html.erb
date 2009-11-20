@@ -6,6 +6,7 @@
 			<li><%= link_to "Diputados", new_search_member_path %></li>
 			<li><%= link_to "Partidos", parties_path %></li>
 			<li><%= link_to "Estados", states_path %></li>
+			<li><%= link_to "Propuestas", bills_path %></li>
 		</ul>
 	</div>
 <% else %>
@@ -13,6 +14,7 @@
 		<ul>
 			<li><%= link_to "Inicio", news_index_path %></li>
 			<li><%= link_to "Diputados", new_search_member_path %></li>
+			<li><%= link_to "Propuestas", bills_path %></li>
 		</ul>
 	</div>
 <% end %>
