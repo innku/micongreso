@@ -19,6 +19,16 @@
 		<%= f.text_field :date, :id => "actualDate", :style => "display: none;" %>
   </p>
 	<p>
+		<%= f.label :member_votes_for, "A Favor" %>
+		<%= f.text_field :member_votes_for, :size => 6 %>
+		
+		<%= f.label :member_votes_against, "En Contra" %>
+		<%= f.text_field :member_votes_against, :size => 6 %>
+		
+		<%= f.label :member_votes_neutral, "Abstenciones" %>
+		<%= f.text_field :member_votes_neutral, :size => 6 %>
+	</p>
+	<p>
 		<%= f.label :tag_list, "Tags" %> <%= f.text_field :tag_list %>
 	</p>
   <p><%= f.submit "Guardar Propuesta" %></p>

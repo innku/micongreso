@@ -14,8 +14,8 @@
 	  <% for member in @incomplete_members %>
 	    <tr>
 	      <td><%= link_to member.name, member %></td>
-	      <td><%=h member.party.abbr %></td>
-	      <td><%=h member.state.name %></td>
+	      <td><%=h member.party.abbr if member.party %></td>
+	      <td><%=h member.state.name if member.state %></td>
 	      <td><%=h member.district %></td>
 	      <td> 
 					<% if admin?(current_user) %>
@@ -41,8 +41,8 @@
 	  <% for member in @duplicate_members %>
 	    <tr>
 	      <td><%= link_to member.name, member %></td>
-	      <td><%=h member.party.abbr %></td>
-	      <td><%=h member.state.name %></td>
+	      <td><%=h member.party.abbr if member.party %></td>
+	      <td><%=h member.state.name if member.state %></td>
 	      <td><%=h member.district %></td>
 	      <td> 
 					<% if admin?(current_user) %>

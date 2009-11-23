@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   
   include AuthenticatedSystem
+  #include ApiAuthorizedFilter
   
   before_filter :login_required
   

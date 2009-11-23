@@ -7,6 +7,8 @@ class Member < ActiveRecord::Base
   
   attr_accessor :importing
   
+  acts_as_voter
+  
   production = ENV['RAILS_ENV'] == 'production'
   
   has_attached_file :picture, :styles => { :medium => "360x240>", :thumb => "150x100>" },

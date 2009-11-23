@@ -4,6 +4,7 @@ class Bill < ActiveRecord::Base
   validates_presence_of :description, :message => "^Te faltó la descripción de la propuesta"
   
   acts_as_taggable
+  acts_as_voteable
   
   def formatted_date
     if self.new_record?
