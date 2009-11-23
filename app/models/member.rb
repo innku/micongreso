@@ -49,8 +49,12 @@ class Member < ActiveRecord::Base
     write_attribute(:party_id, party.id) if party
   end
   
+  def party_name
+    self.party.name if self.party
+  end
+  
   def state_name
-    self.state.name
+    self.state.name if self.state
   end
   
   def state_name=(state_name)
