@@ -73,5 +73,6 @@
 	  <%= link_to "Editar", edit_member_path(@member) %> |
 	  <%= link_to "Regresar a diputados", members_path %> |
 		<%= link_to "Mensajes a diputado", member_messages_path(@member) %>
+		<%= link_to "Eliminar", @member, :method => :delete, :confirm => "¿Estás seguro que lo deseas eliminar?" %>
 	</p>
 <% end %>
