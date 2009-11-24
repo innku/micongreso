@@ -2,6 +2,7 @@
 
 <% unless @incomplete_members.empty? %>
 	<h3>Diputados con información incompleta</h3>
+	<p>Diputados que les falta algún dato obligatorio (nombre, correo, partido, entidad o distrito)</p>
 
 	<table>
 	  <tr>
@@ -29,7 +30,8 @@
 
 <% unless @duplicate_members.empty? %>
 	<h3>Diputados duplicados</h3>
-
+	<p>Diputados que tienen el mismo nombre o correo electrónico que uno existente.</p>
+	
 	<table>
 	  <tr>
 	    <th>Nombre</th>
@@ -83,6 +85,7 @@
 	<p><%= link_to "Nuevo Diputado", new_member_path %></p>
 	
 	<h3>Importar Diputados</h3>
+	<p><%= link_to "Descargar archivo muestra", "importar_diputados.csv" %></p>
 	
 	<% form_tag ({:action => 'import'}, :multipart => true) do %>
 		<h3>

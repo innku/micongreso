@@ -1,5 +1,7 @@
 class Bill < ActiveRecord::Base
   
+  has_many  :views
+  
   validates_presence_of :name, :message => "^Te faltó el título de la propuesta"
   validates_presence_of :description, :message => "^Te faltó la descripción de la propuesta"
   
@@ -46,4 +48,10 @@ class Bill < ActiveRecord::Base
     Vote.count(:all, :joins => "INNER JOIN members ON members.id = votes.voter_id",
                       :conditions => ["voteable_id = ? AND voteable_type = ? AND vote IS NULL AND voter_type = ? AND members.state_id = ?", self.id, self.class.name, "Member", state.id])
   end
+  
+  def update_week_views!
+    self.week_views = self.views.last_week.count
+    self.save
+  end
+  
 end

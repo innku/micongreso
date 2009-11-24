@@ -10,6 +10,7 @@ class BillsController < ApplicationController
   
   def show
     @bill = Bill.find(params[:id])
+    @bill.views.create
   end
   
   def new
