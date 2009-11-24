@@ -100,15 +100,15 @@ module Juixe
         
         def votes_neutral
           Vote.count(:all, :conditions => [
-            "voteable_id = ? AND voteable_type = ? AND vote = ?",
-            id, self.class.name, nil
+            "voteable_id = ? AND voteable_type = ? AND vote IS NULL",
+            id, self.class.name
           ])
         end
         
         def votes_neutral_by(voter_class)
           Vote.count(:all, :conditions => [
-            "voteable_id = ? AND voteable_type = ? AND voter_type = ? AND vote = ?",
-            id, self.class.name, voter_class, nil
+            "voteable_id = ? AND voteable_type = ? AND voter_type = ? AND vote IS NULL",
+            id, self.class.name, voter_class
           ])
         end
         

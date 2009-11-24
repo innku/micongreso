@@ -7,6 +7,32 @@
   <%=h @bill.date.to_s(:long) %>
 </p>
 
+<h4>Votaciones totales</h4>
+<p>
+	A favor: <%= @bill.votes_for_by("Member") %> <br/>
+	En contra: <%= @bill.votes_against_by("Member") %> <br/>
+	Abstención: <%= @bill.votes_neutral_by("Member") %> <br/>
+</p>
+
+<h4>Por bancadas</h4>
+<% Party.all.each do |party| %>
+	<strong><%= party.name %></strong>
+	<p>
+		A favor: <%= @bill.votes_for_for_party(party) %> <br/>
+		En contra: <%= @bill.votes_against_for_party(party) %> <br/>
+		Abstención: <%= @bill.votes_neutral_for_party(party) %> <br/>
+	</p>
+<% end %>
+
+<h4>Por Estados</h4>
+<% State.all.each do |state| %>
+	<strong><%= state.name %></strong>
+	<p>
+		A favor: <%= @bill.votes_for_for_state(state) %> <br/>
+		En contra: <%= @bill.votes_against_for_state(state) %> <br/>
+		Abstención: <%= @bill.votes_neutral_for_state(state) %> <br/>
+	</p>
+<% end %>
 
 <p>
 	<% if admin?(current_user) %>

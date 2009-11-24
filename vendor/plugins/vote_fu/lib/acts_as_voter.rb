@@ -51,8 +51,8 @@ module PeteOnRails
          
          def voted_neutral?(voteable)
            0 < Vote.count(:all, :conditions => [
-                   "voter_id = ? AND voter_type = ? AND vote = ? AND voteable_id = ? AND voteable_type = ?",
-                   self.id, self.class.name, nil, voteable.id, voteable.class.name
+                   "voter_id = ? AND voter_type = ? AND vote IS NULL AND voteable_id = ? AND voteable_type = ?",
+                   self.id, self.class.name, voteable.id, voteable.class.name
                    ])
          end
 
