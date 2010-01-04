@@ -21,6 +21,9 @@ class News < ActiveRecord::Base
   validates_attachment_content_type :photo, :content_type => ['image/jpeg','image/jpg','image/jpeg','image/pjpeg','image/png','image/x-png','image/gif'], 
                                               :message => "^Solo están permitidas las imágenes tipo JPEG, PNG y GIF."
   
+  named_scope :latest, :limit => 5, :order => "created_at DESC"
+  
+  
   def formatted_date
     if self.new_record?
       Date.today.to_s(:es)

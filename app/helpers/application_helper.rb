@@ -4,4 +4,12 @@ module ApplicationHelper
   def admin?(user)
     user && user.admin?
   end
+  
+  def display_vote(choice)
+    if choice.nil?
+      "Abstención"
+    else
+      choice == true ? "Favor" : "Contra"
+    end
+  end
 end

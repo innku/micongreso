@@ -35,6 +35,11 @@ class Member < ActiveRecord::Base
   named_scope :complete, :conditions => ['complete = ?', true]
   named_scope :duplicate, :conditions => ['duplicate = ?', true]
   
+  def self.find_by_email_or_name(string)
+    member = find_by_email(string)
+    member = find_by_name(string) unless member
+    return member
+  end
   
   def is_importing?
     importing

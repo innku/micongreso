@@ -1,0 +1,61 @@
+<% content_for :body_class do -%>
+	class="dashboard"
+<% end -%>
+
+<div class="left">
+	<% for bill in @bills %>
+		<div class="bills">
+			<h4><%= link_to bill.name, bill %></h4>
+			<p><%= bill.date.to_s(:short) %>, <% if bill.general_votes? %>Votaciones: Favor: <%= bill.member_votes_for %> Contra: <%= bill.member_votes_against %> Abstención: <%= bill.member_votes_neutral %><% end %></p>
+			<div>Tags: <%= bill.tag_list %></div>
+		</div>
+	<% end %>
+	
+	
+	<h2>Encuentra tu diputado</h2>
+	<% form_for SearchMember.new do |f| %>
+	  <%= f.error_messages %>
+	  <p>
+	    <%= f.label :name, "Nombre" %>
+	    <%= f.text_field :name %>
+	  </p>
+	  <p>
+	    <%= f.label :party_id, "Partido" %>
+	    <%= f.collection_select :party_id, Party.all, :id_as_string, :name, {:prompt => "Todos"} %>
+	  </p>
+	  <p>
+	    <%= f.label :state_id, "Entidad" %>
+	    <%= f.collection_select :state_id, State.all, :id_as_string, :name, {:prompt => "Todos"} %>
+	  </p>
+	  <p><%= f.submit "Buscar" %></p>
+	<% end %>
+</div>
+
+<div class="right">
+	<% for news in @news %>
+		<div class="news">
+			<div class="title">
+				<h3><%= link_to news.title, news %></h3>
+				<span><%=h news.date %></span>
+				<% if admin?(current_user) %>
+					<span><%= link_to "Edit", edit_news_path(news) %></span>
+				<% end %>
+			</div>
+
+			<p><%=h news.abstract %></p>
+			<% unless news.tag_list.empty? %>
+				<p>Tags: <%= news.tag_list.join(', ') %></p>
+			<% end %>
+		</div>
+	<% end %>
+</div>
+
+<div class="clear">
+	
+</div>
+
+<div id="parties">
+	<h4>Partidos</h4>
+	
+	<%= Party.all.collect {|party| link_to party.name, group_search_members_path(:party_id => party.id )}.join(', ')  %>
+</div>

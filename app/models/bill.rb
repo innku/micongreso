@@ -8,6 +8,25 @@ class Bill < ActiveRecord::Base
   acts_as_taggable
   acts_as_voteable
   
+  named_scope :latest_voted, :conditions => ["member_votes_for != ? OR member_votes_against != ? OR member_votes_neutral != ?",0,0,0], :order => "created_at DESC"
+  
+  def create_votes_from_api(params)
+    params[:members_for].each do |member_string|
+      member = Member.find_by_email_or_name(member_string)
+      member.vote_for(self)
+    end
+    
+    params[:members_against].each do |member_string|
+      member = Member.find_by_email_or_name(member_string)
+      member.vote_against(self)
+    end
+    
+    params[:members_neutral].each do |member_string|
+      member = Member.find_by_email_or_name(member_string)
+      member.vote_neutral(self)
+    end
+  end
+  
   def formatted_date
     if self.new_record?
       Date.today.to_s(:es)
@@ -17,6 +36,10 @@ class Bill < ActiveRecord::Base
   end
   
   def formatted_date=(date)
+  end
+  
+  def general_votes?
+    (self.member_votes_for != 0) or (self.member_votes_against != 0) or (self.member_votes_neutral != 0)
   end
   
   def votes_for_for_party(party)

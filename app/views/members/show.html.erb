@@ -43,6 +43,13 @@
   <%=h @member.substitute %>
 </p>
 
+<div id="latest_voted">
+	<h3>Ultimas votaciones</h3>
+	<% for bill in Bill.latest_voted %>
+		<p><%=h truncate(bill.name, 80) %> <strong>Votó: <%= display_vote(@member.vote_choice(bill)) %></strong></p>
+	<% end %>
+</div>
+
 <div id="message">
 	<h3>Enviar mensaje a diputado</h3>
 	

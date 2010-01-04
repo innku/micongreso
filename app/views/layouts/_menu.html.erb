@@ -12,9 +12,10 @@
 <% else %>
 	<div id="menu">
 		<ul>
-			<li><%= link_to "Inicio", news_index_path %></li>
+			<li><%= link_to "Inicio", root_path %></li>
 			<li><%= link_to "Diputados", new_search_member_path %></li>
 			<li><%= link_to "Propuestas", bills_path %></li>
+			<li><%= link_to "Noticias", news_index_path %></li>
 		</ul>
 	</div>
 <% end %>

@@ -34,6 +34,13 @@ module PeteOnRails
           Vote.count(:all, :conditions => where)
 
         end
+        
+        def vote_choice(voteable)
+          vote = Vote.find(:first, :conditions => [
+                      "voter_id = ? AND voter_type = ? AND voteable_id = ? AND voteable_type = ?",
+                      self.id, self.class.name, voteable.id, voteable.class.name])
+          vote ? vote.vote : nil
+        end
                 
         def voted_for?(voteable)
            0 < Vote.count(:all, :conditions => [

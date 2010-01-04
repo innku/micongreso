@@ -20,7 +20,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil
   
-  map.root :controller => "news", :action => "index"
+  map.root :controller => "dashboard", :action => "index"
 
   # The priority is based upon order of creation: first created -> highest priority.
 
