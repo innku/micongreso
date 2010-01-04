@@ -7,7 +7,7 @@
 		<div class="bills">
 			<h4><%= link_to bill.name, bill %></h4>
 			<p><%= bill.date.to_s(:short) %>, <% if bill.general_votes? %>Votaciones: Favor: <%= bill.member_votes_for %> Contra: <%= bill.member_votes_against %> Abstención: <%= bill.member_votes_neutral %><% end %></p>
-			<div>Tags: <%= bill.tag_list %></div>
+			<div>Tags: <%= bill.tag_list %>, Visitas: <%= bill.total_views %></div>
 		</div>
 	<% end %>
 	
