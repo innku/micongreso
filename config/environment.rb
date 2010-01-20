@@ -21,7 +21,7 @@ Rails::Initializer.run do |config|
   # config.gem "aws-s3", :lib => "aws/s3"
   
   config.gem "fastercsv"
-  config.gem "pauldix-feedzirra", :source => "http://gems.github.com"
+  #config.gem "pauldix-feedzirra", :source => "http://gems.github.com"
   config.gem "searchlogic"
   config.gem "facebooker"
   
