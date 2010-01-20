@@ -9,7 +9,29 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091113191304) do
+ActiveRecord::Schema.define(:version => 20100120231637) do
+
+  create_table "absences", :force => true do |t|
+    t.integer  "sitting_id"
+    t.integer  "member_id"
+    t.boolean  "justified"
+    t.text     "justification"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "bills", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.date     "date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "member_votes_for",     :default => 0
+    t.integer  "member_votes_against", :default => 0
+    t.integer  "member_votes_neutral", :default => 0
+    t.integer  "total_views",          :default => 0
+    t.integer  "week_views",           :default => 0
+  end
 
   create_table "comments", :force => true do |t|
     t.string   "title",            :limit => 50, :default => ""
@@ -28,9 +50,7 @@ ActiveRecord::Schema.define(:version => 20091113191304) do
   create_table "members", :force => true do |t|
     t.string   "name"
     t.string   "email"
-    t.string   "party_id"
     t.string   "commission"
-    t.string   "state_id"
     t.integer  "district"
     t.string   "head"
     t.string   "election"
@@ -43,6 +63,19 @@ ActiveRecord::Schema.define(:version => 20091113191304) do
     t.string   "picture_content_type"
     t.integer  "picture_file_size",    :default => 0
     t.datetime "picture_updated_at"
+    t.integer  "party_id"
+    t.integer  "state_id"
+    t.boolean  "complete",             :default => true
+    t.boolean  "duplicate",            :default => false
+  end
+
+  create_table "messages", :force => true do |t|
+    t.text     "text"
+    t.string   "name"
+    t.string   "email"
+    t.integer  "member_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "news", :force => true do |t|
@@ -62,6 +95,21 @@ ActiveRecord::Schema.define(:version => 20091113191304) do
   create_table "parties", :force => true do |t|
     t.string "name"
     t.string "abbr"
+  end
+
+  create_table "search_members", :force => true do |t|
+    t.string   "name"
+    t.integer  "party_id"
+    t.integer  "state_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sittings", :force => true do |t|
+    t.string   "name"
+    t.datetime "date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "states", :force => true do |t|
@@ -97,9 +145,35 @@ ActiveRecord::Schema.define(:version => 20091113191304) do
     t.string   "activation_code",           :limit => 40
     t.datetime "activated_at"
     t.string   "role"
+    t.string   "api_key"
+    t.integer  "fb_user_id",                :limit => 8
+    t.string   "email_hash"
+    t.string   "login"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["role"], :name => "index_users_on_role"
+
+  create_table "views", :force => true do |t|
+    t.integer  "bill_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "views", ["bill_id"], :name => "index_views_on_bill_id"
+
+  create_table "votes", :force => true do |t|
+    t.boolean  "vote"
+    t.integer  "voteable_id",   :null => false
+    t.string   "voteable_type", :null => false
+    t.integer  "voter_id"
+    t.string   "voter_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["voteable_id", "voteable_type"], :name => "fk_voteables"
+  add_index "votes", ["voter_id", "voter_type", "voteable_id", "voteable_type"], :name => "uniq_one_vote_only", :unique => true
+  add_index "votes", ["voter_id", "voter_type"], :name => "fk_voters"
 
 end

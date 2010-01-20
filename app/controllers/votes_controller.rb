@@ -1,13 +1,22 @@
 class VotesController < ApplicationController
   
+  before_filter :find_bill
+  
+  def edit
+    
+  end
+  
   def create
-    @bill = Bill.find_by_name(params[:bill_name])
-    if @bill
-      @bill.create_votes_from_api(params)
-    else
-      logger.warn "Se intentó registrar los votos para la propuesta '#{params[:bill_name]}', pero no se encontró."
-    end
-    render :nothing => true
+    redirect_to edit_bill_votes_path(@bill)
+  end
+  
+  def update
+    @bill.update_votes(params[:votes])
+    redirect_to edit_bill_votes_path(@bill)
+  end
+  
+  def find_bill
+    @bill = Bill.find(params[:bill_id])
   end
 
 end

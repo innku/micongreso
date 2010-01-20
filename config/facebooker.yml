@@ -1,0 +1,12 @@
+development:
+  api_key: 278518abb833e6c04e0729af4c449816
+  secret_key: fbc373179492ae09806b25fe9fa34765
+  canvas_page_name:
+  callback_url: http://diputado.local/
+  pretty_errors: true
+  set_asset_host_to_callback_url: true
+  tunnel:
+    public_host_username:
+    public_host:
+    public_port: 4007
+    local_port: 3000

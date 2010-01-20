@@ -21,6 +21,7 @@
 	      <td> 
 					<% if admin?(current_user) %>
 						<%= link_to "Editar", edit_member_path(member) %>
+						<%= link_to "Eliminar", member, :method => :delete, :confirm => "¿Estas seguro que lo quieres eliminar?" %>
 					<% end %>
 				</td>
 	    </tr>
@@ -49,6 +50,7 @@
 	      <td> 
 					<% if admin?(current_user) %>
 						<%= link_to "Editar", edit_member_path(member) %>
+						<%= link_to "Eliminar", member, :method => :delete, :confirm => "¿Estas seguro que lo quieres eliminar?" %>
 					<% end %>
 				</td>
 	    </tr>
@@ -75,6 +77,7 @@
       <td> 
 				<% if admin?(current_user) %>
 					<%= link_to "Editar", edit_member_path(member) %>
+					<%= link_to "Eliminar", member, :method => :delete, :confirm => "¿Estas seguro que lo quieres eliminar?" %>
 				<% end %>
 			</td>
     </tr>

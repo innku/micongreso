@@ -1,0 +1,19 @@
+<% title "Absences" %>
+
+<table>
+  <tr>
+    <th>Justified</th>
+    <th>Justification</th>
+  </tr>
+  <% for absence in @absences %>
+    <tr>
+      <td><%=h absence.justified %></td>
+      <td><%=h absence.justification %></td>
+      <td><%= link_to "Show", absence %></td>
+      <td><%= link_to "Edit", edit_absence_path(absence) %></td>
+      <td><%= link_to "Destroy", absence, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Absence", new_absence_path %></p>

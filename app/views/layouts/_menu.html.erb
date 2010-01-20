@@ -1,4 +1,4 @@
-<% if logged_in? %>
+<% if logged_in? && current_user.admin? %>
 	<div id="menu">
 		<ul>
 			<li><%= link_to "Usuarios", users_path %></li>
@@ -7,9 +7,29 @@
 			<li><%= link_to "Partidos", parties_path %></li>
 			<li><%= link_to "Estados", states_path %></li>
 			<li><%= link_to "Propuestas", bills_path %></li>
+			<li><%= link_to "Sesiones", sittings_path %></li>
+		</ul>
+	</div>
+<% elsif logged_in? %>
+	<% if current_user.facebook_user? %>
+		<fb:profile-pic uid="<%= current_user.fb_user_id%>" facebook-logo="true" size="thumb" ></fb:profile-pic>
+		<p><a href="#" onclick='FB.Connect.logoutAndRedirect("/logout")'>Logout</a></p>
+	<% else %>
+		<p>Entra con tu cuenta de facebook</p>
+		<%= fb_login_button('window.location = "/users/link_user_accounts";')%>
+		<p><%= link_to 'Salir', logout_path %></p>
+	<% end %>
+	<div id="menu">
+		<ul>
+			<li><%= link_to "Inicio", root_path %></li>
+			<li><%= link_to "Diputados", new_search_member_path %></li>
+			<li><%= link_to "Propuestas", bills_path %></li>
+			<li><%= link_to "Noticias", news_index_path %></li>
 		</ul>
 	</div>
 <% else %>
+	<h2>Entra a Tu voz en el congreso!</h2>
+	<p><%= link_to 'Registrate', signup_path%> or <%= link_to 'Entrar', login_path %></p>
 	<div id="menu">
 		<ul>
 			<li><%= link_to "Inicio", root_path %></li>

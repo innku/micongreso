@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
   
-  skip_before_filter  :login_required, :only => :activate
+  skip_before_filter  :login_required, :only => [:activate, :new, :create]
   
   def index
     @users = User.all
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   def create
     #logout_keeping_session!
     @user = User.new(params[:user])
-    @user.role = current_user ? "admin" : "user"
+    @user.role = (current_user && current_user.admin?) ? "admin" : "user"
     success = @user && @user.save
     if success && @user.errors.empty?
       redirect_to users_path
@@ -56,5 +56,16 @@ class UsersController < ApplicationController
       flash[:error]  = "We couldn't find a user with that activation code -- check your email? Or maybe you've already activated -- try signing in."
       redirect_back_or_default('/')
     end
+  end
+  
+  def link_user_accounts
+    if self.current_user.nil?
+      #register with fb
+      User.create_from_fb_connect(facebook_session.user)
+    else
+      #connect accounts
+      self.current_user.link_fb_connect(facebook_session.user.id) unless self.current_user.fb_user_id == facebook_session.user.id
+    end
+    redirect_to '/'
   end
 end

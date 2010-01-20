@@ -1,0 +1,41 @@
+<% content_for :jQuery do -%>
+	<%= javascript_include_tag 'ui.datepicker-es', 'jquery.autocomplete' %>
+	<%= stylesheet_link_tag 'jquery-ui-1.7.2' %>
+<% end -%>
+
+<% content_for :body_class do -%>
+	class="absences"
+<% end -%>
+
+<% form_for @sitting do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+
+	<p>
+    <%= f.label :date, "Fecha" %>
+		<%= f.text_field :formatted_date, :class => "input_text datepicker", :id => "datepicker" %>
+		<%= f.text_field :date, :id => "actualDate", :style => "display: none;" %>
+  </p>
+
+	<h3>Faltas</h3>
+	<table>
+		<tr>
+			<td>Diputado</td>
+			<td>¿Justificada?</td>
+			<td>Justificación</td>
+			<td></td>
+		</tr>
+		<% f.fields_for :absences do |builder| %>
+			<%= render "absence_fields", :f => builder %>
+		<% end %>
+		<tr>
+			<td><%= link_to_add_fields "Agregar Falta", f, :absences %></td>
+		</tr>
+	</table>
+
+
+  <p><%= f.submit "Guardar" %></p>
+<% end %>

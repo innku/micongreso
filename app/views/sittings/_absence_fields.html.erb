@@ -1,0 +1,8 @@
+<tr class="fields">
+	<td><%= f.text_field :member_name, :class => "member_name" %></td>
+	<td><%= f.check_box :justified, :class => "justified" %></td>
+	<td><%= f.text_area	:justification, :cols => 30, :rows => 2, :style => display?(f.object.justified) %></td>
+	<td>
+		<%= link_to_remove_fields("Eliminar", f) %>
+	</td>
+</tr>

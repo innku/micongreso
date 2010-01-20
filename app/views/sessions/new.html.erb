@@ -13,4 +13,7 @@
 -->
 
 <p><%= submit_tag 'Log in' %></p>
+
+<p>or login with Facebook connect</p>
+<%= fb_login_button('window.location = "/users/link_user_accounts";')%>
 <% end -%>

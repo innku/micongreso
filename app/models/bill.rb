@@ -10,20 +10,17 @@ class Bill < ActiveRecord::Base
   
   named_scope :latest_voted, :conditions => ["member_votes_for != ? OR member_votes_against != ? OR member_votes_neutral != ?",0,0,0], :order => "created_at DESC"
   
-  def create_votes_from_api(params)
-    params[:members_for].each do |member_string|
-      member = Member.find_by_email_or_name(member_string)
-      member.vote_for(self)
-    end
-    
-    params[:members_against].each do |member_string|
-      member = Member.find_by_email_or_name(member_string)
-      member.vote_against(self)
-    end
-    
-    params[:members_neutral].each do |member_string|
-      member = Member.find_by_email_or_name(member_string)
-      member.vote_neutral(self)
+  def update_votes(params)
+    params.each do |member_id, vote_value|
+      vote_value = vote_value.first.to_i
+      vote_value = nil if vote_value == -1
+      member = Member.find(member_id.to_i)
+      vote = member.vote_object(self)
+      if vote
+        vote.update_attributes(:vote => vote_value)
+      else
+        member.vote(self, vote)
+      end
     end
   end
   

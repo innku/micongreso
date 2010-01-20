@@ -135,6 +135,16 @@ module Juixe
           rtn
         end
         
+        def voted_result_by?(voter, vote)
+          rtn = false
+          if voter
+            self.votes.each { |v|
+              rtn = true if (voter.id == v.voter_id && voter.class.name == v.voter_type && vote == v.vote)
+            }
+          end
+          rtn
+        end
+        
         
       end
     end

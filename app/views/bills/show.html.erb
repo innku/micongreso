@@ -7,37 +7,60 @@
   <%=h @bill.date.to_s(:long) %>
 </p>
 
-<h4>Votaciones totales</h4>
+<h3>Votaciones totales</h3>
 <p>
 	A favor: <%= @bill.votes_for_by("Member") %> <br/>
 	En contra: <%= @bill.votes_against_by("Member") %> <br/>
 	Abstención: <%= @bill.votes_neutral_by("Member") %> <br/>
 </p>
 
-<h4>Por bancadas</h4>
-<% Party.all.each do |party| %>
-	<strong><%= party.name %></strong>
-	<p>
-		A favor: <%= @bill.votes_for_for_party(party) %> <br/>
-		En contra: <%= @bill.votes_against_for_party(party) %> <br/>
-		Abstención: <%= @bill.votes_neutral_for_party(party) %> <br/>
-	</p>
-<% end %>
+<%= link_to "Votaciones bancadas", "#", :class => "show_votes" %>
+<div class="votes" style="display: none;">
+	<h3>Por bancadas</h3>
+	<table>
+		<tr>
+			<th>Partido</th>
+			<th>A Favor</th>
+			<th>En Contra</th>
+			<th>Abstención</th>
+		</tr>
+		<% Party.all.each do |party| %>
+			<tr>
+				<td><strong><%= party.name %></strong></td>
+				<td><%= @bill.votes_for_for_party(party) %></td>
+				<td><%= @bill.votes_against_for_party(party) %></td>
+				<td><%= @bill.votes_neutral_for_party(party) %></td>
+			</tr>
+		<% end %>
+	</table>
+</div>
 
-<h4>Por Estados</h4>
-<% State.all.each do |state| %>
-	<strong><%= state.name %></strong>
-	<p>
-		A favor: <%= @bill.votes_for_for_state(state) %> <br/>
-		En contra: <%= @bill.votes_against_for_state(state) %> <br/>
-		Abstención: <%= @bill.votes_neutral_for_state(state) %> <br/>
-	</p>
-<% end %>
+<%= link_to "Votaciones por estados", "#", :class => "show_votes" %>
+<div class="votes" style="display: none;">
+	<h3>Por Estados</h3>
+	<table>
+		<tr>
+			<th>Estado</th>
+			<th>A Favor</th>
+			<th>En Contra</th>
+			<th>Abstención</th>
+		</tr>
+		<% State.all.each do |state| %>
+			<tr>
+				<td><strong><%= state.name %></strong></td>
+				<td><%= @bill.votes_for_for_state(state) %></td>
+				<td><%= @bill.votes_against_for_state(state) %></td>
+				<td><%= @bill.votes_neutral_for_state(state) %></td>
+			</tr>
+		<% end %>
+	</table>
+</div>
 
 <p>
 	<% if admin?(current_user) %>
   	<%= link_to "Editar", edit_bill_path(@bill) %> |
   	<%= link_to "Eliminar", @bill, :confirm => 'Are you sure?', :method => :delete %> |
+		<%= link_to "Editar votos", edit_bill_votes_path(@bill) %>
 	<% end %>
   <%= link_to "Regresar a todas las propuestas", bills_path %>
 </p>

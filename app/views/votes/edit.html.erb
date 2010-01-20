@@ -1,0 +1,26 @@
+<% title "Votos de la propuesta" %>
+
+<% form_tag update_bill_votes_path(@bill) do |f| %>
+	
+	<table>
+		<tr>
+			<th>Diputado</th>
+			<th>A Favor</th>
+			<th>En Contra</th>
+			<th>Abstención</th>
+		</tr>
+		<% for member in Member.all %>
+			<tr>
+				<td><%= member.name %></td>
+				<td><%= radio_button_tag "votes[#{member.id}][]", 1, @bill.voted_result_by?(member, true) %></td>
+				<td><%= radio_button_tag "votes[#{member.id}][]", 0, @bill.voted_result_by?(member, false) %></td>
+				<td><%= radio_button_tag "votes[#{member.id}][]", -1, @bill.voted_result_by?(member, nil) %></td>
+			</tr>
+		<% end %>
+	</table>
+
+  <p><%= submit_tag "Guardar Votos" %></p>
+<% end %>
+
+
+<p><%= link_to "Regresar a la propuesta", bill_path(@bill) %></p>

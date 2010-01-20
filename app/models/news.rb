@@ -36,12 +36,12 @@ class News < ActiveRecord::Base
   end
   
   def self.read_new_feed
-    feed = Feedzirra::Feed.fetch_and_parse("http://www3.diputados.gob.mx/camara/rss/feed/Noticias09.xml")
+    feed = Feedzirra::Feed.fetch_and_parse("http://www3.diputados.gob.mx/camara/rss/feed/Noticias.xml")
     create_news_from_feed(feed.entries, "Cámara de Diputados")
   end
   
   def self.update_feeds
-    feed = Feedzirra::Feed.fetch_and_parse("http://www3.diputados.gob.mx/camara/rss/feed/Noticias09.xml")
+    feed = Feedzirra::Feed.fetch_and_parse("http://www3.diputados.gob.mx/camara/rss/feed/Noticias.xml")
     updated_feed = Feedzirra::Feed.update(feed)
     
     RAILS_DEFAULT_LOGGER.debug "Se actualizo? #{updated_feed.updated?}"

@@ -5,9 +5,16 @@
     <title><%= h(yield(:title) || "Untitled") %></title>
     <%= stylesheet_link_tag 'diputadovirtual' %>
     <%= yield(:head) %>
+
+		<%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js' %>
 		<%= yield(:jQuery) %>
+		<%= javascript_include_tag 'application' %>
+		
   </head>
   <body <%= yield(:body_class) %>>
+		<%= fb_connect_javascript_tag %>
+		<%= init_fb_connect "XFBML", :js => :jquery %>
+		
     <div id="container">
 
 			<%= render :partial => "users/user_bar" %>

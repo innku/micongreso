@@ -1,0 +1,16 @@
+<% title "Sesiones" %>
+
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th>Fecha</th>
+  </tr>
+  <% for sitting in @sittings %>
+    <tr>
+      <td><%= link_to sitting.name, sitting %></td>
+      <td><%=h sitting.date.to_s(:es) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "Nueva Sesión", new_sitting_path %></p>

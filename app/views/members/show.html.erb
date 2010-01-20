@@ -50,6 +50,20 @@
 	<% end %>
 </div>
 
+<div id="absences">
+	<h3>Faltas</h3>
+	<table>
+		<tr>
+			<th>30 días</th>
+			<th>Año</th>
+		</tr>
+		<tr>
+			<td><%= @member.absences.month.count %></td>
+			<td><%= @member.absences.year.count %></td>
+		</tr>
+	</table>
+</div>
+
 <div id="message">
 	<h3>Enviar mensaje a diputado</h3>
 	

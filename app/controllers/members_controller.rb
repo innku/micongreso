@@ -5,9 +5,17 @@ class MembersController < ApplicationController
   skip_before_filter :login_required, :only => [:show]
   
   def index
-    @members = Member.complete
-    @incomplete_members = Member.incomplete
-    @duplicate_members = Member.duplicate
+    respond_to do |wants|
+      wants.html {
+        @members = Member.complete
+        @incomplete_members = Member.incomplete
+        @duplicate_members = Member.duplicate
+      }
+      wants.js {
+        @members = Member.name_like(params[:q]) if params[:q]
+      }
+    end
+
   end
   
   def import
