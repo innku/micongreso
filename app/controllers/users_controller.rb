@@ -1,8 +1,6 @@
 class UsersController < ApplicationController
-  # Be sure to include AuthenticationSystem in Application Controller instead
-  include AuthenticatedSystem
   
-  skip_before_filter  :login_required, :only => [:activate, :new, :create, :link_user_accounts]
+  skip_before_filter  :login_required, :only => [:activate, :new, :create, :link_user_accounts, :home]
   
   def index
     @users = User.all

@@ -10,6 +10,8 @@ ActionController::Routing::Routes.draw do |map|
   map.edit_bill_votes '/bill/:bill_id/votes/edit', :controller => 'votes', :action => 'edit'
   map.update_bill_votes '/bill/:bill_id/votes', :controller => 'votes', :action => 'update'
   
+  map.root :controller => "users", :action => "home"
+  
   map.resources :search_members, :collection => {:group => :get}
   map.resources :states
   map.resources :parties
@@ -26,7 +28,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil
   
-  map.root :controller => "dashboard", :action => "index"
+  #map.root :controller => "dashboard", :action => "index"
 
   # The priority is based upon order of creation: first created -> highest priority.
 
