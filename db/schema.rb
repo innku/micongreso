@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100120231637) do
+ActiveRecord::Schema.define(:version => 20100120161233) do
 
   create_table "absences", :force => true do |t|
     t.integer  "sitting_id"
@@ -146,9 +146,6 @@ ActiveRecord::Schema.define(:version => 20100120231637) do
     t.datetime "activated_at"
     t.string   "role"
     t.string   "api_key"
-    t.integer  "fb_user_id",                :limit => 8
-    t.string   "email_hash"
-    t.string   "login"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
