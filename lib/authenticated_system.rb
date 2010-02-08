@@ -3,7 +3,7 @@ module AuthenticatedSystem
   # Accesses the current user from the session.
   # Future calls avoid the database because nil is not equal to false.
   def current_user
-    @current_user ||= (login_from_session || login_from_basic_auth || login_from_cookie || login_from_fb) unless @current_user == false
+    @current_user ||= (login_from_session || login_from_basic_auth || login_from_cookie) unless @current_user == false
   end
   
   # Store the given user id in the session.
@@ -13,12 +13,6 @@ module AuthenticatedSystem
   end
   
   protected
-    
-    def login_from_fb
-      if facebook_session
-        self.current_user = User.find_by_fb_user(facebook_session.user)
-      end
-    end
     
     # Returns true or false if the user is logged in.
     # Preloads @current_user with the user model if they're logged in.
@@ -40,7 +34,7 @@ module AuthenticatedSystem
     #  end
     #
     def authorized?(action = action_name, resource = nil)
-      logged_in?
+      logged_in? && has_permission?
     end
 
     # Filter method to enforce a login requirement.
@@ -60,6 +54,23 @@ module AuthenticatedSystem
     def login_required
       authorized? || access_denied
     end
+    
+    def user_rights
+      user_rights = {:dashboard => ["index"], :search_members => ["new", "create", "show", "group"], :members => ["show"], 
+                    :messages => ["create"], :bills => ["index", "show"], :news => ["index", "show"], :comments => ["new", "create"]}
+    end
+    
+    def admin_rights
+      admin_rights = {:absences => [], :bills => [], :comments => [], :dashboard => [], :members => [], :messages => [],
+                      :news => [], :parties => [], :search_members => [], :sittings => [], :states => [], :users => [], 
+                      :views => [], :votes => []}
+    end
+    
+    def has_permission?
+      role = current_user.role
+      return send(role+"_rights").include?(controller_name.to_sym) &&
+      (send(role+"_rights")[controller_name.to_sym].include?(action_name) || send(role+"_rights")[controller_name.to_sym].empty?)
+    end
 
     # Redirect as appropriate when an access request fails.
     #
@@ -73,6 +84,7 @@ module AuthenticatedSystem
       respond_to do |format|
         format.html do
           store_location
+          flash[:error] = "No estas autorizado a ver la página solicitada."
           redirect_to new_session_path
         end
         # format.any doesn't work in rails version < http://dev.rubyonrails.org/changeset/8987

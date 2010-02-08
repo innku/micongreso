@@ -1,17 +1,13 @@
 ActionController::Routing::Routes.draw do |map|
+  
   map.resources :sittings
-
   map.resources :absences
-
   map.resources :views
-
   map.resources :bills
   
   map.edit_bill_votes '/bill/:bill_id/votes/edit', :controller => 'votes', :action => 'edit'
   map.update_bill_votes '/bill/:bill_id/votes', :controller => 'votes', :action => 'update'
-  
-  map.root :controller => "users", :action => "home"
-  
+    
   map.resources :search_members, :collection => {:group => :get}
   map.resources :states
   map.resources :parties
@@ -23,12 +19,12 @@ ActionController::Routing::Routes.draw do |map|
   map.signup '/signup', :controller => 'users', :action => 'new'
   
   map.resources :news, :has_many => :comments
-  map.resources :users, :collection => {:link_user_accounts => :get}
+  map.resources :users
   map.resource :session
   
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil
   
-  #map.root :controller => "dashboard", :action => "index"
+  map.root :controller => "dashboard", :action => "index"
 
   # The priority is based upon order of creation: first created -> highest priority.
 

@@ -1,9 +1,11 @@
-class Bill < ActiveRecord::Base
-  
+class Bill < ActiveRecord::Base  
+    
   has_many  :views
   
   validates_presence_of :name, :message => "^Te faltó el título de la propuesta"
   validates_presence_of :description, :message => "^Te faltó la descripción de la propuesta"
+  
+  attr_accessor :publish_bill_on_social_media
   
   acts_as_taggable
   acts_as_voteable
@@ -11,15 +13,15 @@ class Bill < ActiveRecord::Base
   named_scope :latest_voted, :conditions => ["member_votes_for != ? OR member_votes_against != ? OR member_votes_neutral != ?",0,0,0], :order => "created_at DESC"
   
   def update_votes(params)
-    params.each do |member_id, vote_value|
+    params.each do |member_id, vote_value|      
       vote_value = vote_value.first.to_i
-      vote_value = nil if vote_value == -1
+      vote_value = nil if vote_value == -1      
       member = Member.find(member_id.to_i)
       vote = member.vote_object(self)
       if vote
         vote.update_attributes(:vote => vote_value)
       else
-        member.vote(self, vote)
+        member.vote(self, vote_value)
       end
     end
   end
@@ -72,6 +74,24 @@ class Bill < ActiveRecord::Base
   def update_week_views!
     self.week_views = self.views.last_week.count
     self.save
+  end
+  
+  def after_save
+    RAILS_DEFAULT_LOGGER.debug "After Save:"
+    if publish_bill_on_social_media.to_i == 1
+      RAILS_DEFAULT_LOGGER.debug "Short Name: #{short_name}"
+      RAILS_DEFAULT_LOGGER.debug "#{short_name} http://diputado.local/bills/#{self.id}"
+      self.post_to_social_media(self.name, "http://diputado.local/bills/#{self.id}")
+    end
+  end
+  
+  def post_to_social_media(text, url)
+    RAILS_DEFAULT_LOGGER.debug "Publicando post en twitter y facebook: #{helpers.truncate(text, :length => 120)} #{url}"
+    #PingFM.user_post("status", helpers.truncate(text, :length => 120) + " " + url)
+  end
+  
+  def helpers
+    ActionController::Base.helpers
   end
   
 end

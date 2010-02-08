@@ -23,7 +23,7 @@ Rails::Initializer.run do |config|
   config.gem "fastercsv"
   #config.gem "pauldix-feedzirra", :source => "http://gems.github.com"
   config.gem "searchlogic"
-  config.gem "facebooker"
+  #config.gem "facebooker"
   
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
