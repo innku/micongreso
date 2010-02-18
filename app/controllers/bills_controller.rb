@@ -1,8 +1,6 @@
 class BillsController < ApplicationController
   
   skip_before_filter  :login_required, :only => [:index, :show]
-  protect_from_forgery :except => :create
-  prepend_around_filter ApiAuthorizedFilter.new, :only => [:create]
   
   def index
     @bills = Bill.all
