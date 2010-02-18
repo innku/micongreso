@@ -79,8 +79,6 @@ class Bill < ActiveRecord::Base
   def after_save
     RAILS_DEFAULT_LOGGER.debug "After Save:"
     if publish_bill_on_social_media.to_i == 1
-      RAILS_DEFAULT_LOGGER.debug "Short Name: #{short_name}"
-      RAILS_DEFAULT_LOGGER.debug "#{short_name} http://diputado.local/bills/#{self.id}"
       self.post_to_social_media(self.name, "http://diputado.local/bills/#{self.id}")
     end
   end

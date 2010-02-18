@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   
-  skip_before_filter  :login_required, :only => [:activate, :new, :create]
+  skip_before_filter  :login_required, :only => [:activate, :resend_form, :resend]
   
   def index
     @users = User.all
@@ -22,9 +22,9 @@ class UsersController < ApplicationController
     success = @user && @user.save
     if success && @user.errors.empty?
       redirect_to users_path
-      flash[:notice] = "Se le envió un correo de activación, debe dar clic en la liga del correo para completar el registro."
+      flash[:notice] = "Te acabamos de enviar un correo de activación, da clic en la liga del correo para completar el registro."
     else
-      flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."
+      flash[:error]  = "Ocurrió un error, por favor inténtalo de nuevo."
       render :action => 'new'
     end
   end
@@ -54,6 +54,19 @@ class UsersController < ApplicationController
       flash[:error]  = "We couldn't find a user with that activation code -- check your email? Or maybe you've already activated -- try signing in."
       redirect_back_or_default('/')
     end
+  end
+  
+  def resend
+    user = User.find_by_email(params[:email])
+    if user
+      flash[:notice] = "El correo de activación se te envió con éxito."
+      UserMailer.deliver_signup_notification(user)
+      redirect_to login_path
+    else
+      flash[:error] = "No encontramos un usuario con el correo que nos indicaste."
+      redirect_to resend_activation_form_path
+    end
+    
   end
   
 end

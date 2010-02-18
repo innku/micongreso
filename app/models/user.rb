@@ -42,6 +42,10 @@ class User < ActiveRecord::Base
   def admin?
     role == "admin"
   end
+  
+  def make_citizen
+    role = "citizen"
+  end
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   #
@@ -52,6 +56,12 @@ class User < ActiveRecord::Base
   def self.authenticate(email, password)
     return nil if email.blank? || password.blank?
     u = find :first, :conditions => ['email = ? and activated_at IS NOT NULL', email] # need to get the salt
+    u && u.authenticated?(password) ? u : nil
+  end
+  
+  def self.authenticate_inactive(email, password)
+    return nil if email.blank? || password.blank?
+    u = find :first, :conditions => ['email = ? and activated_at IS NULL', email]
     u && u.authenticated?(password) ? u : nil
   end
 

@@ -1,0 +1,12 @@
+<% title "Citizen" %>
+
+<p>
+  <strong>Name:</strong>
+  <%=h @citizen.name %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_citizen_path(@citizen) %> |
+  <%= link_to "Destroy", @citizen, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", citizens_path %>
+</p>

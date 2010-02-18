@@ -16,13 +16,16 @@ ActionController::Routing::Routes.draw do |map|
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'
   map.register '/register', :controller => 'users', :action => 'create'
-  map.signup '/signup', :controller => 'users', :action => 'new'
+  map.signup '/signup', :controller => 'citizens', :action => 'new'
   
   map.resources :news, :has_many => :comments
   map.resources :users
+  map.resources :citizens
   map.resource :session
   
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil
+  map.resend_activation_form '/resend_activation_form', :controller => 'users', :action => 'resend_form'
+  map.resend_activation '/resend', :controller => 'users', :action => 'resend'
   
   map.root :controller => "dashboard", :action => "index"
 

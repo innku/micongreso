@@ -11,6 +11,7 @@ class SessionsController < ApplicationController
   def create
     logout_keeping_session!
     user = User.authenticate(params[:email], params[:password])
+    inactive_user = User.authenticate_inactive(params[:email], params[:password])
     if user
       # Protects against session fixation attacks, causes request forgery
       # protection if user resubmits an earlier form using back
@@ -22,7 +23,11 @@ class SessionsController < ApplicationController
       handle_remember_cookie! new_cookie_flag
       redirect_back_or_default('/users')
     else
-      note_failed_signin
+      if inactive_user
+        flash[:error] = "No has activado tu cuenta, si no recibiste el correo de activación haz clic <a href='#{resend_activation_form_path}'>aquí para reenviártelo</a>."
+      else
+        note_failed_signin
+      end
       @email       = params[:email]
       @remember_me = params[:remember_me]
       render :action => 'new'

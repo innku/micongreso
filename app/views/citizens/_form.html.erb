@@ -1,0 +1,20 @@
+<% form_for @citizen, :url => citizens_path do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :name, "Nombre Completo" %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :email, "Correo Electrónico" %><br />
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :password, "Contraseña" %><br />
+    <%= f.password_field :password %>
+  </p>
+  <p>
+    <%= f.label :password_confirmation, "Confirmación de Contraseña" %><br />
+    <%= f.password_field :password_confirmation %>
+  </p>
+  <p><%= f.submit "Guardar" %></p>
+<% end %>
