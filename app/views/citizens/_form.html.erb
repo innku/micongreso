@@ -1,4 +1,4 @@
-<% form_for @citizen, :url => citizens_path do |f| %>
+<% form_for @citizen, :url => @citizen.new_record? ? citizens_path : citizen_path(@citizen.id) do |f| %>
   <%= f.error_messages %>
   <p>
     <%= f.label :name, "Nombre Completo" %><br />
@@ -7,6 +7,10 @@
   <p>
     <%= f.label :email, "Correo Electrónico" %><br />
     <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :state_id, "Estado" %><br />
+    <%= f.select :state_id, State.all.collect {|s| [s.name, s.id]} %>
   </p>
   <p>
     <%= f.label :password, "Contraseña" %><br />

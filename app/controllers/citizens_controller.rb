@@ -3,7 +3,7 @@ class CitizensController < ApplicationController
   skip_before_filter  :login_required, :only => [:new, :create]
   
   def index
-    @citizens = User.all
+    @citizens = User.citizens
   end
   
   def show
@@ -28,14 +28,14 @@ class CitizensController < ApplicationController
   end
   
   def edit
-    @citizen = User.find(params[:id])
+    @citizen = current_user
   end
   
   def update
-    @citizen = User.find(params[:id])
-    if @citizen.update_attributes(params[:citizen])
-      flash[:notice] = "Successfully updated citizen."
-      redirect_to @citizen
+    @citizen = current_user
+    if @citizen.update_attributes(params[:user])
+      flash[:notice] = "Se guardaron los cambios del usuario correctamente"
+      redirect_to edit_citizen_path(@citizen)
     else
       render :action => 'edit'
     end

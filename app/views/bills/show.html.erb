@@ -1,3 +1,63 @@
+<% content_for :head do -%>
+
+  <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+  <script type="text/javascript">
+    google.load('visualization', '1', {packages: ['geomap','columnchart']});
+    
+    var entidades = [<%= State.google_codes_and_votes(@bill) %>]
+    
+    function drawVisualization() {
+      var data = new google.visualization.DataTable();
+      data.addRows(entidades.length);
+      data.addColumn('string', 'Estado');
+      data.addColumn('number', 'Votos');
+      data.addColumn('string', 'Nombre');
+      
+      for ( var i=0;i<entidades.length;i++){
+        data.setValue(i,0,entidades[i][0]); //codigo entidad para mapa MX-
+        data.setValue(i,1,entidades[i][2]);            //valor
+        data.setValue(i,2,entidades[i][1]); //texto para mostrar
+      }
+      
+      var geomap = new google.visualization.GeoMap(
+          document.getElementById('citizen_votes_per_state'));
+      geomap.draw(data,{'region':'MX', 'colors': [0xFFFFFF, 0xc06000]});
+    }
+    
+    google.setOnLoadCallback(drawVisualization);
+  </script>
+  
+  <script type="text/javascript">
+    google.load('visualization', '1', {packages: ['barchart']});
+    
+    var partidos = [<%= Party.votes_per_party(@bill) %>]
+    
+    function drawVisualization() {
+      // Create and populate the data table.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Name');
+      data.addColumn('number', 'Favor');
+      data.addColumn('number', 'Contra');
+      data.addColumn('number', 'Abstencion');
+      data.addRows(partidos.length);
+      
+      for ( var i=0;i<partidos.length;i++){
+        data.setValue(i,0,partidos[i][0]); // Abreviación del partido
+        data.setValue(i,1,partidos[i][1]); // Votos a favor
+        data.setValue(i,2,partidos[i][2]); // Votos en contra
+        data.setValue(i,3,partidos[i][3]); // Abstenciones
+      }
+    
+      // Create and draw the visualization.
+      new google.visualization.BarChart(document.getElementById('votes_per_party')).
+        draw(data, {'isStacked':true, 'height': 200});  
+    }
+    
+
+    google.setOnLoadCallback(drawVisualization);
+  </script>
+<% end -%>
+
 <% title @bill.name %>
 <p>
   <%=h @bill.description %>
@@ -13,6 +73,19 @@
 	En contra: <%= @bill.votes_against_by("Member") %> <br/>
 	Abstención: <%= @bill.votes_neutral_by("Member") %> <br/>
 </p>
+
+<h3>Votaciones ciudadanos</h3>
+<p>Favor: <%= @bill.citizen_votes(true) %>, Contra: <%= @bill.citizen_votes(false) %></p>
+<% if current_user %>
+	<div id="bill_<%= @bill.id %>">
+		<% if current_user.voted_on?(@bill) %>
+		  Votaste: <%= current_user.vote_choice(@bill) %>
+		<% else %>
+		  <%= link_to "Vota a favor", bill_votes_path(@bill), :class => "vote", 'data-vote' => 1, 'data-voteable' => "bill" %> 
+		  <%= link_to "Vota en contra", bill_votes_path(@bill), :class => "vote", 'data-vote' => 0, 'data-voteable' => "bill" %>
+		<% end %>
+	</div>
+<% end %>
 
 <%= link_to "Votaciones bancadas", "#", :class => "show_votes" %>
 <div class="votes" style="display: none;">
@@ -55,6 +128,12 @@
 		<% end %>
 	</table>
 </div>
+
+<h3>Votaciones de diputados por partidos</h3>
+<div id="votes_per_party" style="width: 800px; height: 200px;"></div>
+
+<h3>Votaciones de ciudadanos por estados</h3>
+<div id="citizen_votes_per_state" style="width: 800px; height: 400px;"></div>
 
 <p>
 	<% if admin?(current_user) %>

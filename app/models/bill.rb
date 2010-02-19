@@ -1,6 +1,6 @@
 class Bill < ActiveRecord::Base  
     
-  has_many  :views
+  has_many  :views, :dependent => :destroy
   
   validates_presence_of :name, :message => "^Te faltó el título de la propuesta"
   validates_presence_of :description, :message => "^Te faltó la descripción de la propuesta"
@@ -66,6 +66,11 @@ class Bill < ActiveRecord::Base
   def citizen_votes(vote)
     Vote.count(:all, :joins => "INNER JOIN users ON users.id = votes.voter_id",
                       :conditions => ["voteable_id = ? AND voteable_type = ? AND vote = ? AND voter_type = ?", self.id, self.class.name, vote, "User"])
+  end
+  
+  def citizen_votes_for_state(state, vote)
+    Vote.count(:all, :joins => "INNER JOIN users ON users.id = votes.voter_id",
+                      :conditions => ["voteable_id = ? AND voteable_type = ? AND vote = ? AND voter_type = ? AND users.state_id = ?", self.id, self.class.name, vote, "User", state.id])
   end
   
   def update_week_views!

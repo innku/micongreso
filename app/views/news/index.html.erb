@@ -9,6 +9,18 @@
 			<% if admin?(current_user) %>
 				<span><%= link_to "Edit", edit_news_path(news) %></span>
 			<% end %>
+			
+			<p>Votos: Favor: <%= news.citizen_votes(true) %>, Contra: <%= news.citizen_votes(false) %></p>
+			<% if current_user %>
+  			<div id="news_<%= news.id %>">
+    			<% if current_user.voted_on?(news) %>
+    			  Votaste: <%= current_user.vote_choice(news) %>
+    			<% else %>
+    			  <%= link_to "Vota a favor", news_votes_path(news), :class => "vote", 'data-vote' => 1, 'data-voteable' => "news" %> 
+    			  <%= link_to "Vota en contra", news_votes_path(news), :class => "vote", 'data-vote' => 0, 'data-voteable' => "news" %>
+    			<% end %>
+  			</div>
+			<% end %>
 		</div>
 		
 		<p><%=h news.abstract %></p>

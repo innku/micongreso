@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   skip_before_filter  :login_required, :only => [:activate, :resend_form, :resend]
   
   def index
-    @users = User.all
+    @users = User.admins
   end
   
   # render new.rhtml

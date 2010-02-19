@@ -36,6 +36,11 @@ class News < ActiveRecord::Base
   def formatted_date=(date)
   end
   
+  def citizen_votes(vote)
+    Vote.count(:all, :joins => "INNER JOIN users ON users.id = votes.voter_id",
+                      :conditions => ["voteable_id = ? AND voteable_type = ? AND vote = ? AND voter_type = ?", self.id, self.class.name, vote, "User"])
+  end
+  
   def self.read_new_feed
     feed = Feedzirra::Feed.fetch_and_parse("http://www3.diputados.gob.mx/camara/rss/feed/Noticias.xml")
     create_news_from_feed(feed.entries, "Cámara de Diputados")
