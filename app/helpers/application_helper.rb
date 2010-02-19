@@ -1,8 +1,6 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
-  
-  include GoogleVisualization
-  
+    
   def admin?(user)
     user && user.admin?
   end
