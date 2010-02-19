@@ -19,8 +19,8 @@ require 'rest_client'
 # 
 class PingFM
   
-  API_KEY = "610009b178ba28f29332db9bd1df638b"
-  USER_API_KEY = "34cd8684400b83ed2103e992e29a6785-1264109398"
+  API_KEY = "64ec3c4eadd1cfb900d5d8b1d23ae55b"
+  USER_API_KEY = "d8b4d0eafdb9d831cde04003cade79ef-1266533592"
   
   def self.user_post(post_method, body, opts = {})
     params = {:api_key => API_KEY, 
@@ -30,4 +30,19 @@ class PingFM
     xml_result = RestClient.post("http://api.ping.fm/v1/user.post", params)
   end
   
+  def self.post_to_social_media(text, url)
+    RAILS_DEFAULT_LOGGER.debug "Publicando post en twitter y facebook: #{truncate(text, :length => 120)} #{url}"
+    self.user_post("status", truncate(text) + " " + url)
+  end
+  
+  def self.truncate(text, options={})
+    length = 120
+    length = options[:length].to_i if options[:length]
+    if text.size > length-4
+      length -= 4
+      return text[0..length]+"..."
+    else
+      return text
+    end
+  end
 end

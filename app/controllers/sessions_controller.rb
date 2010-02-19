@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
       self.current_user = user
       new_cookie_flag = (params[:remember_me] == "1")
       handle_remember_cookie! new_cookie_flag
-      redirect_back_or_default('/users')
+      redirect_to root_path
     else
       if inactive_user
         flash[:error] = "No has activado tu cuenta, si no recibiste el correo de activación haz clic <a href='#{resend_activation_form_path}'>aquí para reenviártelo</a>."

@@ -27,9 +27,9 @@
 		<% Party.all.each do |party| %>
 			<tr>
 				<td><strong><%= party.name %></strong></td>
-				<td><%= @bill.votes_for_for_party(party) %></td>
-				<td><%= @bill.votes_against_for_party(party) %></td>
-				<td><%= @bill.votes_neutral_for_party(party) %></td>
+				<td><%= @bill.votes_for_party(party, true) %></td>
+				<td><%= @bill.votes_for_party(party, false) %></td>
+				<td><%= @bill.votes_for_party(party, nil) %></td>
 			</tr>
 		<% end %>
 	</table>
@@ -48,9 +48,9 @@
 		<% State.all.each do |state| %>
 			<tr>
 				<td><strong><%= state.name %></strong></td>
-				<td><%= @bill.votes_for_for_state(state) %></td>
-				<td><%= @bill.votes_against_for_state(state) %></td>
-				<td><%= @bill.votes_neutral_for_state(state) %></td>
+				<td><%= @bill.votes_for_state(state, true) %></td>
+				<td><%= @bill.votes_for_state(state, false) %></td>
+				<td><%= @bill.votes_for_state(state, nil) %></td>
 			</tr>
 		<% end %>
 	</table>

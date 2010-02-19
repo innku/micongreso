@@ -13,7 +13,6 @@ $(document).ready( function(){
 	  settings.data += (settings.data ? "&" : "") + "authenticity_token=" + encodeURIComponent(AUTH_TOKEN);
 	});
 	
-	
 	if ($("body").hasClass("text_counter")) {
 		$("#news_abstract").apTextCounter({
 		  maxCharacters: 300,
@@ -58,6 +57,12 @@ $(document).ready( function(){
 		$(".member_name").each(function(){
 			$(this).autocomplete('/members.js');
 		})
+	})
+	
+	// Votos de los ciudadanos
+	$("a.vote").click(function(){
+		$.post($(this).attr("href"), { vote: $(this).attr('data-vote'), voteable: $(this).attr('data-voteable') }, null, "script");
+		return false;
 	})
 	
 });

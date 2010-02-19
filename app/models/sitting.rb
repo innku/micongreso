@@ -4,6 +4,8 @@ class Sitting < ActiveRecord::Base
   
   accepts_nested_attributes_for :absences, :reject_if => lambda { |a| a[:member_name].blank? }, :allow_destroy => true
   
+  attr_accessor :publish_absences_on_social_media
+  
   def formatted_date
     if self.new_record?
       Date.today.to_s(:es)
@@ -14,4 +16,19 @@ class Sitting < ActiveRecord::Base
   
   def formatted_date=(date)
   end
+  
+  def after_save
+    if publish_absences_on_social_media.to_i == 1
+      PingFM.post_to_social_media("Ausencias de la sesion: #{self.name}", "#{$global_url}/sittings/#{self.id}")
+    end
+  end
+  
+  # def post_to_social_media(text, url)
+  #   RAILS_DEFAULT_LOGGER.debug "Publicando post en twitter y facebook: #{helpers.truncate(text, :length => 120)} #{url}"
+  #   PingFM.user_post("status", helpers.truncate(text, :length => 120) + " " + url)
+  # end
+  # 
+  # def helpers
+  #   ActionController::Base.helpers
+  # end
 end

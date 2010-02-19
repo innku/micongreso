@@ -38,6 +38,17 @@ class UsersController < ApplicationController
       render :action => "edit"
     end
   end
+  
+  def destroy
+    @user = User.find(params[:id])
+    if (@user.admin? && User.admins.count > 1) || @user.citizen?
+      @user.destroy
+      flash[:notice] = "Has eliminado correctamente al usuario"
+    else
+      flash[:error] = "No puedes eliminar al último administrador"
+    end
+    redirect_to users_path
+  end
 
   def activate
     logout_keeping_session!
@@ -66,7 +77,6 @@ class UsersController < ApplicationController
       flash[:error] = "No encontramos un usuario con el correo que nos indicaste."
       redirect_to resend_activation_form_path
     end
-    
   end
   
 end

@@ -4,7 +4,9 @@ class User < ActiveRecord::Base
   include Authentication
   include Authentication::ByPassword
   include Authentication::ByCookieToken
-
+  
+  acts_as_voter
+  
   validates_format_of       :name,     :with => Authentication.name_regex,  :message => Authentication.bad_name_message, :allow_nil => true
   validates_length_of       :name,     :maximum => 100
 
@@ -20,7 +22,9 @@ class User < ActiveRecord::Base
   # anything else you want your user to change should be added here.
   attr_accessible :email, :name, :password, :password_confirmation
 
-
+  named_scope :citizens, :conditions => ['role = ?', 'citizen']
+  named_scope :admins, :conditions => ['role = ?', 'admin']
+  
   # Activates the user in the database.
   def activate!
     @activated = true
@@ -43,8 +47,12 @@ class User < ActiveRecord::Base
     role == "admin"
   end
   
+  def citizen?
+    role == "citizen"
+  end
+  
   def make_citizen
-    role = "citizen"
+    self.role = "citizen"
   end
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.

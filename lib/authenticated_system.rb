@@ -55,9 +55,10 @@ module AuthenticatedSystem
       authorized? || access_denied
     end
     
-    def user_rights
+    def citizen_rights
       user_rights = {:dashboard => ["index"], :search_members => ["new", "create", "show", "group"], :members => ["show"], 
-                    :messages => ["create"], :bills => ["index", "show"], :news => ["index", "show"], :comments => ["new", "create"]}
+                    :messages => ["create"], :bills => ["index", "show"], :news => ["index", "show"], :comments => ["new", "create"],
+                    :votes => ["create"]}
     end
     
     def admin_rights

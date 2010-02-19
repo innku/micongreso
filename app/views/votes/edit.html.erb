@@ -22,6 +22,9 @@
 	<p>
 		<%= check_box_tag :publish_votes_on_social_media, 1, false %> <%= label_tag :publish_votes_on_social_media, "¿Deseas publicar el resultado de la votación en medios sociales?" %>
 	</p>
+	<p>
+		<%= check_box_tag :send_emails, 1, false %> <%= label_tag :send_emails, "¿Desea notificar por correo a todos los ciudadanos registrados?" %>
+	</p>
 	
   <p><%= submit_tag "Guardar Votos" %></p>
 <% end %>

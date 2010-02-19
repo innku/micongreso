@@ -8,6 +8,7 @@ class News < ActiveRecord::Base
   
   acts_as_taggable
   acts_as_commentable
+  acts_as_voteable
   
   production = ENV['RAILS_ENV'] == 'production'
   

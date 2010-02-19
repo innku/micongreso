@@ -20,11 +20,25 @@ class UserMailer < ActionMailer::Base
     @body[:member] = member
   end
   
+  def bill(user, bill)
+    setup_email(user)
+    @subject    += bill.name
+    @body[:url]  = "#{$global_url}/bills/#{bill.id}"
+    @body[:bill] = bill
+  end
+  
+  def bill_votes(user, bill)
+    setup_email(user)
+    @subject    += bill.name
+    @body[:url]  = "#{$global_url}/bills/#{bill.id}"
+    @body[:bill] = bill
+  end
+  
   protected
     def setup_email(user)
       @recipients  = "#{user.email}"
       @from        = "no-responder@diputadorvirtual.mx"
-      @subject     = "Diputado Virtual "
+      @subject     = "MiCongreso - "
       @sent_on     = Time.now
       @body[:user] = user
     end

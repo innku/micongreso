@@ -16,7 +16,7 @@ class CitizensController < ApplicationController
   
   def create
     @citizen = User.new(params[:user])
-    @citizen.make_citizen 
+    @citizen.make_citizen
     if @citizen.save
       self.current_user = @citizen
       redirect_to root_path
