@@ -65,6 +65,23 @@ $(document).ready( function(){
 		return false;
 	})
 	
+	// Load districts into the select field when a state is selected
+	$("select#member_state_id").change(function(){
+	  $.get('/districts', {state_id: $(this).val()}, function(data){
+	   $("select#member_district_id").html(data); 
+	  })
+	})
+	
+	// Show district select if member is a "mayoria relativa"
+	$("input#member_election_mayoría_relativa").click(function(){
+	  $("select#member_district_id").parent().show();
+	})
+	
+	// Hide district select if member is a "plurinominal"
+	$("input#member_election_representación_proporcional").click(function(){
+	  $("select#member_district_id").parent().hide();
+	})
+	
 });
 
 function remove_fields(link) {

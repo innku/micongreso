@@ -18,14 +18,16 @@
   <strong>Estado:</strong>
   <%=h @member.state_name %>
 </p>
-<p>
-  <strong>Distrito:</strong>
-  <%=h @member.district %>
-</p>
-<p>
-  <strong>Cabecera:</strong>
-  <%=h @member.head %>
-</p>
+<% if @member.district %>
+  <p>
+    <strong>Distrito:</strong>
+    <%=h @member.district.number %>
+  </p>
+  <p>
+    <strong>Cabecera:</strong>
+    <%=h @member.district.head %>
+  </p>
+<% end %>
 <p>
   <strong>Tipo de Elección:</strong>
   <%=h @member.election %>

@@ -1,0 +1,8 @@
+<h2>Circunscripción <%= @region.number %></h2>
+
+<ul>
+  <% @region.representatives.each do |member| %>
+    <li><%= link_to member.name, member %></li>
+  <% end %>
+</ul>
+

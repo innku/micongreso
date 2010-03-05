@@ -1,6 +1,11 @@
 class State < ActiveRecord::Base
   
   has_many :members
+  has_many :districts
+  
+  belongs_to  :region
+  
+  has_many :sections, :through => :districts
   
   def id_as_string
     id.to_s

@@ -2,6 +2,7 @@ class Member < ActiveRecord::Base
   
   belongs_to  :state
   belongs_to  :party
+  belongs_to  :district
   
   has_many    :messages
   has_many    :absences
@@ -30,7 +31,7 @@ class Member < ActiveRecord::Base
   validates_uniqueness_of :email, :message => "^Ya se encuentra un diputado con este correo", :unless => :is_importing?
   validates_presence_of   :party_id, :message => "^Por favor seleccione el partido"
   validates_presence_of   :state_id, :message => "^Por favor seleccione el estado"
-  validates_presence_of   :district, :message => "^Por favor ingrese el distrito del diputado"
+  validates_presence_of   :district_id, :message => "^Por favor ingrese el distrito del diputado", :if => :elected?
   
   named_scope :incomplete, :conditions => ['complete = ?', false]
   named_scope :complete, :conditions => ['complete = ?', true]
@@ -44,6 +45,14 @@ class Member < ActiveRecord::Base
   
   def is_importing?
     importing
+  end
+  
+  def elected?
+    self.election == "Mayoría Relativa"
+  end
+  
+  def proportional?
+    self.election == "Representación Proporcional"
   end
   
   def party_abbr
@@ -93,5 +102,6 @@ class Member < ActiveRecord::Base
   
   def before_save
     self.complete = true if self.valid?
+    self.district_id = nil if self.proportional?
   end
 end

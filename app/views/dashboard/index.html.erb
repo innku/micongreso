@@ -24,21 +24,16 @@
 	
 	
 	<h2>Encuentra tu diputado</h2>
-	<% form_for SearchMember.new do |f| %>
-	  <%= f.error_messages %>
+	<% form_tag districts_path, :method => :get do %>
 	  <p>
-	    <%= f.label :name, "Nombre" %>
-	    <%= f.text_field :name %>
+	    <%= label_tag :state_id, "Estado" %>
+	    <%= select_tag :state_id, options_for_select(State.all.map {|s| [s.name, s.id]}, :selected => params[:state_id].to_i) %>
 	  </p>
 	  <p>
-	    <%= f.label :party_id, "Partido" %>
-	    <%= f.collection_select :party_id, Party.all, :id_as_string, :name, {:prompt => "Todos"} %>
+	    <%= label_tag :section %>
+	    <%= text_field_tag :section %>
 	  </p>
-	  <p>
-	    <%= f.label :state_id, "Entidad" %>
-	    <%= f.collection_select :state_id, State.all, :id_as_string, :name, {:prompt => "Todos"} %>
-	  </p>
-	  <p><%= f.submit "Buscar" %></p>
+	  <p><%= submit_tag "Buscar" %></p>
 	<% end %>
 </div>
 

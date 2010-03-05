@@ -1,5 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
-  
+  map.resources :regions
+  map.resources :districts
+
   map.resources :sittings
   map.resources :absences
   map.resources :views
