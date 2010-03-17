@@ -30,6 +30,7 @@ class NewsController < ApplicationController
   
   def update
     @news = News.find(params[:id])
+    params[:news][:tag_ids] ||= []
     if @news.update_attributes(params[:news])
       flash[:notice] = "La noticia se actualizó correctamente."
       redirect_to news_index_path

@@ -1,3 +1,11 @@
+<% content_for :jQuery do -%>
+	<%= javascript_include_tag 'jquery.autocomplete' %>
+<% end -%>
+
+<% content_for :body_class do -%>
+	class="user"
+<% end -%>
+
 <% form_for @citizen, :url => @citizen.new_record? ? citizens_path : citizen_path(@citizen.id) do |f| %>
   <%= f.error_messages %>
   <p>
@@ -9,8 +17,8 @@
     <%= f.text_field :email %>
   </p>
   <p>
-    <%= f.label :state_id, "Estado" %><br />
-    <%= f.select :state_id, State.all.collect {|s| [s.name, s.id]} %>
+    <%= f.label :city_name, "Ciudad" %><br />
+    <%= f.text_field :city_name, :class => "city_name" %>
   </p>
   <p>
     <%= f.label :password, "Contraseña" %><br />
@@ -20,5 +28,8 @@
     <%= f.label :password_confirmation, "Confirmación de Contraseña" %><br />
     <%= f.password_field :password_confirmation %>
   </p>
-  <p><%= f.submit "Guardar" %></p>
+  <p>
+    <%= hidden_field_tag :tab, 0 %>
+    <%= f.submit "Guardar" %>
+  </p>
 <% end %>

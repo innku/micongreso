@@ -28,9 +28,17 @@
 		<%= f.label :member_votes_neutral, "Abstenciones" %>
 		<%= f.text_field :member_votes_neutral, :size => 6 %>
 	</p>
-	<p>
-		<%= f.label :tag_list, "Tags" %> <%= f.text_field :tag_list %>
-	</p>
+	
+	<p>Selecciona los temas de interés relacionados a la propuesta</p>
+	<ul id="tag_ids">
+    <% Tag.all.each do |tag| %>
+      <li>
+        <%= link_to tag.name, "#{tag.id}", :class => "#{tag_classes(@bill, tag)}" %>
+        <%= hidden_field_tag "bill[tag_ids][]", tag.id, :disabled => !@bill.tags.include?(tag) %>
+      </li>
+    <% end %>
+  </ul>
+	
 	<p>
 		<%= f.check_box :publish_bill_on_social_media %> <%= f.label :publish_bill_on_social_media, "¿Desea publicar esta propuesta en medios sociales?" %>
 	</p>

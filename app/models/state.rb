@@ -2,6 +2,7 @@ class State < ActiveRecord::Base
   
   has_many :members
   has_many :districts
+  has_many :cities
   
   belongs_to  :region
   

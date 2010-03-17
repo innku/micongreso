@@ -1,0 +1,27 @@
+<% title "Invita a tus amigos" %>
+
+<h3>Selecciona el servicio de correo</h3>
+
+<% form_tag contacts_path do %>
+  <p>
+    <%= radio_button_tag :provider, "gmail", params[:provider] == "gmail" ? true : false %> <%= label_tag :provider_gmail, "Gmail" %>
+    <%= radio_button_tag :provider, "hotmail", params[:provider] == "hotmail" ? true : false %>  <%= label_tag :provider_hotmail, "Hotmail" %>
+    <%= radio_button_tag :provider, "yahoo", params[:provider] == "yahoo" ? true : false %>  <%= label_tag :provider_yahoo, "Yahoo!" %>
+  </p>
+  <p>
+    <%= label_tag :login, "Nombre de Usuario o Correo Electrónico" %> <br/>
+    <%= text_field_tag :login, params[:login] %>
+  </p> 
+  <p>
+    <%= label_tag :password, "Contraseña" %> <br/>
+    <%= text_field_tag :password %>
+  </p>
+  <p>
+    MiCongreso no almacenará tu contraseña
+  </p>
+  <p>
+    <%= submit_tag "Enviar invitación" %>
+  </p>
+<% end %>
+
+

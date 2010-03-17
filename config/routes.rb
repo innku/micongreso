@@ -1,4 +1,12 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :contacts
+
+  map.resources :tags
+
+  map.resources :cities
+
+  map.resources :profiles
+
   map.resources :regions
   map.resources :districts
 
@@ -8,7 +16,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.update_bill_votes '/bill/:bill_id/votes', :controller => 'votes', :action => 'update'
   map.edit_bill_votes '/bill/:bill_id/votes/edit', :controller => 'votes', :action => 'edit'
-  map.resources :bills, :has_many => :votes
+  map.resources :bills, :has_many => [:comments, :votes]
   map.resources :news, :has_many => [:comments, :votes]
     
   map.resources :search_members, :collection => {:group => :get}

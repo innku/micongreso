@@ -10,6 +10,7 @@ class Bill < ActiveRecord::Base
   
   acts_as_taggable
   acts_as_voteable
+  acts_as_commentable
   
   named_scope :latest_voted, :conditions => ["member_votes_for != ? OR member_votes_against != ? OR member_votes_neutral != ?",0,0,0], :order => "created_at DESC"
   
@@ -69,8 +70,8 @@ class Bill < ActiveRecord::Base
   end
   
   def citizen_votes_for_state(state, vote)
-    Vote.count(:all, :joins => "INNER JOIN users ON users.id = votes.voter_id",
-                      :conditions => ["voteable_id = ? AND voteable_type = ? AND vote = ? AND voter_type = ? AND users.state_id = ?", self.id, self.class.name, vote, "User", state.id])
+    Vote.count(:all, :from => "(votes", :joins => "INNER JOIN users ON users.id = votes.voter_id) INNER JOIN cities ON cities.id = users.city_id",
+                      :conditions => ["voteable_id = ? AND voteable_type = ? AND vote #{vote_sql(vote)} AND voter_type = ? AND cities.state_id = ?", self.id, self.class.name, "User", state.id])
   end
   
   def update_week_views!
@@ -84,7 +85,9 @@ class Bill < ActiveRecord::Base
     end
     
     if send_emails.to_i == 1
-      User.citizens.each {|citizen| UserMailer.deliver_bill(citizen, self)}
+      User.citizens.each do |citizen|
+        UserMailer.deliver_bill(citizen, self) if citizen.notify_me?(self.tags)
+      end
     end
   end
   

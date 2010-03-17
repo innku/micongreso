@@ -19,7 +19,7 @@ class CitizensController < ApplicationController
     @citizen.make_citizen
     if @citizen.save
       self.current_user = @citizen
-      redirect_to root_path
+      redirect_to edit_citizen_path(@citizen, :tab => 1)
       flash[:notice] = "Te acabamos de enviar un correo de activación, da clic en la liga del correo para completar el registro."
     else
       flash[:error]  = "Ocurrió un error, por favor inténtalo de nuevo."
@@ -33,9 +33,10 @@ class CitizensController < ApplicationController
   
   def update
     @citizen = current_user
+    params[:user][:tag_ids] ||= []
     if @citizen.update_attributes(params[:user])
       flash[:notice] = "Se guardaron los cambios del usuario correctamente"
-      redirect_to edit_citizen_path(@citizen)
+      redirect_to edit_citizen_path(@citizen, :tab => params[:tab])
     else
       render :action => 'edit'
     end

@@ -1,0 +1,13 @@
+one:
+  email: false
+  twitter: false
+  facebook: false
+  sms: false
+  interest_topics: false
+
+two:
+  email: false
+  twitter: false
+  facebook: false
+  sms: false
+  interest_topics: false

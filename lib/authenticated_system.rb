@@ -58,13 +58,13 @@ module AuthenticatedSystem
     def citizen_rights
       user_rights = {:dashboard => ["index"], :search_members => ["new", "create", "show", "group"], :members => ["show"], 
                     :messages => ["create"], :bills => ["index", "show"], :news => ["index", "show"], :comments => ["new", "create"],
-                    :votes => ["create"], :citizens => ["edit", "update"]}
+                    :votes => ["create"], :citizens => ["edit", "update"], :contacts => ["new", "create"]}
     end
     
     def admin_rights
       admin_rights = {:absences => [], :bills => [], :comments => [], :dashboard => [], :members => [], :messages => [],
                       :news => [], :parties => [], :search_members => [], :sittings => [], :states => [], :users => [], 
-                      :views => [], :votes => [], :citizens => ["index"]}
+                      :views => [], :votes => [], :citizens => ["index"], :tags => [], :contacts => []}
     end
     
     def has_permission?

@@ -1,4 +1,35 @@
+<% content_for :jQuery do -%>
+  <%= stylesheet_link_tag 'jquery-ui-1.7.2' %>
+<% end -%>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#user_tabs').tabs({selected: <%= selected_tab(params[:tab]) %>});
+  });
+</script>
+
 <h1>Editar Ciudadano</h1>
 
-<%= render :partial => 'form' %>
+<div id="user_tabs">
+  <ul>
+    <li><%= link_to "Datos Personales", "#user" %></li>
+    <li><%= link_to "Perfil Ciudadano", "#profile" %></li>
+    <li><%= link_to "Notificaciones", "#notifications" %></li>
+  </ul>
+  <div id="user">
+    <%= render :partial => 'form' %>
+  </div>
+  
+  <div id="profile">
+    <%= render :partial => 'profile' %>
+  </div>
+  
+  <div id="notifications">
+    <%= render :partial => 'notifications' %>
+  </div>
+</div>
+
+<%= link_to "Invita a tus amigos a unirse a MiCongreso", new_contact_path %>
+
+
 

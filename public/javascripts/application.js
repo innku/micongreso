@@ -59,6 +59,26 @@ $(document).ready( function(){
 		})
 	})
 	
+	// ------------- Usuario --------------------
+	
+	// Autocomplete en la forma de registro y al editar la info del usuario
+	if ($("body").hasClass("user")) {
+		$(".city_name").each(function(){
+			$(this).autocomplete('/cities.js');
+		})
+	}
+	
+	// Agregar temás de interés a usuarios/noticias/propuestas
+	// Si el usuario selecciona el tema de interés, se va a habilitar/deshabilitar el hidden field
+	$("a.tag").click(function(){
+	  if ($(this).hasClass("selected_tag")) {
+	    $(this).removeClass("selected_tag").next().attr("disabled", "disabled");
+	  } else {
+	    $(this).addClass("selected_tag").next().attr("disabled", "");
+	  }
+	  return false;
+	})
+	
 	// Votos de los ciudadanos
 	$("a.vote").click(function(){
 		$.post($(this).attr("href"), { vote: $(this).attr('data-vote'), voteable: $(this).attr('data-voteable') }, null, "script");

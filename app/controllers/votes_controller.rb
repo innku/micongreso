@@ -7,7 +7,11 @@ class VotesController < ApplicationController
   end
   
   def create
-    vote = params[:vote].to_i == 1 ? true : false
+    vote = case params[:vote].to_i
+            when 1 true
+            when 0 false
+            when -1 nil
+           end
     current_user.vote(@voteable, vote)
     
     respond_to do |wants|

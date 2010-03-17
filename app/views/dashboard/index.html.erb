@@ -11,10 +11,11 @@
 			<% if current_user %>
   			<div id="bill_<%= bill.id %>">
     			<% if current_user.voted_on?(bill) %>
-    			  Votaste: <%= current_user.vote_choice(bill) %>
+    			  Votaste: <%= display_vote(current_user.vote_choice(bill)) %>
     			<% else %>
     			  <%= link_to "Vota a favor", bill_votes_path(bill), :class => "vote", 'data-vote' => 1, 'data-voteable' => "bill" %> 
     			  <%= link_to "Vota en contra", bill_votes_path(bill), :class => "vote", 'data-vote' => 0, 'data-voteable' => "bill" %>
+    			  <%= link_to "Abstención", bill_votes_path(bill), :class => "vote", 'data-vote' => -1, 'data-voteable' => "bill" %>
     			<% end %>
   			</div>
 			<% end %>

@@ -1,0 +1,11 @@
+one:
+  name: MyString
+  state_id: 1
+  city_name: MyString
+  priority: 1
+
+two:
+  name: MyString
+  state_id: 1
+  city_name: MyString
+  priority: 1

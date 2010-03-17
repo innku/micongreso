@@ -1,0 +1,16 @@
+<% title "Temas de Interés" %>
+
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+  <% for tag in @tags %>
+    <tr>
+      <td><%=h tag.name %></td>
+      <td><%= link_to "Editar", edit_tag_path(tag) %></td>
+      <td><%= link_to "Eliminar", tag, :confirm => '¿Estas seguro que lo deseas eliminar?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "Nuevo tema de interés", new_tag_path %></p>

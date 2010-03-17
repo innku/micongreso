@@ -32,4 +32,10 @@ module ApplicationHelper
   def yes_or_no(value)
     value ? "Si" : "No"
   end
+  
+  def tag_classes(tagger, tag)
+    tag_classes = "tag"
+    tag_classes += " selected_tag" if tagger.tags.include?(tag)
+    return tag_classes
+  end
 end

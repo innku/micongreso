@@ -1,0 +1,36 @@
+<% form_for @citizen, :url => @citizen.new_record? ? citizens_path : citizen_path(@citizen.id) do |f| %>
+  <%= f.error_messages %>
+  
+  <% f.fields_for :profile do |p| %>
+    <p>
+      <%= p.label :political_views, "Ideología Política" %>
+      <%= p.select :political_views, Profile::POLITICAL_VIEWS %>
+    </p>
+    <p>
+      <%= p.label :ocupation, "Ocupación" %>
+      <%= p.select :ocupation, Profile::OCUPATIONS %>
+    </p>
+    <p>
+      <%= p.label :education, "Nivel de Educación" %>
+      <%= p.select :education, Profile::EDUCATION_LEVELS %>
+    </p>
+    <p>
+      <%= p.label :marital_status, "Estado Civil" %>
+      <%= p.select :marital_status, Profile::MARITAL_STATUSES %>
+    </p>
+    <p>
+      <%= p.label :sex, "Género" %>
+      <%= p.radio_button :sex, true %> <%= p.label :sex_true, "Masculino" %>
+      <%= p.radio_button :sex, false %> <%= p.label :sex_false, "Femenino" %>
+    </p>
+    <p>
+      <%= p.label :birthdate, "Fecha de Nacimiento" %>
+      <%= p.date_select :birthdate, :order => [:day, :month, :year], :start_year => Date.today.year-70, :end_year => Date.today.year-10 %>
+    </p>
+  <% end %>
+  
+  <p>
+    <%= hidden_field_tag :tab, 1 %>
+    <%= f.submit "Guardar Perfil" %>
+  </p>
+<% end %>

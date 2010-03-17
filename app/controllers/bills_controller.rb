@@ -31,6 +31,7 @@ class BillsController < ApplicationController
   
   def update
     @bill = Bill.find(params[:id])
+    params[:bill][:tag_ids] ||= []
     if @bill.update_attributes(params[:bill])
       flash[:notice] = "La propuesta se actualizó correctamente."
       redirect_to bills_path

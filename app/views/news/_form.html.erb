@@ -34,9 +34,17 @@
 		<%= f.label :photo, "Imagen / Fotografía" %>
 		<%= f.file_field :photo %>
 	</p>
-	<p>
-		<%= f.label :tag_list, "Tags" %> <%= f.text_field :tag_list %>
-	</p>
+	
+	<p>Selecciona los temas de interés relacionados a la noticia</p>
+	<ul id="tag_ids">
+    <% Tag.all.each do |tag| %>
+      <li>
+        <%= link_to tag.name, "#{tag.id}", :class => "#{tag_classes(@news, tag)}" %>
+        <%= hidden_field_tag "news[tag_ids][]", tag.id, :disabled => !@news.tags.include?(tag) %>
+      </li>
+    <% end %>
+  </ul>
+  
   <p><%= f.submit "Guardar Noticia" %></p>
 <% end %>
 
