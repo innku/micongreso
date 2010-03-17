@@ -22,13 +22,4 @@ class Sitting < ActiveRecord::Base
       PingFM.post_to_social_media("Ausencias de la sesion: #{self.name}", "#{$global_url}/sittings/#{self.id}")
     end
   end
-  
-  # def post_to_social_media(text, url)
-  #   RAILS_DEFAULT_LOGGER.debug "Publicando post en twitter y facebook: #{helpers.truncate(text, :length => 120)} #{url}"
-  #   PingFM.user_post("status", helpers.truncate(text, :length => 120) + " " + url)
-  # end
-  # 
-  # def helpers
-  #   ActionController::Base.helpers
-  # end
 end
