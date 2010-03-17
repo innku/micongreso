@@ -54,9 +54,11 @@ class User < ActiveRecord::Base
   end
   
   def section_number=(number)
-    RAILS_DEFAULT_LOGGER.debug "state: #{state.id}, section: #{number}"
-    self.section = self.state.sections.find_by_number(number)
-    write_attribute(:section_number, number)
+    if self.city
+      RAILS_DEFAULT_LOGGER.debug "state: #{state.id}, section: #{number}"
+      self.section = self.state.sections.find_by_number(number)
+      write_attribute(:section_number, number)
+    end
   end
   
   def valid_district
