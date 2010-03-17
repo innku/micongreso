@@ -8,9 +8,10 @@ class VotesController < ApplicationController
   
   def create
     vote = case params[:vote].to_i
-            when 1 true
-            when 0 false
-            when -1 nil
+            when 1 then true
+            when 0 then false
+            when -1 then nil
+            else nil
            end
     current_user.vote(@voteable, vote)
     
