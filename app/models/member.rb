@@ -3,9 +3,9 @@ class Member < ActiveRecord::Base
   belongs_to  :state
   belongs_to  :party
   belongs_to  :district
-  
-  has_many    :messages
-  has_many    :absences
+    
+  has_many    :messages,  :dependent => :destroy
+  has_many    :absences,  :dependent => :destroy
   
   attr_accessor :importing
   
@@ -77,18 +77,28 @@ class Member < ActiveRecord::Base
     write_attribute(:state_id, state.id) if state
   end
   
+  def district_number=(number)
+    if self.state
+      district = self.state.districts.find_by_number(number.to_i)
+      write_attribute(:district_id, district.id) if district
+    end
+  end
+  
   def self.create_from_csv(row)
     member = Member.new(:name => row['nombre'], 
                         :email => row['correo'],
                         :commission => row['comision'],
-                        :district => row['distrito'],
-                        :head => row['cabecera'],
+                        :state_name => row['entidad'],
                         :election => row['tipo_eleccion'],
                         :birthdate => row['fecha_nacimiento'],
                         :birthplace => row['lugar_nacimiento'],
-                        :substitute => row['sustituto'],
+                        :substitute => row['suplente'],
                         :party_abbr => row['partido'],
-                        :state_name => row['entidad'])
+                        :curul => row['curul'],
+                        :education => row['escolaridad'],
+                        :political_experience => row['trayectoria_politica'],
+                        :private_experience => row['iniciativa_privada'])
+    member.district_number = row['distrito']
     member.importing = true
     member.complete = false unless member.valid?
     member.duplicate = true if member.same_name_or_email?
