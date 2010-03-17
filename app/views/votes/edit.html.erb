@@ -2,23 +2,28 @@
 
 <% form_tag update_bill_votes_path(@bill) do |f| %>
 	
-	<table>
-		<tr>
-			<th>Diputado</th>
-			<th>A Favor</th>
-			<th>En Contra</th>
-			<th>Abstención</th>
-		</tr>
-		<% for member in Member.all %>
-			<tr>
-				<td><%= member.name %></td>
-				<td><%= radio_button_tag "votes[#{member.id}][]", 1, @bill.voted_result_by?(member, true) %></td>
-				<td><%= radio_button_tag "votes[#{member.id}][]", 0, @bill.voted_result_by?(member, false) %></td>
-				<td><%= radio_button_tag "votes[#{member.id}][]", -1, @bill.voted_result_by?(member, nil) %></td>
-			</tr>
-		<% end %>
-	</table>
-	
+	<% Party.all.each do |party| %>
+	  <h3><%= party.name %></h3>
+	  <p>Opciones para seleccionar votos del <%= party.abbr %></p>
+	  <%= link_to "Todos a favor", "#", "data-vote" => "for", :class => "multiple_vote_select" %>
+	  <%= link_to "Todos en contra", "#", "data-vote" => "against", :class => "multiple_vote_select" %>
+  	<table>
+  		<tr>
+  			<th>Diputado</th>
+  			<th>A Favor</th>
+  			<th>En Contra</th>
+  			<th>Abstención</th>
+  		</tr>
+		  <% for member in party.members %>
+  			<tr>
+  				<td><%= member.name %></td>
+  				<td><%= radio_button_tag "votes[#{member.id}][]", 1, @bill.voted_result_by?(member, true), :class => "for" %></td>
+  				<td><%= radio_button_tag "votes[#{member.id}][]", 0, @bill.voted_result_by?(member, false), :class => "against" %></td>
+  				<td><%= radio_button_tag "votes[#{member.id}][]", -1, @bill.voted_result_by?(member, nil), :class => "neutral" %></td>
+  			</tr>
+  		<% end %>
+  	</table>
+	<% end %>
 	<p>
 		<%= check_box_tag :publish_votes_on_social_media, 1, false %> <%= label_tag :publish_votes_on_social_media, "¿Deseas publicar el resultado de la votación en medios sociales?" %>
 	</p>

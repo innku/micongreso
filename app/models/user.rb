@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   
   acts_as_voter
   acts_as_taggable
-  
+      
   belongs_to  :city
   belongs_to  :section
   belongs_to  :state,   :foreign_key => :ife_state_id
@@ -24,6 +24,11 @@ class User < ActiveRecord::Base
   validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message
   
   validates_presence_of     :city_id,  :message => "^Por favor seleccione una ciudad"
+  validate  :valid_district
+
+  delegate :state, :to => :city
+  delegate :district, :to => :section
+  delegate :member, :to => :district
 
   before_create :make_activation_code
 
@@ -38,6 +43,28 @@ class User < ActiveRecord::Base
   
   def city_name=(city_string)
     self.city = City.find_by_full_name(city_string).first
+  end
+  
+  def section_number
+    if read_attribute(:section_number)
+      read_attribute(:section_number)
+    elsif self.section
+      self.section.number
+    end
+  end
+  
+  def section_number=(number)
+    RAILS_DEFAULT_LOGGER.debug "state: #{state.id}, section: #{number}"
+    self.section = self.state.sections.find_by_number(number)
+    write_attribute(:section_number, number)
+  end
+  
+  def valid_district
+    RAILS_DEFAULT_LOGGER.debug "Section: #{section.inspect}, section_number #{self.section_number}"
+    unless self.section_number.blank?
+      RAILS_DEFAULT_LOGGER.debug "Agregar error a section_id"
+      errors.add(:section_id, "^No encontramos la sección no. #{self.section_number} en el estado de #{self.state.name}") unless self.section
+    end
   end
   
   # Activates the user in the database.

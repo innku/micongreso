@@ -28,6 +28,10 @@ class Bill < ActiveRecord::Base
         end
       end
     end
+    self.member_votes_for = self.votes_for_by("Member")
+    self.member_votes_against = self.votes_against_by("Member")
+    self.member_votes_neutral = self.votes_neutral_by("Member")
+    self.save
   end
   
   def formatted_date

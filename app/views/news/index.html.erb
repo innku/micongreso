@@ -14,7 +14,7 @@
 			<% if current_user %>
   			<div id="news_<%= news.id %>">
     			<% if current_user.voted_on?(news) %>
-    			  Votaste: <%= current_user.vote_choice(news) %>
+    			  Votaste: <%= display_vote(current_user.vote_choice(news)) %>
     			<% else %>
     			  <%= link_to "Vota a favor", news_votes_path(news), :class => "vote", 'data-vote' => 1, 'data-voteable' => "news" %> 
     			  <%= link_to "Vota en contra", news_votes_path(news), :class => "vote", 'data-vote' => 0, 'data-voteable' => "news" %>

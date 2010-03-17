@@ -64,7 +64,7 @@ module AuthenticatedSystem
     def admin_rights
       admin_rights = {:absences => [], :bills => [], :comments => [], :dashboard => [], :members => [], :messages => [],
                       :news => [], :parties => [], :search_members => [], :sittings => [], :states => [], :users => [], 
-                      :views => [], :votes => [], :citizens => ["index"], :tags => [], :contacts => []}
+                      :views => [], :votes => [], :citizens => ["index", "edit", "update"], :tags => [], :contacts => []}
     end
     
     def has_permission?

@@ -59,6 +59,18 @@ $(document).ready( function(){
 		})
 	})
 	
+	// ------------- Editar Votos --------------
+	
+	$("a.multiple_vote_select").click(function(){
+	  if ($(this).attr("data-vote") == "for") {
+	    $(this).next().next().find("input.for").attr("checked", "checked")
+	  } else if ($(this).attr("data-vote") == "against"){
+	    $(this).next().find("input.against").attr("checked", "checked")
+	  }
+	  return false;
+	  
+	})
+	
 	// ------------- Usuario --------------------
 	
 	// Autocomplete en la forma de registro y al editar la info del usuario

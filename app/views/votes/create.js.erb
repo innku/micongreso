@@ -1,1 +1,1 @@
-$("#<%= @voteable.class.name.downcase %>_<%= @voteable.id %>").html("Votaste: <%= current_user.vote_choice(@voteable) %>");
+$("#<%= @voteable.class.name.downcase %>_<%= @voteable.id %>").html("Votaste: <%= display_vote(current_user.vote_choice(@voteable)) %>");

@@ -22,7 +22,6 @@ class CitizensController < ApplicationController
       redirect_to edit_citizen_path(@citizen, :tab => 1)
       flash[:notice] = "Te acabamos de enviar un correo de activación, da clic en la liga del correo para completar el registro."
     else
-      flash[:error]  = "Ocurrió un error, por favor inténtalo de nuevo."
       render :action => 'new'
     end
   end
