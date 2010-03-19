@@ -30,13 +30,14 @@
     
     <% if p.object.avatar? %>
       <div id="avatar">
-        <%= p.object.avatar.url(:small) %>
-        <%= link_to "Cambiar Foto", "#" %>
+        <%= image_tag(p.object.avatar.url(:small)) %>
+        <%= link_to "Cambiar Foto", "#", :id => "change_avatar" %>
       </div>
     <% end %>
     <p id="avatar_field" style="<% if p.object.avatar? %>display: none;<% end %>">
       <%= p.label :avatar, "Fotografía" %>
       <%= p.file_field :avatar %>
+      <%= link_to "No cambiar foto", "#", :id => "cancel_change_avatar" %>
     </p>
   <% end %>
   

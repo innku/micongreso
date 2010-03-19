@@ -73,6 +73,17 @@ $(document).ready( function(){
 	
 	// ------------- Usuario --------------------
 	
+	// Cambiar foto del perfil
+	$("a#change_avatar").click(function(){
+	  $("#avatar").hide();
+	  $("#avatar_field").show();
+  })
+  
+  $("a#cancel_change_avatar").click(function(){
+    $("#avatar_field").hide();
+    $("#avatar").show();
+  })
+	
 	// Autocomplete en la forma de registro y al editar la info del usuario
 	if ($("body").hasClass("user")) {
 		$(".city_name").each(function(){
