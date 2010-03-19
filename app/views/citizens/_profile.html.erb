@@ -1,4 +1,4 @@
-<% form_for @citizen, :url => @citizen.new_record? ? citizens_path : citizen_path(@citizen.id) do |f| %>
+<% form_for @citizen, :url => @citizen.new_record? ? citizens_path : citizen_path(@citizen.id), :html => { :multipart => true } do |f| %>
   <%= f.error_messages %>
   
   <% f.fields_for :profile do |p| %>
@@ -25,7 +25,18 @@
     </p>
     <p>
       <%= p.label :birthdate, "Fecha de Nacimiento" %>
-      <%= p.date_select :birthdate, :order => [:day, :month, :year], :start_year => Date.today.year-70, :end_year => Date.today.year-10 %>
+      <%= p.date_select :birthdate, :order => [:day, :month, :year], :start_year => Date.today.year-100, :end_year => Date.today.year-10, :default => Date.today-25.years %>
+    </p>
+    
+    <% if p.object.avatar? %>
+      <div id="avatar">
+        <%= p.object.avatar.url(:small) %>
+        <%= link_to "Cambiar Foto", "#" %>
+      </div>
+    <% end %>
+    <p id="avatar_field" style="<% if p.object.avatar? %>display: none;<% end %>">
+      <%= p.label :avatar, "Fotografía" %>
+      <%= p.file_field :avatar %>
     </p>
   <% end %>
   

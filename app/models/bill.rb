@@ -70,7 +70,7 @@ class Bill < ActiveRecord::Base
   
   def citizen_votes(vote)
     Vote.count(:all, :joins => "INNER JOIN users ON users.id = votes.voter_id",
-                      :conditions => ["voteable_id = ? AND voteable_type = ? AND vote = ? AND voter_type = ?", self.id, self.class.name, vote, "User"])
+                      :conditions => ["voteable_id = ? AND voteable_type = ? AND vote #{vote_sql(vote)} AND voter_type = ?", self.id, self.class.name, "User"])
   end
   
   def citizen_votes_for_state(state, vote)
