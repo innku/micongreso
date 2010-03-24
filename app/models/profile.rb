@@ -4,7 +4,7 @@ class Profile < ActiveRecord::Base
   
   production = Rails.env == 'production'
   
-  has_attached_file :avatar, :styles => { :medium => "192x192>", :small => "96x96>", :thumb => "48x48>" },
+  has_attached_file :avatar, :styles => { :medium => "192x192>", :small => "96x96>", :thumb => "48x48#" },
                             :storage => (production ? :s3 : :filesystem),
                             :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
                             :path => (production ? ":attachment/:id/:style/:basename.:extension" : "public/system/:attachment/:id/:style/:basename.:extension"),

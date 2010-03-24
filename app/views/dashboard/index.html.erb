@@ -50,6 +50,16 @@
   	  <p><%= submit_tag "Buscar" %></p>
   	<% end %>
   <% end %>
+  
+  <h2>Miembros de mi congreso</h2>
+  
+  <div id="members">
+    <ul>
+      <% @citizens.each do |citizen| %>
+        <li><%= image_tag(citizen.profile.avatar.url) %></li>
+      <% end %>
+    </ul>
+  </div>
 </div>
 
 <div class="right">

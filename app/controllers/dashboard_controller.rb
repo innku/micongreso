@@ -5,6 +5,7 @@ class DashboardController < ApplicationController
   def index
     @news = News.latest
     @bills = Bill.latest_voted
+    @citizens = User.with_avatar.latest
   end
 
 end

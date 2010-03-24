@@ -34,6 +34,8 @@ class User < ActiveRecord::Base
 
   named_scope :citizens, :conditions => ['role = ?', 'citizen']
   named_scope :admins, :conditions => ['role = ?', 'admin']
+  named_scope :with_avatar, :include => :profile, :conditions => ['profiles.avatar_file_size > ?', 0]
+  named_scope :latest, :order => "users.created_at DESC", :limit => 18
   
   accepts_nested_attributes_for :profile, :notification
   
