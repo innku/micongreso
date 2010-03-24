@@ -78,6 +78,24 @@ class Bill < ActiveRecord::Base
                       :conditions => ["voteable_id = ? AND voteable_type = ? AND vote #{vote_sql(vote)} AND voter_type = ? AND cities.state_id = ?", self.id, self.class.name, "User", state.id])
   end
   
+  def citizen_votes_and_percents
+    return @citizen_votes_and_percents_array if @citizen_votes_and_percents_array
+    for_votes = citizen_votes(true)
+    against_votes = citizen_votes(false)
+    neutral_votes = citizen_votes(nil)
+    total_votes = for_votes + against_votes + neutral_votes
+    @citizen_votes_and_percents_array = [for_votes, against_votes, neutral_votes, (for_votes.to_f/total_votes)*100, (against_votes.to_f/total_votes)*100, (neutral_votes.to_f/total_votes)*100]
+  end
+  
+  def member_votes_and_percents
+    return @member_votes_and_percents_array if @member_votes_and_percents_array
+    for_votes = member_votes_for
+    against_votes = member_votes_against
+    neutral_votes = member_votes_neutral
+    total_votes = for_votes + against_votes + neutral_votes
+    @member_votes_and_percents_array = [for_votes, against_votes, neutral_votes, (for_votes.to_f/total_votes)*100, (against_votes.to_f/total_votes)*100, (neutral_votes.to_f/total_votes)*100]
+  end
+  
   def update_week_views!
     self.week_views = self.views.last_week.count
     self.save

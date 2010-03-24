@@ -38,4 +38,8 @@ module ApplicationHelper
     tag_classes += " selected_tag" if tagger.tags.include?(tag)
     return tag_classes
   end
+  
+  def show_votes?(vote_type, votes_array)
+    votes_array[vote_type] if votes_array[vote_type+3] > 6
+  end
 end

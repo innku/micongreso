@@ -1,5 +1,5 @@
 <% if logged_in? && current_user.admin? %>
-	<div id="menu">
+	<div id="nav">
 		<ul>
 		  <li><%= link_to "Inicio", root_path %></li>
 			<li><%= link_to "Usuarios", users_path %></li>
@@ -13,12 +13,15 @@
 		</ul>
 	</div>
 <% else %>
-	<div id="menu">
+	<div id="nav">
 		<ul>
 			<li><%= link_to "Inicio", root_path %></li>
 			<li><%= link_to "Diputados", new_search_member_path %></li>
 			<li><%= link_to "Propuestas", bills_path %></li>
 			<li><%= link_to "Noticias", news_index_path %></li>
+			<% if !logged_in? %>
+			  <li class="login"><%= link_to "Inicia Sesi&oacute;n &raquo;", login_path %></li> 
+			<% end %>
 		</ul>
 	</div>
 <% end %>

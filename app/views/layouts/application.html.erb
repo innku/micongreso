@@ -12,21 +12,43 @@
 		
   </head>
   <body <%= yield(:body_class) %>>
+
+    <div id="header"> 
+    	<div class="contenido"> 
+    		<div id="logo"> 
+    			<img src="/images/logo.gif" alt="mi congreso" /> 
+    		</div> 
+    		<%= render :partial => "layouts/menu" %>
+    		<%= render :partial => "users/user_bar" %>
+    	</div>
+    </div>
 		
     <div id="container">
+      
+      <div id="main"> 
+      	<div class="contenido">
+      	  
+      	  <%- flash.each do |name, msg| -%>
+            <%= content_tag :div, msg, :id => "flash_#{name}" %>
+          <%- end -%>
 
-			<%= render :partial => "users/user_bar" %>
-			<%= render :partial => "layouts/menu" %>
-		
-      <%- flash.each do |name, msg| -%>
-        <%= content_tag :div, msg, :id => "flash_#{name}" %>
-      <%- end -%>
-      
-      <%- if show_title? -%>
-        <h1><%=h yield(:title) %></h1>
-      <%- end -%>
-      
-      <%= yield %>
+          <%- if show_title? -%>
+            <h1><%=h yield(:title) %></h1>
+          <%- end -%>
+      	  
+          <%= yield %>
+        </div>
+      </div>
     </div>
+    
+  	<div id="footer"> 
+  		<div class="contenido">
+  		  <div id="parties">
+        	<h4>Partidos</h4>
+
+        	<%= Party.all.collect {|party| link_to party.name, group_search_members_path(:party_id => party.id )}.join(', ')  %>
+        </div>
+  		</div> 
+  	</div>
   </body>
 </html>
