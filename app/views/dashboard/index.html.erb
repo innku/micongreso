@@ -64,55 +64,18 @@
 		<div class="tabs"> 
   		<h2>Propuestas</h2> 
   		<ul> 
-  			<li><a href="#" class="active">Mas votadas</a></li> 
-  			<li><a href="#">Recientes</a></li> 
-  			<li><a href="#">Activas</a></li> 
-  			<li><a href="#">Cerradas</a></li> 
-  		</ul> 
+  			<li><%= link_to "Más votadas", root_path(:type => "voted"), :class => tab_class(params[:type], "voted") %></li> 
+  			<li><%= link_to "Recientes", root_path(:type => "recent"), :class => tab_class(params[:type], "recent") %></li> 
+  			<li><%= link_to "Activas", root_path(:type => "active"), :class => tab_class(params[:type], "active") %></li> 
+  			<li><%= link_to "Cerradas", root_path(:type => "closed"), :class => tab_class(params[:type], "closed") %></li> 
+  		</ul>
 		</div> 
 
 		<div class="propuestas">
-    	
-    	<% for bill in @bills %>
-    		<div class="propuesta"> 
-    			<div class="ribbon"> 
-    				<p><%= bill.date.strftime("%d") %><br /><%= bill.date.strftime("%b") %></p>		
-    			</div>
-    			<h3><%= link_to bill.name, bill %></h3> 
-    			<ul class="graficas">
-    				<li class="ciudadana">
-    				  <span>Votaci&oacute;n ciudadana:</span>
-    				  <div class="votos">
-    				    <div class="barra favor" style="width: <%= bill.citizen_votes_and_percents[3] %>%;">&nbsp; <%= show_votes?(0, bill.citizen_votes_and_percents) %></div>
-      				  <div class="barra contra" style="width: <%= bill.citizen_votes_and_percents[4] %>%;">&nbsp; <%= show_votes?(1, bill.citizen_votes_and_percents) %></div>
-      				  <div class="barra neutral" style="width: <%= bill.citizen_votes_and_percents[5] %>%;">&nbsp; <%= show_votes?(2, bill.citizen_votes_and_percents) %></div>
-    				  </div>
-    				</li>
-    				<li class="oficial">
-    				  <span>Votaci&oacute;n oficial:</span>
-    				  <div class="votos">
-    				    <div class="barra favor" style="width: <%= bill.member_votes_and_percents[3] %>%;">&nbsp; <%= show_votes?(0, bill.member_votes_and_percents) %></div>
-      				  <div class="barra contra" style="width: <%= bill.member_votes_and_percents[4] %>%;">&nbsp; <%= show_votes?(1, bill.member_votes_and_percents) %></div>
-      				  <div class="barra neutral" style="width: <%= bill.member_votes_and_percents[5] %>%;">&nbsp; <%= show_votes?(2, bill.member_votes_and_percents) %></div>
-    				  </div>
-    				</li>
-    				<li class="resultados">Resultados oficiales: </li> 
-    				<li class="resultado_si">Aprobada -</li> 
-    				<li class="resultado_no">Rechazada -</li> 
-    			</ul>
-    			<% if current_user %>
-      			<ul id="bill_<%= bill.id %>" class="links">
-        			<% if current_user.voted_on?(bill) %>
-        			  <li>Votaste: <%= display_vote(current_user.vote_choice(bill)) %></li>
-        			<% else %>
-        			  <li><%= link_to "Vota a favor", bill_votes_path(bill), :class => "vote si", 'data-vote' => 1, 'data-voteable' => "bill" %> </li>
-        			  <li><%= link_to "Vota en contra", bill_votes_path(bill), :class => "vote no", 'data-vote' => 0, 'data-voteable' => "bill" %></li>
-        			  <li><%= link_to "Abstención", bill_votes_path(bill), :class => "vote", 'data-vote' => -1, 'data-voteable' => "bill" %></li>
-        			<% end %>
-      			</ul>
-    			<% end %>
-    		</div>
-    	<% end %>
+		  <%= image_tag("spinner.gif", :style => "display: none;", :id => "spinner") %>
+		  <div id="propuestas">
+		    <%= render :partial => 'bill', :collection => @bills %>
+		  </div>
 		</div>
 
 	</div>

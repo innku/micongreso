@@ -381,6 +381,11 @@ ul.graficas {
 	color: #6D6A61;
 	background: #CACAC2;
 }
+
+.propuestas img#spinner {
+	margin: 40px 288px 100px 288px;
+}
+
 /*NOTICIAS & USERS & TWEET*/
 #noticias, #users, #tweet {
 	width: 100%;

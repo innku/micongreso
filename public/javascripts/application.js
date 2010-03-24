@@ -13,6 +13,13 @@ $(document).ready( function(){
 	  settings.data += (settings.data ? "&" : "") + "authenticity_token=" + encodeURIComponent(AUTH_TOKEN);
 	});
 	
+	$(".tabs li a").click(function (){
+	  $.get($(this).attr("href"), null, null, 'script');
+	  $(".propuesta").hide();
+	  $("#spinner").show();
+	  return false;
+	})
+	
 	if ($("body").hasClass("text_counter")) {
 		$("#news_abstract").apTextCounter({
 		  maxCharacters: 300,

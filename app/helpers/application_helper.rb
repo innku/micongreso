@@ -42,4 +42,9 @@ module ApplicationHelper
   def show_votes?(vote_type, votes_array)
     votes_array[vote_type] if votes_array[vote_type+3] > 6
   end
+  
+  def tab_class(params, type)
+    return "active" if params.blank? && type == "voted"
+    "active" if params == type
+  end
 end
