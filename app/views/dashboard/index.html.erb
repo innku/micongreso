@@ -56,7 +56,7 @@
   <div id="members">
     <ul>
       <% @citizens.each do |citizen| %>
-        <li><%= image_tag(citizen.profile.avatar.url) %></li>
+        <li><%= image_tag(citizen.profile.avatar.url(:thumb)) %></li>
       <% end %>
     </ul>
   </div>
