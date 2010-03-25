@@ -15,11 +15,10 @@
 
     <div id="header"> 
     	<div class="contenido"> 
-    		<div id="logo"> 
-    			<img src="/images/logo.gif" alt="mi congreso" /> 
+    		<div id="logo">
+    		  <%= link_to image_tag("logo.gif"), root_path %>
     		</div> 
     		<%= render :partial => "layouts/menu" %>
-    		<%= render :partial => "users/user_bar" %>
     	</div>
     </div>
 		

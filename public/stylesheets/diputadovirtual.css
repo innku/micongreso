@@ -15,6 +15,11 @@ a {
 a:hover {
 	color: #B63D46;
 }
+a:active{
+	outline: none;
+}
+* { outline: none; }
+
 /*LAYOUT*/
 #header {
 	background: #FFF;
@@ -25,6 +30,10 @@ a:hover {
 }
 #logo {
 	float: left;
+}
+
+#logo img {
+	border: none;
 }
 #main {
 	background: #F1F3EE url(/images/deg2.png) repeat-x;
@@ -68,6 +77,11 @@ a:hover {
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	margin-left: 10px;
+}
+
+#nav ul li.email a {
+	color: #B63D46;
+	padding: 6px 0 6px 20px;
 }
 /*PITCH*/
 #pitch {
@@ -310,6 +324,7 @@ ul.links li a.no {
 ul.links li a:hover {
 	color: #B63D46;
 }
+
 /*GRAFICAS*/
 ul.graficas {
 	margin: 10px 0 15px 0px;
@@ -334,10 +349,6 @@ ul.graficas {
 .ciudadana {
 	background: #F4F4F3 url(/images/ciud.jpg) no-repeat 5px 5px;
 }
-.graficas li.resultados {
-	padding: 5px 0px;
-	font-style: italic;
-}
 
 .graficas span {
 	float: left;
@@ -346,6 +357,20 @@ ul.graficas {
 .oficial {
 	background: url(/images/off.jpg) no-repeat 5px 2px;
 }
+
+.graficas li.resultados {
+	padding: 5px;
+	font-style: italic;
+}
+
+ul.graficas li.resultados span {
+	float: none;
+	width: auto;
+	font-style: italic;
+	font-weight: bold;
+	margin-right: 5px;
+}
+
 .resultado_si {
 	background: #F4F4F3 url(/images/ok.gif) no-repeat 5px 2px;
 }

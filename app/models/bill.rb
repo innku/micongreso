@@ -14,8 +14,8 @@ class Bill < ActiveRecord::Base
   
   named_scope :voted, :conditions => ["member_votes_for != ? OR member_votes_against != ? OR member_votes_neutral != ?",0,0,0], :order => "created_at DESC"
   named_scope :recent, :order => "created_at DESC"
-  named_scope :active, :conditions => ['date <= ?', Date.today]
-  named_scope :closed, :conditions => ['date > ?', Date.today]
+  named_scope :active, :conditions => ['date >= ?', Date.today]
+  named_scope :closed, :conditions => ['date < ?', Date.today]
   
   def update_votes(params)
     if params

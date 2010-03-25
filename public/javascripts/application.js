@@ -20,6 +20,8 @@ $(document).ready( function(){
 	  return false;
 	})
 	
+	$("a#search_link").fancybox();
+	
 	if ($("body").hasClass("text_counter")) {
 		$("#news_abstract").apTextCounter({
 		  maxCharacters: 300,

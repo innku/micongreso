@@ -47,4 +47,8 @@ module ApplicationHelper
     return "active" if params.blank? && type == "voted"
     "active" if params == type
   end
+  
+  def es_date(date)
+    "#{date.day} #{MONTHS[date.month]} #{date.year}"
+  end
 end
