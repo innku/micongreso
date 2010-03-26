@@ -3,7 +3,16 @@ class BillsController < ApplicationController
   skip_before_filter  :login_required, :only => [:index, :show]
   
   def index
-    @bills = Bill.all
+    if params[:search]
+      @bills = Bill.name_or_description_like(params[:search])
+    elsif params[:tag_id]
+      @tag = Tag.find(params[:tag_id])
+      @bills = Bill.find_tagged_with(@tag.name)
+    elsif params[:month] && params[:year]
+      @bills = Bill.monthly(params[:month], params[:year])
+    else
+      @bills = Bill.all
+    end
   end
   
   def show

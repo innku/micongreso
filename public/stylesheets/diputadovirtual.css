@@ -527,6 +527,83 @@ ul.graficas li.resultados span {
 	width: 100%;
 	float: left;
 }
+/*INTERNAS*/
+#rest h2.section {
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	color: #FFF;
+	font-family: "union", palatino, georgia, times;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	background: #696055;
+	padding: 5px 10px;
+	margin: 0 0 3px 0;
+}
+/*TOPICS*/
+#topics, #archivo {
+	margin-top: 20px;
+	float: left;
+	width: 100%;
+}
+/*Bloques de Listas*/
+#de_propuestas {
+	background: url(/images/deg6.png) top left;
+	margin-top: 20px;
+	padding: 10px;
+}
+ul.blocklist {
+	margin: 0px 0px 10px 0px;
+	width: 100%;
+	float: left;
+	list-style-type: none;
+	padding: 0px;
+}
+ul.blocklist li {
+	width: 100%;
+	float: left;
+	margin: 0px;
+	padding: 1px 0px;
+	border-bottom: 1px dotted #CCC;
+}
+ul.blocklist li a {
+	display: block;
+	padding: 3px 5px;
+}
+ul.blocklist li a:hover {
+	background: #EEE;
+}
+/*SEARCH MEMBER*/
+#search_member {
+	width: 240px;
+	height: 180px;
+	background: #FFF url(/images/credencial.png) no-repeat 20px 15px;
+	padding: 5px 10px 10px 280px;
+}
+#search_member h2 {
+	color: #2E2013;
+	font-family: "union", palatino, georgia, times;
+	font-size: 1.3em;
+	letter-spacing: -.05em;
+}
+#search_member input#section {
+	width: 210px;
+}
+.action {
+	background: #502628 url(/images/deg3.png) repeat-x top left;
+	color: #FFF;
+	font-size: 1em;
+	display: block;
+	float: left;
+	padding: 5px 15px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border: none;
+	border-bottom: 1px solid #502628;
+	_border: 1px solid #502628;
+	text-shadow: -1px -1px 1px #502628;
+	-moz-box-shadow: 1px 0px 3px #CCC;
+	-webkit-box-shadow: 1px 0px 3px #CCC;
+}
 
 
 /*-------------------------------------------------

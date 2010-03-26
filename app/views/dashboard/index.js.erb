@@ -1,5 +1,5 @@
 $("#spinner").hide()
 $(".propuesta").show()
-$("#propuestas").html("<%= escape_javascript(render :partial => 'bill', :collection => @bills) %>");
+$("#propuestas").html("<%= escape_javascript(render :partial => '/bills/bill', :collection => @bills) %>");
 $(".tabs ul li a").removeClass("active");
 $("a[href='/?type=<%= params[:type]%>']").addClass("active");

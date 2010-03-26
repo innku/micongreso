@@ -18,6 +18,9 @@ ActionController::Routing::Routes.draw do |map|
   map.edit_bill_votes '/bill/:bill_id/votes/edit', :controller => 'votes', :action => 'edit'
   map.resources :bills, :has_many => [:comments, :votes]
   map.resources :news, :has_many => [:comments, :votes]
+  
+  map.bills_tag 'bills/tags/:tag_id', :controller => 'bills', :action => 'index'
+  map.bills_archive 'bills/archive/:month/:year', :controller => 'bills', :action => 'index'
     
   map.resources :search_members, :collection => {:group => :get}
   map.resources :states

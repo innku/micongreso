@@ -5,7 +5,7 @@ class Absence < ActiveRecord::Base
   
   validates_presence_of :member_id, :message => "^No encontramos el nombre del diputado."
   
-  year_selector = ENV['RAILS_ENV'] == 'production' ? "EXTRACT(YEAR FROM sittings.date)" : "YEAR(sittings.date)"
+  year_selector = Rails.env.production? ? "EXTRACT(YEAR FROM sittings.date)" : "YEAR(sittings.date)"
   
   named_scope :month, :include => :sitting, :conditions => ['sittings.date > ?', Date.today - 30.days]
   named_scope :year, :include => :sitting, :conditions => ["#{year_selector} = ?", Date.today.year ]

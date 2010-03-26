@@ -1,6 +1,6 @@
-<% if logged_in? && current_user.admin? %>
-	<div id="nav">
-		<ul>
+<div id="nav">
+  <ul>
+    <% if logged_in? && current_user.admin? %>
 		  <li><%= link_to "Inicio", root_path %></li>
 			<li><%= link_to "Usuarios", users_path %></li>
 			<li><%= link_to "Noticias", news_index_path %></li>
@@ -10,21 +10,18 @@
 			<li><%= link_to "Propuestas", bills_path %></li>
 			<li><%= link_to "Sesiones", sittings_path %></li>
 			<li><%= link_to "Temas de Interés", tags_path %></li>
-		</ul>
-	</div>
-<% else %>
-	<div id="nav">
-		<ul>
+    <% else %>
 			<li><%= link_to "Inicio", root_path %></li>
 			<li><%= link_to "Diputados", new_search_member_path %></li>
 			<li><%= link_to "Propuestas", bills_path %></li>
 			<li><%= link_to "Noticias", news_index_path %></li>
-			<% if logged_in? %>
-			  <li class="email"><%= link_to current_user.email, edit_citizen_path(current_user) %></li>
-			  <li class="login"><%= link_to "Salir", logout_path %></li> 
-			<% else %>
-			  <li class="login"><%= link_to "Inicia Sesi&oacute;n &raquo;", login_path %></li> 
-			<% end %>
-		</ul>
-	</div>
-<% end %>
+    <% end %>
+    
+    <% if logged_in? %>
+		  <li class="email"><%= link_to current_user.email, edit_citizen_path(current_user) %></li>
+		  <li class="login"><%= link_to "Salir", logout_path %></li> 
+		<% else %>
+		  <li class="login"><%= link_to "Inicia Sesi&oacute;n &raquo;", login_path %></li> 
+		<% end %>
+	</ul>
+</div>

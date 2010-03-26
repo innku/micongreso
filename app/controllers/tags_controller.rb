@@ -1,10 +1,18 @@
 class TagsController < ApplicationController
+  
+  skip_before_filter :login_required, :only => :show
+  
   def index
     @tags = Tag.all
   end
   
   def new
     @tag = Tag.new
+  end
+  
+  def show
+    @tag = Tag.find(params[:id])
+    @bills = Bill.find_tagged_with(@tag.name)
   end
   
   def create

@@ -1,26 +1,59 @@
-<% title "Propuestas" %>
-
-
-<% for bill in @bills %>
-	<div class="bills">
-		<h4><%= link_to bill.name, bill %></h4>
-		<p><%= bill.date.to_s(:short) %>, <% if bill.general_votes? %>Votaciones: Favor: <%= bill.member_votes_for %> Contra: <%= bill.member_votes_against %> Abstención: <%= bill.member_votes_neutral %><% end %></p>
-		<p>Ciudadanos: Favor: <%= bill.citizen_votes(true) %>, Contra: <%= bill.citizen_votes(false) %></p>
-		<% if current_user %>
-			<div id="bill_<%= bill.id %>">
-  			<% if current_user.voted_on?(bill) %>
-  			  Votaste: <%= display_vote(current_user.vote_choice(bill)) %>
-  			<% else %>
-  			  <%= link_to "Vota a favor", bill_votes_path(bill), :class => "vote", 'data-vote' => 1, 'data-voteable' => "bill" %> 
-  			  <%= link_to "Vota en contra", bill_votes_path(bill), :class => "vote", 'data-vote' => 0, 'data-voteable' => "bill" %>
-  			  <%= link_to "Abstención", bill_votes_path(bill), :class => "vote", 'data-vote' => -1, 'data-voteable' => "bill" %>
-  			<% end %>
-			</div>
-		<% end %>
-		<div>Tags: <%= bill.tag_list %>, Visitas: <%= bill.total_views %></div>
-	</div>
-<% end %>
-
-<% if admin?(current_user) %>
-	<p><%= link_to "Nueva Propuesta", new_bill_path %></p>
-<% end %>
+<div id="rest">
+  <h2 class="section">Propuestas</h2>
+  
+  <div class="left">
+		<div class="propuestas">
+		  <%= image_tag("spinner.gif", :style => "display: none;", :id => "spinner") %>
+		  <div id="propuestas">
+		    <%= render :partial => 'bill', :collection => @bills %>
+		  </div>
+		</div>
+		
+		<% if admin?(current_user) %>
+		  <ul class="links">
+		    <li><%= link_to "Nueva Propuesta", new_bill_path %></li>
+		  </ul>
+    <% end %>
+  </div>
+  
+  <div class="right">
+    <div id="de_propuestas" class="buscador">
+      <% if params[:search] %>
+        <p>
+          Resultados encontrados con la búsqueda: <%= params[:search] %>
+        </p>
+      <% end %>
+      
+      <% form_tag bills_path, :method => :get do %>
+        <p>
+          <%= text_field_tag :search, params[:search] %>
+          <%= submit_tag "Buscar" %>
+        </p>
+      <% end %>
+    </div>
+    <div id="topics">
+      <h2>Temas en las propuestas</h2>
+      <ul id="topic_list" class="blocklist">
+        <% Tag.all.each do |tag| %>
+          <li><%= link_to tag.name, bills_tag_path(tag)  %></li>
+        <% end %>
+      </ul>
+    </div>
+    <div id="archivo">
+      <h2>Archivo <%= params[:year] || Date.today.year %></h2>
+      <ul id="topic_list" class="blocklist">
+        <% [1,2,3,4,5,6,7,8,9,10,11,12].each do |month| %>
+          <li><%= link_to "#{MONTHS[month]} (#{Bill.monthly(month, params[:year] || Date.today.year).count})", bills_archive_path(month, params[:year] || Date.today.year)  %></li>
+        <% end %>
+      </ul>
+      <ul class="links">
+        <% before_year = params[:year] ? params[:year].to_i-1 : Date.today.year-1 %>
+        <% if params[:year] && params[:year].to_i != Date.today.year %>
+          <% recent_year = params[:year].to_i+1 %>
+          <li><%= link_to "Año Reciente »", bills_archive_path(1, recent_year) %></li>
+        <% end %>
+        <li><%= link_to "Año Anterior »", bills_archive_path(1, before_year) %></li>
+      </ul>
+    </div>
+  </div>
+</div>

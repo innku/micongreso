@@ -81,6 +81,7 @@
 	width: 100%;
 	height: 100%;
 	background: #FFF;
+	border: #000 4px solid;
 }
 
 #fancybox-inner {
