@@ -6,6 +6,9 @@ class Sitting < ActiveRecord::Base
   
   attr_accessor :publish_absences_on_social_media
   
+  year_selector = Rails.env.production? ? "EXTRACT(YEAR FROM sittings.date)" : "YEAR(sittings.date)"
+  named_scope :year, lambda { |*args| { :conditions => ["#{year_selector} = ?", args.first] } }
+  
   def formatted_date
     if self.new_record?
       Date.today.to_s(:es)

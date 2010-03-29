@@ -5,7 +5,7 @@
     <div class="propuestas">
       <div id="interna" class="propuesta">
         <div class="dipufoto">
-          <div class="partido"><%= image_tag("") %></div>
+          <div class="partido"><%= image_tag(@member.party.abbr+".png") %></div>
           <%= image_tag(@member.picture.url(:medium)) %>
         </div>
         <h1><%= @member.name %></h1>
@@ -43,26 +43,27 @@
           <%=h @member.substitute %> <br/>
         </p>
         
+        <p class="faltas">
+          <strong>Faltas:</strong> <%= @member.absences.year.count %> de <%= Sitting.year.count %>
+        </p>
+        
         <div class="clear"></div>
         
-        <div id="latest_voted">
+        <div id="votaciones">
         	<h3>Ultimas votaciones</h3>
-        	<% @member.votes[0..4].each do |vote| %>
-        		<p><%=h truncate(vote.voteable.name, 80) %> <strong>Votó: <%= display_vote(vote.vote) %></strong></p>
-        	<% end %>
-        </div>
-
-        <div id="absences">
-        	<h3>Faltas</h3>
-        	<table>
-        		<tr>
-        			<th>30 días</th>
-        			<th>Año</th>
-        		</tr>
-        		<tr>
-        			<td><%= @member.absences.month.count %></td>
-        			<td><%= @member.absences.year.count %></td>
-        		</tr>
+        	<table class="resultados" cellspacing="0" cellpadding="0" border="0">
+        	  <tr>
+              <th>Propuesta</th>
+              <th width="120">Fecha</th>
+              <th width="70">Voto</th>
+        	  </tr>
+        	  <% @member.votes[0..4].each do |vote| %>
+        	    <tr>
+          	    <td><%= link_to(truncate(vote.voteable.name, :length => 80)) %></td>
+          	    <td><%= es_date(vote.voteable.date) %></td>
+          	    <td><span class="<%= display_vote(vote.vote, vote.voteable).downcase %>"><%= display_vote(vote.vote, vote.voteable) %></span></td>
+        	    </tr>
+          	<% end %>
         	</table>
         </div>
         

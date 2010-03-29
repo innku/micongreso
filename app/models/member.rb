@@ -1,5 +1,8 @@
 class Member < ActiveRecord::Base
   
+  cattr_reader :per_page
+  @@per_page = 50
+  
   belongs_to  :state
   belongs_to  :party
   belongs_to  :district

@@ -6,12 +6,12 @@ class DashboardController < ApplicationController
     respond_to do |wants|
       wants.html { 
         @news = News.latest
-        @bills = Bill.voted
+        @bills = Bill.limit.recent_popular
         @citizens = User.with_avatar.latest
         @citizen = User.new
       }
       wants.js {
-        @bills = Bill.send(params[:type])
+        @bills = Bill.limit.send(params[:type])
       }
     end
   end

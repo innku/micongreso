@@ -37,9 +37,13 @@ class UserMailer < ActionMailer::Base
   def invitation(user, name, email)
     @recipients  = "#{email}"
     @from        = "no-responder@micongreso.org"
-    @subject     = "#{user.name} te ha invitado a unirte a MiCongreso"
+    if user
+      @subject     = "#{user.name} te ha invitado a unirte a MiCongreso"
+      @body[:user] = user
+    else
+      @subject     = "Te han invitado a unirte a MiCongreso"
+    end
     @sent_on     = Time.now
-    @body[:user] = user
     @body[:url]  = "#{$global_url}/signup"
     @body[:name] = name
     @body[:email] = email

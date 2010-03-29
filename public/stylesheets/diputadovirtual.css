@@ -179,6 +179,31 @@ a.action {
 	border: 1px solid #CCC;
 	margin: 7px 15px 7px 6px;
 }
+
+#invite {
+	width: 100%;
+	float: left;
+	margin-bottom: 20px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	background: #665E59 url(/images/logged_head.png) no-repeat right;
+	padding: 0;
+}
+
+#invite h2 {
+	float: left;
+	color: #fff;
+	margin: 14px;
+	font-family:"union",palatino,georgia,times;
+	font-size:1.3em;
+	letter-spacing:-0.05em;
+	text-transform:uppercase;
+}
+
+#invite a.action {
+	float: right;
+	margin: 10px 10px 0 0;
+}
 /*REST*/
 #rest {
 	width: 944px;
@@ -920,16 +945,21 @@ ul.status li {
 	background: #EEE;
 	color: #CCC;
 	-moz-box-shadow: 0px 1px 3px #CCC;
+	-webkit-box-shadow: 0px 1px 3px #CCC;
 	padding: 5px 12px;
 	font-style: italic;
 }
 ul.status #one {
 	-moz-border-radius-topleft: 10px;
 	-moz-border-radius-bottomleft: 10px;
+	-webkit-border-top-left-radius: 10px;
+	-webkit-border-bottom-left-radius: 10px;
 }
 ul.status #three {
 	-moz-border-radius-topright: 10px;
 	-moz-border-radius-bottomright: 10px;
+	-webkit-border-top-right-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;
 }
 #one.selected {
 	background: #81A15B url(/images/green.png) top left;
@@ -946,6 +976,7 @@ ul.status #three {
 	color: #FFF;
 	font-weight: bold;
 }
+
 
 /*NOTAS*/
 .news {
@@ -973,17 +1004,19 @@ p.news_date {
 	font-size: .8em;
 	margin: 5px 0px;
 }
-.votos {
+.votes {
 	font-style: italic;
 	float: left;
 	padding: 5px 0px;
 	margin-right: 10px;
 }
-.favor {
+#votaciones span.favor {
 	color: #627B46;
+	font-weight: bold;
 }
-.contra {
+#votaciones span.contra {
 	color: #CC5577;
+	font-weight: bold;
 }
 /*PAGER*/
 #pager ul {
@@ -1020,7 +1053,7 @@ p.news_date {
 	_margin: 5px auto;
 	text-align: left;*/
 }
-.cien form h2 {
+.cien form h2, h2.lightbox {
 	text-transform: uppercase;
 	color: #2E2013;
 	font-family: "union", palatino, georgia, times;
@@ -1165,6 +1198,20 @@ FLASH MESSAGES
   border: solid 1px #C66;
 }
 
+.lightTip { width: 500px; }
+.lightTip .content { width: 480px; padding: 10px; border: 6px solid #e2e2e2; -moz-border-radius: 5px; -webkit-border-radius: 5px; background: #ffffff; color: #020202; }
+.lightTip .bottom { height: 14px; }
+.lightTip .left {
+	float: left;
+	width: 220px;
+	margin-right: 10px;
+}
+
+.lighTip img {
+	float: left;
+}
+
+
 /*-------------------------------------------------
 USER TAGS
 -------------------------------------------------*/
@@ -1183,8 +1230,9 @@ VALIDATION ERRORS
 }
 
 #errorExplanation {
+  font-family:"union",palatino,georgia,times;
   width: 400px;
-  border: 2px solid #CF0000;
+  border: 2px solid #CC5477;
   padding: 0px;
   padding-bottom: 12px;
   margin-bottom: 20px;
@@ -1197,7 +1245,7 @@ VALIDATION ERRORS
   padding: 5px 5px 5px 15px;
   font-size: 12px;
   margin: 0;
-  background-color: #c00;
+  background-color: #CC5477;
   color: #fff;
 }
 

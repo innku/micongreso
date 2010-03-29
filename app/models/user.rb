@@ -15,13 +15,14 @@ class User < ActiveRecord::Base
   has_one     :notification, :dependent => :destroy
   has_many    :contacts, :dependent => :nullify
   
+  validates_presence_of     :name,     :message => "^Por favor llene su nombre"
   validates_format_of       :name,     :with => Authentication.name_regex,  :message => Authentication.bad_name_message, :allow_nil => true
   validates_length_of       :name,     :maximum => 100
 
-  validates_presence_of     :email
-  validates_length_of       :email,    :within => 6..100 #r@a.wk
-  validates_uniqueness_of   :email
-  validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message
+  validates_presence_of     :email,    :message => "^Por favor ingrese su correo electrónico"
+  validates_length_of       :email,    :within => 6..100, :allow_blank => true
+  validates_uniqueness_of   :email,    :case_sensitive => false, :message => "^Ya existe un usuario registrado con ese correo, por favor escoga uno diferente."
+  validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message, :allow_blank => true
   
   validates_presence_of     :city_id,  :message => "^Por favor seleccione una ciudad"
   validate  :valid_district

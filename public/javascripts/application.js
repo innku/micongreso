@@ -22,7 +22,12 @@ $(document).ready( function(){
 	
 	if ($("body").hasClass("dashboard")) {
 	  $("a#search_link").fancybox();
+	  $("a.invite_link").fancybox();
 	  $("a.signup_link").fancybox({'autoDimensions':false,'width':480,'height':530});
+	}
+	
+	if (($("body").hasClass("dashboard") && $("body").is(":not(.logged)")) || $("body").hasClass("user")){
+	  $("a.what").tinyTips('light', "<div class='left'><h2 class='lightbox'>Credencial de Elector</h2><p>Te pedimos el número de la <strong>sección</strong> para identificar tu distrito, este número viene localizado en la parte inferior de la Credencial de Elector.</p></div><img src='/images/credencial.png'/>");
 	}
 	
 	if ($("body").hasClass("text_counter")) {

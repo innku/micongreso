@@ -1,34 +1,68 @@
-<% title "Noticias" %>
-
-
-<% for news in @news %>
-	<div class="news">
-		<div class="title">
-			<h3><%= link_to news.title, news %></h3>
-			<span><%=h news.date %></span>
-			<% if admin?(current_user) %>
-				<span><%= link_to "Edit", edit_news_path(news) %></span>
-			<% end %>
-			
-			<p>Votos: Favor: <%= news.citizen_votes(true) %>, Contra: <%= news.citizen_votes(false) %></p>
-			<% if current_user %>
-  			<div id="news_<%= news.id %>">
-    			<% if current_user.voted_on?(news) %>
-    			  Votaste: <%= display_vote(current_user.vote_choice(news)) %>
-    			<% else %>
-    			  <%= link_to "Vota a favor", news_votes_path(news), :class => "vote", 'data-vote' => 1, 'data-voteable' => "news" %> 
-    			  <%= link_to "Vota en contra", news_votes_path(news), :class => "vote", 'data-vote' => 0, 'data-voteable' => "news" %>
-    			<% end %>
-  			</div>
-			<% end %>
+<div id="rest">
+  <h2 class="section">Noticias</h2>
+  
+  <div class="left">
+    <div class="propuestas">
+      <% for news in @news %>
+      	<div class="news">
+      		<div class="title">
+      		  <% if news.photo? %>
+      		    <%= image_tag(news.photo.url(:small)) %>
+      		  <% end %>
+      		  <p class="news_date"><%=h news.date %></p>
+      			<h2><%= link_to news.title, news %></h2>
+      			<% if admin?(current_user) %>
+      				<span><%= link_to "Edit", edit_news_path(news) %></span>
+      			<% end %>
+            
+            <p><%=h news.abstract %></p>
+            
+      			<% if current_user %>
+      			  <ul id="news_<%= news.id %>" class="links">
+      			   	<% if current_user.voted_on?(news) %>
+          			  Me gusta
+          			<% else %>
+          			  <%= link_to "Me gusta", news_votes_path(news), :class => "vote", 'data-vote' => 1, 'data-voteable' => "news" %> 
+          			<% end %>
+      			  </ul>
+      			<% end %>
+      		</div>
+      	</div>
+      <% end %>
+            
+    </div>
+    
+    <div class="clear"></div>
+    <%= will_paginate @members, :previous_label => '&laquo; Anterior', :next_label => 'Siguiente &raquo;' %>
+    
+  </div>
+  <div class="right">
+    <div id="lateral" class="refinador">
+      <h1>Busca noticias</h1>
+      
+      <% form_tag news_index_path, :method => :get do %>
+        <p>
+          <%= text_field_tag :search, params[:search] %>
+        </p>
+        <p>
+          <%= submit_tag "Buscar", :class => "action" %>
+        </p>
+      <% end %>
+    </div>
+    
+    <div id="noticias">
+			<h2>Noticias Populares</h2>
+			<ul class="list">
+			  <% @popular_news.each do |news| %>
+  				<li>
+  					<%= image_tag(news.photo.url(:thumb)) %>
+  					<h3><%= link_to truncate(news.title, :length => 75), news %></h3>
+  				</li>
+  			<% end %>
+			</ul>
 		</div>
-		
-		<p><%=h news.abstract %></p>
-		<% unless news.tag_list.empty? %>
-			<p>Tags: <%= news.tag_list.join(', ') %></p>
-		<% end %>
-	</div>
-<% end %>
+  </div>
+</div>
 
 <% if admin?(current_user) %>
 	<p><%= link_to "Nueva Noticia", new_news_path %></p>

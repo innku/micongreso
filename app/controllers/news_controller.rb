@@ -3,11 +3,18 @@ class NewsController < ApplicationController
   skip_before_filter :login_required, :only => [:index, :show]
   
   def index
-    @news = News.all
+    if params[:search]
+      @news = News.title_or_body_like(params[:search]).paginate(:page => params[:page])
+    else
+      @news = News.ordered.paginate(:page => params[:page])
+    end
+    @popular_news = News.popular
   end
   
   def show
     @news = News.find(params[:id])
+    @related_news = News.find_tagged_with(@news.tags)-[@news]
+    @news.viewed!
   end
   
   def new

@@ -1,66 +1,111 @@
-<% title @news.title %>
+<div id="rest">
+  <h2 class="section">Noticias</h2>
+  
+  <div class="left">
+    <div class="propuestas">
+      <div id="interna" class="propuesta">
+        <h1><%= @news.title %></h1>
+        
+        <% if current_user %>
+        	<div id="news_<%= @news.id %>">
+        		<% if current_user.voted_on?(@news) %>
+        		  Me gusta
+        		<% else %>
+        		  <%= link_to "Me gusta", news_votes_path(@news), :class => "vote", 'data-vote' => 1, 'data-voteable' => "news" %> 
+        		<% end %>
+        	</div>
+        <% end %>
+        
+        <% if @news.tags.any? %>
+          <ul class="tags">
+            <% @news.tags.each do |tag| %>
+              <li><%= tag.name %></li>
+            <% end %>
+          </ul>
+        <% end %>
+        
+        <% if @news.photo? %>
+          <div class="main_image"><%= @news.photo.url(:medium) %></div>
+        <% end %>
+        
+        <p><%= @news.body %></p>
+        
+        <div class="all_comments">
+          <h3>Comentarios (<%= @news.comments.size %>)</h3>
+          <div class="comments">
+          	<% for comment in @news.comments %>
+          		<div class="comment">
+          			<h4><%=h comment.title %></h4>
+          			<p><%=h comment.comment %></p>
+          			<% if admin?(current_user) %>
+          				<%= link_to "Eliminar", news_comment_path(@news, comment), :method => :delete, :confirm => "¿Esta seguro que lo desea eliminar?" %>
+          			<% end %>
+          		</div>
+          	<% end %>
+          </div>
+          <div id="comment_form">
+          	<h4>Envíanos tus comentarios:</h4>
 
-<div><%=h @news.date %>, Fuente: <%=h @news.source %></div>
+          	<% form_for [@news, Comment.new] do |f| %>
+          		<%= f.error_messages %>
+          		<p>
+          			<%= f.label :title, "Título" %> <br />
+          			<%= f.text_field :title, :class => "comment_input" %>
+          		</p>
+          		<p>
+          			<%= f.label :comment, "Comentario" %> <br />
+          			<%= f.text_area :comment, :rows => 6, :cols => 40, :class => "comment_input" %>
+          		</p>
+          		<p>
+          			<%= recaptcha_tags(:display => {:theme => "clean"}) %>
+          		</p>
+          		<p>
+          			<%= f.submit "Enviar Comentario", :class => "action" %>
+          		</p>
+          	<% end %>
+          </div>
+        </div>
+        
+        <p>
+        	<% if admin?(current_user) %>
+        	  <%= link_to "Editar", edit_news_path(@news) %> |
+        	  <%= link_to "Eliminar", @news, :confirm => 'Are you sure?', :method => :delete %> |
+        	<% end %>
 
-<p>Votos: Favor: <%= @news.citizen_votes(true) %>, Contra: <%= @news.citizen_votes(false) %></p>
-<% if current_user %>
-	<div id="news_<%= @news.id %>">
-		<% if current_user.voted_on?(@news) %>
-		  Votaste: <%= display_vote(current_user.vote_choice(@news)) %>
-		<% else %>
-		  <%= link_to "Vota a favor", news_votes_path(@news), :class => "vote", 'data-vote' => 1, 'data-voteable' => "news" %> 
-		  <%= link_to "Vota en contra", news_votes_path(@news), :class => "vote", 'data-vote' => 0, 'data-voteable' => "news" %>
-		<% end %>
-	</div>
-<% end %>
-
-<div class="news_body">
-	<%= image_tag(@news.photo.url(:medium), :class => "photo") if @news.photo? %>
-	<%= @news.body %>
-</div>
-
-
-<p>
-	<% if admin?(current_user) %>
-	  <%= link_to "Editar", edit_news_path(@news) %> |
-	  <%= link_to "Eliminar", @news, :confirm => 'Are you sure?', :method => :delete %> |
-	<% end %>
-
-  <%= link_to "Regresar a noticias", news_index_path %>
-</p>
-
-<h3>Comentarios (<%= @news.comments.size %>)</h3>
-<div class="comments">
-	<% for comment in @news.comments %>
-		<div class="comment">
-			<h4><%=h comment.title %></h4>
-			<p><%=h comment.comment %></p>
-			<% if admin?(current_user) %>
-				<%= link_to "Eliminar", news_comment_path(@news, comment), :method => :delete, :confirm => "¿Esta seguro que lo desea eliminar?" %>
-			<% end %>
+          <%= link_to "Regresar a noticias", news_index_path %>
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="right">
+    <div id="lateral" class="refinador">
+      <h1>Busca noticias</h1>
+      
+      <% form_tag news_index_path, :method => :get do %>
+        <p>
+          <%= text_field_tag :search, params[:search] %>
+        </p>
+        <p>
+          <%= submit_tag "Buscar", :class => "action" %>
+        </p>
+      <% end %>
+    </div>
+    
+    <div id="noticias">
+			<h2>Noticias Relacionadas</h2>
+			<ul class="list">
+			  <% @related_news.each do |news| %>
+  				<li>
+  					<%= image_tag(news.photo.url(:thumb)) %>
+  					<h3><%= link_to truncate(news.title, :length => 75), news %></h3>
+  				</li>
+  			<% end %>
+			</ul>
 		</div>
-	<% end %>
+  </div>
 </div>
 
 
-<div id="comment_form">
-	<h4>Envíanos tus comentarios:</h4>
-	
-	<% form_for [@news, Comment.new] do |f| %>
-		<%= f.error_messages %>
-		<p>
-			<%= f.label :title, "Título" %> <br />
-			<%= f.text_field :title %>
-		</p>
-		<p>
-			<%= f.label :comment, "Comentario" %> <br />
-			<%= f.text_area :comment, :rows => 4, :cols => 40 %>
-		</p>
-		<p>
-			<%= recaptcha_tags(:display => {:theme => "clean"}) %>
-		</p>
-		<p>
-			<%= f.submit "Enviar Comentario" %>
-		</p>
-	<% end %>
-</div>
+
+

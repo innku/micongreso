@@ -70,6 +70,13 @@ module Juixe
       
       # This module contains instance methods
       module InstanceMethods
+        def votes_by(voter_class)
+          Vote.count(:all, :conditions => [
+            "voteable_id = ? AND voteable_type = ? AND voter_type = ?",
+            id, self.class.name, voter_class
+          ])
+        end
+        
         def votes_for
           Vote.count(:all, :conditions => [
             "voteable_id = ? AND voteable_type = ? AND vote = ?",

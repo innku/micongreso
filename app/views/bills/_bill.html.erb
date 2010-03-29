@@ -23,9 +23,9 @@
   		  </div>
 		  </li>
 		  <% if bill.member_votes_and_percents[0] > bill.member_votes_and_percents[1] %>
-		    <li class="resultado_si">Aprobada -</li> 
+		    <li class="resultado_si">Aprobada</li> 
 		  <% else %>
-		    <li class="resultado_no">Rechazada -</li> 
+		    <li class="resultado_no">Rechazada</li> 
 		  <% end %>
   	<% else %>
   	  <li class="resultados"><span>Resultados Oficiales:</span> <%= es_date(bill.date) %></li>
@@ -36,7 +36,7 @@
 	<ul id="bill_<%= bill.id %>" class="links">
 	  <% if current_user %>
 			<% if current_user.voted_on?(bill) %>
-			  <li>Votaste: <%= display_vote(current_user.vote_choice(bill)) %></li>
+			  <li>Votaste: <%= display_vote(current_user.vote_choice(bill), bill) %></li>
 			<% else %>
 			  <li><%= link_to "Vota a favor", bill_votes_path(bill), :class => "vote si", 'data-vote' => 1, 'data-voteable' => "bill" %> </li>
 			  <li><%= link_to "Vota en contra", bill_votes_path(bill), :class => "vote no", 'data-vote' => 0, 'data-voteable' => "bill" %></li>

@@ -20,8 +20,14 @@ class Bill < ActiveRecord::Base
   named_scope :active, :conditions => ['date >= ?', Date.today]
   named_scope :closed, :conditions => ['date < ?', Date.today]
   named_scope :monthly, lambda { |*args| { :conditions => ["#{month_selector} = ? AND #{year_selector} = ?", args.first, args.last] } }
+  named_scope :last_month, :conditions => ['date >= ?', Date.today-1.months]
+  named_scope :most_viewed, :order => "total_views DESC"
+  named_scope :limit, :limit => 5
   
   
+  def self.recent_popular
+    last_month.most_viewed
+  end
   
   def update_votes(params)
     if params

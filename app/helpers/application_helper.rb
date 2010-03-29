@@ -5,7 +5,8 @@ module ApplicationHelper
     user && user.admin?
   end
   
-  def display_vote(choice)
+  def display_vote(choice, voteable=nil)
+    return "Me gusta" if voteable && voteable.class.name == "News"
     if choice.nil?
       "Abstención"
     else
@@ -44,7 +45,7 @@ module ApplicationHelper
   end
   
   def tab_class(params, type)
-    return "active" if params.blank? && type == "voted"
+    return "active" if params.blank? && type == "recent_popular"
     "active" if params == type
   end
   

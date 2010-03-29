@@ -4,12 +4,12 @@ class SearchMembersController < ApplicationController
   
   def show
     @search_member = SearchMember.find(params[:id])
-    @members = Member.search(@search_member.conditions).paginate(:page => params[:page], :per_page => 50)
+    @members = Member.search(@search_member.conditions).paginate(:page => params[:page])
   end
   
   def new
     @search_member = SearchMember.new
-    @members = Member.paginate(:page => params[:page], :per_page => 50)
+    @members = Member.paginate(:page => params[:page])
   end
   
   def group

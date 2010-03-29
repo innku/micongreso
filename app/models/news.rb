@@ -2,6 +2,9 @@ require 'feedzirra'
 
 class News < ActiveRecord::Base
   
+  cattr_reader :per_page
+  @@per_page = 10
+  
   validates_presence_of :title, :message => "^Te faltó el título"
   validates_presence_of :abstract, :message => "^Te faltó el resumen"
   validates_presence_of :body, :message => "^Te faltó el cuerpo de la noticia"
@@ -12,7 +15,7 @@ class News < ActiveRecord::Base
   
   production = ENV['RAILS_ENV'] == 'production'
   
-  has_attached_file :photo, :styles => { :medium => "360x240>", :thumb => "80x50#" },
+  has_attached_file :photo, :styles => { :medium => "360x240>", :small => "180x100#", :thumb => "80x50#" },
                             :storage => (production ? :s3 : :filesystem),
                             :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
                             :path => (production ? ":attachment/:id/:style/:basename.:extension" : "public/system/:attachment/:id/:style/:basename.:extension"),
@@ -23,9 +26,10 @@ class News < ActiveRecord::Base
   validates_attachment_content_type :photo, :content_type => ['image/jpeg','image/jpg','image/jpeg','image/pjpeg','image/png','image/x-png','image/gif'], 
                                               :message => "^Solo están permitidas las imágenes tipo JPEG, PNG y GIF."
   
+  named_scope :ordered, :order => "created_at DESC"
   named_scope :latest, :limit => 5, :order => "created_at DESC"
-  
-  
+  named_scope :popular, :limit => 5, :order => "views DESC"
+
   def formatted_date
     if self.new_record?
       Date.today.to_s(:es)
@@ -55,6 +59,11 @@ class News < ActiveRecord::Base
     RAILS_DEFAULT_LOGGER.debug "Nuevas entradas: #{updated_feed.new_entries.inspect}"
     
     create_news_from_feed(updated_feed.new_entries, "Cámara de Diputados")
+  end
+  
+  def viewed!
+    self.views += 1
+    self.save
   end
   
   private

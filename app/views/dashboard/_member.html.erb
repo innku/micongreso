@@ -6,7 +6,7 @@
     <% member.votes.each do |vote| %>
       <tr>
         <td><%= vote.voteable.name %></td>
-        <td><%= display_vote(vote.vote) %></td>
+        <td><%= display_vote(vote.vote, vote.voteable) %></td>
       </tr>
     <% end %>
   </table>

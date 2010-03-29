@@ -1,4 +1,7 @@
 class ContactsController < ApplicationController
+  
+  skip_before_filter :login_required, :create
+  
   def index
     @contacts = Contact.all
   end
@@ -14,7 +17,11 @@ class ContactsController < ApplicationController
   def create
     if Contact.send_invitations(current_user, params[:provider], params[:login], params[:password])
       flash[:notice] = "Las invitaciones se enviaron correctamente a los contactos de su cuenta de correo."
-      redirect_to edit_citizen_path(current_user)
+      if current_user
+        redirect_to edit_citizen_path(current_user)
+      else
+        redirect_to root_path
+      end
     else
       flash[:error] = "El usuario/correo y/o la contraseña proporcionada son incorrectos"
       render :action => 'new'

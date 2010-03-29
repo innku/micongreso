@@ -16,7 +16,9 @@ class Contact < ActiveRecord::Base
       contacts.compact!
       contacts.delete_if {|c| c[1].blank? } # Eliminar el registro si no trae correo electrónico
       contacts.each do |c|
-        user.contacts.create!(:name => c[0], :email => c[1])
+        contact = Contact.new(:name => c[0], :email => c[1])
+        contact.user_id = user.id if user
+        contact.save!
         UserMailer.deliver_invitation(user, c[0], c[1])
       end
       return true
