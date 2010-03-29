@@ -1,16 +1,16 @@
 <% form_for @search_member do |f| %>
   <%= f.error_messages %>
   <p>
-    <%= f.label :name, "Nombre" %>
+    <%= f.label :name, "Nombre" %><br/>
     <%= f.text_field :name %>
   </p>
   <p>
-    <%= f.label :party_id, "Partido" %>
+    <%= f.label :party_id, "Partido" %><br/>
     <%= f.collection_select :party_id, Party.all, :id_as_string, :name, {:include_blank => "Todos"} %>
   </p>
   <p>
-    <%= f.label :state_id, "Entidad" %>
+    <%= f.label :state_id, "Entidad" %><br/>
     <%= f.collection_select :state_id, State.all, :id_as_string, :name, {:include_blank => "Todos"} %>
   </p>
-  <p><%= f.submit "Buscar" %></p>
+  <p><%= f.submit "Buscar", :class => "action" %></p>
 <% end %>

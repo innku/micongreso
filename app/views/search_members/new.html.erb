@@ -1,20 +1,63 @@
-<% title "Buscar diputados" %>
+<div id="rest">
+  <h2 class="section">Diputados</h2>
+  
+  <div class="left">
+    <div id="de_diputados" class="refinador">
+      <h1>Refina tu búsqueda</h1>
+      <%= render :partial => 'form' %>
+    </div>
+    
+    <div class="propuestas">
+      <table width="100%" border="0" cellpadding="0" cellspacing="0" class="resultados">
+  		  <tr>
+  		    <th>Nombre</th>
+  		    <th>Partido</th>
+  		    <th>Estado</th>
 
-<%= render :partial => 'form' %>
+  		    <th>Distrito</th>
 
-<div id="parties">
-	<h4>Partidos</h4>
-	
-	<%= Party.all.collect {|party| link_to party.name, group_search_members_path(:party_id => party.id )}.join(', ')  %>
+  				<th></th>
+  		  </tr>
+        
+        <% @members.each do |member| %>
+  		    <tr>
+  		      <td><%= link_to(member.name, member) %></td>
+  		      <td><%= link_to(member.party.abbr, member) if member.party %></td>
+  		      <td><%= link_to(member.state.name, member) if member.state %></td>
+  		      <td><%= link_to(member.district.number, member) if member.district %></td>
+  		      <td></td>
+  		    </tr>
+  		  <% end %>
+		  </table>
+    </div>
+    <div class="clear"></div>
+    <%= will_paginate @members, :previous_label => '&laquo; Anterior', :next_label => 'Siguiente &raquo;' %>
+  </div>
+  
+  <div class="right">
+    <div id="partidos">
+      <h2>Diputados por partido</h2>
+      <ul id="estados_list" class="blocklist">
+        <% Party.all.each do |party| %>
+          <li><%= link_to party.name, group_search_members_path(:party_id => party.id) %></li>
+        <% end %>
+      </ul>
+    </div>
+    <div id="estados">
+      <h2>Diputados por estado</h2>
+      <ul id="estados_list" class="blocklist">
+        <% State.all.each do |state| %>
+          <li><%= link_to state.name, group_search_members_path(:state_id => state.id) %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <br />
+
+  <% if admin?(current_user) %>
+  	<%= link_to "Listar todos los diputados", members_path %>
+  <% end %>
 </div>
 
-<div id="states">
-	<h4>Estados</h4>
-	<%= State.all.collect {|state| link_to state.name, group_search_members_path(:state_id => state.id )}.join(', ')  %>
-</div>
 
-<br />
-
-<% if admin?(current_user) %>
-	<%= link_to "Listar todos los diputados", members_path %>
-<% end %>

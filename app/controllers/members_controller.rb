@@ -29,6 +29,7 @@ class MembersController < ApplicationController
   def show
     @member = Member.find(params[:id])
     @message = Message.new
+    @search_member = SearchMember.new
   end
   
   def new

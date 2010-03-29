@@ -18,6 +18,7 @@ class BillsController < ApplicationController
   def show
     @bill = Bill.find(params[:id])
     @bill.views.create
+    @related_bills = Bill.find_tagged_with(@bill.tags)-[@bill]
   end
   
   def new

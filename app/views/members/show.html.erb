@@ -1,101 +1,118 @@
-<% title @member.name %>
+<div id="rest">
+  <h2 class="section">Diputados</h2>
+  
+  <div class="left">
+    <div class="propuestas">
+      <div id="interna" class="propuesta">
+        <div class="dipufoto">
+          <div class="partido"><%= image_tag("") %></div>
+          <%= image_tag(@member.picture.url(:medium)) %>
+        </div>
+        <h1><%= @member.name %></h1>
+        <p>
+          <strong>Correo Electrónico:</strong>
+          <%=h @member.email %> <br/>
 
+          <strong>Partido:</strong>
+          <%=h @member.party_name %> <br/>
 
-<%= image_tag(@member.picture.url(:medium)) %>
-<p>
-  <strong>Correo Electrónico:</strong>
-  <%=h @member.email %>
-</p>
-<p>
-  <strong>Partido:</strong>
-  <%=h @member.party_name %>
-</p>
-<p>
-  <strong>Comisión:</strong>
-  <%=h @member.commission %>
-</p>
-<p>
-  <strong>Estado:</strong>
-  <%=h @member.state_name %>
-</p>
-<% if @member.district %>
-  <p>
-    <strong>Distrito:</strong>
-    <%=h @member.district.number %>
-  </p>
-  <p>
-    <strong>Cabecera:</strong>
-    <%=h @member.district.head %>
-  </p>
-<% end %>
-<p>
-  <strong>Tipo de Elección:</strong>
-  <%=h @member.election %>
-</p>
-<p>
-  <strong>Fecha de Nacimiento:</strong>
-  <%=h @member.birthdate %>
-</p>
-<p>
-  <strong>Lugar de Nacimiento:</strong>
-  <%=h @member.birthplace %>
-</p>
-<p>
-  <strong>Suplente:</strong>
-  <%=h @member.substitute %>
-</p>
+          <strong>Comisión:</strong>
+          <%=h @member.commission %> <br/>
 
-<div id="latest_voted">
-	<h3>Ultimas votaciones</h3>
-	<% @member.votes[0..4].each do |vote| %>
-		<p><%=h truncate(vote.voteable.name, 80) %> <strong>Votó: <%= display_vote(vote.vote) %></strong></p>
-	<% end %>
+          <strong>Estado:</strong>
+          <%=h @member.state_name %> <br/>
+        
+          <% if @member.district %>
+              <strong>Distrito:</strong>
+              <%=h @member.district.number %> <br/>
+
+              <strong>Cabecera:</strong>
+              <%=h @member.district.head %> <br/>
+          <% end %>
+          
+          <strong>Tipo de Elección:</strong>
+          <%=h @member.election %> <br/>
+
+          <strong>Fecha de Nacimiento:</strong>
+          <%=h @member.birthdate %> <br/>
+
+          <strong>Lugar de Nacimiento:</strong>
+          <%=h @member.birthplace %> <br/>
+
+          <strong>Suplente:</strong>
+          <%=h @member.substitute %> <br/>
+        </p>
+        
+        <div class="clear"></div>
+        
+        <div id="latest_voted">
+        	<h3>Ultimas votaciones</h3>
+        	<% @member.votes[0..4].each do |vote| %>
+        		<p><%=h truncate(vote.voteable.name, 80) %> <strong>Votó: <%= display_vote(vote.vote) %></strong></p>
+        	<% end %>
+        </div>
+
+        <div id="absences">
+        	<h3>Faltas</h3>
+        	<table>
+        		<tr>
+        			<th>30 días</th>
+        			<th>Año</th>
+        		</tr>
+        		<tr>
+        			<td><%= @member.absences.month.count %></td>
+        			<td><%= @member.absences.year.count %></td>
+        		</tr>
+        	</table>
+        </div>
+        
+        <% if admin?(current_user) %>
+        	<p>
+        	  <%= link_to "Editar", edit_member_path(@member) %> |
+        	  <%= link_to "Regresar a diputados", members_path %> |
+        		<%= link_to "Mensajes a diputado", member_messages_path(@member) %>
+        		<%= link_to "Eliminar", @member, :method => :delete, :confirm => "¿Estás seguro que lo deseas eliminar?" %>
+        	</p>
+        <% end %>
+        
+        <div id="comment_form">
+        	<h3>Enviar mensaje a diputado</h3>
+
+        	<% form_for [@member, @message] do |f| %>
+        		<%= f.error_messages %>
+        		<p>
+        			<%= f.text_area :text, :rows => 6, :class => "comment_input" %>
+        		</p>
+
+        		<div style="float: left; width: 50%">
+        		  <p>
+          			<%= f.label :name, "Nombre" %><br />
+          			<%= f.text_field :name %>
+        			</p>
+        		</div>
+        		<div style="float: left; width: 50%">
+        		  <p>
+        		    <%= f.label :email, "Correo electrónico" %><br />
+          			<%= f.text_field :email %>
+        		  </p>
+
+        		</div>
+        		<p style="clear: both;">
+        			<%= recaptcha_tags(:display => {:theme => "clean"}) %>
+        		</p>
+        		<p>
+        			<%= f.submit "Enviar mensaje", :class => "action" %>
+        		</p>
+        	<% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="right">
+    <div id="de_diputados" class="refinador">
+      <h1>Búsqueda de diputados</h1>
+      <%= render :partial => '/search_members/form' %>
+    </div>
+  </div>
 </div>
-
-<div id="absences">
-	<h3>Faltas</h3>
-	<table>
-		<tr>
-			<th>30 días</th>
-			<th>Año</th>
-		</tr>
-		<tr>
-			<td><%= @member.absences.month.count %></td>
-			<td><%= @member.absences.year.count %></td>
-		</tr>
-	</table>
-</div>
-
-<div id="message">
-	<h3>Enviar mensaje a diputado</h3>
-	
-	<% form_for [@member, @message] do |f| %>
-		<%= f.error_messages %>
-		<p>
-			<%= f.text_area :text, :rows => 6 %>
-		</p>
-		<p>
-			<%= f.label :name, "Nombre" %>
-			<%= f.text_field :name %>
-		</p>
-		<p>
-			<%= f.label :email, "Correo electrónico" %>
-			<%= f.text_field :email %>
-		</p>
-		<p>
-			<%= recaptcha_tags(:display => {:theme => "clean"}) %>
-		</p>
-		<p>
-			<%= f.submit "Enviar mensaje" %>
-		</p>
-	<% end %>
-</div>
-
-<% if admin?(current_user) %>
-	<p>
-	  <%= link_to "Editar", edit_member_path(@member) %> |
-	  <%= link_to "Regresar a diputados", members_path %> |
-		<%= link_to "Mensajes a diputado", member_messages_path(@member) %>
-		<%= link_to "Eliminar", @member, :method => :delete, :confirm => "¿Estás seguro que lo deseas eliminar?" %>
-	</p>
-<% end %>

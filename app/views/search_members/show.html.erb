@@ -1,32 +1,68 @@
-<% title "Diputados encontrados" %>
+<div id="rest">
+  <h2 class="section">Diputados</h2>
+  
+  <div class="left">
+    <div id="de_diputados" class="refinador">
+      <h1>Refina tu búsqueda</h1>
+      <%= render :partial => 'form' %>
+    </div>
+    
+    <div class="propuestas">
+      <table width="100%" border="0" cellpadding="0" cellspacing="0" class="resultados">
+  		  <tr>
+  		    <th>Nombre</th>
+  		    <th>Partido</th>
+  		    <th>Estado</th>
 
-<div class="left">
-	<%= render :partial => "form" %>
+  		    <th>Distrito</th>
+
+  				<th></th>
+  		  </tr>
+        
+        <% @members.each do |member| %>
+  		    <tr>
+  		      <td><%= link_to(member.name, member) %></td>
+  		      <td><%= link_to(member.party.abbr, member) if member.party %></td>
+  		      <td><%= link_to(member.state.name, member) if member.state %></td>
+  		      <td><%= link_to(member.district.number, member) if member.district %></td>
+  		      <td>
+  		        <% if admin?(current_user) %>
+    						<%= link_to "Editar", edit_member_path(member) %>
+    					<% end %>
+  		      </td>
+  		    </tr>
+  		  <% end %>
+		  </table>
+    </div>
+    <div class="clear"></div>
+    <%= will_paginate @members, :previous_label => '&laquo; Anterior', :next_label => 'Siguiente &raquo;' %>
+  </div>
+  
+  <div class="right">
+    <div id="partidos">
+      <h2>Diputados por partido</h2>
+      <ul id="estados_list" class="blocklist">
+        <% Party.all.each do |party| %>
+          <li><%= link_to party.name, group_search_members_path(:party_id => party.id) %></li>
+        <% end %>
+      </ul>
+    </div>
+    <div id="estados">
+      <h2>Diputados por estado</h2>
+      <ul id="estados_list" class="blocklist">
+        <% State.all.each do |state| %>
+          <li><%= link_to state.name, group_search_members_path(:state_id => state.id) %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <br />
+
+  <% if admin?(current_user) %>
+  	<%= link_to "Listar todos los diputados", members_path %>
+  <% end %>
 </div>
 
-<div class="right">
-	<table>
-	  <tr>
-	    <th>Nombre</th>
-	    <th>Partido</th>
-	    <th>Estado</th>
-	    <th>Distrito</th>
-			<th></th>
-	  </tr>
-	  <% for member in @search_member.members %>
-	    <tr>
-	      <td><%= link_to member.name, member %></td>
-	      <td><%=h member.party.abbr if member.party %></td>
-	      <td><%=h member.state.name if member.state %></td>
-	      <td><%=h member.district.number if member.district %></td>
-	      <td> 
-					<% if admin?(current_user) %>
-						<%= link_to "Editar", edit_member_path(member) %>
-					<% end %>
-				</td>
-	    </tr>
-	  <% end %>
-	</table>
-</div>
 
-<div class="clear"></div>
+

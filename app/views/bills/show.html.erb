@@ -21,7 +21,7 @@
       
       var geomap = new google.visualization.GeoMap(
           document.getElementById('citizen_votes_per_state'));
-      geomap.draw(data,{'region':'MX', 'colors': [0xFFFFFF, 0xc06000]});
+      geomap.draw(data,{'region':'MX', 'colors': [0xFFFFFF, 0x81A05A]});
     }
     
     google.setOnLoadCallback(drawVisualization);
@@ -50,7 +50,7 @@
     
       // Create and draw the visualization.
       new google.visualization.BarChart(document.getElementById('votes_per_party')).
-        draw(data, {'isStacked':true, 'height': 200});  
+        draw(data, {'isStacked':true, 'height': 200, 'colors': ['#81A05A', '#CC5477', '#CACAC2']});  
     }
     
 
@@ -58,125 +58,142 @@
   </script>
 <% end -%>
 
-<% title @bill.name %>
-<p>
-  <%=h @bill.description %>
-</p>
-<p>
-  <strong>Fecha:</strong>
-  <%=h @bill.date.to_s(:long) %>
-</p>
+<div id="rest">
+  <h2 class="section">Propuestas</h2>
+  
+  <div class="left">
+    <div class="propuestas">
+      <div id="interna" class="propuesta">
+        <h1 class="close"><%= @bill.name %></h1>
+        
+        <ul class="status">
+					<li id="one" class="selected">Aprobada</li>
+					<li id="two">Rechazada</li>
+					<li id="three">Pendiente</li>
+				</ul>
+				
+				<p class="fecha">
+          <strong>Fecha:</strong>
+          <%=h @bill.date.to_s(:long) %>
+        </p>
+        
+        <p><%= @bill.description %></p>
+        
+        <ul class="tags">
+          <% @bill.tags.each do |tag| %>
+            <li><%= tag.name %></li>
+          <% end %>
+        </ul>
+        <div class="clear"></div>
+        
+        <% if admin?(current_user) %>
+          <p>
+          	<%= link_to "Editar", edit_bill_path(@bill) %> |
+          	<%= link_to "Eliminar", @bill, :confirm => 'Are you sure?', :method => :delete %> |
+        		<%= link_to "Editar votos", edit_bill_votes_path(@bill) %>
+        		<%= link_to "Regresar a todas las propuestas", bills_path %>
+          </p>
+        <% end %>
+        
+        <h3>Votaciones Totales</h3>
+        <ul class="graficas">
+      		<li class="ciudadana">
+      		  <span>Votaci&oacute;n ciudadana:</span>
+      		  <div class="votos inside">
+      		    <div class="barra favor" style="width: <%= @bill.citizen_votes_and_percents[3] %>%;">&nbsp; <%= show_votes?(0, @bill.citizen_votes_and_percents) %></div>
+      			  <div class="barra contra" style="width: <%= @bill.citizen_votes_and_percents[4] %>%;">&nbsp; <%= show_votes?(1, @bill.citizen_votes_and_percents) %></div>
+      			  <div class="barra neutral" style="width: <%= @bill.citizen_votes_and_percents[5] %>%;">&nbsp; <%= show_votes?(2, @bill.citizen_votes_and_percents) %></div>
+      		  </div>
+      		</li>
 
-<h3>Votaciones totales</h3>
-<p>
-	A favor: <%= @bill.votes_for_by("Member") %> <br/>
-	En contra: <%= @bill.votes_against_by("Member") %> <br/>
-	Abstención: <%= @bill.votes_neutral_by("Member") %> <br/>
-</p>
+      		<% if @bill.general_votes? %>
+      		  <li class="oficial">
+        		  <span>Votaci&oacute;n oficial:</span>
+        		  <div class="votos inside">
+        		    <div class="barra favor" style="width: <%= @bill.member_votes_and_percents[3] %>%;">&nbsp; <%= show_votes?(0, @bill.member_votes_and_percents) %></div>
+        			  <div class="barra contra" style="width: <%= @bill.member_votes_and_percents[4] %>%;">&nbsp; <%= show_votes?(1, @bill.member_votes_and_percents) %></div>
+        			  <div class="barra neutral" style="width: <%= @bill.member_votes_and_percents[5] %>%;">&nbsp; <%= show_votes?(2, @bill.member_votes_and_percents) %></div>
+        		  </div>
+      		  </li>
+        	<% end %>
 
-<h3>Votaciones ciudadanos</h3>
-<p>Favor: <%= @bill.citizen_votes(true) %>, Contra: <%= @bill.citizen_votes(false) %>, Abstención: <%= @bill.citizen_votes(nil) %></p>
-<% if current_user %>
-	<div id="bill_<%= @bill.id %>">
-		<% if current_user.voted_on?(@bill) %>
-		  Votaste: <%= display_vote(current_user.vote_choice(@bill)) %>
-		<% else %>
-		  <%= link_to "Vota a favor", bill_votes_path(@bill), :class => "vote", 'data-vote' => 1, 'data-voteable' => "bill" %> 
-		  <%= link_to "Vota en contra", bill_votes_path(@bill), :class => "vote", 'data-vote' => 0, 'data-voteable' => "bill" %>
-		  <%= link_to "Abstención", bill_votes_path(@bill), :class => "vote", 'data-vote' => -1, 'data-voteable' => "bill" %>
-		<% end %>
-	</div>
-<% end %>
+      	</ul>
+        
+        <div id="graficas">
+          <div class="graph">
+            <h3>Votaciones por Partido</h3>
+            <div id="votes_per_party" style="width: 580px; height: 200px;"></div>
+          </div>
+          
+          <div class="graph">
+            <h3>Votaciones ciudadanas por Estado</h3>
+            <div id="citizen_votes_per_state" style="width: 549px; height: 300px;"></div>
+          </div>
+        </div>
+        
+        <div class="all_comments">
+          <h3>Comentarios (<%= @bill.comments.size %>)</h3>
+          <div class="comments">
+          	<% for comment in @bill.comments %>
+          		<div class="comment">
+          			<h4><%=h comment.title %></h4>
+          			<p><%=h comment.comment %></p>
+          			<% if admin?(current_user) %>
+          				<%= link_to "Eliminar", bill_comment_path(@bill, comment), :method => :delete, :confirm => "¿Esta seguro que lo desea eliminar?" %>
+          			<% end %>
+          		</div>
+          	<% end %>
+          </div>
 
-<%= link_to "Votaciones bancadas", "#", :class => "show_votes" %>
-<div class="votes" style="display: none;">
-	<h3>Por bancadas</h3>
-	<table>
-		<tr>
-			<th>Partido</th>
-			<th>A Favor</th>
-			<th>En Contra</th>
-			<th>Abstención</th>
-		</tr>
-		<% Party.all.each do |party| %>
-			<tr>
-				<td><strong><%= party.name %></strong></td>
-				<td><%= @bill.votes_for_party(party, true) %></td>
-				<td><%= @bill.votes_for_party(party, false) %></td>
-				<td><%= @bill.votes_for_party(party, nil) %></td>
-			</tr>
-		<% end %>
-	</table>
+
+          <div id="comment_form">
+          	<h4>Envíanos tus comentarios:</h4>
+
+          	<% form_for [@bill, Comment.new] do |f| %>
+          		<%= f.error_messages %>
+          		<p>
+          			<strong><%= f.label :title, "Título" %></strong> <br />
+          			<%= f.text_field :title, :class => "comment_input" %>
+          		</p>
+          		<p>
+          			<strong><%= f.label :comment, "Comentario" %></strong> <br />
+          			<%= f.text_area :comment, :rows => 6, :cols => 50, :class => "comment_input" %>
+          		</p>
+          		<p>
+          			<%= recaptcha_tags(:display => {:theme => "clean"}) %>
+          		</p>
+          		<p>
+          			<%= f.submit "Enviar Comentario", :class => "action" %>
+          		</p>
+          	<% end %>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+  <div class="right">
+    <div id="lateral" class="refinador">
+      <h1>Busca propuestas</h1>
+      
+      <% form_tag bills_path, :method => :get do %>
+        <p>
+          <%= text_field_tag :search, params[:search] %>
+        </p>
+        <p>
+          <%= submit_tag "Buscar", :class => "action" %>
+        </p>
+      <% end %>
+    </div>
+    <div id="related">
+      <h2>Propuestas Relacionadas</h2>
+      <ul class="list">
+        <% @related_bills.each do |bill| %>
+          <li><h3><%= link_to bill.name, bill %></h3></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 </div>
 
-<%= link_to "Votaciones por estados", "#", :class => "show_votes" %>
-<div class="votes" style="display: none;">
-	<h3>Por Estados</h3>
-	<table>
-		<tr>
-			<th>Estado</th>
-			<th>A Favor</th>
-			<th>En Contra</th>
-			<th>Abstención</th>
-		</tr>
-		<% State.all.each do |state| %>
-			<tr>
-				<td><strong><%= state.name %></strong></td>
-				<td><%= @bill.votes_for_state(state, true) %></td>
-				<td><%= @bill.votes_for_state(state, false) %></td>
-				<td><%= @bill.votes_for_state(state, nil) %></td>
-			</tr>
-		<% end %>
-	</table>
-</div>
-
-<h3>Votaciones de diputados por partidos</h3>
-<div id="votes_per_party" style="width: 800px; height: 200px;"></div>
-
-<h3>Votaciones de ciudadanos por estados</h3>
-<div id="citizen_votes_per_state" style="width: 800px; height: 400px;"></div>
-
-<p>
-	<% if admin?(current_user) %>
-  	<%= link_to "Editar", edit_bill_path(@bill) %> |
-  	<%= link_to "Eliminar", @bill, :confirm => 'Are you sure?', :method => :delete %> |
-		<%= link_to "Editar votos", edit_bill_votes_path(@bill) %>
-	<% end %>
-  <%= link_to "Regresar a todas las propuestas", bills_path %>
-</p>
-
-<h3>Comentarios (<%= @bill.comments.size %>)</h3>
-<div class="comments">
-	<% for comment in @bill.comments %>
-		<div class="comment">
-			<h4><%=h comment.title %></h4>
-			<p><%=h comment.comment %></p>
-			<% if admin?(current_user) %>
-				<%= link_to "Eliminar", bill_comment_path(@bill, comment), :method => :delete, :confirm => "¿Esta seguro que lo desea eliminar?" %>
-			<% end %>
-		</div>
-	<% end %>
-</div>
-
-
-<div id="comment_form">
-	<h4>Envíanos tus comentarios:</h4>
-	
-	<% form_for [@bill, Comment.new] do |f| %>
-		<%= f.error_messages %>
-		<p>
-			<%= f.label :title, "Título" %> <br />
-			<%= f.text_field :title %>
-		</p>
-		<p>
-			<%= f.label :comment, "Comentario" %> <br />
-			<%= f.text_area :comment, :rows => 4, :cols => 40 %>
-		</p>
-		<p>
-			<%= recaptcha_tags(:display => {:theme => "clean"}) %>
-		</p>
-		<p>
-			<%= f.submit "Enviar Comentario" %>
-		</p>
-	<% end %>
-</div>

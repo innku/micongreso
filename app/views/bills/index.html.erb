@@ -2,7 +2,14 @@
   <h2 class="section">Propuestas</h2>
   
   <div class="left">
+    <% if params[:search] %>
+      <p>
+        Resultados encontrados con la búsqueda: <%= params[:search] %>
+      </p>
+    <% end %>
+    
 		<div class="propuestas">
+		  
 		  <%= image_tag("spinner.gif", :style => "display: none;", :id => "spinner") %>
 		  <div id="propuestas">
 		    <%= render :partial => 'bill', :collection => @bills %>
@@ -17,17 +24,15 @@
   </div>
   
   <div class="right">
-    <div id="de_propuestas" class="buscador">
-      <% if params[:search] %>
-        <p>
-          Resultados encontrados con la búsqueda: <%= params[:search] %>
-        </p>
-      <% end %>
+    <div id="lateral" class="refinador">
+      <h1>Busca propuestas</h1>
       
       <% form_tag bills_path, :method => :get do %>
         <p>
           <%= text_field_tag :search, params[:search] %>
-          <%= submit_tag "Buscar" %>
+        </p>
+        <p>
+          <%= submit_tag "Buscar", :class => "action" %>
         </p>
       <% end %>
     </div>

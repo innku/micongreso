@@ -8,6 +8,7 @@ class DashboardController < ApplicationController
         @news = News.latest
         @bills = Bill.voted
         @citizens = User.with_avatar.latest
+        @citizen = User.new
       }
       wants.js {
         @bills = Bill.send(params[:type])

@@ -8,32 +8,38 @@
 
 <% form_for @citizen, :url => @citizen.new_record? ? citizens_path : citizen_path(@citizen.id) do |f| %>
   <%= f.error_messages %>
+  
+  <h2>Forma parte de Mi Congreso</h2>
   <p>
-    <%= f.label :name, "Nombre Completo" %><br />
-    <%= f.text_field :name %>
+    <strong><%= f.label :name, "Nombre Completo" %></strong><br />
+    <%= f.text_field :name, :class => "texto" %>
   </p>
   <p>
-    <%= f.label :city_name, "Ciudad" %><br />
-    <%= f.text_field :city_name, :class => "city_name" %>
+    <strong><%= f.label :city_name, "Ciudad" %></strong><br />
+    <%= f.text_field :city_name, :class => "city_name texto" %>
   </p>
   <p>
-    <%= f.label :section_number, "Sección" %><br />
-    <%= f.text_field :section_number %>
+    <strong><%= f.label :section_number, "Sección" %></strong><br />
+    <%= f.text_field :section_number, :class => "texto" %>
+    <%= link_to "¿Qué es esto?", "#", :class => "what" %>
   </p>
   <p>
-    <%= f.label :email, "Correo Electrónico" %><br />
-    <%= f.text_field :email %>
+    <strong><%= f.label :email, "Correo Electrónico" %></strong><br />
+    <%= f.text_field :email, :class => "texto" %>
   </p>
   <p>
-    <%= f.label :password, "Contraseña" %><br />
-    <%= f.password_field :password %>
+    <strong><%= f.label :password, "Contraseña" %></strong><br />
+    <%= f.password_field :password, :class => "texto" %>
   </p>
   <p>
-    <%= f.label :password_confirmation, "Confirmación de Contraseña" %><br />
-    <%= f.password_field :password_confirmation %>
+    <strong><%= f.label :password_confirmation, "Confirmación de Contraseña" %></strong><br />
+    <%= f.password_field :password_confirmation, :class => "texto" %>
+  </p>
+  <p class="private">
+    En Mi Congreso respetamos tu <%= link_to "privacidad", "#" %>
   </p>
   <p>
     <%= hidden_field_tag :tab, 0 %>
-    <%= f.submit "Guardar" %>
+    <%= f.submit "Guardar", :class => "action" %>
   </p>
 <% end %>

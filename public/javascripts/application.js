@@ -22,6 +22,7 @@ $(document).ready( function(){
 	
 	if ($("body").hasClass("dashboard")) {
 	  $("a#search_link").fancybox();
+	  $("a.signup_link").fancybox({'autoDimensions':false,'width':480,'height':530});
 	}
 	
 	if ($("body").hasClass("text_counter")) {

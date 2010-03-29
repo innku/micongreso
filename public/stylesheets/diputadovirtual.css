@@ -49,6 +49,10 @@ a:active{
 	margin: 0px auto;
 	text-align: left;
 }
+
+.clear {
+	clear: both;
+}
 /*MENU*/
 #nav ul {
 	margin: 25px 0 0 0;
@@ -391,6 +395,10 @@ ul.graficas li.resultados span {
 	color: #fff;
 }
 
+.inside {
+	width: 390px;
+}
+
 .votos .barra {
 	float: left;
 	padding: 2px 0px;
@@ -419,7 +427,7 @@ ul.graficas li.resultados span {
 	float: left;
 	margin-top: 15px;
 }
-#noticias ul.list {
+#noticias ul.list, #related ul.list {
 	margin: 0px 0px 10px 0px;
 	_margin: 0px;
 	padding: 0px;
@@ -427,13 +435,13 @@ ul.graficas li.resultados span {
 	float: left;
 	width: 100%;
 }
-#noticias ul.list li {
+#noticias ul.list li, #related ul.list li {
 	border-bottom: 1px dotted #CCC;
 	padding: 8px 15px 8px 0px;
 	width: 275px;
 	float: left;
 }
-#noticias h3, #users h3 {
+#noticias h3, #users h3, #related h3 {
 	font-weight: normal;
 	font-size: 1em;
 	margin: 0px;
@@ -542,11 +550,12 @@ ul.graficas li.resultados span {
 	margin: 0 0 3px 0;
 }
 /*TOPICS*/
-#topics, #archivo {
+#topics, #archivo, #estados, #partidos, #related {
 	margin-top: 20px;
 	float: left;
 	width: 100%;
 }
+
 /*Bloques de Listas*/
 #de_propuestas {
 	background: url(/images/deg6.png) top left;
@@ -607,6 +616,456 @@ ul.blocklist li a:hover {
 	-webkit-box-shadow: 1px 0px 3px #CCC;
 }
 
+/*tablas*/
+table.resultados {
+	font-size: 1em;
+}
+table.resultados th {
+	text-align: left;
+	padding: 10px 10px;
+	background: #ECECE9;
+}
+table.resultados td {
+	border-top: 1px dotted #CCC;
+	padding: 4px 10px;
+}
+table.resultados tr:hover {
+	background: #FFF;
+}
+table.resultados a {
+	display: block;
+}
+/*REFINADOR*/
+.refinador {
+	background: #CCCBC5;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	color: #696055;
+	float: left;
+}
+.refinador h1 {
+	color: #696055;
+	font-family: "union", palatino, georgia, times;
+	font-size: 1em;
+	margin: 0px;
+}
+#superior {
+	background: #CCCBC5;
+	padding: 10px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	margin-bottom: 4px;
+	color: #696055;
+	float: left;
+	width: 600px;
+	_width: 610px;
+}
+#de_diputados {
+	width: 600px;
+	_width: 610px;
+	margin-bottom: 4px;
+	padding: 10px;
+}
+.right #de_diputados {
+	width: 270px;
+	_width: 290px;
+	margin-bottom: 0px;
+	padding: 10px;
+	margin-top: 20px;
+}
+.right #de_diputados select {
+	width: 125px;
+	margin-top: 4px;
+	margin-right: 10px;
+}
+#lateral {
+	padding: 10px;
+	margin-top: 20px;
+	width: 270px;
+	_width: 290px;
+}
+
+#de_diputados h1, #lateral h1 {
+	border-bottom: #A1A09B solid 1px;
+}
+
+#de_diputados p {
+	margin: 5px 0px;
+	_margin: 0px;
+}
+#de_diputados select {
+	width: 130px;
+	margin-top: 4px;
+	margin-right: 10px;
+}
+.refinador p, .refinador form {
+	float: left;
+	margin: 0px;
+	padding: 0;
+}
+#de_diputados input {
+	border: #A1A09B solid 1px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	padding: 3px;
+	margin-top: 2px;
+	margin-right: 10px;
+}
+.right #de_diputados input {
+	width: 260px;
+}
+.right #de_diputados input.action {
+	margin: 10px 0px 0px 0px;
+	width: auto;
+}
+#lateral input {
+	border: #A1A09B solid 1px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	padding: 3px;
+	margin-top: 10px;
+	margin-right: 10px;
+}
+#lateral input.action {
+	border: none;
+	padding: 2px 10px;
+	_padding: 1px 5px;
+	margin-top: 10px;
+	margin-right: 0px;
+}
+#de_diputados input.action {
+	border: none;
+	padding: 3px 6px;
+	margin-top: 15px;
+}
+#superior input.action {
+	border: none;
+	padding: 4px 6px;
+	_padding: 2px 6px;
+	margin-left: 10px;
+}
+.refinador label {
+	font-size: .9em;
+}
+#superior h1 {
+	float: left;
+	margin: 5px 10px 0px 0px;
+}
+#superior input {
+	margin-top: 0px;
+}
+#superior input {
+	border: #A1A09B solid 1px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	padding: 5px;
+	margin-top: 2px;
+}
+.refinador input.action {
+	border: none;
+	padding: 4px 6px;
+}
+/*PROPUESTA DETALLE*/
+#interna h1 {
+	font-size: 1.5em;
+	font-family: georgia;
+	margin: 0 0 20px 0;
+	font-weight: normal;
+	color: #663300;
+}
+
+#interna h1.close {
+	margin: 0;
+}
+
+#interna {
+	width: 549px;
+	_width: 600px;
+	padding: 30px;
+	_overflow: hidden;
+}
+/*.fecha {
+	color: #81A15B;
+	border: #D9E3CD solid 1px;
+	padding: 5px 10px 5px 30px;
+	margin: 0px 0px 15px 0px;
+	background: #F4F7F0 url(/images/cale.jpg) no-repeat 6px 6px;
+	float: left;
+}*/
+/*COMMENTS*/
+.all_comments {
+	width: 100%;
+	float: left;
+	padding: 10px 0px;
+	margin: 10px 0px;
+}
+#interna h3 {
+	font-family: "union", palatino, georgia, times;
+	font-size: 1.3em;
+	margin: 10px 0px 0px 0px;
+	font-weight: bold;
+	color: #333;
+	border-top: #EEE 3px solid;
+	padding: 10px 0px;
+}
+.all_comments .comment {
+	padding: 10px;
+	border: 1px solid #EEE;
+	margin-top: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	background: #FFF8F7;
+}
+.all_comments .comment {
+	font-family: georgia;
+	font-style: italic;
+}
+#interna .comment h4 {
+	margin: 5px 0 0 0;
+	color: #663300;
+	font-size: 1.2em;
+	border: none;
+	padding: 0px;
+	text-transform: none;
+}
+.all_comments #comment_form {
+	float: left;
+	width: 100%;
+	margin: 20px 0px;
+}
+#interna h4 {
+	margin: 0px;
+	color: #666;
+	text-transform: uppercase;
+	border-top: #EEE 1px solid;
+	padding: 10px 0px;
+	color: #999;
+}
+#interna .graficas li {
+	width: 519px;
+}
+#interna .graficas li.resultados {
+	width: 549px;
+}
+input.comment_input, textarea.comment_input {
+	width: 100%;
+}
+#comment_form {
+	width: 100%;
+	float: left;
+}
+/*TAGS*/
+ul.tags {
+	padding: 3px 0px 3px 30px;
+	margin: 0px 0px 15px 0px;
+	width: 100%;
+	float: left;
+	color: #8C9497;
+	background: url(/images/tag.gif) no-repeat;
+}
+ul.tags a {
+	color: #8C9497;
+}
+ul.tags li {
+	display: inline;
+	margin-right: 5px;
+}
+/*GRAFICAS*/
+.graph {
+	width: 100%;
+	float: left;
+	margin-bottom: 15px;
+}
+#graficas {
+	margin-bottom: 20px;
+	width: 100%;
+	float: left;
+}
+/*DIPUTADO*/
+.dipufoto {
+	float: left;
+	border: #EEE solid 1px;
+	margin: 0px 20px 15px 0px;
+	background: #FFF;
+	padding: 2px;
+	position: relative;
+}
+.dipufoto .partido {
+	position: absolute;
+	bottom: 10px;
+	left: -5px;
+	width: 30px;
+	height: 30px;
+	background: red;
+}
+/*NOTAS*/
+.main_image {
+	float: right;
+	padding: 2px;
+	background: #FFF;
+	border: 1px solid #EEE;
+	margin-left: 20px;
+	margin-bottom: 10px;
+}
+/*STATUS*/
+ul.status {
+	margin-bottom: 20px;
+	padding: 0;
+	width: 100%;
+	list-style-type: none;
+	float: left;
+}
+ul.status li {
+	float: left;
+	background: #EEE;
+	color: #CCC;
+	-moz-box-shadow: 0px 1px 3px #CCC;
+	padding: 5px 12px;
+	font-style: italic;
+}
+ul.status #one {
+	-moz-border-radius-topleft: 10px;
+	-moz-border-radius-bottomleft: 10px;
+}
+ul.status #three {
+	-moz-border-radius-topright: 10px;
+	-moz-border-radius-bottomright: 10px;
+}
+#one.selected {
+	background: #81A15B url(/images/green.png) top left;
+	color: #FFF;
+	font-weight: bold;
+}
+#two.selected {
+	background: #CC5477 url(/images/pink.png) top left;
+	color: #FFF;
+	font-weight: bold;
+}
+#three.selected {
+	background: #6D6A61 url(/images/pte.png) top left;
+	color: #FFF;
+	font-weight: bold;
+}
+
+/*NOTAS*/
+.news {
+	float: left;
+ 	margin: 10px 15px;
+	padding: 0 0 15px 0;
+	border-bottom: 1px #CCCBC5 solid;
+}
+.news img {
+	width: 180px;
+	height: 100px;
+	float: left;
+	margin-right: 15px;
+}
+#rest .news h2 {
+	text-transform: none;
+	font-family: georgia;
+	font-size: 1.3em;
+	font-weight: normal;
+	letter-spacing: 0;
+	margin: 0 0 10px 0;
+}
+p.news_date {
+	color: #666;
+	font-size: .8em;
+	margin: 5px 0px;
+}
+.votos {
+	font-style: italic;
+	float: left;
+	padding: 5px 0px;
+	margin-right: 10px;
+}
+.favor {
+	color: #627B46;
+}
+.contra {
+	color: #CC5577;
+}
+/*PAGER*/
+#pager ul {
+	margin: 15px 0px 25px 0px;
+	padding: 0px;
+	width: 100%;
+	float: left;
+	text-align: center;
+}
+#pager ul li {
+	display: inline;
+	padding: 5px;
+}
+/*CIEN*/
+.cien {
+	/*float: left;
+	width: 480px;
+	_width: 400px;
+	background: #ECECE9;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	padding: 5px;
+	text-align: center;*/
+}
+.cien form {
+	/*width: 400px;
+	padding: 15px 20px;
+	-moz-box-shadow: 0px 1px 3px #CCCBC4;
+	-webkit-box-shadow: 0px 1px 3px #CCCBC4;
+	background: #FFF;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	margin: -20px auto 10px auto;
+	_margin: 5px auto;
+	text-align: left;*/
+}
+.cien form h2 {
+	text-transform: uppercase;
+	color: #2E2013;
+	font-family: "union", palatino, georgia, times;
+	font-size: 1.3em;
+	letter-spacing: -.05em;
+	margin: 0 0 20px 0;
+	border-bottom: 1px dotted #CCC;
+	padding: 10px 0px;
+	text-transform: none;
+}
+.cien form .action {
+	float: none;
+	border: none;
+}
+.cien form .texto {
+	width: 398px;
+	border: 1px solid #CCC;
+	color: #444;
+	font-size: 14px;
+	padding: 8px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	background: #EEE;
+	margin: 0px;
+}
+.cien form #user_section_number {
+	width: 200px;
+	float: left;
+	margin-right: 10px;
+}
+a.what {
+	text-decoration: underline;
+	display: block;
+	padding: 10px;
+	_padding: 4px;
+}
+.private {
+	font-style: italic;
+	font-size: .9em;
+}
+
+#signup_form {
+	padding: 10px;
+	width: 400px;
+}
 
 /*-------------------------------------------------
 NEWS
@@ -624,13 +1083,6 @@ NEWS
 /*-------------------------------------------------
 COMMENTS
 -------------------------------------------------*/
-
-.comments {
-	width: 400px;
-	padding: 10px;
-	background: #ececec;
-	border: 1px solid #bfbfbf;
-}
 
 .comment {
 	padding: 10px 0;
@@ -763,3 +1215,53 @@ VALIDATION ERRORS
   font-size: 12px;
   list-style: disc;
 }
+
+/*-------------------------------------------------
+PAGINATION
+-------------------------------------------------*/
+
+.pagination {
+  background: white;
+  margin: 14px 6px;
+  /* self-clearing method: */ }
+  .pagination a, .pagination span {
+    padding: .2em .5em;
+    display: block;
+    float: left;
+    margin-right: 1px; }
+  .pagination span.disabled {
+    color: #999;
+    border: 1px solid #DDD; }
+  .pagination span.current {
+    font-weight: bold;
+    background: #B63D46;
+    color: white;
+    border: 1px solid #f19298; }
+  .pagination a {
+    text-decoration: none;
+    color: #B63D46;
+    border: 1px solid #f19298; }
+    .pagination a:hover, .pagination a:focus {
+      color: #003;
+      border-color: #003; }
+  .pagination .page_info {
+    background: #2E6AB1;
+    color: white;
+    padding: .4em .6em;
+    width: 22em;
+    margin-bottom: .3em;
+    text-align: center; }
+    .pagination .page_info b {
+      color: #003;
+      background: #6aa6ed;
+      padding: .1em .25em; }
+  .pagination:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden; }
+  * html .pagination {
+    height: 1%; }
+  *:first-child+html .pagination {
+    overflow: hidden; }
