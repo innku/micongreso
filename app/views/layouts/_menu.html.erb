@@ -18,7 +18,7 @@
     <% end %>
     
     <% if logged_in? %>
-		  <li class="email"><%= link_to current_user.email, edit_citizen_path(current_user) %></li>
+		  <li class="email"><%= link_to "Mi perfil", edit_citizen_path(current_user) %></li>
 		  <li class="login"><%= link_to "Salir", logout_path %></li> 
 		<% else %>
 		  <li class="login"><%= link_to "Inicia Sesi&oacute;n &raquo;", login_path %></li> 

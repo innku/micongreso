@@ -5,7 +5,7 @@
     <div class="propuestas">
       <div id="interna" class="propuesta">
         <div class="dipufoto">
-          <div class="partido"><%= image_tag(@member.party.abbr+".png") %></div>
+          <div class="partido"><%= image_tag(@member.party.abbr.downcase+".png") %></div>
           <%= image_tag(@member.picture.url(:medium)) %>
         </div>
         <h1><%= @member.name %></h1>
@@ -59,7 +59,7 @@
         	  </tr>
         	  <% @member.votes[0..4].each do |vote| %>
         	    <tr>
-          	    <td><%= link_to(truncate(vote.voteable.name, :length => 80)) %></td>
+          	    <td><%= link_to(truncate(vote.voteable.name, :length => 80), vote.voteable) %></td>
           	    <td><%= es_date(vote.voteable.date) %></td>
           	    <td><span class="<%= display_vote(vote.vote, vote.voteable).downcase %>"><%= display_vote(vote.vote, vote.voteable) %></span></td>
         	    </tr>

@@ -106,11 +106,19 @@
 	</div>
 		
 	<div class="right"> 
-		<div id="diputado"> 
-			<h2>&iquest;Sabes quién es<br />tu diputado?</h2> 
-			<a id="search_link" href="#search_member">Descubrelo ahora &raquo;</a> 
-			<p>Comienza a seguirles la pista en las decisiones que toman</p> 
-		</div>
+		  <% if current_user && current_user.district %>
+		    <div id="diputado" class="escogido">
+		      <h2><%= current_user.member.name %></h2>
+  		    <%= image_tag(current_user.member.picture.url(:thumb)) %>
+  		    <%= link_to "Perfil de tu diputado &raquo;", current_user.member %>
+		    </div>
+		  <% else %>
+		    <div id="diputado"> 
+    			<h2>&iquest;Sabes quién es<br />tu diputado?</h2> 
+    			<a id="search_link" href="#search_member">Descubrelo ahora &raquo;</a> 
+    			<p>Comienza a seguirles la pista en las decisiones que toman</p> 
+  			</div>
+  		<% end %>
 		
 		<div style="display: none;">
 		  <div id="search_member">

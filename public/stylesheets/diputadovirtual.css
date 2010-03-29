@@ -531,6 +531,24 @@ ul.graficas li.resultados span {
 	float: left;
 	border: #CCCBC4 solid 1px;
 }
+
+#diputado.escogido {
+	background: #FFF url(/images/sin_mono.png) no-repeat left bottom;
+	width: 258px;
+	padding: 10px 15px 10px 15px;
+	height: 100px;
+	_height: 120px;
+}
+
+#diputado.escogido img{
+	float: left;
+}
+
+#diputado.escogido h2{
+	float: right;
+	width: 160px;
+}
+
 #diputado p {
 	float: right;
 	width: 140px;
