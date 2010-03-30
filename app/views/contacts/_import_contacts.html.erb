@@ -7,14 +7,14 @@
   </p>
   <p>
     <strong><%= label_tag :login, "Nombre de Usuario o Correo Electrónico" %></strong> <br/>
-    <%= text_field_tag :login, params[:login], :class => "texto" %>
-  </p> 
+    <%= text_field_tag :login, params[:login], :class => "texto", :id => "email_login" %>
+  </p>
   <p>
     <strong><%= label_tag :password, "Contraseña" %></strong> <br/>
     <%= password_field_tag :password, nil, :class => "texto" %>
   </p>
   <p>
-    MiCongreso no almacenará tu contraseña
+    Mi Congreso no almacenará tu contraseña
   </p>
   <p>
     <%= submit_tag "Enviar invitación", :class => "action" %>
