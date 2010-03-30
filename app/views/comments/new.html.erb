@@ -1,23 +1,32 @@
-<% title "Nuevo Comentario" %>
+<div id="rest">
+  <h2 class="section">Comentarios</h2>
+  
+  <div class="left">
+    <div class="propuestas">
+      <div class="propuesta" id="interna">
+        <div id="comment_form">
+        	<h4>Envíanos tus comentarios:</h4>
 
-<div id="comment_form">
-	<h4>Envíanos tus comentarios:</h4>
-	
-	<% form_for [@commentable, @comment] do |f| %>
-		<%= f.error_messages %>
-		<p>
-			<%= f.label :title, "Título" %> <br />
-			<%= f.text_field :title %>
-		</p>
-		<p>
-			<%= f.label :comment, "Comentario" %> <br />
-			<%= f.text_area :comment, :rows => 4, :cols => 40 %>
-		</p>
-		<p>
-			<%= recaptcha_tags(:display => {:theme => "clean"}) %>
-		</p>
-		<p>
-			<%= f.submit "Enviar Comentario" %>
-		</p>
-	<% end %>
+        	<% form_for [@commentable, @comment] do |f| %>
+        		<%= f.error_messages :header_message => "¡Por favor intenta de nuevo!", :message => "Se encontraron los siguientes problemas:" %>
+            
+        		<p>
+        			<%= f.label :title, "Título" %> <br />
+        			<%= f.text_field :title %>
+        		</p>
+        		<p>
+        			<%= f.label :comment, "Comentario" %> <br />
+        			<%= f.text_area :comment, :rows => 4, :cols => 40 %>
+        		</p>
+        		<p>
+        			<%= recaptcha_tags(:display => {:theme => "clean"}) %>
+        		</p>
+        		<p>
+        			<%= f.submit "Enviar Comentario", :class => "action" %>
+        		</p>
+        	<% end %>
+        </div>        
+      </div>
+    </div>
+  </div>
 </div>

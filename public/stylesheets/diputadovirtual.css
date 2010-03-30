@@ -236,6 +236,18 @@ a.action {
 	font-size: 1.3em;
 	letter-spacing: -.05em;
 }
+
+#rest h3 {
+	color: #2E2013;
+}
+
+#rest h4, #rest h4 label {
+	color: #2E2013;
+	font-family: "union", palatino, georgia, times;
+	font-size: 14px;
+	letter-spacing: -.05em;
+}
+
 #rest .right {
 	float: left;
 	width: 290px;
@@ -958,7 +970,6 @@ ul.tags li {
 	left: -5px;
 	width: 30px;
 	height: 30px;
-	background: red;
 }
 /*NOTAS*/
 .main_image {
@@ -1135,6 +1146,12 @@ a.what {
 	display: block;
 	padding: 10px;
 	_padding: 4px;
+	float: left;
+}
+
+a:hover.what {
+	background: #b63d46;
+	color: #fff;
 }
 .private {
 	font-style: italic;
@@ -1217,6 +1234,96 @@ li.login {
 }
 label {
 	font-weight: bold;
+	font-family: arial;
+}
+
+/*MENU PERFIL*/
+ul#menu_perfil {
+	text-align: left;
+	list-style-type: none;
+	margin: 0px 0px 25px 0px;
+	padding: 0px;
+	float: left;
+	width: 100%;
+	float: left;
+	background: #CCC;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	height: 40px;
+	overflow: hidden;
+	border: none;
+}
+ul#menu_perfil li {
+	padding: 0px;
+	float: left;
+	margin-left: 4px;
+	margin-top: 10px;
+}
+ul#menu_perfil li a {
+	background: #EEE;
+	padding: 6px 10px;
+	display: block;
+	float: left;
+	font-size: 1em;
+	border: 1px solid #DDD;
+	border-bottom: 1px solid #EEE;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright: 4px;
+	-webkit-border-top-left-radius: 4px;
+	-webkit-border-top-right-radius: 4px;
+	color:#663300;
+	font-family:"union",palatino,georgia,times;
+	letter-spacing:-0.05em;
+	font-weight: bold;
+}
+ul#menu_perfil li.ui-state-active a {
+	border: 1px solid #CCC;
+	border-bottom: 1px solid #FFF;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright: 4px;
+	-webkit-border-top-left-radius: 4px;
+	-webkit-border-top-right-radius: 4px;
+	background: #FFF;
+}
+
+ul#menu_perfil li.ui-state-hover a, ul#menu_perfil li.ui-state-hover a:hover {
+	color: #b63d46;
+}
+
+form#edit_user {
+	width: 600px;
+	padding: 3px;
+}
+.cien form#edit_user .texto {
+	width: 568px;
+	border: 1px solid #CCC;
+	color: #444;
+	font-size: 14px;
+	padding: 8px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	background: #EEE;
+	margin: 0px;
+}
+.cien form#edit_user #user_section_number {
+	width: 200px;
+	float: left;
+	margin-right: 10px;
+}
+.edit {
+	padding: 30px 15px 15px 15px;
+}
+
+#profile table td {
+	padding: 6px 6px 6px 0;
+}
+
+#avatar_field label {
+	padding: 0 20px 0 0;
+}
+
+.password_fields {
+	display: none;
 }
 
 /*-------------------------------------------------
@@ -1294,7 +1401,7 @@ AUTO COMPLETE
 }
  
 .ac_over {
-	background-color: #B42024;
+	background-color: #b63d46;
 	color: white;
 }
 
@@ -1335,9 +1442,32 @@ FLASH MESSAGES
 USER TAGS
 -------------------------------------------------*/
 
-#tag_ids a.selected_tag {
-	color: #fffeff;
-	background-color: #652509;
+ul#tag_ids {
+	list-style: none;
+	padding: 0;
+}
+
+ul#tag_ids li {
+	float: left;
+	margin: 2px;
+}
+
+ul#tag_ids li a {
+	padding: 10px;
+	background: #ECECE9;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	display: block;
+}
+
+ul#tag_ids li a:hover {
+	color: #fff;
+	background: #665E59;
+}
+
+ul#tag_ids a.selected_tag, ul#tag_ids a:hover.selected_tag  {
+	color: #fff;
+	background: #b63d46;
 }
 
 /*-------------------------------------------------
@@ -1351,7 +1481,7 @@ VALIDATION ERRORS
 #errorExplanation {
   font-family:"union",palatino,georgia,times;
   width: 400px;
-  border: 2px solid #CC5477;
+  border: 2px solid #b63d46;
   padding: 0px;
   padding-bottom: 12px;
   margin-bottom: 20px;
@@ -1364,7 +1494,7 @@ VALIDATION ERRORS
   padding: 5px 5px 5px 15px;
   font-size: 12px;
   margin: 0;
-  background-color: #CC5477;
+  background-color: #b63d46;
   color: #fff;
 }
 

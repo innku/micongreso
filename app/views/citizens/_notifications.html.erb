@@ -2,34 +2,34 @@
   <% f.error_messages %>
   
   <% f.fields_for :notification do |n| %>
+    <h4>¿Por cuales medios deseas recibir notificaciones?</h4>
     <p>
+      <%= n.check_box :email %>
       <%= n.label :email, "Correo Electrónico" %>
-      <%= n.radio_button :email, true %> <%= n.label :email_true, "Si" %>
-      <%= n.radio_button :email, true %> <%= n.label :email_false, "No" %>
     </p>
-    <p>
+    <p style="display: none;">
+      <%= n.label :sms %>
+      <%= n.check_box :sms %>
+    </p>
+    <p style="display: none;">
       <%= n.label :twitter %>
       <%= n.radio_button :twitter, true %> <%= n.label :twitter_true, "Si" %>
       <%= n.radio_button :twitter, true %> <%= n.label :twitter_false, "No" %>
     </p>
-    <p>
+    <p style="display: none;">
       <%= n.label :facebook %>
       <%= n.radio_button :facebook, true %> <%= n.label :facebook_true, "Si" %>
       <%= n.radio_button :facebook, true %> <%= n.label :facebook_false, "No" %>
     </p>
+    
+    <h4><%= n.label :interest_topics, "Recibir notificaciones relacionadas a:" %></h4>
     <p>
-      <%= n.label :sms %>
-      <%= n.radio_button :sms, true %> <%= n.label :sms_true, "Si" %>
-      <%= n.radio_button :sms, true %> <%= n.label :sms_false, "No" %>
-    </p>
-    <p>
-      <%= n.label :interest_topics, "Recibir notificaciones de:" %>
       <%= n.radio_button :interest_topics, false %> <%= n.label :interest_topics_false, "Todos los temas" %>
       <%= n.radio_button :interest_topics, true %> <%= n.label :interest_topics_true, "Mis temas de interés" %>
     </p>
   <% end %>
   
-  <h3>Temas de Interés</h3>
+  <h4>Temas de Interés</h4>
   <p>Selecciona tus temas de interés</p>
   
   <ul id="tag_ids">
@@ -41,8 +41,10 @@
     <% end %>
   </ul>
   
+  <div class="clear"></div>
+  
   <p>
     <%= hidden_field_tag :tab, 2 %>
-    <%= f.submit "Guardar Preferencias" %>
+    <%= f.submit "Guardar Preferencias", :class => "action" %>
   </p>
 <% end %>

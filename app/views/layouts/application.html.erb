@@ -43,9 +43,7 @@
   	<div id="footer"> 
   		<div class="contenido">
   		  <div id="parties">
-        	<h4>Partidos</h4>
 
-        	<%= Party.all.collect {|party| link_to party.name, group_search_members_path(:party_id => party.id )}.join(', ')  %>
         </div>
   		</div> 
   	</div>

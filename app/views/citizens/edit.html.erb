@@ -8,28 +8,35 @@
   });
 </script>
 
-<h1>Editar Ciudadano</h1>
+<div id="rest">
+  
+  <h2 class="section">Mi Perfil</h2>
+  
+  <div class="left">
+    <div class="cien">
+      
+      <div id="user_tabs">
+        <ul id="menu_perfil">
+          <li><%= link_to "Datos Personales", "#user" %></li>
+          <li><%= link_to "Perfil Ciudadano", "#profile" %></li>
+          <li><%= link_to "Preferencias", "#notifications" %></li>
+        </ul>
+        <div id="user">
+          <%= render :partial => 'edit_form' %>
+        </div>
 
-<div id="user_tabs">
-  <ul>
-    <li><%= link_to "Datos Personales", "#user" %></li>
-    <li><%= link_to "Perfil Ciudadano", "#profile" %></li>
-    <li><%= link_to "Notificaciones", "#notifications" %></li>
-  </ul>
-  <div id="user">
-    <%= render :partial => 'form' %>
+        <div id="profile">
+          <%= render :partial => 'profile' %>
+        </div>
+
+        <div id="notifications">
+          <%= render :partial => 'notifications' %>
+        </div>
+      </div>
+      
+    </div>
   </div>
   
-  <div id="profile">
-    <%= render :partial => 'profile' %>
-  </div>
-  
-  <div id="notifications">
-    <%= render :partial => 'notifications' %>
-  </div>
 </div>
-
-<%= link_to "Invita a tus amigos a unirse a MiCongreso", new_contact_path %>
-
 
 

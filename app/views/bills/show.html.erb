@@ -149,7 +149,6 @@
           <div id="comment_form">
           	<h4>Envíanos tus comentarios:</h4>
             
-            <p>Para comentar sobre esta propuesta es necesario que te registres en mi congreso.</p>
             <% if current_user %>
             	<% form_for [@bill, Comment.new] do |f| %>
             		<%= f.error_messages %>
@@ -169,6 +168,8 @@
             		</p>
             	<% end %>
             <% else %>
+              <p>Para comentar sobre esta propuesta es necesario que te registres en mi congreso.</p>
+              
               <%= link_to "¡Regístrate y opina!", signup_path, :class => "action" %>
             <% end %>
           </div>

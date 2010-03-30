@@ -7,12 +7,9 @@
 	class="user"
 <% end -%>
 
-<% form_for @citizen, :url => citizens_path do |f| %>
+<% form_for @citizen, :url => citizen_path(@citizen.id) do |f| %>
   <%= f.error_messages :header_message => "¡Por favor intenta de nuevo!", :message => "Se encontraron los siguientes problemas:" %>
 
-  <% if @citizen.new_record? %>
-    <h2>Forma parte de Mi Congreso</h2>
-  <% end %>
   <p>
     <strong><%= f.label :name, "Nombre Completo" %></strong><br />
     <%= f.text_field :name, :class => "texto" %>
@@ -31,13 +28,17 @@
     <strong><%= f.label :email, "Correo Electrónico" %></strong><br />
     <%= f.text_field :email, :class => "texto" %>
   </p>
-  <p>
+  <p class="password_fields">
     <strong><%= f.label :password, "Contraseña" %></strong><br />
     <%= f.password_field :password, :class => "texto" %>
   </p>
-  <p>
+  <p class="password_fields">
     <strong><%= f.label :password_confirmation, "Confirmación de Contraseña" %></strong><br />
     <%= f.password_field :password_confirmation, :class => "texto" %>
+  </p>
+  <p>
+    <%= link_to "Cambiar contraseña", "#", :id => "change_password" %>
+    <%= link_to "No Cambiar contraseña", "#", :id => "not_change_password", :style => "display: none;" %>
   </p>
   <p class="private" style="display: none;">
     En Mi Congreso respetamos tu <%= link_to "privacidad", "#" %>

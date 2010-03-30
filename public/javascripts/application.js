@@ -117,6 +117,21 @@ $(document).ready( function(){
     $("#avatar_field").hide();
     $("#avatar").show();
   })
+  
+  // Cambiar password 
+  $("a#change_password").click(function(){
+    $(".password_fields").show().find("input").val("");
+    $(this).hide()
+    $("a#not_change_password").show();
+    return false;
+  })
+  
+  $("a#not_change_password").click(function(){
+    $(".password_fields").hide().find("input").val("");
+    $(this).hide()
+    $("a#change_password").show();
+    return false;
+  })
 	
 	// Autocomplete en la forma de registro y al editar la info del usuario
 	if ($("body").hasClass("user")) {

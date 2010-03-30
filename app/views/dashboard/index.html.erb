@@ -129,7 +129,7 @@
       	    <%= select_tag :state_id, options_for_select(State.all.map {|s| [s.name, s.id]}, :selected => params[:state_id].to_i) %>
       	  </p>
       	  <p>
-      	    <strong><%= label_tag :section %></strong><br/>
+      	    <strong><%= label_tag :section, "Sección" %></strong><br/>
       	    <%= text_field_tag :section %>
       	  </p>
       	  <p><%= submit_tag "Buscar", :class => "action" %></p>

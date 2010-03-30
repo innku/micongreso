@@ -1,5 +1,13 @@
-<% title "Nuevo Mensaje" %>
-
-<%= render :partial => 'form' %>
-
-<%= link_to "Regresar a perfil de diputado", @member %>
+<div id="rest">
+  <h2 class="section">Enviar Mensaje a diputado</h2>
+  
+  <div class="left">
+    <div class="propuestas">
+      <div class="propuesta" id="interna">
+        <%= render :partial => 'form' %>
+        
+        <%= link_to "Regresar a perfil de diputado", @member %>
+      </div>
+    </div>
+  </div>
+</div>
