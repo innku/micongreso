@@ -356,6 +356,26 @@ ul.links li a:hover {
 	color: #B63D46;
 }
 
+ul.links li.voted {
+	background: #EEE url(/images/deg4.png) repeat-x;
+}
+
+ul.links li div {
+	padding: 2px 6px;
+}
+
+ul.links li div.si {
+	background: url(/images/si.gif) no-repeat 4px 2px;
+	padding-left: 20px;
+}
+ul.links li div.no {
+	background: url(/images/no.gif) no-repeat 4px 3px;
+	padding-left: 20px;
+}
+ul.links li span:hover {
+	color: #B63D46;
+}
+
 /*GRAFICAS*/
 ul.graficas {
 	margin: 10px 0 15px 0px;
@@ -1097,6 +1117,11 @@ p.news_date {
 	background: #EEE;
 	margin: 0px;
 }
+
+#comment_form.cien form .texto {
+	width: 245px;
+}
+
 .cien form #user_section_number {
 	width: 200px;
 	float: left;

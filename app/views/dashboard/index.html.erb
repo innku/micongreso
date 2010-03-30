@@ -106,7 +106,7 @@
 	</div>
 		
 	<div class="right"> 
-		  <% if current_user && current_user.district %>
+		  <% if current_user && current_user.section %>
 		    <div id="diputado" class="escogido">
 		      <h2><%= current_user.member.name %></h2>
   		    <%= image_tag(current_user.member.picture.url(:thumb)) %>

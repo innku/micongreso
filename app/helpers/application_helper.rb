@@ -49,6 +49,11 @@ module ApplicationHelper
     "active" if params == type
   end
   
+  def choice_class(vote)
+    return "" if vote.nil?
+    vote ? "si" : "no"
+  end
+  
   def es_date(date)
     "#{date.day} #{MONTHS[date.month]} #{date.year}"
   end

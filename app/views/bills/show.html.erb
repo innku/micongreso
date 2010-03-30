@@ -148,24 +148,29 @@
 
           <div id="comment_form">
           	<h4>Envíanos tus comentarios:</h4>
-
-          	<% form_for [@bill, Comment.new] do |f| %>
-          		<%= f.error_messages %>
-          		<p>
-          			<strong><%= f.label :title, "Título" %></strong> <br />
-          			<%= f.text_field :title, :class => "comment_input" %>
-          		</p>
-          		<p>
-          			<strong><%= f.label :comment, "Comentario" %></strong> <br />
-          			<%= f.text_area :comment, :rows => 6, :cols => 50, :class => "comment_input" %>
-          		</p>
-          		<p>
-          			<%= recaptcha_tags(:display => {:theme => "clean"}) %>
-          		</p>
-          		<p>
-          			<%= f.submit "Enviar Comentario", :class => "action" %>
-          		</p>
-          	<% end %>
+            
+            <p>Para comentar sobre esta propuesta es necesario que te registres en mi congreso.</p>
+            <% if current_user %>
+            	<% form_for [@bill, Comment.new] do |f| %>
+            		<%= f.error_messages %>
+            		<p>
+            			<strong><%= f.label :title, "Título" %></strong> <br />
+            			<%= f.text_field :title, :class => "comment_input" %>
+            		</p>
+            		<p>
+            			<strong><%= f.label :comment, "Comentario" %></strong> <br />
+            			<%= f.text_area :comment, :rows => 6, :cols => 50, :class => "comment_input" %>
+            		</p>
+            		<p>
+            			<%= recaptcha_tags(:display => {:theme => "clean"}) %>
+            		</p>
+            		<p>
+            			<%= f.submit "Enviar Comentario", :class => "action" %>
+            		</p>
+            	<% end %>
+            <% else %>
+              <%= link_to "¡Regístrate y opina!", signup_path, :class => "action" %>
+            <% end %>
           </div>
         </div>
         

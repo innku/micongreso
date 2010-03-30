@@ -76,7 +76,7 @@
         	</p>
         <% end %>
         
-        <div id="comment_form">
+        <div id="comment_form" class="cien">
         	<h3>Enviar mensaje a diputado</h3>
 
         	<% form_for [@member, @message] do |f| %>
@@ -84,20 +84,26 @@
         		<p>
         			<%= f.text_area :text, :rows => 6, :class => "comment_input" %>
         		</p>
-
-        		<div style="float: left; width: 50%">
-        		  <p>
-          			<%= f.label :name, "Nombre" %><br />
-          			<%= f.text_field :name %>
-        			</p>
-        		</div>
-        		<div style="float: left; width: 50%">
-        		  <p>
-        		    <%= f.label :email, "Correo electrónico" %><br />
-          			<%= f.text_field :email %>
-        		  </p>
-
-        		</div>
+            
+            <% if current_user %>
+              <p>
+                <%= f.hidden_field :name %>
+                <%= f.hidden_field :email %>
+              </p>
+            <% else %>
+          		<div style="float: left; width: 50%; margin-right: 10px">
+          		  <p>
+            			<strong><%= f.label :name, "Nombre" %></strong><br />
+            			<%= f.text_field :name, :class => "texto" %>
+          			</p>
+          		</div>
+          		<div style="float: left; width: 40%">
+          		  <p>
+          		    <strong><%= f.label :email, "Correo electrónico" %></strong><br />
+            			<%= f.text_field :email, :class => "texto" %>
+          		  </p>
+          		</div>
+          	<% end %>
         		<p style="clear: both;">
         			<%= recaptcha_tags(:display => {:theme => "clean"}) %>
         		</p>

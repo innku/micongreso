@@ -28,7 +28,11 @@ class MembersController < ApplicationController
   
   def show
     @member = Member.find(params[:id])
-    @message = Message.new
+    if current_user
+      @message = Message.new(:name => current_user.name, :email => current_user.email)
+    else
+      @message = Message.new
+    end
     @search_member = SearchMember.new
   end
   

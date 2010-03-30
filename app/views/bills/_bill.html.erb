@@ -36,7 +36,7 @@
 	<ul id="bill_<%= bill.id %>" class="links">
 	  <% if current_user %>
 			<% if current_user.voted_on?(bill) %>
-			  <li>Votaste: <%= display_vote(current_user.vote_choice(bill), bill) %></li>
+			  <li class="voted"><div class="<%= choice_class(current_user.vote_choice(bill)) %>"><%= display_vote(current_user.vote_choice(bill), bill) %></div></li>
 			<% else %>
 			  <li><%= link_to "Vota a favor", bill_votes_path(bill), :class => "vote si", 'data-vote' => 1, 'data-voteable' => "bill" %> </li>
 			  <li><%= link_to "Vota en contra", bill_votes_path(bill), :class => "vote no", 'data-vote' => 0, 'data-voteable' => "bill" %></li>
