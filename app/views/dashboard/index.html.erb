@@ -159,9 +159,11 @@
           <li><%= image_tag(citizen.profile.avatar.url(:thumb)) %></li>
         <% end %>
 			</ul> 
-			<ul class="links"> 
-				<li><%= link_to "Unete a Mi Congreso &raquo;", "#signup_form", :class => "signup_link" %></li> 
-			</ul> 
+			<% unless current_user %>
+  			<ul class="links"> 
+  				<li><%= link_to "Unete a Mi Congreso &raquo;", "#signup_form", :class => "signup_link" %></li> 
+  			</ul> 
+  		<% end %>
 		</div> 
 		
 		<div id="tweet"> 

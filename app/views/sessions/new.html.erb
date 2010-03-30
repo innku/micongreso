@@ -1,17 +1,26 @@
-<h1>Log In</h1>
+<div id="rest">
+  <h2 class="section">Inicio de sesión</h2>
+  <div class="left">
+    <div id="interna" class="propuesta session">
+      <% form_tag session_path do -%>
+      <p><%= label_tag 'email', "Correo Electrónico" %><br />
+      <%= text_field_tag 'email', @email, :class => "input" %></p>
 
-<% form_tag session_path do -%>
-<p><%= label_tag 'email' %><br />
-<%= text_field_tag 'email', @email %></p>
+      <p><%= label_tag 'password', 'Contraseña' %><br/>
+      <%= password_field_tag 'password', nil, :class => "input" %></p>
 
-<p><%= label_tag 'password' %><br/>
-<%= password_field_tag 'password', nil %></p>
+      <p>
+        <%= check_box_tag :remember_me, '1', @remember_me %>
+        <%= label_tag :remember_me, 'Recordarme' %>
+      </p>
 
-<!-- Uncomment this if you want this functionality
-<p><%= label_tag 'remember_me', 'Remember me' %>
-<%= check_box_tag 'remember_me', '1', @remember_me %></p>
--->
+      <p><%= submit_tag 'Iniciar Sesión', :class => "action" %></p>
 
-<p><%= submit_tag 'Log in' %></p>
+      <% end -%>
+    </div>
 
-<% end -%>
+  </div>
+  <div class="right"></div>
+</div>
+
+

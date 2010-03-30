@@ -21,7 +21,26 @@
 		  <li class="email"><%= link_to "Mi perfil", edit_citizen_path(current_user) %></li>
 		  <li class="login"><%= link_to "Salir", logout_path %></li> 
 		<% else %>
-		  <li class="login"><%= link_to "Inicia Sesi&oacute;n &raquo;", login_path %></li> 
+		  <li class="login">
+		    <%= link_to "Inicia Sesi&oacute;n &raquo;", login_path, :id => "signin_link", :class => "closed" %>
+		    <div id="login">
+		      <% form_tag session_path do -%>
+            <p>
+              <%= label_tag :email, "Correo Electrónico:" %><br />
+              <%= text_field_tag :email, @email, :class => "input" %>
+            </p>
+            <p>
+              <%= label_tag :password, "Contraseña:" %><br/>
+              <%= password_field_tag :password, nil, :class => "input" %>
+            </p>
+            <p>
+              <%= check_box_tag :remember_me, '1', @remember_me %>
+              <%= label_tag :remember_me, 'Recuerdame' %>
+            </p>
+            <p><%= submit_tag 'Iniciar Sesión', :class => "action" %></p>
+          <% end %>
+		    </div>
+		  </li>
 		<% end %>
 	</ul>
 </div>

@@ -197,7 +197,6 @@ a.action {
 	font-family:"union",palatino,georgia,times;
 	font-size:1.3em;
 	letter-spacing:-0.05em;
-	text-transform:uppercase;
 }
 
 #invite a.action {
@@ -1122,6 +1121,10 @@ p.news_date {
 	width: 245px;
 }
 
+#comment_form.cien form textarea.texto {
+	width: 530px;
+}
+
 .cien form #user_section_number {
 	width: 200px;
 	float: left;
@@ -1141,6 +1144,79 @@ a.what {
 #signup_form {
 	padding: 10px;
 	width: 400px;
+}
+
+/*LOGIN*/
+li.login {
+	position: relative;
+}
+#nav ul li.login a.main_b {
+	font-size: 1em;
+	font-style: italic;
+	background: #CAC9C2;
+	border: #B7B5B1 1px solid;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	margin-left: 10px;
+}
+#login {
+	background: #CAC9C2;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	position: absolute;
+	width: 250px;
+	height: 200px;
+	_height: 180px;
+	top: 24px;
+	right: 0px;
+	_right: -1px;
+	border-right: 1px solid #B7B5B1;
+	border-bottom: 1px solid #B7B5B1;
+	padding: 5px 15px;
+	_padding: 15px;
+	color: #2E2013;
+	display: none;
+	z-index: 1000;
+}
+#login p {
+	_margin: 5px 0px;
+}
+#login .input, .session .input {
+	width: 246px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border: #B7B5B1 solid 1px;
+	border-bottom: #B7B5B1 solid 2px;
+	color: #555;
+	font-size: 1.2em;
+	padding: 3px;
+}
+#login .action {
+	_border: none;
+	_margin-top: 10px;
+	_padding: 4px 5px;
+}
+#nav ul.mini {
+	font-size: .8em;
+	margin: 0px;
+	_margin: 10px 0 0 0px;
+	padding: 0px;
+	font-style: italic;
+	width: 160px;
+	_width: 140px;
+}
+#nav ul.mini li {
+	margin: 0px;
+	padding: 0px;
+}
+#nav ul.mini li a {
+	float: none;
+	font-weight: normal;
+	padding: 0px;
+	margin: 0px;
+}
+label {
+	font-weight: bold;
 }
 
 /*-------------------------------------------------

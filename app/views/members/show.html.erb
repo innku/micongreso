@@ -81,9 +81,6 @@
 
         	<% form_for [@member, @message] do |f| %>
         		<%= f.error_messages %>
-        		<p>
-        			<%= f.text_area :text, :rows => 6, :class => "comment_input" %>
-        		</p>
             
             <% if current_user %>
               <p>
@@ -104,6 +101,9 @@
           		  </p>
           		</div>
           	<% end %>
+          	<p>
+        			<%= f.text_area :text, :rows => 6, :class => "comment_input texto" %>
+        		</p>
         		<p style="clear: both;">
         			<%= recaptcha_tags(:display => {:theme => "clean"}) %>
         		</p>

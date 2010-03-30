@@ -9,7 +9,7 @@ module Authentication
         # Virtual attribute for the unencrypted password
         attr_accessor :password
         validates_presence_of     :password,                   :if => :password_required?, :message => "^Por favor llene la contraseña."
-        validates_presence_of     :password_confirmation,      :if => :password_required?, :message => "^Por favor lene la confirmación de la contraseña."
+        validates_presence_of     :password_confirmation,      :if => :password_required?, :message => "^Por favor llene la confirmación de la contraseña."
         validates_confirmation_of :password,                   :if => :password_required?, :message => "^La confirmación de la contraseña no concuerda con la contraseña."
         validates_length_of       :password, :within => 6..40, :if => :password_required?, :message => "^La contraseña es muy corta (mínimo 6 caracteres).", :allow_blank => true
         before_save :encrypt_password

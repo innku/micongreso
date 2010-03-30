@@ -23,12 +23,29 @@ $(document).ready( function(){
 	if ($("body").hasClass("dashboard")) {
 	  $("a#search_link").fancybox();
 	  $("a.invite_link").fancybox();
-	  $("a.signup_link").fancybox({'autoDimensions':false,'width':480,'height':530});
+	  $("a.signup_link").fancybox({'autoDimensions':false,'width':460,'height':530});
 	}
 	
 	if (($("body").hasClass("dashboard") && $("body").is(":not(.logged)")) || $("body").hasClass("user")){
 	  $("a.what").tinyTips('light', "<div class='left'><h2 class='lightbox'>Credencial de Elector</h2><p>Te pedimos el número de la <strong>sección</strong> para identificar tu distrito, este número viene localizado en la parte inferior de la Credencial de Elector.</p></div><img src='/images/credencial.png'/>");
 	}
+	
+	// ------------- Login --------------
+	$("a#signin_link").click(function(e) {
+       e.preventDefault();
+       $("#login").toggle();
+       $("a#signin_link").toggleClass("main_b");
+   });
+
+   $("#login").mouseup(function() {
+       return false
+   });
+   $(document).mouseup(function(e) {
+       if($(e.target).parent("a#signin_link").length==0) {
+           $("a#signin_link").removeClass("main_b");
+           $("#login").hide();
+       }
+   });
 	
 	if ($("body").hasClass("text_counter")) {
 		$("#news_abstract").apTextCounter({
