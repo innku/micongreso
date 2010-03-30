@@ -39,6 +39,7 @@ class Member < ActiveRecord::Base
   named_scope :incomplete, :conditions => ['complete = ?', false]
   named_scope :complete, :conditions => ['complete = ?', true]
   named_scope :duplicate, :conditions => ['duplicate = ?', true]
+  named_scope :included, :include => [:state, :district, :party]
   
   def self.find_by_email_or_name(string)
     member = find_by_email(string)

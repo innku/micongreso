@@ -6,11 +6,11 @@
   </p>
   <p>
     <%= f.label :party_id, "Partido" %><br/>
-    <%= f.collection_select :party_id, Party.all, :id_as_string, :name, {:include_blank => "Todos"} %>
+    <%= f.collection_select :party_id, @parties, :id_as_string, :name, {:include_blank => "Todos"} %>
   </p>
   <p>
     <%= f.label :state_id, "Entidad" %><br/>
-    <%= f.collection_select :state_id, State.all, :id_as_string, :name, {:include_blank => "Todos"} %>
+    <%= f.collection_select :state_id, @states, :id_as_string, :name, {:include_blank => "Todos"} %>
   </p>
   <p><%= f.submit "Buscar", :class => "action" %></p>
 <% end %>

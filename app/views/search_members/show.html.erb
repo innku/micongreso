@@ -42,7 +42,7 @@
     <div id="partidos">
       <h2>Diputados por partido</h2>
       <ul id="estados_list" class="blocklist">
-        <% Party.all.each do |party| %>
+        <% @parties.each do |party| %>
           <li><%= link_to party.name, group_search_members_path(:party_id => party.id) %></li>
         <% end %>
       </ul>
@@ -50,7 +50,7 @@
     <div id="estados">
       <h2>Diputados por estado</h2>
       <ul id="estados_list" class="blocklist">
-        <% State.all.each do |state| %>
+        <% @states.each do |state| %>
           <li><%= link_to state.name, group_search_members_path(:state_id => state.id) %></li>
         <% end %>
       </ul>

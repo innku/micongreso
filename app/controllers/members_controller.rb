@@ -34,6 +34,8 @@ class MembersController < ApplicationController
       @message = Message.new
     end
     @search_member = SearchMember.new
+    @parties = Party.all
+    @states = State.all
   end
   
   def new
