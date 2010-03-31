@@ -29,8 +29,8 @@
     <%= f.text_field :email, :class => "texto" %>
   </p>
   <p class="password_fields">
-    <strong><%= f.label :password, "Contraseña" %></strong><br />
-    <%= f.password_field :password, :class => "texto" %>
+    <strong><%= f.label :password, "Nueva Contraseña" %></strong><br />
+    <%= f.password_field :password, :class => "texto", :id => "edit_password" %>
   </p>
   <p class="password_fields">
     <strong><%= f.label :password_confirmation, "Confirmación de Contraseña" %></strong><br />

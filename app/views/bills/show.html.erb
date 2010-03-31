@@ -73,8 +73,8 @@
 				</ul>
 				
 				<p class="fecha">
-          <strong>Fecha:</strong>
-          <%=h @bill.date.to_s(:long) %>
+          <strong>Fecha de Votación:</strong>
+          <%= es_date(@bill.date) %>
         </p>
         
         <p><%= @bill.description %></p>
@@ -116,7 +116,20 @@
         		  </div>
       		  </li>
         	<% end %>
-
+      	</ul>
+      	
+      	<ul id="bill_<%= @bill.id %>" class="links">
+      	  <% if current_user %>
+      			<% if current_user.voted_on?(@bill) %>
+      			  <li class="voted"><div class="<%= choice_class(current_user.vote_choice(@bill)) %>"><%= display_vote(current_user.vote_choice(@bill), @bill) %></div></li>
+      			<% else %>
+      			  <li><%= link_to "Vota a favor", bill_votes_path(@bill), :class => "vote si", 'data-vote' => 1, 'data-voteable' => "bill" %> </li>
+      			  <li><%= link_to "Vota en contra", bill_votes_path(@bill), :class => "vote no", 'data-vote' => 0, 'data-voteable' => "bill" %></li>
+      			  <li><%= link_to "Abstente", bill_votes_path(@bill), :class => "vote", 'data-vote' => -1, 'data-voteable' => "bill" %></li>
+      			<% end %>
+        	<% else %>
+      	    <li class="registro"><%= link_to "Regístrate para votar!", signup_path %></li>
+        	<% end %>
       	</ul>
         
         <div id="graficas">

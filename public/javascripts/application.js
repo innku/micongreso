@@ -151,6 +151,27 @@ $(document).ready( function(){
 	  return false;
 	})
 	
+	// Warning si se intenta salir y no ha guardado los cambios
+	if ($("body").hasClass("edit_citizen")) {
+	  $("form input, form select").change(function(){
+	    $("body").addClass("changed");
+	  })
+	  
+	  $("form a.tag").click(function(){
+	    $("body").addClass("changed");
+	  })
+	  
+	  $("#header a").click(function(){
+	    if ($("body").hasClass("changed")){
+	      if (confirm("No has guardado tus cambios, ¿Aun así quieres salir?")) {
+  	      window.location = $(this).attr("href");
+  	    } else {
+  	      return false;
+  	    }
+	    }
+	  })
+	}
+	
 	// Votos de los ciudadanos
 	$("a.vote").live('click', function(){
 		$.post($(this).attr("href"), { vote: $(this).attr('data-vote'), voteable: $(this).attr('data-voteable') }, null, "script");

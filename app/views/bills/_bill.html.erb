@@ -28,9 +28,8 @@
 		    <li class="resultado_no">Rechazada</li> 
 		  <% end %>
   	<% else %>
-  	  <li class="resultados"><span>Resultados Oficiales:</span> <%= es_date(bill.date) %></li>
+  	  <li class="resultados"><span>Fecha de Votación:</span> <%= es_date(bill.date) %></li>
   	<% end %>
-
 	</ul>
 	
 	<ul id="bill_<%= bill.id %>" class="links">

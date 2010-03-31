@@ -1,5 +1,5 @@
-<% form_for @citizen, :url => @citizen.new_record? ? citizens_path : citizen_path(@citizen.id), :html => { :multipart => true } do |f| %>
-  <%= f.error_messages %>
+<% form_for @citizen, :url => citizen_path(@citizen), :html => { :multipart => true } do |f| %>
+  <%= f.error_messages :header_message => "¡Por favor intenta de nuevo!", :message => "Se encontraron los siguientes problemas:" %>
   
   <% f.fields_for :profile do |p| %>
     <table style="float: left;" width="500px">

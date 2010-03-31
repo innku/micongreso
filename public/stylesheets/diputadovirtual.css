@@ -549,6 +549,7 @@ ul.graficas li.resultados span {
 }
 #tweet .tweets ul li a {
 	color: #B63D46;
+	padding-left: 4px;
 }
 /*DIPUTADO BOX*/
 #diputado {
@@ -858,14 +859,14 @@ table.resultados a {
 	padding: 30px;
 	_overflow: hidden;
 }
-/*.fecha {
+.fecha {
 	color: #81A15B;
 	border: #D9E3CD solid 1px;
 	padding: 5px 10px 5px 30px;
 	margin: 0px 0px 15px 0px;
 	background: #F4F7F0 url(/images/cale.jpg) no-repeat 6px 6px;
-	float: left;
-}*/
+	clear: both;
+}
 /*COMMENTS*/
 .all_comments {
 	width: 100%;
@@ -1184,7 +1185,7 @@ li.login {
 	width: 250px;
 	height: 200px;
 	_height: 180px;
-	top: 24px;
+	top: 23px;
 	right: 0px;
 	_right: -1px;
 	border-right: 1px solid #B7B5B1;
@@ -1194,6 +1195,8 @@ li.login {
 	color: #2E2013;
 	display: none;
 	z-index: 1000;
+	-moz-box-shadow: 0px 3px 3px #CCC;
+	-webkit-box-shadow: 0px 3px 3px #CCC;
 }
 #login p {
 	_margin: 5px 0px;

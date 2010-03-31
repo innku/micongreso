@@ -1,8 +1,8 @@
 <% form_for @citizen, :url => citizen_path(@citizen) do |f| %>
-  <% f.error_messages %>
+  <%= f.error_messages :header_message => "¡Por favor intenta de nuevo!", :message => "Se encontraron los siguientes problemas:" %>
   
   <% f.fields_for :notification do |n| %>
-    <h4>¿Por cuales medios deseas recibir notificaciones?</h4>
+    <h4>¿Por cuáles medios deseas recibir notificaciones?</h4>
     <p>
       <%= n.check_box :email %>
       <%= n.label :email, "Correo Electrónico" %>
