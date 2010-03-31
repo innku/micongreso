@@ -15,6 +15,17 @@ class VotesController < ApplicationController
            end
     current_user.vote(@voteable, vote)
     
+    if @voteable.class.name == "Bill"
+      if vote.nil?
+        @voteable.user_votes_neutral += 1
+      elsif vote == true
+        @voteable.user_votes_for += 1
+      elsif vote == false
+        @voteable.user_votes_against += 1
+      end
+      @voteable.save
+    end
+    
     respond_to do |wants|
       wants.html { redirect_to root_path }
       wants.js

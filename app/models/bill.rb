@@ -95,9 +95,9 @@ class Bill < ActiveRecord::Base
   
   def citizen_votes_and_percents
     return @citizen_votes_and_percents_array if @citizen_votes_and_percents_array
-    for_votes = citizen_votes(true)
-    against_votes = citizen_votes(false)
-    neutral_votes = citizen_votes(nil)
+    for_votes = user_votes_for
+    against_votes = user_votes_against
+    neutral_votes = user_votes_neutral
     total_votes = for_votes + against_votes + neutral_votes
     @citizen_votes_and_percents_array = [for_votes, against_votes, neutral_votes, (for_votes.to_f/total_votes)*100, (against_votes.to_f/total_votes)*100, (neutral_votes.to_f/total_votes)*100]
   end
