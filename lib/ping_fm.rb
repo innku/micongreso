@@ -19,8 +19,8 @@ require 'rest_client'
 # 
 class PingFM
   
-  API_KEY = "64ec3c4eadd1cfb900d5d8b1d23ae55b"
-  USER_API_KEY = "d8b4d0eafdb9d831cde04003cade79ef-1266533592"
+  API_KEY = "c836c96015529b4ff5baf4a2492a1924"
+  USER_API_KEY = "2dc047eea26d74ef28e273ae5d08e0d4-1270108387"
   
   def self.user_post(post_method, body, opts = {})
     params = {:api_key => API_KEY, 
