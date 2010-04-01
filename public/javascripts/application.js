@@ -154,26 +154,15 @@ $(document).ready( function(){
 	// Warning si se intenta salir y no ha guardado los cambios
 	if ($("body").hasClass("edit_citizen")) {
 	  $("form input, form select").change(function(){
-	    $(this).each(function(){
-	      if ($(this).is(":text")) { 
-	        alert("textfield: "+$(this).attr("id"))
-	      } else if ($(this).is(":radio")) {
-	        alert("radio: "+$(this).attr("id"))
-	      } else if ($(this).is(":checkbox")) {
-	        alert("checkbox: "+$(this).attr("id"))
-	      } else if ($(this).is("select")) {
-	        alert("select: "+$(this).attr("id"))
-	      }
-	    })
-	    $("body").addClass("changed");
+	    $('body').data('changed', true);
 	  })
 	  
 	  $("form a.tag").click(function(){
-	    $("body").addClass("changed");
+	    $("body").data('changed', true);
 	  })
 	  
 	  $("#header a").click(function(){
-	    if ($("body").hasClass("changed")){
+	    if ($("body").data('changed') == true){
 	      if (confirm("No has guardado tus cambios, ¿Aun así quieres salir?")) {
   	      window.location = $(this).attr("href");
   	    } else {
