@@ -1,3 +1,11 @@
+<% content_for :title do -%>
+  <% if @tag %>
+    Propuestas - <%= @tag.name %>
+  <% else %>
+    Propuestas
+  <% end %>
+<% end -%>
+
 <div id="rest">
   <h2 class="section">Propuestas</h2>
   
