@@ -154,7 +154,8 @@ $(document).ready( function(){
 	// Warning si se intenta salir y no ha guardado los cambios
 	if ($("body").hasClass("edit_citizen")) {
 	  $("form input, form select").change(function(){
-	    //$("body").addClass("changed");
+	    alert("change input or select");
+	    $("body").addClass("changed");
 	  })
 	  
 	  $("form a.tag").click(function(){
