@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
   
-  skip_before_filter :login_required, :only => :index
+  skip_before_filter :login_required
   
   def index
     respond_to do |wants|

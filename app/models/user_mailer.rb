@@ -12,8 +12,8 @@ class UserMailer < ActionMailer::Base
   end
   
   def message_to_member(message, member)
-    @recipients  = "#{member.email}, mensajes@diputadovirtual.mx"
-    @from        = "no-responder@diputadorvirtual.mx"
+    @recipients  = "#{member.email}, mensajes@micongreso.mx"
+    @from        = "no-responder@micongreso.mx"
     @subject     = "Diputado Virtual "
     @sent_on     = Time.now
     @body[:message] = message
@@ -36,7 +36,7 @@ class UserMailer < ActionMailer::Base
   
   def invitation(user, name, email)
     @recipients  = "#{email}"
-    @from        = "no-responder@micongreso.org"
+    @from        = "no-responder@micongreso.mx"
     if user
       @subject     = "#{user.name} te ha invitado a unirte a MiCongreso"
       @body[:user] = user
@@ -52,7 +52,7 @@ class UserMailer < ActionMailer::Base
   protected
     def setup_email(user)
       @recipients  = "#{user.email}"
-      @from        = "no-responder@diputadorvirtual.mx"
+      @from        = "no-responder@micongreso.mx"
       @subject     = "MiCongreso - "
       @sent_on     = Time.now
       @body[:user] = user

@@ -1,7 +1,7 @@
 case ENV['RAILS_ENV']
 when 'production'
   then
-  $global_url = "http://diputadovirtual.heroku.com"
+  $global_url = "http://micongreso.mx"
   $paperclip_bucket = "diputado"
 when 'staging'
   then
