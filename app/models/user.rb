@@ -133,6 +133,26 @@ class User < ActiveRecord::Base
     write_attribute :email, (value ? value.downcase : nil)
   end
   
+  def generate_new_password!
+    new_password = User.smart_password
+    self.password = new_password
+    self.password_confirmation = new_password
+    self.save
+    return new_password
+  end
+  
+  def self.smart_password(size = 6)
+    consonants = %w(b c d f g h j k l m n p qu r s t v w x z cr fr ch sp tr)
+    vocals = %w(a e i o u y)
+    f, pass = true, ''
+
+    (size).times do
+      pass << (f ? consonants[rand * consonants.size] : vocals[rand * vocals.size])
+      f = !f
+    end
+    return pass
+  end
+  
   def before_create
     self.build_profile
     self.build_notification
@@ -143,6 +163,5 @@ class User < ActiveRecord::Base
     def make_activation_code
         self.activation_code = self.class.make_token
     end
-
 
 end

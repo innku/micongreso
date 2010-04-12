@@ -1183,8 +1183,8 @@ li.login {
 	-webkit-border-radius: 4px;
 	position: absolute;
 	width: 250px;
-	height: 200px;
-	_height: 180px;
+	height: 230px;
+	_height: 210px;
 	top: 23px;
 	right: 0px;
 	_right: -1px;
@@ -1215,7 +1215,29 @@ li.login {
 	_border: none;
 	_margin-top: 10px;
 	_padding: 4px 5px;
+	float: none;
 }
+
+#nav ul li.login #login p.forgot {
+	border-top: 1px solid #59504d;
+	margin-top: 6px;
+}
+
+#nav ul li.login #login a {
+	color: #59504d;
+	background: none;
+	margin-left: 0;
+	padding-left: 0;
+	font-style: normal;
+	font-weight: normal;
+	text-decoration: underline;
+	border: none;
+}
+
+#nav ul li.login #login a:hover {
+	color: #B63D46;
+}
+
 #nav ul.mini {
 	font-size: .8em;
 	margin: 0px;

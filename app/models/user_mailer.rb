@@ -11,6 +11,13 @@ class UserMailer < ActionMailer::Base
     @body[:url]  = "#{$global_url}/"
   end
   
+  def new_password(user, password)
+    setup_email(user)
+    @subject    += 'Nueva Contraseña'
+    @body[:url]  = "#{$global_url}/"
+    @body[:password] = password
+  end
+  
   def message_to_member(message, member)
     @recipients  = "#{member.email}, mensajes@micongreso.mx"
     @from        = "no-responder@micongreso.mx"

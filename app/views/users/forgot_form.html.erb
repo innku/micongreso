@@ -1,0 +1,27 @@
+<% content_for :title do -%>
+  Generar nueva contraseña
+<% end -%>
+
+<div id="rest">
+  <h2 class="section">Generar nueva contraseña</h2>
+  
+  <div class="left">
+    <div class="propuestas">
+      <div id="interna" class="propuesta cien">
+        <p>Ingresa el correo electrónico con el cual te registraste y te enviaremos una nueva contraseña.</p>
+        
+        <% form_tag forgot_password_path do %>
+          <p>
+            <%= label_tag :email, "Correo Electrónico" %> <br />
+            <%= text_field_tag :email, "", :class => "texto" %>
+          </p>
+
+          <p><%= submit_tag "Reenviar Contraseña", :class => "action" %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  
+  <div class="right">
+
+</div>

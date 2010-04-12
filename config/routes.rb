@@ -32,6 +32,8 @@ ActionController::Routing::Routes.draw do |map|
   map.register '/register', :controller => 'users', :action => 'create'
   map.signup '/signup', :controller => 'citizens', :action => 'new'
   map.about_us '/conocenos', :controller => 'dashboard', :action => "about"
+  map.forgot_form '/forgot_form', :controller => 'users', :action => 'forgot_form'
+  map.forgot_password '/forgot', :controller => 'users', :action => 'forgot'
   
   map.resources :users
   map.resources :citizens

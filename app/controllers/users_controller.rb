@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   
-  skip_before_filter  :login_required, :only => [:activate, :resend_form, :resend]
+  skip_before_filter  :login_required, :only => [:activate, :resend_form, :resend, :forgot, :forgot_form]
   
   def index
     @users = User.admins
@@ -76,6 +76,18 @@ class UsersController < ApplicationController
     else
       flash[:error] = "No encontramos un usuario con el correo que nos indicaste."
       redirect_to resend_activation_form_path
+    end
+  end
+  
+  def forgot
+    user = User.find_by_email(params[:email])
+    if user
+      flash[:notice] = "Te acabamos de enviar tu nueva contraseña a el correo: #{user.email}"
+      UserMailer.deliver_new_password(user, user.generate_new_password!)
+      redirect_to login_path
+    else
+      flash[:error] = "No encontramos un usuario con el correo que nos indicaste."
+      redirect_to forgot_form_path
     end
   end
   
