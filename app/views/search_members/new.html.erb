@@ -41,9 +41,9 @@
   <div class="right">
     <div id="partidos">
       <h2>Diputados por partido</h2>
-      <ul id="estados_list" class="blocklist">
+      <ul id="partidos_list" class="blocklist">
         <% @parties.each do |party| %>
-          <li><%= link_to party.name, group_search_members_path(:party_id => party.id) %></li>
+          <li class="<%= party.abbr.split(' ')[0].downcase %>"><%= link_to "", group_search_members_path(:party_id => party.id) %></li>
         <% end %>
       </ul>
     </div>

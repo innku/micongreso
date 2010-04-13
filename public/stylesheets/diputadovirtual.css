@@ -658,6 +658,79 @@ ul.blocklist li a {
 ul.blocklist li a:hover {
 	background: #EEE;
 }
+
+ul#partidos_list li {
+	width:auto;
+	border:none;
+}
+
+ul#partidos_list li a{
+	height:57px;
+}
+
+ul#partidos_list li.pan a{
+	width:57px;
+	background: url('/images/pan_2.png') no-repeat;
+}
+
+ul#partidos_list li.convergencia a{
+	width:79px;
+	background: url('/images/convergencia_2.png') no-repeat;
+}
+
+ul#partidos_list li.nueva a{
+	width:107px;
+	background: url('/images/nueva_2.png') no-repeat;
+}
+
+ul#partidos_list li.prd a{
+	width:52px;
+	background: url('/images/prd_2.png') no-repeat;
+}
+
+ul#partidos_list li.pt a{
+	width:57px;
+	background: url('/images/pt_2.png') no-repeat;
+}
+
+ul#partidos_list li.pvem a{
+	width:57px;
+	background: url('/images/verde_2.png') no-repeat;
+}
+
+ul#partidos_list li.pri a{
+	width:57px;
+	background: url('/images/pri_2.png') no-repeat;
+}
+
+ul#partidos_list li.pan a:hover{
+	background: url('/images/pan_1.png') no-repeat;
+}
+
+ul#partidos_list li.convergencia a:hover{
+	background: url('/images/convergencia_1.png') no-repeat;
+}
+
+ul#partidos_list li.nueva a:hover{
+	background: url('/images/nueva_1.png') no-repeat;
+}
+
+ul#partidos_list li.prd a:hover{
+	background: url('/images/prd_1.png') no-repeat;
+}
+
+ul#partidos_list li.pt a:hover{
+	background: url('/images/pt_1.png') no-repeat;
+}
+
+ul#partidos_list li.pvem a:hover{
+	background: url('/images/verde_1.png') no-repeat;
+}
+
+ul#partidos_list li.pri a:hover{
+	background: url('/images/pri_1.png') no-repeat;
+}
+
 /*SEARCH MEMBER*/
 #search_member {
 	width: 240px;
