@@ -136,7 +136,7 @@ $(document).ready( function(){
   })
 	
 	// Autocomplete en la forma de registro y al editar la info del usuario
-	if ($("body").hasClass("user")) {
+	if ($("body").hasClass("user") || $("body").hasClass("dashboard")) {
 		$(".city_name").each(function(){
 			$(this).autocomplete('/cities.js');
 		})
