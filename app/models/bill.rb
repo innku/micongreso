@@ -30,6 +30,18 @@ class Bill < ActiveRecord::Base
     last_month.most_viewed
   end
   
+  def approved?
+    self.status == "approved"
+  end
+  
+  def rejected?
+    self.status == "rejected"
+  end
+  
+  def pending?
+    self.status == "pending"
+  end
+  
   def update_votes(params)
     if params
       params.each do |member_id, vote_value|      

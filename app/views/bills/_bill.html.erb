@@ -22,9 +22,9 @@
   			  <div class="barra neutral" style="width: <%= bill.member_votes_and_percents[5] %>%;">&nbsp; <%= show_votes?(2, bill.member_votes_and_percents) %></div>
   		  </div>
 		  </li>
-		  <% if bill.member_votes_and_percents[0] > bill.member_votes_and_percents[1] %>
+		  <% if bill.approved? %>
 		    <li class="resultado_si">Aprobada</li> 
-		  <% else %>
+		  <% elsif bill.rejected? %>
 		    <li class="resultado_no">Rechazada</li> 
 		  <% end %>
   	<% else %>
