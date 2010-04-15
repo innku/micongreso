@@ -68,6 +68,7 @@
   <div class="left">
     <div class="propuestas">
       <div id="interna" class="propuesta">
+        
         <h1 class="close"><%= @bill.name %></h1>
         
         <ul class="status">
@@ -76,9 +77,14 @@
 					<li id="three" class="<%= bill_status_class(@bill, "pending") %>">Pendiente</li>
 				</ul>
 				
+				<p>
+				  <strong>Fecha de Presentación:</strong>
+          <%= es_date(@bill.date) %>
+				</p>
+				
 				<p class="fecha">
           <strong>Fecha de Votación:</strong>
-          <%= es_date(@bill.date) %>
+          <%= vote_date(@bill.vote_date) %>
         </p>
         
         <p><%= @bill.description %></p>
