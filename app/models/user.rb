@@ -103,10 +103,12 @@ class User < ActiveRecord::Base
   end
   
   def notify_me?(tags)
-    if self.notification.interest_topics
-      tags.each {|tag| return true if self.tags.include?(tag)}
-    else
-      return true
+    if email
+      if self.notification.interest_topics
+        tags.each {|tag| return true if self.tags.include?(tag)}
+      else
+        return true
+      end
     end
     return false
   end

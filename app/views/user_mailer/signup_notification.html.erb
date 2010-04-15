@@ -1,0 +1,14 @@
+<p>Tu cuenta ha sido creada.</p>
+
+<table>
+  <tr>
+    <td>Correo Electronico:</td>
+    <td><%=h @user.email %></td>
+  </tr>
+  <tr>
+    <td>Contraseña:</td>
+    <td><%=h @user.password %></td>
+  </tr>
+</table>
+
+<p>Visita la siguiente liga para activar tu cuenta: <%= link_to @url, @url %></p>

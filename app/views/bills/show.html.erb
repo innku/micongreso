@@ -71,9 +71,9 @@
         <h1 class="close"><%= @bill.name %></h1>
         
         <ul class="status">
-					<li id="one" class="selected">Aprobada</li>
-					<li id="two">Rechazada</li>
-					<li id="three">Pendiente</li>
+					<li id="one" class="<%= bill_status_class(@bill, "approved") %>">Aprobada</li>
+					<li id="two" class="<%= bill_status_class(@bill, "rejected") %>">Rechazada</li>
+					<li id="three" class="<%= bill_status_class(@bill, "pending") %>">Pendiente</li>
 				</ul>
 				
 				<p class="fecha">

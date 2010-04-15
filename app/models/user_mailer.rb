@@ -1,4 +1,7 @@
 class UserMailer < ActionMailer::Base
+  helper :application
+  layout 'email'
+  
   def signup_notification(user)
     setup_email(user)
     @subject    += 'Por favor activa tu cuenta'
@@ -21,7 +24,7 @@ class UserMailer < ActionMailer::Base
   def message_to_member(message, member)
     @recipients  = "#{member.email}, mensajes@micongreso.mx"
     @from        = "no-responder@micongreso.mx"
-    @subject     = "Diputado Virtual "
+    @subject     = "MiCongreso "
     @sent_on     = Time.now
     @body[:message] = message
     @body[:member] = member
@@ -29,14 +32,14 @@ class UserMailer < ActionMailer::Base
   
   def bill(user, bill)
     setup_email(user)
-    @subject    += bill.name
+    @subject    += "Hay una nueva propuesta, ¡Opina!"
     @body[:url]  = "#{$global_url}/bills/#{bill.id}"
     @body[:bill] = bill
   end
   
   def bill_votes(user, bill)
     setup_email(user)
-    @subject    += bill.name
+    @subject    += "Ya votaron los diputados, ¡Conoce los resultados!"
     @body[:url]  = "#{$global_url}/bills/#{bill.id}"
     @body[:bill] = bill
   end
@@ -62,6 +65,7 @@ class UserMailer < ActionMailer::Base
       @from        = "no-responder@micongreso.mx"
       @subject     = "MiCongreso - "
       @sent_on     = Time.now
+      @content_type = "text/html"
       @body[:user] = user
     end
 end

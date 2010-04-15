@@ -14,9 +14,20 @@
     <%= f.text_area :description, :rows => 14, :cols => 100, :class => "rte-zone"  %>
   </p>
   <p>
-    <%= f.label :date, "Fecha" %>
-		<%= f.text_field :formatted_date, :class => "input_text datepicker", :id => "datepicker" %>
-		<%= f.text_field :date, :id => "actualDate", :style => "display: none;" %>
+    <%= f.label :status, "Status" %><br />
+    <%= f.radio_button :status, "approved" %> <%= label_tag "bill_status_approved", "Aprobado" %>
+    <%= f.radio_button :status, "rejected" %> <%= label_tag "bill_status_rejected", "Rechazada" %>
+    <%= f.radio_button :status, "pending" %> <%= label_tag "bill_status_pending", "Pendiente" %>
+  </p>
+  <p>
+    <%= f.label :date, "Fecha de Presentación" %>
+		<%= f.text_field :formatted_date, :class => "input_text datepicker" %>
+		<%= f.text_field :date, :style => "display: none;" %>
+  </p>
+  <p>
+    <%= f.label :vote_date, "Fecha de Votación" %>
+		<%= f.text_field :formatted_vote_date, :class => "input_text datepicker" %>
+		<%= f.text_field :vote_date, :style => "display: none;" %>
   </p>
 	<p>
 		<%= f.label :member_votes_for, "A Favor" %>

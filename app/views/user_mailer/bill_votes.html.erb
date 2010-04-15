@@ -1,0 +1,28 @@
+<style type="text/css">
+  .votos {width: 429px;color: #fff; height: 24px; margin-bottom: 10px;}
+  .votos .barra {float: left;padding: 2px 0px;}
+  .votos .favor {background: #81A05A;}
+  .votos .contra {background: #CC5477;}
+  .votos .neutral {color: #6D6A61;background: #CACAC2;}
+  .votos .leyend {color: #000; padding: 0 6px;}
+</style>
+
+<h3><%= @bill.name %></h3>
+
+<p><%= @bill.description %></p>
+
+<p><strong>Votación Oficial:</strong></p>
+
+<div class="votos">
+  <div class="barra favor" style="width: <%= @bill.member_votes_and_percents[3] %>%;">&nbsp; <%= show_votes?(0, @bill.member_votes_and_percents) %></div>
+  <div class="barra contra" style="width: <%= @bill.member_votes_and_percents[4] %>%;">&nbsp; <%= show_votes?(1, @bill.member_votes_and_percents) %></div>
+  <div class="barra neutral" style="width: <%= @bill.member_votes_and_percents[5] %>%;">&nbsp; <%= show_votes?(2, @bill.member_votes_and_percents) %></div>
+</div>
+
+<div class="votos" style="clear: both;">
+  <div class="barra favor" style="width: 24px;">&nbsp;</div> <div class="barra leyend">A Favor</div>
+  <div class="barra contra" style="width: 24px;">&nbsp;</div> <div class="barra leyend">En Contra</div>
+  <div class="barra neutral" style="width: 24px;">&nbsp;</div> <div class="barra leyend">Abstenciones</div>
+</div>
+
+<p style="clear: both;"><%= link_to @url, @url %></p>

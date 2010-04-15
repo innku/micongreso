@@ -57,4 +57,16 @@ module ApplicationHelper
   def es_date(date)
     "#{date.day} #{MONTHS[date.month]} #{date.year}"
   end
+  
+  def vote_date(date)
+    if date
+      es_date(date)
+    else
+      "Pendiente"
+    end
+  end
+  
+  def bill_status_class(bill, status)
+    "selected" if bill.status == status
+  end
 end

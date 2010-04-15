@@ -64,6 +64,12 @@ $(document).ready( function(){
 		$(this).datepicker('option', 'altFormat', 'yy-mm-dd');
 	});
 	
+	$('.datepicker').blur(function(){
+	  if ($(this).val() == "") {
+	    $(this).next().val("");
+	  }
+	})
+	
 	$('.show_votes').click(function(){
 		$(this).next().toggle();
 		return false;

@@ -1,0 +1,7 @@
+<% if @name %>
+<p>Estimado <%= @name %></p>
+<% end %>
+
+<p>Has recibido una invitación <% if @user %> de <%= @user.name %> <% end %> para utilizar MiCongreso.</p>
+
+<p>Para registrarte haz clic en la siguiente liga: <%= link_to @url, @url %></p>

@@ -28,7 +28,8 @@
       </tr>
       <tr>
         <td><%= p.label :birthdate, "Fecha de Nacimiento" %></td>
-        <td><%= p.date_select :birthdate, :order => [:day, :month, :year], :start_year => Date.today.year-100, :end_year => Date.today.year-10, :default => Date.today-25.years %></td>
+        <% months = MONTHS; months.delete("") %>
+        <td><%= p.date_select :birthdate, :order => [:day, :month, :year], :start_year => Date.today.year-100, :end_year => Date.today.year-10, :default => Date.today-25.years, :use_month_names => months %></td>
       </tr>
       <tr>
         <td colspan="2">
