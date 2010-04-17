@@ -35,23 +35,24 @@ class Contact < ActiveRecord::Base
     end
   end
   
-  def self.send_test(user, emails)
-    begin
-      emails.each do |c|
-        begin
-          contact = Contact.new(:name => "prueba", :email => c)
-          contact.user_id = user.id if user
-          contact.save!
-          UserMailer.deliver_invitation(user, "prueba", c)
-        rescue Net::SMTPSyntaxError
-          RAILS_DEFAULT_LOGGER.debug "Net::SMTPSyntaxError para el correo: #{c}"
-          puts "Net::SMTPSyntaxError para el correo: #{c}"
-        end
-      end
-      return true
-    rescue Contacts::AuthenticationError
-      RAILS_DEFAULT_LOGGER.debug "AuthenticationError: El login (#{login}) y/o la contraseña son incorrectos."
-      return false
-    end
-  end
+  # def self.send_test(user, emails)
+  #   begin
+  #     emails.each do |c|
+  #       begin
+  #         contact = Contact.new(:name => "prueba", :email => c)
+  #         contact.user_id = user.id if user
+  #         contact.save!
+  #         UserMailer.deliver_invitation(user, "prueba", c)
+  #       rescue Net::SMTPSyntaxError
+  #         RAILS_DEFAULT_LOGGER.debug "Net::SMTPSyntaxError para el correo: #{c}"
+  #         puts "Net::SMTPSyntaxError para el correo: #{c}"
+  #       end
+  #     end
+  #     return true
+  #   rescue Contacts::AuthenticationError
+  #     RAILS_DEFAULT_LOGGER.debug "AuthenticationError: El login (#{login}) y/o la contraseña son incorrectos."
+  #     return false
+  #   end
+  # end
+  
 end
