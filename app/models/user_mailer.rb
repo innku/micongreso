@@ -26,6 +26,7 @@ class UserMailer < ActionMailer::Base
     @from        = "no-responder@micongreso.mx"
     @subject     = "MiCongreso "
     @sent_on     = Time.now
+    @content_type = "text/html"
     @body[:message] = message
     @body[:member] = member
   end
@@ -54,6 +55,7 @@ class UserMailer < ActionMailer::Base
       @subject     = "Te han invitado a unirte a MiCongreso"
     end
     @sent_on     = Time.now
+    @content_type = "text/html"
     @body[:url]  = "#{$global_url}/signup"
     @body[:name] = name
     @body[:email] = email

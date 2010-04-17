@@ -16,10 +16,37 @@ class Contact < ActiveRecord::Base
       contacts.compact!
       contacts.delete_if {|c| c[1].blank? } # Eliminar el registro si no trae correo electrónico
       contacts.each do |c|
-        contact = Contact.new(:name => c[0], :email => c[1])
-        contact.user_id = user.id if user
-        contact.save!
-        UserMailer.deliver_invitation(user, c[0], c[1])
+        begin
+          existing = Contact.find_by_email(c[1])
+          unless existing
+            contact = Contact.new(:name => c[0], :email => c[1])
+            contact.user_id = user.id if user
+            contact.save!
+            UserMailer.deliver_invitation(user, c[0], c[1])
+          end
+        rescue Net::SMTPSyntaxError
+          RAILS_DEFAULT_LOGGER.debug "Net::SMTPSyntaxError para el correo: #{c[1]}"
+        end
+      end
+      return true
+    rescue Contacts::AuthenticationError
+      RAILS_DEFAULT_LOGGER.debug "AuthenticationError: El login (#{login}) y/o la contraseña son incorrectos."
+      return false
+    end
+  end
+  
+  def self.send_test(user, emails)
+    begin
+      emails.each do |c|
+        begin
+          contact = Contact.new(:name => "prueba", :email => c)
+          contact.user_id = user.id if user
+          contact.save!
+          UserMailer.deliver_invitation(user, "prueba", c)
+        rescue Net::SMTPSyntaxError
+          RAILS_DEFAULT_LOGGER.debug "Net::SMTPSyntaxError para el correo: #{c}"
+          puts "Net::SMTPSyntaxError para el correo: #{c}"
+        end
       end
       return true
     rescue Contacts::AuthenticationError
