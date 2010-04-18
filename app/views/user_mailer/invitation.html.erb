@@ -2,6 +2,15 @@
 <p>Estimado <%= @name %></p>
 <% end %>
 
-<p>Has recibido una invitación <% if @user %> de <%= @user.name %> <% end %> para utilizar MiCongreso.</p>
+<p>Has recibido una invitación <% if @user %> de <%= @user.name %> <% end %> para utilizar <strong>Mi Congreso MX.</strong></p>
 
-<p>Para registrarte haz clic en la siguiente liga: <%= link_to @url, @url %></p>
+<h3>¿Que es Mi Congreso MX?</h3>
+<p>Es un espacio interactivo para que los ciudadanos podamos conocer y opinar sobre la actividad de lo que sucede y 
+  las decisiones que se toman dentro del congreso. Buscamos acercar al congreso con los ciudadanos, reducir la brecha 
+  ejerciendo nuestra ciudadanía.</p>
+
+<p>Una de las principales características de micongreso.mx es permitirnos a los ciudadanos opinar y votar de forma muy sencilla 
+  sobre las propuestas que se votan dentro del congreso y comparar la votación de cada uno de los diputados con la votación 
+  de la ciudadanía que representan.</p>
+
+<p>Forma parte de Mi Congreso MX haciendo click aqui: <%= link_to @url, @url %></p>
