@@ -1,5 +1,10 @@
-<p>Estimado <%= @member.name %></p>
-
-<p>Ha recibido el siguiente mensaje a través de Mi Congreso MX.</p>
-
-<p><%= @message.text %></p>
+<tr>
+  <td scope="col" style="background-color:#FFF;"><img src="<%= "#{$global_url}/images/mensaje.jpg" %>" width="700" height="40" alt="Nuevo Mensaje" /></td>
+</tr>
+<tr>
+  <td scope="col" style="background-color:#FFF; padding:25px;">
+  	<p style="text-align: left;">Estimado <strong><%= @member.name %></strong></p>
+    <p style="text-align: left;">Ha recibido el siguiente mensaje a través de Mi Congreso MX.</p>
+    <p style="text-align: left;"><%= @message.text %></p>
+  </td>
+</tr>

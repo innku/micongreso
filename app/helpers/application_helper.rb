@@ -8,9 +8,9 @@ module ApplicationHelper
   def display_vote(choice, voteable=nil)
     return "Me gusta" if voteable && voteable.class.name == "News"
     if choice.nil?
-      "Abstención"
+      "Te abstuviste de votar"
     else
-      choice == true ? "Favor" : "Contra"
+      choice == true ? "Votaste a favor" : "Votaste en contra"
     end
   end
   

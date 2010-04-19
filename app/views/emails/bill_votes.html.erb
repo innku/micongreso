@@ -1,11 +1,3 @@
-<% content_for :online do -%>
-  <tr>
-    <td scope="col" style="padding: 10px">
-    	<p style="text-align: left;">Si tienes algún problema viendo este correo, <a href="<%= "#{$global_url}/emails/bill_votes/#{@bill.id}" %>" style="color:#E61F70">vizualizalo en línea.</a></p>
-    </td>
-  </tr>
-<% end -%>
-
 <tr>
   <td scope="col" style="background-color:#FFF;"><img src="<%= "#{$global_url}/images/votacion.jpg" %>" width="700" height="40" alt="Votación de la Propuesta" /></td>
 </tr>
@@ -28,7 +20,7 @@
       <div class="barra neutral" style="color: #6D6A61;background: #CACAC2; float: left;padding: 2px 0px; width: 24px;">&nbsp;</div> <div class="barra leyend">Abstenciones</div>
     </div>
 
-    <p style="clear: both; text-align: left;">Ir a ver la propuesta: <%= link_to @url, @url, :style => "text-decoration: underline; color: #B63D46;" %></p>
+    <p style="clear: both; text-align: left;">Ir a ver la propuesta: <%= link_to bill_url(@bill), bill_url(@bill), :style => "text-decoration: underline; color: #B63D46;" %></p>
     
   </td>
 </tr>

@@ -2,7 +2,7 @@
   <h2 class="section">Inicio de sesión</h2>
   <div class="left">
     <div id="interna" class="propuesta session">
-      <% form_tag session_path do -%>
+      <% form_tag session_path, :id => "login_form" do -%>
       <p><%= label_tag 'email', "Correo Electrónico" %><br />
       <%= text_field_tag 'email', @email, :class => "input" %></p>
 
@@ -15,7 +15,7 @@
       </p>
 
       <p><%= submit_tag 'Iniciar Sesión', :class => "action" %></p>
-
+      <p class="forgot clear"><%= link_to "Se me olvidó mi contraseña", forgot_form_path %></p>
       <% end -%>
     </div>
 

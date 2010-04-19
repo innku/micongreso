@@ -1285,16 +1285,21 @@ li.login {
 	font-size: 1.2em;
 	padding: 3px;
 }
-#login .action {
+#login_form .action {
 	_border: none;
 	_margin-top: 10px;
 	_padding: 4px 5px;
 	float: none;
 }
 
-#nav ul li.login #login p.forgot {
-	border-top: 1px solid #59504d;
+p.forgot {
+	border-top: 1px dotted #B7B5B1;
 	margin-top: 6px;
+}
+
+p.forgot a {
+	display: block;
+	padding: 6px 0px;
 }
 
 #nav ul li.login #login a {
@@ -1507,6 +1512,11 @@ AUTO COMPLETE
 /*-------------------------------------------------
 FLASH MESSAGES
 -------------------------------------------------*/
+
+.flash a {
+	text-decoration: underline;
+	color: #B63D46;
+}
 
 #flash_notice, #flash_error {
   padding: 5px 8px;

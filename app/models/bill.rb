@@ -25,7 +25,6 @@ class Bill < ActiveRecord::Base
   named_scope :most_viewed, :order => "total_views DESC"
   named_scope :limit, :limit => 5
   
-  
   def self.recent_popular
     last_month.most_viewed
   end

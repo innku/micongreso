@@ -1,14 +1,22 @@
-<p>Tu cuenta ha sido creada.</p>
-
-<table>
-  <tr>
-    <td>Correo Electronico:</td>
-    <td><%=h @user.email %></td>
-  </tr>
-  <tr>
-    <td>Contraseña:</td>
-    <td><%=h @user.password %></td>
-  </tr>
-</table>
-
-<p>Visita la siguiente liga para activar tu cuenta: <%= link_to @url, @url %></p>
+<tr>
+  <td scope="col" style="background-color:#FFF;"><img src="<%= "#{$global_url}/images/bienvenido.jpg" %>" width="700" height="40" alt="Bienvenido a Mi Congreso MX" /></td>
+</tr>
+<tr>
+  <td scope="col" style="background-color:#FFF; padding:25px;">
+  	<p style="text-align: left;">Estimado <strong><%= @user.name %></strong>,</p>
+    <p style="text-align: left;">Tu cuenta ha sido creada.</p>
+    
+    <table style="text-align: left;">
+      <tr>
+        <td style="text-align: left;"><strong>Correo Electronico:</strong></td>
+        <td style="text-align: left;"><%=h @user.email %></td>
+      </tr>
+      <tr>
+        <td style="text-align: left;"><strong>Contraseña:</strong></td>
+        <td style="text-align: left;"><%=h @user.password %></td>
+      </tr>
+    </table>
+    
+    <p style="text-align: left;">Visita la siguiente liga para activar tu cuenta: <%= link_to @url, @url, :style => "text-decoration: underline; color: #B63D46;" %></p>
+  </td>
+</tr>

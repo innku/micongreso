@@ -24,7 +24,7 @@
 		  <li class="login">
 		    <%= link_to "Inicia Sesi&oacute;n &raquo;", login_path, :id => "signin_link", :class => "closed" %>
 		    <div id="login">
-		      <% form_tag session_path do -%>
+		      <% form_tag session_path, :id => "login_form" do -%>
             <p>
               <%= label_tag :email, "Correo Electrónico:" %><br />
               <%= text_field_tag :email, @email, :class => "input" %>

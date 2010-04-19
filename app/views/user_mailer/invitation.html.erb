@@ -1,16 +1,22 @@
-<% if @name %>
-<p>Estimado <%= @name %></p>
-<% end %>
+<tr>
+  <td scope="col" style="background-color:#FFF;"><img src="<%= "#{$global_url}/images/invitacion.jpg" %>" width="700" height="40" alt="Invitación" /></td>
+</tr>
+<tr>
+  <td scope="col" style="background-color:#FFF; padding:25px;">
+  	<% if @name %>
+    <p style="text-align: left;">Estimado <%= @name %></p>
+    <% end %>
+    <p style="text-align: left;">Has recibido una invitación <% if @user %> de <strong><%= @user.name %></strong> <% end %> para utilizar <strong>Mi Congreso MX.</strong></p>
+    
+    <h1 style="font-size:18px; color:#2E2013; margin: 0px; padding:0px; text-align: left">¿Que es Mi Congreso MX?</h1>
+    <p style="text-align: left;">Es un espacio interactivo para que los ciudadanos podamos conocer y opinar sobre la actividad de lo que sucede y 
+      las decisiones que se toman dentro del congreso. Buscamos acercar al congreso con los ciudadanos, reducir la brecha 
+      ejerciendo nuestra ciudadanía.</p>
 
-<p>Has recibido una invitación <% if @user %> de <%= @user.name %> <% end %> para utilizar <strong>Mi Congreso MX.</strong></p>
+    <p style="text-align: left;">Una de las principales características de micongreso.mx es permitirnos a los ciudadanos opinar y votar de forma muy sencilla 
+      sobre las propuestas que se votan dentro del congreso y comparar la votación de cada uno de los diputados con la votación 
+      de la ciudadanía que representan.</p>
 
-<h3>¿Que es Mi Congreso MX?</h3>
-<p>Es un espacio interactivo para que los ciudadanos podamos conocer y opinar sobre la actividad de lo que sucede y 
-  las decisiones que se toman dentro del congreso. Buscamos acercar al congreso con los ciudadanos, reducir la brecha 
-  ejerciendo nuestra ciudadanía.</p>
-
-<p>Una de las principales características de micongreso.mx es permitirnos a los ciudadanos opinar y votar de forma muy sencilla 
-  sobre las propuestas que se votan dentro del congreso y comparar la votación de cada uno de los diputados con la votación 
-  de la ciudadanía que representan.</p>
-
-<p>Forma parte de Mi Congreso MX haciendo click aqui: <%= link_to @url, @url %></p>
+    <p style="text-align: left;">Forma parte de Mi Congreso MX haciendo click aqui: <%= link_to @url, @url, :style => "text-decoration: underline; color: #B63D46;" %></p>
+  </td>
+</tr>

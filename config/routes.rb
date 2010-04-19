@@ -44,6 +44,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resend_activation '/resend', :controller => 'users', :action => 'resend'
   
   map.root :controller => "dashboard", :action => "index"
+  
+  map.email_bill_votes '/emails/bill_votes/:id', :controller => 'emails', :action => 'bill_votes'
+  map.email_bill '/emails/bill/:id', :controller => 'emails', :action => 'bill'
 
   # The priority is based upon order of creation: first created -> highest priority.
 
