@@ -156,7 +156,7 @@ class Bill < ActiveRecord::Base
       heroku.set_workers("diputadovirtual", 1)
       #heroku.rake("diputadovirtual", "jobs:work")
     end
-    self.send_later(:deliver)
+    self.send_later(:test_deliver)
   end
 
   def after_save
