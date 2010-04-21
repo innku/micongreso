@@ -138,6 +138,26 @@ class Bill < ActiveRecord::Base
     self.week_views = self.views.last_week.count
     self.save
   end
+  
+  def deliver
+    User.citizens.each do |citizen|
+      UserMailer.deliver_bill(citizen, self) if citizen.notify_me?(self.tags)
+    end
+  end
+  
+  def test_deliver
+    user = User.find_by_email("fedegl@gmail.com")
+    UserMailer.deliver_bill(user, self) if user.notify_me?(self.tags)
+  end
+  
+  def test
+    if Rails.env.production?
+      heroku = Heroku::Client.new("federico@innku.com", "ziggy1304")
+      heroku.set_workers("diputadovirtual", 1)
+      #heroku.rake("diputadovirtual", "jobs:work")
+    end
+    self.send_later(:deliver)
+  end
 
   def after_save
     if publish_bill_on_social_media.to_i == 1
@@ -145,9 +165,12 @@ class Bill < ActiveRecord::Base
     end
     
     if send_emails.to_i == 1
-      User.citizens.each do |citizen|
-        UserMailer.deliver_bill(citizen, self) if citizen.notify_me?(self.tags)
+      if Rails.env.production?
+        heroku = Heroku::Client.new("federico@innku.com", "ziggy1304")
+        heroku.set_workers("diputadovirtual", 1)
+        #heroku.rake("diputadovirtual", "jobs:work")
       end
+      self.send_later(:deliver)
     end
   end
   
