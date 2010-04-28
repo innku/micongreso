@@ -1,6 +1,6 @@
 class ContactsController < ApplicationController
   
-  skip_before_filter :login_required, :create
+  skip_before_filter :login_required, :only => [:create, :deliver]
   
   def index
     @contacts = Contact.all
@@ -14,17 +14,40 @@ class ContactsController < ApplicationController
     @contact = Contact.new
   end
   
-  def create
-    if Contact.send_invitations(current_user, params[:provider], params[:login], params[:password])
-      flash[:notice] = "Las invitaciones se enviaron correctamente a los contactos de su cuenta de correo."
-      if current_user
-        redirect_to edit_citizen_path(current_user)
-      else
-        redirect_to root_path
-      end
-    else
-      flash[:error] = "El usuario/correo y/o la contraseña proporcionada son incorrectos"
-      render :action => 'new'
+  def create    
+    respond_to do |wants|
+      wants.html { 
+        if Contact.send_invitations(current_user, params[:provider], params[:login], params[:password])
+          flash[:notice] = "Las invitaciones se enviaron correctamente a los contactos de su cuenta de correo."
+          if current_user
+            redirect_to edit_citizen_path(current_user)
+          else
+            redirect_to root_path
+          end
+        else
+          flash[:error] = "El usuario/correo y/o la contraseña proporcionada son incorrectos"
+          render :action => 'new'
+        end
+      }
+      wants.js {
+        token = User.make_token
+        session[:token] = token
+        @success = Contact.save_contacts(current_user, params[:provider], params[:login], params[:password], token)
+        if current_user
+          @contacts = current_user.contacts
+        else
+          @contacts = Contact.find_all_by_token(token)
+        end
+      }
+    end
+  end
+  
+  def deliver
+    respond_to do |wants|
+      wants.js {
+        logger.warn "Mensaje: #{params[:message]}"
+        Contact.deliver_invitations_later({:contact_ids => params[:contact_ids], :message => params[:message], :user => current_user})
+      }
     end
   end
   

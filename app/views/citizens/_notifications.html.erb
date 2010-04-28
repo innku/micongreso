@@ -4,22 +4,9 @@
   <% f.fields_for :notification do |n| %>
     <h4>¿Por cuáles medios deseas recibir notificaciones?</h4>
     <p>
-      <%= n.check_box :email %>
+      <%= hidden_field_tag "user[notification_attributes][email]", false, :id => "user_hidden_email" %>
+      <%= check_box_tag "user[notification_attributes][email]", true, n.object.email, :id => "user_notification_attributes_email" %>
       <%= n.label :email, "Correo Electrónico" %>
-    </p>
-    <p style="display: none;">
-      <%= n.label :sms %>
-      <%= n.check_box :sms %>
-    </p>
-    <p style="display: none;">
-      <%= n.label :twitter %>
-      <%= n.radio_button :twitter, true %> <%= n.label :twitter_true, "Si" %>
-      <%= n.radio_button :twitter, true %> <%= n.label :twitter_false, "No" %>
-    </p>
-    <p style="display: none;">
-      <%= n.label :facebook %>
-      <%= n.radio_button :facebook, true %> <%= n.label :facebook_true, "Si" %>
-      <%= n.radio_button :facebook, true %> <%= n.label :facebook_false, "No" %>
     </p>
     
     <h4><%= n.label :interest_topics, "Recibir notificaciones relacionadas a:" %></h4>

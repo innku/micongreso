@@ -45,7 +45,7 @@ class UserMailer < ActionMailer::Base
     @body[:bill] = bill
   end
   
-  def invitation(user, name, email)
+  def invitation(user, name, email, message)
     @recipients  = "#{email}"
     @from        = "no-responder@micongreso.mx"
     if user
@@ -59,6 +59,7 @@ class UserMailer < ActionMailer::Base
     @body[:url]  = "#{$global_url}/signup"
     @body[:name] = name
     @body[:email] = email
+    @body[:message] = message
   end
   
   protected

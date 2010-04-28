@@ -8,6 +8,11 @@
     <% end %>
     <p style="text-align: left;">Has recibido una invitación <% if @user %> de <strong><%= @user.name %></strong> <% end %> para utilizar <strong>Mi Congreso MX.</strong></p>
     
+    <% unless @message.blank? %>
+      <h2 style="font-size:14px; color:#2E2013; margin: 0px; padding:0px; text-align: left">Mensaje:</h2>
+      <p style="text-align: left;"><%= @message %></p>
+    <% end %>
+    
     <h1 style="font-size:18px; color:#2E2013; margin: 0px; padding:0px; text-align: left">¿Que es Mi Congreso MX?</h1>
     <p style="text-align: left;">Es un espacio interactivo para que los ciudadanos podamos conocer y opinar sobre la actividad de lo que sucede y 
       las decisiones que se toman dentro del congreso. Buscamos acercar al congreso con los ciudadanos, reducir la brecha 

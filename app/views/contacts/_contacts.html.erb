@@ -1,0 +1,21 @@
+<% form_tag deliver_contacts_path, :id => "deliver_invitations" do %>
+  <h2 class="lightbox">Selecciona las personas a invitar</h2>
+
+  <table>
+    <% contacts.each do |contact| %>
+      <tr>
+        <td><%= check_box_tag "contact_ids[]", contact.id, false %></td>
+        <td><%= contact.name %></td>
+        <td><%= contact.email %></td>
+      </tr>
+    <% end %>
+  </table>
+
+  <p>
+    <%= label_tag :message, "Mensaje" %>
+    <%= text_area_tag "message" %>
+  </p>
+  <p>
+    <%= submit_tag "Enviar invitaciones", :class => "action" %>
+  </p>
+<% end %>

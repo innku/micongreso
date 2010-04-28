@@ -35,18 +35,27 @@ class Contact < ActiveRecord::Base
     end
   end
   
-  def self.send_test(user, emails)
+  def self.save_contacts(user, provider, login, password, token)
     begin
-      emails.each do |c|
-        begin
-          contact = Contact.new(:name => "prueba", :email => c)
-          contact.user_id = user.id if user
+      return false if login.blank? || password.blank?
+      if provider
+        contacts = Contacts.new(provider.to_sym, login, password).contacts
+      else
+        contacts = Contacts.guess(login, password)
+        return false if contacts.empty?
+      end
+      contacts.compact!
+      contacts.delete_if {|c| c[1].blank? } # Eliminar el registro si no trae correo electrónico
+      contacts.each do |c|
+        existing = Contact.find_by_email(c[1])
+        unless existing
+          contact = Contact.new(:name => c[0], :email => c[1])
+          if user
+            contact.user_id = user.id 
+          else
+            contact.token = token
+          end
           contact.save!
-          UserMailer.deliver_invitation(user, "prueba", c)
-          puts "Mail enviado a #{c}"
-        rescue Net::SMTPSyntaxError
-          RAILS_DEFAULT_LOGGER.debug "Net::SMTPSyntaxError para el correo: #{c}"
-          puts "Net::SMTPSyntaxError para el correo: #{c}"
         end
       end
       return true
@@ -54,6 +63,21 @@ class Contact < ActiveRecord::Base
       RAILS_DEFAULT_LOGGER.debug "AuthenticationError: El login (#{login}) y/o la contraseña son incorrectos."
       return false
     end
+  end
+  
+  def self.deliver_invititations(options={})
+    options[:contact_ids].each do |contact_id|
+      contact = Contact.find(contact_id.to_i)
+      UserMailer.deliver_invitation(options[:user], contact.name, contact.email, options[:message])
+    end
+  end
+  
+  def self.deliver_invitations_later(options={})
+    if Rails.env.production?
+      heroku = Heroku::Client.new("federico@innku.com", "ziggy1304")
+      heroku.set_workers("diputadovirtual", 1)
+    end
+    self.send_later(:deliver_invititations, options)
   end
   
 end

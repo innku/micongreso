@@ -1,0 +1,8 @@
+$("#loading").hide()
+<% if @success %>
+  $("#contacts_list").html("<%= escape_javascript(render :partial => '/contacts/contacts', :locals => {:contacts => @contacts}) %>")
+<% else %>
+  $("#contacts_form").show()
+  $("#contacts_list").html("<tr><td>El usuario o la contraseña están incorrectos</td></tr>")
+<% end %>
+

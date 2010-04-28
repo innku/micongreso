@@ -1,6 +1,6 @@
 task :cron => :environment do
   require 'heroku'
-  puts "Entering cron"
+  puts "Entering cron at #{Time.now}"
   if Delayed::Job.count == 0
     puts "Opening heroku"
     heroku = Heroku::Client.new("federico@innku.com", "ziggy1304")

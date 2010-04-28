@@ -22,7 +22,6 @@ Rails::Initializer.run do |config|
   #config.gem "facebooker"
   config.gem "contacts"
   config.gem "will_paginate"
-  config.gem "nimble_nodes"
   config.gem "heroku"
   
   # Only load the plugins named here, in the order given (default is alphabetical).

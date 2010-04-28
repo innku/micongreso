@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :contacts
+  map.resources :contacts, :collection => {:deliver => :any}
 
   map.resources :tags
 

@@ -1,4 +1,4 @@
-<% form_tag contacts_path do %>
+<% form_tag contacts_path, :id => "contacts_form" do %>
   <h2>Invita a los contactos de tu cuenta de correo</h2>
   <p>
     <%= radio_button_tag :provider, "gmail", params[:provider] == "gmail" ? true : false %> <%= label_tag :provider_gmail, image_tag("gmail.png") %>
@@ -17,6 +17,26 @@
     Mi Congreso no almacenará tu contraseña
   </p>
   <p>
-    <%= submit_tag "Enviar invitación", :class => "action" %>
+    <%= submit_tag "Selecciona a quien enviar", :class => "action" %>
   </p>
 <% end %>
+
+<div id="loading" class="loading">
+  <%= image_tag("white_spinner.gif", :class => "contact_spinner") %>
+  <p>Estamos cargando tus contactos...</p>
+</div>
+
+<div id="sending" class="loading">
+  <%= image_tag("white_spinner.gif", :class => "contact_spinner") %>
+  <p>Estamos enviando tus invitaciones...</p>
+</div>
+
+<div id="success">
+  <%= image_tag("success.png") %>
+  <h2>¡Muchas Gracias!</h2>
+  <p>Las invitaciones se enviaron correctamente</p>
+</div>
+
+<div id="contacts_list">
+
+</div>

@@ -203,6 +203,26 @@ $(document).ready( function(){
 	  $("select#member_district_id").parent().hide();
 	})
 	
+	// ------------- Invitaciones --------------------
+	
+	$("#invite_form form input[type='submit']").click(function(e){
+	  e.preventDefault();
+	  form = $("#contacts_form");
+	  form.hide();
+	  $("#loading").show();
+	  $.post(form.attr("action"), form.serialize(), null, "script");
+	  return false;
+	})
+	
+	$("form#deliver_invitations input[type='submit']").live('click', function(e){
+	  e.preventDefault();
+	  form = $("form#deliver_invitations");
+	  form.hide();
+	  $("#sending").show();
+	  $.post(form.attr("action"), form.serialize(), null, "script");
+	  return false;
+	})
+	
 });
 
 function remove_fields(link) {
