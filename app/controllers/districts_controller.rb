@@ -6,17 +6,22 @@ class DistrictsController < ApplicationController
     respond_to do |wants|
       wants.html { 
         @state = State.find(params[:state_id])
-        @section = @state.sections.find_by_number(params[:section])
-        if @section
-          @district = @section.district
-          @member = @district.member
-          if @member
-            redirect_to @member
-            #flash[:notice] = "Si quieres conocer los diputados plurinominales de tu región <a href='/regions/#{@state.region.id}'>haz click aquí</a>"
-          end
-        else
+        if params[:section].blank?
           redirect_to root_path(:state_id => params[:state_id])
-          flash[:error] = "No encontramos la sección #{params[:section]} en el estado de #{@state.name}"
+          flash[:error] = "Por favor ingrese la sección que viene en su credencial de Elector"
+        else
+          @section = @state.sections.find_by_number(params[:section])
+          if @section
+            @district = @section.district
+            @member = @district.member
+            if @member
+              redirect_to @member
+              #flash[:notice] = "Si quieres conocer los diputados plurinominales de tu región <a href='/regions/#{@state.region.id}'>haz click aquí</a>"
+            end
+          else
+            redirect_to root_path(:state_id => params[:state_id])
+            flash[:error] = "No encontramos la sección #{params[:section]} en el estado de #{@state.name}"
+          end
         end
       }
       wants.js {
