@@ -68,6 +68,8 @@ class Contact < ActiveRecord::Base
   def self.deliver_invititations(options={})
     options[:contact_ids].each do |contact_id|
       contact = Contact.find(contact_id.to_i)
+      contact.invited_on = Time.now
+      contact.save
       UserMailer.deliver_invitation(options[:user], contact.name, contact.email, options[:message])
     end
   end
