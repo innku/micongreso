@@ -11,7 +11,7 @@ class BillsController < ApplicationController
     elsif params[:month] && params[:year]
       @bills = Bill.monthly(params[:month], params[:year])
     else
-      @bills = Bill.all
+      @bills = Bill.recent
     end
   end
   

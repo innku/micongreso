@@ -21,6 +21,7 @@ class SessionsController < ApplicationController
       self.current_user = user
       new_cookie_flag = (params[:remember_me] == "1")
       handle_remember_cookie! new_cookie_flag
+      flash[:notice] = "Has entrado a MiCongreso, ¡Bienvenido de regreso!"
       redirect_to root_path
     else
       if inactive_user
