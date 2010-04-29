@@ -40,50 +40,88 @@
       </div>
     </div>
     
-  	<div id="footer"> 
-  		<div class="contenido">
-  		  <div id="parties">
+		<!--FOOTER-->
+		<div id="footer">
+			<div class="contenido">
+				<div class="lista_footer">
+  				<h2>Mi Congreso</h2>
+  				<ul>
 
-        </div>
-  		</div> 
-  	</div>
-  	
-  	<script type="text/javascript">
-      var uservoiceOptions = {
-        /* required */
-        key: 'micongresomx',
-        host: 'micongresomx.uservoice.com', 
-        forum: '50993',
-        showTab: true,  
-        /* optional */
-        alignment: 'left',
-        background_color:'#696055', 
-        text_color: 'white',
-        hover_color: '#b63d46',
-        lang: 'es'
-      };
+  					<li><a href="/conocenos">Acerca de Nosotros</a></li>
+  					<li style="display: none;"><a href="#">Preguntas Frecuentes</a></li>
+  					<li style="display: none;"><a href="#">Aviso legal</a></li>
+  				</ul>
+				</div>
+				
+				<div class="lista_footer">
+  				<h2>S&iacute;guenos</h2>
 
-      function _loadUserVoice() {
-        var s = document.createElement('script');
-        s.setAttribute('type', 'text/javascript');
-        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
-        document.getElementsByTagName('head')[0].appendChild(s);
-      }
-      _loadSuper = window.onload;
-      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
-    </script>
+  				<ul>
+  					<li><a href="http://twitter.com/micongresomx">Twitter</a></li>
+  					<li><a href="http://www.facebook.com/pages/Mi-Congreso-MX/108586009164833">Facebook</a></li>
+  					<li style="display: none;"><a href="#">Newsletter</a></li>
+  					<li style="display: none;"><a href="#">RSS</a></li>
+  				</ul>
+				</div>
+
+				<div class="lista_footer">
+  				<h2>Cont&aacute;ctanos</h2>
+  				<ul>
+  					<li><a href="mailto: info@micongreso.mx">info@micongreso.mx</a></li>
+  					<li><a href="#">+52 (81) 83570504</a></li>
+  				</ul>
+				</div>
+
+				
+				<div class="lista_footer">
+  				<h2>Ligas de inter&eacute;s</h2>
+  				<ul>
+  					<li><a href="http://www.diputados.gob.mx">Cámara de Diputados</a></li>
+  					<li><a href="http://sil.gobernacion.gob.mx/portal">Sistema de Información Legislativa</a></li>
+  				</ul>
+				</div>
+
+			</div>
+		</div>
+
   	
-  	<script type="text/javascript">      
-      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-    </script>
+  	<% if Rails.env.production? %>  	
+    	<script type="text/javascript">
+        var uservoiceOptions = {
+          /* required */
+          key: 'micongresomx',
+          host: 'micongresomx.uservoice.com', 
+          forum: '50993',
+          showTab: true,  
+          /* optional */
+          alignment: 'left',
+          background_color:'#696055', 
+          text_color: 'white',
+          hover_color: '#b63d46',
+          lang: 'es'
+        };
+
+        function _loadUserVoice() {
+          var s = document.createElement('script');
+          s.setAttribute('type', 'text/javascript');
+          s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+          document.getElementsByTagName('head')[0].appendChild(s);
+        }
+        _loadSuper = window.onload;
+        window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+      </script>
+  	
+    	<script type="text/javascript">      
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+      </script>
     
-    <script type="text/javascript"> 
-      try{
-      var pageTracker = _gat._getTracker("UA-15807435-1");
-      pageTracker._trackPageview();
-      } catch(err) {}
-  	</script>
-  	
+      <script type="text/javascript"> 
+        try{
+        var pageTracker = _gat._getTracker("UA-15807435-1");
+        pageTracker._trackPageview();
+        } catch(err) {}
+    	</script>
+  	<% end %>
   </body>
 </html>

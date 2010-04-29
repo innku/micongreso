@@ -12,6 +12,10 @@ class DistrictsController < ApplicationController
         else
           @section = @state.sections.find_by_number(params[:section])
           if @section
+            if current_user
+              current_user.section = @section
+              current_user.save
+            end
             @district = @section.district
             @member = @district.member
             if @member

@@ -1,28 +1,64 @@
+<% content_for :body_class do -%>
+  class="about"
+<% end -%>
+
+<% content_for :jQuery do -%>
+  <%= javascript_include_tag 'jquery.fancybox-1.3.1.pack' %>
+<% end -%>
+
+<% content_for :head do -%>
+  <%= stylesheet_link_tag 'jquery.fancybox-1.3.1' %>
+<% end -%>
+
 <div id="rest">
-  <h2 class="section">Acerca de Nosotros</h2>
-  
+  <h2 class="section">Acerca de nosotros</h2>
   <div class="left">
-    <div class="propuestas">
-      <div id="interna" class="propuesta">
-        <h2>¿Qué es micongreso.mx?</h2>
-        <p>Es un espacio interactivo para que los ciudadanos podamos conocer y opinar sobre la actividad de lo que sucede y las decisiones que se toman dentro del congreso. Buscamos acercar al congreso con los ciudadanos, reducir la brecha ejerciendo nuestra ciudadanía.</p>
-        
-        <p>Una de las principales características de micongreso.mx es permitirnos a los ciudadanos opinar y votar de forma muy sencilla sobre las propuestas que se votan dentro del congreso y comparar la votación de cada uno de los congresistas con la votación de la ciudadanía que representan.</p>
-        
-        <h2>¿Quién está detrás de micongreso.mx?</h2>
-        
-        <p>No pertenecemos a ningún partido u organización política, simplemente somos un grupo de jóvenes entusiastas que buscamos aportar un granito de arena en la democracia de nuestro país. El proyecto es sin fines de lucro y bajo ninguna ideología política, buscamos simplemente brindar un espacio de comunicación sencillo y efectivo para la construcción de un mejor y más abierto país.</p>
+  	<!--PROPUESTAS CONTENT-->
+  	<div class="propuestas">
 
-        <p>¡Este espacio es de ciudadanos para ciudadanos! Los ciudadanos somos todos.</p>
+    	<!--PROPUESTA-->
+    	<div class="propuesta nosotros" id="interna">
+    		<div id="p01">
+    		<img src="images/nosotros_img01.jpg" />
+    		<h2>&iquest;Qu&eacute; es micongreso.mx?</h2>
+    		<p>Es un espacio interactivo <strong>para que los ciudadanos podamos conocer y opinar</strong> sobre la actividad de lo que sucede y las decisiones que se toman dentro del congreso. <strong>Buscamos acercar al congreso con los ciudadanos,</strong> reducir la brecha ejerciendo nuestra ciudadan&iacute;a.</p>
 
-        <h2>¿Cómo puedo ayudar?</h2>
-        
-        <p>La mejor manera de ayudar es pasando la voz. Comparte tu experiencia con más personas e invítalos a participar en micongreso.mx. El valor de esta comunidad se construye con la participación ciudadana, y es por eso que buscamos una forma sencilla y efectiva de dar tu opinión sobre las decisiones políticas que se toman en nuestro país.</p>
-        
-        <p>Expresar tu opinión es importante y de la misma forma en la que opinamos es como somos escuchados. Aprovecha este espacio de la mejor manera y busca influir realmente en tu sociedad.</p>
-        
-      </div>
+    	    <p>Una de las principales caracter&iacute;sticas de micongreso.mx es permitirnos a los ciudadanos opinar y votar de forma muy sencilla sobre las propuestas que se votan dentro del congreso y comparar la votaci&oacute;n de cada uno de los congresistas con la votaci&oacute;n de la ciudadan&iacute;a que representan.</p></div>
+
+    		<div id="p02">
+    		<img src="images/nosotros_img02.jpg" />
+    		<h2>&iquest;Qui&eacute;n est&aacute; detr&aacute;s de micongreso.mx?</h2>
+
+    		<p><strong>No pertenecemos a ning&uacute;n partido u organizaci&oacute;n pol&iacute;tica,</strong> simplemente somos un grupo de j&oacute;venes entusiastas que buscamos aportar un granito de arena en la democracia de nuestro pa&iacute;s. <strong>El proyecto es sin fines de lucro y bajo ninguna ideolog&iacute;a pol&iacute;tica,</strong> buscamos simplemente brindar un espacio de comunicaci&oacute;n sencillo y efectivo para la construcci&oacute;n de un mejor y m&aacute;s abierto pa&iacute;s.</p>
+
+    		<p class="destacado">&iexcl;Este espacio es <strong>de ciudadanos para ciudadanos!</strong> Los ciudadanos somos todos.</p></div>
+    		<div id="p03">
+      		<img src="images/nosotros_img03.jpg" />
+      		<h2>&iquest;C&oacute;mo puedo ayudar?</h2>
+      		<p><strong>La mejor manera de ayudar es pasando la voz.</strong> Comparte tu experiencia con m&aacute;s personas e inv&iacute;talos a participar en micongreso.mx. <strong>El valor de esta comunidad se construye con la participaci&oacute;n ciudadana,</strong> y es por eso que buscamos una forma sencilla y efectiva de dar tu opini&oacute;n sobre las decisiones pol&iacute;ticas que se toman en nuestro pa&iacute;s.</p>
+
+      		<p><strong>Expresar tu opini&oacute;n es importante</strong> y de la misma forma en la que opinamos es como somos escuchados. <strong>Aprovecha este espacio de la mejor manera y busca influir realmente en tu sociedad.</strong></p>
+    	  </div>
+
+  	  </div>
+  	
     </div>
   </div>
-  <div class="right"></div>
+	<!--RIGHT COLUMN-->
+	<div class="right">
+
+		<!--INVITA AMIGOS-->
+		<div id="invita_lateral">
+		  <h2>Invita a tus amigos</h2>
+      <p>Fomenta la participaci&oacute;n ciudadana enviando una invitaci&oacute;n a los contactos de tu cuenta de correo.</p>
+      
+      <div style="display: none;">
+        <div id="invite_form" class="cien">
+          <%= render :partial => '/contacts/import_contacts' %>
+        </div>
+      </div>
+      <%= link_to "Invita a tus amigos", "#invite_form", :class => "action invite_link" %>
+		</div>
+  </div>
+  
 </div>

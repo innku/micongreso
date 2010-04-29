@@ -88,6 +88,12 @@
   </div>
 <% end %>
 
+<% if current_user && !current_user.active? %>
+  <div id="warning">
+    <div class="text">No has activado tu cuenta, para hacerlo da click a la liga en el correo de bienvenida.</div>
+  </div>
+<% end %>
+
 <div id="rest"> 
 	<div class="left"> 
 		<div class="tabs"> 

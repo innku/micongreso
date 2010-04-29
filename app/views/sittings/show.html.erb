@@ -9,7 +9,7 @@
   <%=h @sitting.date.to_s(:es) %>
 </p>
 
-<h3>Faltas</h3>
+<h3>Ausencias</h3>
 
 <table>
 	<tr>
@@ -17,14 +17,28 @@
 		<th>Justificada</th>
 		<th>Justificación</th>
 	</tr>
-	<% for absence in @sitting.absences %>
+	<% for assistance in @absences %>
 		<tr>
-			<td><%= absence.member_name %></td>
-			<td><%= yes_or_no(absence.justified) %></td>
-			<td><%= absence.justification %></td>
+			<td><%= assistance.member_name %></td>
+			<td><%= yes_or_no(assistance.justified) %></td>
+			<td><%= assistance.justification %></td>
 		</tr>
 	<% end %>
 </table>
+
+<h3>Propuestas a votarse</h3>
+
+<table>
+	<tr>
+		<th>Nombre</th>
+	</tr>
+	<% for bill in @sitting.bills %>
+		<tr>
+			<td><%= bill.name %></td>
+		</tr>
+	<% end %>
+</table>
+
 <p>
   <%= link_to "Editar", edit_sitting_path(@sitting) %> |
   <%= link_to "Eliminar", @sitting, :confirm => 'Are you sure?', :method => :delete %> |

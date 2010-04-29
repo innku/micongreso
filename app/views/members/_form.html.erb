@@ -1,6 +1,14 @@
 <% form_for @member, :html => { :multipart => true } do |f| %>
   <%= f.error_messages %>
   <p>
+    <%= f.label :term_id, "Legislatura" %><br />
+    <%= f.collection_select :term_id, Term.all, :id, :name %>
+  </p>
+  <p>
+    <%= f.label :status, "Status" %><br />
+    <%= f.select :status, [["Activo", "active"], ["Inactivo", "inactive"]] %>
+  </p>
+  <p>
     <%= f.label :name, "Nombre" %><br />
     <%= f.text_field :name %>
   </p>

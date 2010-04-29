@@ -4,6 +4,10 @@ class VotesController < ApplicationController
   
   def edit
     @bill = @voteable
+    unless @bill.sitting
+      flash[:error] = "No puedes selecionar los votos de una propuesta si no está relacionada a una sesión."
+      redirect_to @bill
+    end
   end
   
   def create

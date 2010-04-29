@@ -87,13 +87,41 @@
           <%= vote_date(@bill.vote_date) %>
         </p>
         
-        <p><%= @bill.description %></p>
+        <% if @bill.closed? && !@bill.resolution.blank? %>
+          <p><%= link_to "Ver resolución a propuesta", "", :id => "resolution_link" %></p>
+          
+          <div id="resolution" style="display: none;">
+            <h4>Resolución</h4>
+            <%= @bill.resolution %>
+          </div>
+        <% end %>
+        
+        <div id="description">
+          <%= @bill.description %>
+          
+          <% if @bill.resources.any? %>
+            <h3>Recursos adicionales</h3>
+            <ul id="resources">
+              <% @bill.resources.each do |resource| %>
+                <li><%= link_to resource.name, resource.url %></li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
         
         <ul class="tags">
           <% @bill.tags.each do |tag| %>
             <li><%= tag.name %></li>
           <% end %>
         </ul>
+        
+        <% if @bill.member %>
+          <p>
+  				  <strong>Presentada por:</strong>
+            <%= @bill.member_name %>
+  				</p>
+  			<% end %>
+  			
         <div class="clear"></div>
         
         <% if admin?(current_user) %>

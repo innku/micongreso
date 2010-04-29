@@ -1,6 +1,9 @@
 class Bill < ActiveRecord::Base  
     
   has_many  :views, :dependent => :destroy
+  has_many  :resources, :dependent => :destroy
+  belongs_to  :sitting
+  belongs_to  :member
   
   validates_presence_of :name, :message => "^Te faltó el título de la propuesta"
   validates_presence_of :description, :message => "^Te faltó la descripción de la propuesta"
@@ -13,17 +16,21 @@ class Bill < ActiveRecord::Base
   acts_as_voteable
   acts_as_commentable
   
+  accepts_nested_attributes_for :resources, :reject_if => lambda { |a| a[:url].blank? }, :allow_destroy => true
+  
   month_selector = Rails.env.production? ? "EXTRACT(MONTH FROM bills.date)" : "MONTH(bills.date)"
   year_selector = Rails.env.production? ? "EXTRACT(YEAR FROM bills.date)" : "YEAR(bills.date)"
   
   named_scope :voted, :conditions => ["member_votes_for != ? OR member_votes_against != ? OR member_votes_neutral != ?",0,0,0], :order => "created_at DESC"
   named_scope :recent, :order => "created_at DESC"
-  named_scope :active, :conditions => ['date >= ?', Date.today]
-  named_scope :closed, :conditions => ['date < ?', Date.today]
+  named_scope :active, :conditions => ['vote_date >= ?', Date.today]
+  named_scope :closed, :conditions => ['vote_date < ?', Date.today]
   named_scope :monthly, lambda { |*args| { :conditions => ["#{month_selector} = ? AND #{year_selector} = ?", args.first, args.last] } }
   named_scope :last_month, :conditions => ['date >= ?', Date.today-1.months]
   named_scope :most_viewed, :order => "total_views DESC"
   named_scope :limit, :limit => 5
+  named_scope :pending, :conditions => ['status = ?', 'pending']
+  named_scope :single_voted, :conditions => ['voted_on IS NOT NULL'], :order => "voted_on DESC"
   
   def self.recent_popular
     last_month.most_viewed
@@ -39,6 +46,10 @@ class Bill < ActiveRecord::Base
   
   def pending?
     self.status == "pending"
+  end
+  
+  def closed?
+    (self.vote_date < Date.today) && !self.pending?
   end
   
   def update_votes(params)
@@ -58,6 +69,7 @@ class Bill < ActiveRecord::Base
     self.member_votes_for = self.votes_for_by("Member")
     self.member_votes_against = self.votes_against_by("Member")
     self.member_votes_neutral = self.votes_neutral_by("Member")
+    self.voted_on = Time.now
     self.save
   end
   
@@ -81,6 +93,14 @@ class Bill < ActiveRecord::Base
   end
   
   def formatted_vote_date=(date)
+  end
+  
+  def member_name
+    self.member.name if self.member
+  end
+  
+  def member_name=(string)
+    self.member = Member.find_by_name(string)
   end
   
   def general_votes?

@@ -59,8 +59,12 @@ class User < ActiveRecord::Base
   def section_number=(number)
     if self.city
       RAILS_DEFAULT_LOGGER.debug "state: #{state.id}, section: #{number}"
-      self.section = self.state.sections.find_by_number(number)
-      write_attribute(:section_number, number)
+      if number.blank?
+        write_attribute(:section_id, nil)
+      else
+        self.section = self.state.sections.find_by_number(number)
+        write_attribute(:section_number, number)
+      end
     end
   end
   

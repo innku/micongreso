@@ -48,24 +48,25 @@
         </p>
         
         <p class="faltas">
-          <strong>Faltas:</strong> <%= @member.absences.year.count %> de <%= Sitting.year.count %>
+          <strong>Asistencias:</strong> <%= @member.assistances.present.count %> de <%= @member.assistances.count %> (Faltas <%= number_to_percentage((@member.absences.count.to_f/@member.assistances.count.to_f)*100, :precision => 0) %>)
         </p>
         
         <div class="clear"></div>
         
         <div id="votaciones">
         	<h3>Últimas votaciones</h3>
-        	<table class="resultados" cellspacing="0" cellpadding="0" border="0">
+        	<table class="resultados" cellspacing="0" cellpadding="0" border="0" width="100%">
         	  <tr>
               <th>Propuesta</th>
               <th width="120">Fecha</th>
               <th width="70">Voto</th>
         	  </tr>
-        	  <% @member.votes[0..4].each do |vote| %>
+        	  <% @bills.each do |bill| %>
+        	    <% vote = @member.vote_object(bill) %>
         	    <tr>
-          	    <td><%= link_to(truncate(vote.voteable.name, :length => 80), vote.voteable) %></td>
-          	    <td><%= es_date(vote.voteable.date) %></td>
-          	    <td><span class="<%= display_vote(vote.vote, vote.voteable).downcase %>"><%= display_vote(vote.vote, vote.voteable) %></span></td>
+          	    <td><%= link_to(truncate(bill.name, :length => 80), bill) %></td>
+          	    <td><%= es_date(bill.vote_date) %></td>
+          	    <td><span class="<%= member_vote_class(vote).downcase %>"><%= member_vote(vote) %></span></td>
         	    </tr>
           	<% end %>
         	</table>

@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :terms
+
   map.resources :contacts, :collection => {:deliver => :any}
 
   map.resources :tags
@@ -11,7 +13,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :districts
 
   map.resources :sittings
-  map.resources :absences
+  map.resources :assistances
   map.resources :views
   
   map.update_bill_votes '/bill/:bill_id/votes', :controller => 'votes', :action => 'update'
@@ -34,6 +36,11 @@ ActionController::Routing::Routes.draw do |map|
   map.about_us '/conocenos', :controller => 'dashboard', :action => "about"
   map.forgot_form '/forgot_form', :controller => 'users', :action => 'forgot_form'
   map.forgot_password '/forgot', :controller => 'users', :action => 'forgot'
+  map.profile '/profile', :controller => 'register', :action => 'profile'
+  map.save_profile '/save_profile', :controller => 'register', :action => 'save_profile'
+  map.notifications '/notifications', :controller => 'register', :action => 'notifications'
+  map.save_notifications '/save_notifications', :controller => 'register', :action => 'save_notifications'
+  map.success '/bienvenido', :controller => 'register', :action => 'success'
   
   map.resources :users
   map.resources :citizens

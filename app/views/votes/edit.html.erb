@@ -2,7 +2,8 @@
 
 <% form_tag update_bill_votes_path(@bill) do |f| %>
 	
-	<% Party.all.each do |party| %>
+	<% Member.present_in_sitting(@bill.sitting).include_party.group_by(&:party_id).each do |party_id, members| %>
+	  <% party = members.first.party %>
 	  <h3><%= party.name %></h3>
 	  <p>Opciones para seleccionar votos del <%= party.abbr %></p>
 	  <%= link_to "Todos a favor", "#", "data-vote" => "for", :class => "multiple_vote_select" %>
@@ -14,7 +15,7 @@
   			<th>En Contra</th>
   			<th>Abstención</th>
   		</tr>
-		  <% for member in party.members %>
+		  <% for member in members %>
   			<tr>
   				<td><%= member.name %></td>
   				<td><%= radio_button_tag "votes[#{member.id}][]", 1, @bill.voted_result_by?(member, true), :class => "for" %></td>

@@ -1,10 +1,14 @@
 class Sitting < ActiveRecord::Base
   
-  has_many  :absences
+  has_many  :assistances
+  has_many  :absences, :class_name => 'Assistance', :conditions => ['assistances.assisted = ?', false]
+  has_many  :members, :through => :assistances
+  has_many  :bills
+  belongs_to  :term
   
   accepts_nested_attributes_for :absences, :reject_if => lambda { |a| a[:member_name].blank? }, :allow_destroy => true
   
-  attr_accessor :publish_absences_on_social_media
+  attr_accessor :publish_assistances_on_social_media
   
   year_selector = Rails.env.production? ? "EXTRACT(YEAR FROM sittings.date)" : "YEAR(sittings.date)"
   named_scope :year, lambda { |*args| { :conditions => ["#{year_selector} = ?", args.first] } }
@@ -20,9 +24,17 @@ class Sitting < ActiveRecord::Base
   def formatted_date=(date)
   end
   
+  def before_validation
+    self.assistances.present.destroy_all
+  end
+  
   def after_save
-    if publish_absences_on_social_media.to_i == 1
+    if publish_assistances_on_social_media.to_i == 1
       PingFM.post_to_social_media("Ausencias de la sesion: #{self.name}", "#{$global_url}/sittings/#{self.id}")
+    end
+    
+    (Member.active-self.members).each do |member|
+      self.assistances.create(:member_id => member.id, :assisted => 1)
     end
   end
 end

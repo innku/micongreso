@@ -1,0 +1,74 @@
+<% content_for :title do -%>
+  Mi Congreso - Registro
+<% end -%>
+
+<% content_for :body_class do -%>
+<% end -%>
+
+<div id="rest">
+  
+  <h2 class="section">Preferencias de Notificaciones</h2>
+  
+  <div class="left">
+    <div class="cien propuestas">
+        <div id="notifications" class="propuesta">
+          <% form_for @user, :url => save_notifications_path do |f| %>
+            <%= f.error_messages :header_message => "¡Por favor intenta de nuevo!", :message => "Se encontraron los siguientes problemas:" %>
+
+            <% f.fields_for :notification do |n| %>
+              <h4>¿Por cuáles medios deseas recibir notificaciones?</h4>
+              <p>
+                <%= hidden_field_tag "user[notification_attributes][email]", false, :id => "user_hidden_email" %>
+                <%= check_box_tag "user[notification_attributes][email]", true, n.object.email, :id => "user_notification_attributes_email" %>
+                <%= n.label :email, "Correo Electrónico" %>
+              </p>
+
+              <h4><%= n.label :interest_topics, "Recibir notificaciones relacionadas a:" %></h4>
+              <p>
+                <%= n.radio_button :interest_topics, false %> <%= n.label :interest_topics_false, "Todos los temas" %>
+                <%= n.radio_button :interest_topics, true %> <%= n.label :interest_topics_true, "Mis temas de interés" %>
+              </p>
+            <% end %>
+
+            <h4>Temas de Interés</h4>
+            <p>Selecciona tus temas de interés</p>
+
+            <ul id="tag_ids">
+              <% Tag.all.each do |tag| %>
+                <li>
+                  <%= link_to tag.name, "#{tag.id}", :class => "#{tag_classes(@user, tag)}" %>
+                  <%= hidden_field_tag "user[tag_ids][]", tag.id, :disabled => !@user.tags.include?(tag) %>
+                </li>
+              <% end %>
+            </ul>
+
+            <div class="clear"></div>
+
+            <p>
+              <%= hidden_field_tag :tab, 2 %>
+              <%= f.submit "Terminar Registro", :class => "action" %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+      
+    </div>
+    
+    <div class="right">
+      <div class="register">
+        <h2>Una última cosa</h2>
+
+        <h3>¿Como deseas que nos comuniquemos contigo?</h3> 
+        <p>Para que sólo informarte de lo que te interesa, por favor dinos por que medios deseas que nos comuniquemos contigo.</p>
+        
+        <h3>Temas de Interés</h3>
+        <p>Selecciona tus temas de interés y dinos si deseas que te comuniquemos sobre todo lo que ocurre en MiCongreso, o sólo lo 
+          relacionado a ciertos temas.</p>
+      </div>
+
+    </div>
+  </div>
+  
+</div>
+
+

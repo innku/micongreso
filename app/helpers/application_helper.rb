@@ -14,6 +14,24 @@ module ApplicationHelper
     end
   end
   
+  def member_vote_class(vote)
+    if vote
+      return "neutral" if vote.vote.nil?
+      vote.vote == true ? "favor" : "contra"
+    else
+      "neutral"
+    end
+  end
+  
+  def member_vote(vote)
+    if vote
+      return "Abstención" if vote.vote.nil?
+      vote.vote == true ? "A Favor" : "En Contra"
+    else
+      "Faltó a la sesión"
+    end
+  end
+  
   def display?(value)
     "display: none;" unless value
   end

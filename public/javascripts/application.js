@@ -13,6 +13,10 @@ $(document).ready( function(){
 	  settings.data += (settings.data ? "&" : "") + "authenticity_token=" + encodeURIComponent(AUTH_TOKEN);
 	});
 	
+	$("a[href='#']").click(function(){
+	  return false;
+	})
+	
 	$(".tabs li a").click(function (){
 	  $(".tabs ul li a").removeClass("active");
     $("a[href='"+$(this).attr("href")+"']").addClass("active");
@@ -22,7 +26,7 @@ $(document).ready( function(){
 	  return false;
 	})
 	
-	if ($("body").hasClass("dashboard")) {
+	if ($("body").hasClass("dashboard") || $("body").hasClass("about")) {
 	  $("a#search_link").fancybox();
 	  $("a.invite_link").fancybox();
 	  $("a.signup_link").fancybox({'autoDimensions':false,'width':460,'height':530});
@@ -75,7 +79,10 @@ $(document).ready( function(){
 		return false;
 	})
 	
-	$('.absence').click(function(){
+	// ------------- Sesiones --------------
+	
+	// Agregar asistencias
+	$('.assistance').click(function(){
 		if ($(this).is(':checked')) {
 			$(this).parent().next().children().show();
 		}
@@ -89,7 +96,7 @@ $(document).ready( function(){
 		}
 	})
 	
-	if ($("body").hasClass("absences")) {
+	if ($("body").hasClass("assistances")) {
 		$(".member_name").each(function(){
 			$(this).autocomplete('/members.js');
 		})
@@ -99,6 +106,17 @@ $(document).ready( function(){
 		$(".member_name").each(function(){
 			$(this).autocomplete('/members.js');
 		})
+	})
+	
+	// Relacionar propuestas a una sesión
+	$('.delete_bill_to_vote').live('click', function(){
+	  $(this).parent().remove();
+	  return false;
+	})
+	
+	$('#add_bill_to_sitting').click(function(){
+	  $(this).prev().clone().show().find("select").attr("disabled", "").end().appendTo('#bills_to_vote');
+	  return false;
 	})
 	
 	// ------------- Editar Votos --------------
@@ -220,6 +238,14 @@ $(document).ready( function(){
 	  form.hide();
 	  $("#sending").show();
 	  $.post(form.attr("action"), form.serialize(), null, "script");
+	  return false;
+	})
+	
+	// --------------- Detalle de la Propuesta ------------
+	
+	$("#resolution_link").click(function(){
+	  $(this).hide();
+	  $("#resolution").slideToggle('slow');
 	  return false;
 	})
 	

@@ -1,0 +1,16 @@
+<% title "Assistance" %>
+
+<p>
+  <strong>Justified:</strong>
+  <%=h @assistance.justified %>
+</p>
+<p>
+  <strong>Justification:</strong>
+  <%=h @assistance.justification %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_assistance_path(@assistance) %> |
+  <%= link_to "Destroy", @assistance, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", assistances_path %>
+</p>

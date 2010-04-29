@@ -6,9 +6,12 @@ class Member < ActiveRecord::Base
   belongs_to  :state
   belongs_to  :party
   belongs_to  :district
+  belongs_to  :term
     
   has_many    :messages,  :dependent => :destroy
-  has_many    :absences,  :dependent => :destroy
+  has_many    :assistances,  :dependent => :destroy
+  has_many    :absences, :class_name => 'Assistance', :conditions => ['assistances.assisted = ?', false]
+  has_many    :bills
   
   attr_accessor :importing
   
@@ -40,6 +43,10 @@ class Member < ActiveRecord::Base
   named_scope :complete, :conditions => ['complete = ?', true]
   named_scope :duplicate, :conditions => ['duplicate = ?', true]
   named_scope :included, :include => [:state, :district, :party]
+  named_scope :active, :conditions => ['status = ?', 'active']
+  named_scope :present_in_sitting, lambda { |sitting| { :include => :assistances, :conditions => ['assistances.sitting_id = ? AND assistances.assisted = ?', sitting.id, true] } }
+  named_scope :include_party, :include => :party
+  
   
   def self.find_by_email_or_name(string)
     member = find_by_email(string)

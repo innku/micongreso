@@ -55,10 +55,12 @@ a:active{
 }
 /*MENU*/
 #nav ul {
-	margin: 25px 0 0 0;
-	padding: 0;
-	list-style-type: none;
-	float: right;
+	-moz-border-radius:8px 8px 8px 8px;
+	background:none repeat scroll 0 0 #ECECE9;
+	float:right;
+	list-style-type:none;
+	margin:18px 0 0;
+	padding:5px;
 }
 #nav ul li {
 	float: left;
@@ -66,11 +68,12 @@ a:active{
 	padding: 0;
 }
 #nav ul li a {
-	font-size: 1.14em;
-	color: #2E2013;
-	display: block;
-	padding: 6px 10px;
-	font-weight: bold;
+	border-right:1px dotted #CCCCCC;
+	color:#2E2013;
+	display:block;
+	font-size:1.14em;
+	font-weight:bold;
+	padding:6px 10px;
 }
 #nav ul li a:hover {
 	color: #B63D46;
@@ -87,7 +90,7 @@ a:active{
 
 #nav ul li.email a {
 	color: #B63D46;
-	padding: 6px 0 6px 20px;
+	padding: 6px 10px 6px 10px;
 }
 /*PITCH*/
 #pitch {
@@ -1141,6 +1144,10 @@ p.news_date {
 	color: #CC5577;
 	font-weight: bold;
 }
+#votaciones span.neutral {
+	color: #8e8e8f;
+	font-weight: bold;
+}
 /*PAGER*/
 #pager ul {
 	margin: 15px 0px 25px 0px;
@@ -1456,6 +1463,171 @@ form#deliver_invitations textarea {
 }
 
 /*-------------------------------------------------
+REGISTER
+-------------------------------------------------*/
+
+.register {
+	padding: 10px;
+}
+
+.right .register {
+	padding: 10px;
+	margin-top: 10px;
+}
+
+#rest .wide {
+	width: 900px;
+}
+
+#rest .success {
+	-moz-border-radius:5px 5px 5px 5px;
+	background:none repeat scroll 0 0 #ECECE9;
+	float:left;
+	padding:5px;
+	width:932px;
+}
+
+#rest .success .message {
+	-moz-border-radius:2px 2px 2px 2px;
+	-moz-box-shadow:0 1px 3px #CCCBC4;
+	background:none repeat scroll 0 0 #FFFFFF;
+	float:left;
+	margin:5px 0;
+	padding:15px;
+	position:relative;
+	width:900px;
+}
+
+#rest .success .message h2 {
+	margin: 0 0 20px 0;
+	text-transform: none;
+	font-size: 20px;
+}
+
+#rest .success .message p {
+	font-size: 16px;
+}
+
+#rest .success .message div.bullet {
+	width: 29px;
+	height: 35px;
+	background: url(/images/bullet.png) no-repeat;
+	font-family:"union",palatino,georgia,times;
+	font-size: 20px;
+	color: #fff;
+	float: left;
+	padding: 8px 0 0 14px;
+}
+
+#rest .success .message div.text {
+	float: left;
+	width: 800px;
+	font-size: 14px;
+	margin-left: 10px;
+	margin-bottom: 20px;
+}
+
+#rest .success .message div.text p {
+	font-size: 14px;
+	margin-bottom: 0px;
+	margin-top: 10px;
+}
+
+#rest .success .message div.text span.important {
+	background: #CC2559;
+	padding: 1px;
+	color: #fff;
+	font-size: 16px;
+	font-weight: bold;
+	margin-bottom: 2px;
+}
+
+#rest .success .message div.text h4 {
+	margin: 0 0 6px 0;
+}
+
+#rest .success .point {
+	clear: both;
+}
+
+#rest .success .last .text {
+	padding-bottom: 20px;
+}
+
+#rest .success .final {
+	text-align: center;
+	border-top: 1px dashed #CC2559;
+	border-bottom: 1px dashed #CC2559;
+	padding: 0px 50px;
+	clear: both;
+	color: #CC2559;
+	margin-top: 20px;
+}
+
+#rest .success .final p {
+	font-family:"union",palatino,georgia,times;
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 30px;
+}
+
+#warning {
+	background: #FFFCCB url(/images/icon_warning_small.png) no-repeat 0 2px;
+	float: left;
+	width: 100%;
+	margin-bottom: 10px;
+	margin-top: -10px;
+	border: 1px solid #ECA42E;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+#warning .text {
+	padding: 6px 10px;
+	margin-left: 30px;
+	font-weight: bold;
+}
+
+/*-------------------------------------------------
+BILL
+-------------------------------------------------*/
+
+#resolution {
+	padding: 10px;
+	border: 1px solid #EEE;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	background: #FFF8F7;
+	font-family: georgia;
+	font-style: italic;
+}
+
+#resolution h4 {
+	margin: 5px 0 0 0;
+	color: #663300;
+	font-size: 1.2em;
+	border: none;
+	padding: 0px;
+	text-transform: none;
+	font-style: normal;
+}
+
+#resolution_link {
+	font-size: 14px;
+	color: #663300;
+	font-weight: bold;
+}
+
+#description ul#resources {
+	list-style: none;
+	margin: 0 0 10px 0;
+	padding: 0;
+}
+
+
+/*-------------------------------------------------
 NEWS
 -------------------------------------------------*/
 
@@ -1569,6 +1741,106 @@ FLASH MESSAGES
 
 .lighTip img {
 	float: left;
+}
+
+
+/*-------------------------------------------------
+ABOUT US
+-------------------------------------------------*/
+
+/*NOSOTROS*/
+#rest .nosotros h2 {
+	text-transform: none;
+	font-size: 1.6em;
+	margin-top: 0;
+}
+p.destacado {
+	color: #B63D46;
+	font-size: 14px;
+	border-top: 1px dotted #CCC;
+	border-bottom: 1px dotted #CCC;
+	padding: 15px 0px;
+	text-align: center;
+	width: 100%;
+	margin: 10px 0px;
+	float: left;
+}
+#invita_lateral h2 {
+	color:#2E2013;
+	font-family:"union",palatino,georgia,times;
+	font-size:1.3em;
+	letter-spacing:-0.05em;
+}
+#invita_lateral {
+	margin-top: 30px;
+}
+#invita_lateral input.texto {
+	width: 274px;
+	border: 1px solid #CCC;
+	background: #EEE;
+	padding: 8px;
+	margin-top: 4px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+}
+#p01 img {
+	float: left;
+	margin-right: 15px;
+	margin-bottom: 10px;
+}
+#p03 img {
+	float: left;
+	margin-right: 20px;
+}
+#p01 {
+	border-bottom: 1px dotted #CCC;
+}
+#p02 img {
+	float: right;
+	margin-left: 25px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+#p03, #p02, #p01 {
+	width: 100%;
+	float: left;
+	margin-bottom: 10px;
+}
+
+/*-------------------------------------------------
+FOOTER
+-------------------------------------------------*/
+
+/*FOOTER*/
+#footer {
+	color: #FFF;
+	padding-top: 10px;
+}
+.lista_footer {
+	float: left;
+	margin-right: 30px;
+}
+.lista_footer h2 {
+	font-size: 1em;
+	color: #B8B7AD;
+	text-shadow: 0px 0px 1px #000;
+	text-transform: uppercase;
+}
+.lista_footer ul {
+	margin: 10px 0px;
+	padding: 0px;
+	list-style-type: none;
+	letter-spacing: .1em;
+}
+.lista_footer ul li a {
+	border-top: 1px dotted #7D766B;
+	color: #A9A79D;
+	display: block;
+	padding: 3px 12px 3px 4px;
+	font-size: .84em;
+}
+.lista_footer ul li a:hover {
+	background: #675D52;
 }
 
 

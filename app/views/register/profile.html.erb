@@ -1,0 +1,94 @@
+<% content_for :title do -%>
+  Mi Congreso - Registro
+<% end -%>
+
+<% content_for :body_class do -%>
+<% end -%>
+
+<div id="rest">
+  
+  <h2 class="section">Mi Perfil</h2>
+  
+  <div class="left">
+    <div class="cien propuestas">
+        <div id="profile" class="propuesta">
+          <% form_for @user, :url => save_profile_path, :html => { :multipart => true } do |f| %>
+            <%= f.error_messages :header_message => "¡Por favor intenta de nuevo!", :message => "Se encontraron los siguientes problemas:" %>
+
+            <% f.fields_for :profile do |p| %>
+              <table style="float: left;" width="500px">
+                <tr>
+                  <td width="140px"><%= p.label :political_views, "Ideología Política" %></td>
+                  <td><%= p.select :political_views, Profile::POLITICAL_VIEWS %></td>
+                </tr>
+                <tr>
+                  <td><%= p.label :ocupation, "Ocupación" %></td>
+                  <td><%= p.select :ocupation, Profile::OCUPATIONS %></td>
+                </tr>
+                <tr>
+                  <td><%= p.label :education, "Nivel de Educación" %></td>
+                  <td><%= p.select :education, Profile::EDUCATION_LEVELS %></td>
+                </tr>
+                <tr>
+                  <td><%= p.label :marital_status, "Estado Civil" %></td>
+                  <td><%= p.select :marital_status, Profile::MARITAL_STATUSES %></td>
+                </tr>
+                <tr>
+                  <td><%= p.label :sex, "Género" %></td>
+                  <td>
+                    <%= p.radio_button :sex, true %> <%= p.label :sex_true, "Masculino" %>
+                    <%= p.radio_button :sex, false %> <%= p.label :sex_false, "Femenino" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td><%= p.label :birthdate, "Fecha de Nacimiento" %></td>
+                  <% months = MONTHS; months.delete("") %>
+                  <td><%= p.date_select :birthdate, :order => [:day, :month, :year], :start_year => Date.today.year-100, :end_year => Date.today.year-10, :default => Date.today-25.years, :use_month_names => months %></td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <% if p.object.avatar? %>
+                      <div id="avatar">
+                        <%= image_tag(p.object.avatar.url(:small)) %>
+                        <%= link_to "Cambiar Foto", "#", :id => "change_avatar" %>
+                      </div>
+                    <% end %>
+                      <p id="avatar_field" style="<% if p.object.avatar? %>display: none;<% end %>">
+                        <%= p.label :avatar, "Fotografía" %>
+                        <%= p.file_field :avatar %>
+                        <% if p.object.avatar? %>
+                          <%= link_to "No cambiar foto", "#", :id => "cancel_change_avatar" %>
+                        <% end %>
+                      </p>
+                    <% end %>
+                  </td>
+                </tr>
+              </table>
+              <div class="clear"></div>
+
+            <p>
+              <%= hidden_field_tag :tab, 1 %>
+              <%= f.submit "Continuar »", :class => "action" %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+      
+    </div>
+    
+    <div class="right">
+      <div class="register">
+        <h2>¡Gracias por participar!</h2>
+
+        <h3>Estas a punto de terminar tu registro</h3> 
+        <p>Te pedimos la información a la izquierda con el solo objetivo de hacer estudios generales de toda la información y detectar tendencias.</p>
+        <p>En ningún momento compartimos esta información con ningún tercero.</p>
+      </div>
+
+    </div>
+  </div>
+
+  
+</div>
+
+

@@ -5,14 +5,17 @@ class SittingsController < ApplicationController
   
   def show
     @sitting = Sitting.find(params[:id])
+    @assistances = @sitting.assistances.include_member.present
+    @absences = @sitting.assistances.include_member.absent
   end
   
   def new
     @sitting = Sitting.new
-    10.times { @sitting.absences.build }
+    10.times { @sitting.assistances.build }
   end
   
   def create
+    params[:sitting][:bill_ids] ||= []
     @sitting = Sitting.new(params[:sitting])
     if @sitting.save
       flash[:notice] = "Successfully created sitting."
@@ -27,6 +30,7 @@ class SittingsController < ApplicationController
   end
   
   def update
+    params[:sitting][:bill_ids] ||= []
     @sitting = Sitting.find(params[:id])
     if @sitting.update_attributes(params[:sitting])
       flash[:notice] = "Successfully updated sitting."
