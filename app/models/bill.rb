@@ -49,6 +49,7 @@ class Bill < ActiveRecord::Base
   end
   
   def closed?
+    return false if self.vote_date.nil?
     (self.vote_date < Date.today) && !self.pending?
   end
   

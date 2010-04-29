@@ -55,7 +55,8 @@ a:active{
 }
 /*MENU*/
 #nav ul {
-	-moz-border-radius:8px 8px 8px 8px;
+	-moz-border-radius:8px;
+	-webkit-border-radius: 8px;
 	background:none repeat scroll 0 0 #ECECE9;
 	float:right;
 	list-style-type:none;
