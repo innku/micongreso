@@ -7,6 +7,8 @@ class Member < ActiveRecord::Base
   belongs_to  :party
   belongs_to  :district
   belongs_to  :term
+  
+  belongs_to  :congress, :class_name => "State"
     
   has_many    :messages,  :dependent => :destroy
   has_many    :assistances,  :dependent => :destroy

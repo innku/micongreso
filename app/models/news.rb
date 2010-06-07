@@ -2,6 +2,8 @@ require 'feedzirra'
 
 class News < ActiveRecord::Base
   
+  belongs_to  :congress, :class_name => "State"
+  
   cattr_reader :per_page
   @@per_page = 10
   

@@ -40,7 +40,6 @@ class VotesController < ApplicationController
   def update
     @bill = @voteable
     @bill.update_votes(params[:votes])
-    logger.warn "Lo va a publicar? #{params[:publish_votes_on_social_media].to_i == 1}"
     PingFM.post_to_social_media("Resultados propuesta: #{@bill.name}", bill_url(@bill)) if params[:publish_votes_on_social_media].to_i == 1
     User.citizens.each {|citizen| UserMailer.deliver_bill_votes(citizen, @bill)} if params[:send_emails].to_i == 1
     redirect_to edit_bill_votes_path(@bill)

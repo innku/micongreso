@@ -4,6 +4,9 @@ class State < ActiveRecord::Base
   has_many :districts
   has_many :cities
   
+  has_many :local_members, :class_name => "Member", :foreign_key => "congress_id"
+  has_many :bills, :foreign_key => "congress_id"
+  
   belongs_to  :region
   
   has_many :sections, :through => :districts

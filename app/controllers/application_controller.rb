@@ -8,7 +8,11 @@ class ApplicationController < ActionController::Base
   include AuthenticatedSystem
   #include ApiAuthorizedFilter
   
-  before_filter :login_required
+  before_filter :login_required, :find_local_congress
+  
+  def find_local_congress
+    @state_congress = State.find_by_subdomain(current_subdomain) unless current_subdomain.blank?
+  end
   
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
