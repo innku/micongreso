@@ -16,11 +16,7 @@
     <div id="header"> 
     	<div class="contenido"> 
     		<div id="logo">
-    		  <% if @state_congress %>
-    		    <%= link_to image_tag("logo-#{@state_congress.subdomain}.gif"), root_path %>
-    		  <% else %>
-    		    <%= link_to image_tag("logo.gif"), root_path %>
-    		  <% end %>
+    		  <%= link_to image_tag("logo.gif"), root_path %>
     		</div> 
     		<%= render :partial => "layouts/menu" %>
     	</div>
