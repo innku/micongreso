@@ -95,23 +95,22 @@
 <% end %>
 
 <div id="rest"> 
-	<div class="left"> 
-		<div class="tabs"> 
-  		<h2>Propuestas</h2> 
-  		<ul> 
-  			<li><%= link_to "Más populares", root_path(:type => "recent_popular"), :class => tab_class(params[:type], "recent_popular") %></li> 
-  			<li><%= link_to "Recientes", root_path(:type => "recent"), :class => tab_class(params[:type], "recent") %></li> 
-  			<li><%= link_to "Activas", root_path(:type => "active"), :class => tab_class(params[:type], "active") %></li> 
-  			<li><%= link_to "Cerradas", root_path(:type => "closed"), :class => tab_class(params[:type], "closed") %></li> 
-  		</ul>
-		</div>
+	<div class="left">
+		<% if current_user %>
+			<h2 class="anouncement">
+				Te mostramos en forma de ejemplo algunas propuestas del periodo de sesiones pasado. 
+				Durante el siguiente periodo de sesiones estaremos manteniendo las propuestas al día.
+			</h2>
+			<%= render :partial => "bills" %>
+		<% else %>
+			<h2 class="anouncement">Se de los primeros en registrarte. Te avisaremos cuando comencemos la actividad en el sitio</h2>
 
-		<div class="propuestas">
-		  <%= image_tag("spinner.gif", :style => "display: none;", :id => "spinner") %>
-		  <div id="propuestas">
-		    <%= render :partial => '/bills/bill', :collection => @bills %>
-		  </div>
-		</div>
+			<div class="propuestas">
+	      <div id="interna" class="propuesta cien">
+					<%= render :partial => "citizens/form" %>
+				</div>
+			</div>
+		<% end %>
 
 	</div>
 		

@@ -22,6 +22,19 @@ a:active{
 }
 * { outline: none; }
 
+h2.anouncement {
+	background: url(/images/tongue.png) no-repeat 10px 20px;
+	border: 4px solid #B63D46;
+	-moz-border-radius:5px;
+	-webkit-border-radius: 5px;
+	text-transform: none !important;
+	padding: 10px 10px 10px 70px;
+}
+
+form h2 {
+	text-transform: none !important;
+}
+
 /*LAYOUT*/
 #header {
 	background: #FFF;
