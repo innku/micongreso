@@ -1,5 +1,3 @@
-require 'feedzirra'
-
 class News < ActiveRecord::Base
   
   belongs_to  :congress, :class_name => "State"
