@@ -1,7 +1,5 @@
-rails -v 2.3.9
 fastercsv
 searchlogic
-facebooker
 contacts
 will_paginate
 subdomain-fu
