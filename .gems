@@ -1,6 +1,7 @@
 rails -v 2.3.5
 fastercsv
 searchlogic -v 2.4.19
+hpricot
 contacts
 will_paginate -v 2.3.11
 subdomain-fu
