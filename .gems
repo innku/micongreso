@@ -6,3 +6,4 @@ contacts
 will_paginate -v 2.3.11
 subdomain-fu
 heroku
+aws-s3
