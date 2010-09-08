@@ -17,7 +17,7 @@ Rails::Initializer.run do |config|
   # Specify gems that this application depends on and have them installed with rake gems:install
   
   config.gem "fastercsv"
-  config.gem "searchlogic"
+  config.gem "searchlogic", :version => "= 2.4.19"
   config.gem "contacts"
   config.gem "will_paginate", :version => "= 2.3.11"
   config.gem "heroku"

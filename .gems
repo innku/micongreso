@@ -1,5 +1,5 @@
 fastercsv
-searchlogic
+searchlogic -v 2.4.19
 contacts
-will_paginate
+will_paginate -v 2.3.11
 subdomain-fu
