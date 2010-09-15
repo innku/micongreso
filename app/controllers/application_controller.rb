@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
     @state_congress = State.find_by_subdomain(current_subdomain) unless current_subdomain.blank?
   end
   
+  
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
 end
