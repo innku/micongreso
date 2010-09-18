@@ -1,4 +1,4 @@
-<% form_tag contacts_path, :id => "contacts_form" do %>
+<%= form_tag contacts_path, :id => "contacts_form" do %>
   <h2>Invita a los contactos de tu cuenta de correo</h2>
   <p>
     <%= radio_button_tag :provider, "gmail", params[:provider] == "gmail" ? true : false %> <%= label_tag :provider_gmail, image_tag("gmail.png") %>

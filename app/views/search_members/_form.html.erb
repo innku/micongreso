@@ -1,5 +1,5 @@
-<% form_for @search_member do |f| %>
-  <%= f.error_messages %>
+<%= form_for @search_member do |f| %>
+  <%= render "layouts/error_messages", :target => @search_member %>
   <p>
     <%= f.label :name, "Nombre" %><br/>
     <%= f.text_field :name %>

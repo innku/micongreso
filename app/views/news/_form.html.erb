@@ -7,8 +7,8 @@
  class='text_counter'
 <% end -%>
 
-<% form_for @news, :html => { :multipart => true } do |f| %>
-  <%= f.error_messages %>
+<%= form_for @news, :html => { :multipart => true } do |f| %>
+  <%= render "layouts/error_messages", :target => @news %>
   <p>
     <%= f.label :title, "Título" %><br />
     <%= f.text_field :title %>
@@ -37,10 +37,10 @@
 	
 	<p>Selecciona los temas de interés relacionados a la noticia</p>
 	<ul id="tag_ids">
-    <% Tag.all.each do |tag| %>
+    <% ActsAsTaggableOn::Tag.all.each do |tag| %>
       <li>
         <%= link_to tag.name, "#{tag.id}", :class => "#{tag_classes(@news, tag)}" %>
-        <%= hidden_field_tag "news[tag_ids][]", tag.id, :disabled => !@news.tags.include?(tag) %>
+        <%= hidden_field_tag "news[tag_list][]", tag.name, :disabled => !@news.tags.include?(tag) %>
       </li>
     <% end %>
   </ul>

@@ -1,6 +1,6 @@
 <div class="propuesta"> 
 	<div class="ribbon"> 
-		<p><%= bill.date.strftime("%d") %><br /><%= SHORT_MONTHS[bill.date.month] %></p>		
+		<p><%= bill.date.strftime("%d") %><br /><%= t('date.abbr_month_names')[bill.date.month] %></p>		
 	</div>
 	<h3><%= link_to bill.name, bill %></h3> 
 	<ul class="graficas">

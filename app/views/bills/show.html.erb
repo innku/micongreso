@@ -88,16 +88,18 @@
 				
 				<p>
 				  <strong>Fecha de Presentación:</strong>
-          <%= es_date(@bill.date) %>
+          <%= l @bill.date, :format => :long %>
 				</p>
 				
 				<p class="fecha">
           <strong>Fecha de Votación:</strong>
-          <%= vote_date(@bill.vote_date) %>
+					<% if @bill.vote_date %>
+          	<%= l @bill.vote_date, :format => :long %>
+					<% end %>
         </p>
         
         <div id="description">
-          <%= @bill.description %>
+          <%=raw @bill.description %>
           
           <% if @bill.resources.any? %>
             <h3>Recursos adicionales</h3>
@@ -201,8 +203,8 @@
           	<h4>Envíanos tus comentarios:</h4>
             
             <% if current_user %>
-            	<% form_for [@bill, Comment.new] do |f| %>
-            		<%= f.error_messages %>
+            	<%= form_for [@bill, Comment.new] do |f| %>
+            		<%= render "layouts/error_messages", :target => @bill %>
             		<p>
             			<strong><%= f.label :title, "Título" %></strong> <br />
             			<%= f.text_field :title, :class => "comment_input" %>
@@ -212,7 +214,7 @@
             			<%= f.text_area :comment, :rows => 6, :cols => 50, :class => "comment_input" %>
             		</p>
             		<p>
-            			<%= recaptcha_tags(:display => {:theme => "clean"}) %>
+            			<%=raw recaptcha_tags(:display => {:theme => "clean"}) %>
             		</p>
             		<p>
             			<%= f.submit "Enviar Comentario", :class => "action" %>
@@ -234,7 +236,7 @@
     <div id="lateral" class="refinador">
       <h1>Busca propuestas</h1>
       
-      <% form_tag bills_path, :method => :get do %>
+      <%= form_tag bills_path, :method => :get do %>
         <p>
           <%= text_field_tag :search, params[:search] %>
         </p>

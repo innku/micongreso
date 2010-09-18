@@ -40,7 +40,7 @@
     <div id="lateral" class="refinador">
       <h1>Busca propuestas</h1>
       
-      <% form_tag bills_path, :method => :get do %>
+      <%= form_tag bills_path, :method => :get do %>
         <p>
           <%= text_field_tag :search, params[:search] %>
         </p>
@@ -52,7 +52,7 @@
     <div id="topics">
       <h2>Temas en las propuestas</h2>
       <ul id="topic_list" class="blocklist">
-        <% Tag.all.each do |tag| %>
+        <% ActsAsTaggableOn::Tag.all.each do |tag| %>
           <li><%= link_to tag.name, bills_tag_path(tag)  %></li>
         <% end %>
       </ul>
@@ -61,7 +61,7 @@
       <h2>Archivo <%= params[:year] || Date.today.year %></h2>
       <ul id="topic_list" class="blocklist">
         <% [1,2,3,4,5,6,7,8,9,10,11,12].each do |month| %>
-          <li><%= link_to "#{MONTHS[month]} (#{Bill.monthly(month, params[:year] || Date.today.year).count})", bills_archive_path(month, params[:year] || Date.today.year)  %></li>
+          <li><%= link_to "#{t('date.month_names')[month]} (#{Bill.monthly(month, params[:year] || Date.today.year).count})", bills_archive_path(month, params[:year] || Date.today.year)  %></li>
         <% end %>
       </ul>
       <ul class="links">

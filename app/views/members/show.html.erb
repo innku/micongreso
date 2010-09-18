@@ -65,7 +65,7 @@
         	    <% vote = @member.vote_object(bill) %>
         	    <tr>
           	    <td><%= link_to(truncate(bill.name, :length => 80), bill) %></td>
-          	    <td><%= es_date(bill.vote_date) %></td>
+          	    <td><%=l bill.vote_date, :format => :long %></td>
           	    <td><span class="<%= member_vote_class(vote).downcase %>"><%= member_vote(vote) %></span></td>
         	    </tr>
           	<% end %>
@@ -84,8 +84,8 @@
         <div id="comment_form" class="cien">
         	<h3>Enviar mensaje a diputado</h3>
 
-        	<% form_for [@member, @message] do |f| %>
-        		<%= f.error_messages %>
+        	<%= form_for [@member, @message] do |f| %>
+        		<%= render "layouts/error_messages", :target => @message %>
             
             <% if current_user %>
               <p>
@@ -110,7 +110,7 @@
         			<%= f.text_area :text, :rows => 6, :class => "comment_input texto" %>
         		</p>
         		<p style="clear: both;">
-        			<%= recaptcha_tags(:display => {:theme => "clean"}) %>
+        			<%=raw recaptcha_tags(:display => {:theme => "clean"}) %>
         		</p>
         		<p>
         			<%= f.submit "Enviar mensaje", :class => "action" %>

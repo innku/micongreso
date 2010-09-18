@@ -1,7 +1,7 @@
-<% form_for @citizen, :url => citizen_path(@citizen) do |f| %>
-  <%= f.error_messages :header_message => "¡Por favor intenta de nuevo!", :message => "Se encontraron los siguientes problemas:" %>
+<%= form_for @citizen, :url => citizen_path(@citizen) do |f| %>
+  <%= render "layouts/error_messages", :target => @citizen %>
   
-  <% f.fields_for :notification do |n| %>
+  <%= fields_for @citizen.notification do |n| %>
     <h4>¿Por cuáles medios deseas recibir notificaciones?</h4>
     <p>
       <%= hidden_field_tag "user[notification_attributes][email]", false, :id => "user_hidden_email" %>
@@ -20,10 +20,10 @@
   <p>Selecciona tus temas de interés</p>
   
   <ul id="tag_ids">
-    <% Tag.all.each do |tag| %>
+    <% ActsAsTaggableOn::Tag.all.each do |tag| %>
       <li>
         <%= link_to tag.name, "#{tag.id}", :class => "#{tag_classes(@citizen, tag)}" %>
-        <%= hidden_field_tag "user[tag_ids][]", tag.id, :disabled => !@citizen.tags.include?(tag) %>
+        <%= hidden_field_tag "user[tag_list][]", tag.name, :disabled => !@citizen.tags.include?(tag) %>
       </li>
     <% end %>
   </ul>

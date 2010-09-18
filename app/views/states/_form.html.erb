@@ -1,5 +1,5 @@
-<% form_for @state do |f| %>
-  <%= f.error_messages %>
+<%= form_for @state do |f| %>
+  <%= render "layouts/error_messages", :target => @state %>
   <p>
     <%= f.label :name %><br />
     <%= f.text_field :name %>

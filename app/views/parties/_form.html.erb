@@ -1,5 +1,5 @@
-<% form_for @party do |f| %>
-  <%= f.error_messages %>
+<%= form_for @party do |f| %>
+  <%= render "layouts/error_messages", :target => @party %>
   <p>
     <%= f.label :name, "Nombre" %><br />
     <%= f.text_field :name %>

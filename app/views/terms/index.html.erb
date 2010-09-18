@@ -9,8 +9,8 @@
   <% for term in @terms %>
     <tr>
       <td><%= link_to term.name, term %></td>
-      <td><%= es_date(term.start_date) %></td>
-      <td><%= es_date(term.end_date) %></td>
+      <td><%= l term.start_date, :format => :long %></td>
+      <td><%= l term.end_date, :format => :long %></td>
       <td><%= link_to "Editar", edit_term_path(term) %></td>
     </tr>
   <% end %>

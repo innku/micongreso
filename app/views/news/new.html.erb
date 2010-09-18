@@ -9,8 +9,8 @@
  class='text_counter'
 <% end -%>
 
-<% form_for @news, :url => { :action => "create"}, :html => { :multipart => true } do |f| %>
-  <%= f.error_messages %>
+<%= form_for @news, :url => { :action => "create"}, :html => { :multipart => true } do |f| %>
+  <%= render "layouts/error_messages", :target => @news %>
   <p>
     <%= f.label :title, "Título" %><br />
     <%= f.text_field :title %>

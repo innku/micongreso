@@ -7,8 +7,8 @@
   class="assistances"
 <% end -%>
 
-<% form_for @bill do |f| %>
-  <%= f.error_messages %>
+<%= form_for @bill do |f| %>
+  <%= render "layouts/error_messages", :target => @bill %>
   <p>
     <%= f.label :name, "Nombre" %><br />
     <%= f.text_field :name %>
@@ -21,9 +21,7 @@
   <div id="resources">
     <p>Nombre, URL</p>
     
-    <% f.fields_for :resources do |builder| %>
-      <%= render "resource_fields", :f => builder %>
-    <% end %>
+
 
     <p>
       <span><%= link_to_add_fields "Agregar Recurso", f, :resources %></span>
@@ -70,10 +68,10 @@
 	
 	<p>Selecciona los temas de interés relacionados a la propuesta</p>
 	<ul id="tag_ids">
-    <% Tag.all.each do |tag| %>
+    <% ActsAsTaggableOn::Tag.all.each do |tag| %>
       <li>
         <%= link_to tag.name, "#{tag.id}", :class => "#{tag_classes(@bill, tag)}" %>
-        <%= hidden_field_tag "bill[tag_ids][]", tag.id, :disabled => !@bill.tags.include?(tag) %>
+        <%= hidden_field_tag "bill[tag_list][]", tag.name, :disabled => !@bill.tags.include?(tag) %>
       </li>
     <% end %>
   </ul>

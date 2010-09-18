@@ -1,6 +1,6 @@
 <div id="nav">
   <ul>
-    <% if logged_in? && current_user.admin? %>
+    <% if current_user && current_user.admin? %>
 		  <li><%= link_to "Inicio", root_path %></li>
 			<li><%= link_to "Usuarios", users_path %></li>
 			<li><%= link_to "Noticias", news_index_path %></li>
@@ -19,29 +19,29 @@
 			<li><%= link_to "Nosotros", about_us_path %></li>
     <% end %>
     
-    <% if logged_in? %>
+    <% if current_user %>
 		  <li class="email"><%= link_to "Mi perfil", edit_citizen_path(current_user) %></li>
 		  <li class="login"><%= link_to "Salir", logout_path %></li> 
 		<% else %>
 		  <li class="login">
-		    <%= link_to "Inicia Sesi&oacute;n &raquo;", login_path, :id => "signin_link", :class => "closed" %>
+		    <%= link_to "Inicia Sesión", login_path, :id => "signin_link", :class => "closed" %>
 		    <div id="login">
-		      <% form_tag session_path, :id => "login_form" do -%>
-            <p>
-              <%= label_tag :email, "Correo Electrónico:" %><br />
-              <%= text_field_tag :email, @email, :class => "input" %>
-            </p>
-            <p>
-              <%= label_tag :password, "Contraseña:" %><br/>
-              <%= password_field_tag :password, nil, :class => "input" %>
-            </p>
-            <p>
-              <%= check_box_tag :remember_me, '1', @remember_me %>
-              <%= label_tag :remember_me, 'Recuerdame' %>
-            </p>
-            <p><%= submit_tag 'Iniciar Sesión', :class => "action" %></p>
-            <p class="forgot clear"><%= link_to "Se me olvidó mi contraseña", forgot_form_path %></p>
-          <% end %>
+					<%= form_for UserSession.new, :url => user_session_path, :html => {:id => "login_form"} do |f| %>
+						<p>
+							<%= f.label :email, "Correo Electrónico:" %><br/>
+							<%= f.text_field :email, :class => "input" %>
+						</p>
+						<p>
+							<%= f.label :password, "Contraseña:" %><br/>
+							<%= f.password_field :password, :class => "input" %>
+						</p>
+						<p>
+							<%= f.check_box :remember_me %> <%= f.label :remember_me, "Recuerdame" %>
+						</p>
+
+					  <%= f.submit "Iniciar Sessión", :class => "action" %>
+						<p class="forgot clear"><%= link_to "Se me olvidó mi contraseña", new_password_reset_path %></p>
+					<% end %>
 		    </div>
 		  </li>
 		<% end %>

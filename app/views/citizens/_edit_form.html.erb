@@ -7,8 +7,8 @@
 	class="user"
 <% end -%>
 
-<% form_for @citizen, :url => citizen_path(@citizen.id) do |f| %>
-  <%= f.error_messages :header_message => "¡Por favor intenta de nuevo!", :message => "Se encontraron los siguientes problemas:" %>
+<%= form_for @citizen, :url => citizen_path(@citizen.id) do |f| %>
+  <%= render "layouts/error_messages", :target => @citizen %>
 
   <p>
     <strong><%= f.label :name, "Nombre Completo" %></strong><br />

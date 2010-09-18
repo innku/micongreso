@@ -7,8 +7,8 @@
 	class="assistances"
 <% end -%>
 
-<% form_for @sitting do |f| %>
-  <%= f.error_messages %>
+<%= form_for @sitting do |f| %>
+  <%= render "layouts/error_messages", :target => @sitting %>
   <p>
     <%= f.label :term_id, "Legislatura" %><br />
     <%= f.collection_select :term_id, Term.all, :id, :name %>
@@ -32,7 +32,7 @@
 			<td>Justificación</td>
 			<td></td>
 		</tr>
-		<% f.fields_for :absences do |builder| %>
+		<%= f.fields_for :absences do |builder| %>
 			<%= render "absence_fields", :f => builder %>
 		<% end %>
 		<tr>

@@ -52,8 +52,8 @@
             
             <p>Para comentar sobre esta noticia es necesario que te registres en mi congreso.</p>
             <% if current_user %>
-            	<% form_for [@news, Comment.new] do |f| %>
-            		<%= f.error_messages %>
+            	<%= form_for [@news, Comment.new] do |f| %>
+            		<%= render "layouts/error_messages", :target => Comment.new %>
             		<p>
             			<strong><%= f.label :title, "Título" %></strong> <br />
             			<%= f.text_field :title, :class => "comment_input" %>
@@ -90,7 +90,7 @@
     <div id="lateral" class="refinador">
       <h1>Busca noticias</h1>
       
-      <% form_tag news_index_path, :method => :get do %>
+      <%= form_tag news_index_path, :method => :get do %>
         <p>
           <%= text_field_tag :search, params[:search] %>
         </p>

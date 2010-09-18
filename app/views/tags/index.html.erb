@@ -8,7 +8,7 @@
     <tr>
       <td><%=h tag.name %></td>
       <td><%= link_to "Editar", edit_tag_path(tag) %></td>
-      <td><%= link_to "Eliminar", tag, :confirm => '¿Estas seguro que lo deseas eliminar?', :method => :delete %></td>
+      <td><%= link_to "Eliminar", tag_path(tag), :confirm => '¿Estas seguro que lo deseas eliminar?', :method => :delete %></td>
     </tr>
   <% end %>
 </table>

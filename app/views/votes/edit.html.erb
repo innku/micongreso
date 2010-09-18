@@ -1,6 +1,6 @@
 <% title "Votos de la propuesta" %>
 
-<% form_tag update_bill_votes_path(@bill) do |f| %>
+<%= form_tag update_bill_votes_path(@bill) do |f| %>
 	
 	<% Member.present_in_sitting(@bill.sitting).include_party.group_by(&:party_id).each do |party_id, members| %>
 	  <% party = members.first.party %>

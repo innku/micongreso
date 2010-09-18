@@ -12,14 +12,14 @@
   <div class="left">
     <div class="cien propuestas">
         <div id="notifications" class="propuesta">
-          <% form_for @user, :url => save_notifications_path do |f| %>
-            <%= f.error_messages :header_message => "¡Por favor intenta de nuevo!", :message => "Se encontraron los siguientes problemas:" %>
+          <%= form_for @user, :url => save_notifications_path do |f| %>
+            <%= render "layouts/error_messages", :target => @user %>
 
-            <% f.fields_for :notification do |n| %>
+            <%= fields_for @user.notification do |n| %>
               <h4>¿Por cuáles medios deseas recibir notificaciones?</h4>
               <p>
                 <%= hidden_field_tag "user[notification_attributes][email]", false, :id => "user_hidden_email" %>
-                <%= check_box_tag "user[notification_attributes][email]", true, n.object.email, :id => "user_notification_attributes_email" %>
+                <%= check_box_tag "user[notification_attributes][email]", true, false, :id => "user_notification_attributes_email" %>
                 <%= n.label :email, "Correo Electrónico" %>
               </p>
 
@@ -34,10 +34,10 @@
             <p>Selecciona tus temas de interés</p>
 
             <ul id="tag_ids">
-              <% Tag.all.each do |tag| %>
+              <% ActsAsTaggableOn::Tag.all.each do |tag| %>
                 <li>
                   <%= link_to tag.name, "#{tag.id}", :class => "#{tag_classes(@user, tag)}" %>
-                  <%= hidden_field_tag "user[tag_ids][]", tag.id, :disabled => !@user.tags.include?(tag) %>
+                  <%= hidden_field_tag "user[tag_list][]", tag.name, :disabled => !@user.tags.include?(tag) %>
                 </li>
               <% end %>
             </ul>

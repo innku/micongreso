@@ -1,5 +1,5 @@
-<% form_for @term do |f| %>
-  <%= f.error_messages %>
+<%= form_for @term do |f| %>
+  <%= render "layouts/error_messages", :target => @term %>
   <p>
     <%= f.label :name %><br />
     <%= f.text_field :name %>

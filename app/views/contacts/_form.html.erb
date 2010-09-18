@@ -1,5 +1,5 @@
-<% form_for @contact do |f| %>
-  <%= f.error_messages %>
+<%= form_for @contact do |f| %>
+  <%= render "layouts/error_messages", :target => @contact %>
   <p>
     <%= f.label :name %><br />
     <%= f.text_field :name %>

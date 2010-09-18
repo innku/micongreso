@@ -7,8 +7,8 @@
 	class="user"
 <% end -%>
 
-<% form_for @citizen, :url => citizens_path do |f| %>
-  <%= f.error_messages :header_message => "¡Por favor intenta de nuevo!", :message => "Se encontraron los siguientes problemas:" %>
+<%= form_for @citizen, :url => citizens_path do |f| %>
+  <%= render "layouts/error_messages", :target => @citizen %>
 
   <% if @citizen.new_record? %>
     <h2>Forma parte de Mi Congreso</h2>
@@ -18,7 +18,7 @@
     <%= f.text_field :name, :class => "texto" %>
   </p>
   <p>
-    <strong><%= f.label :city_name, "Ciudad <span>(La registrada en tu Credencial de Elector)</span>" %></strong><br />
+    <strong><%= f.label :city_name, "Ciudad <span>(La registrada en tu Credencial de Elector)</span>".html_safe %></strong><br />
     <%= f.text_field :city_name, :class => "city_name texto" %>
   </p>
   <p>

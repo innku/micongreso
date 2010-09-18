@@ -90,7 +90,7 @@
 	<h3>Importar Diputados</h3>
 	<p><%= link_to "Descargar archivo muestra", "importar_diputados.csv" %></p>
 	
-	<% form_tag ({:action => 'import'}, :multipart => true) do %>
+	<%= form_tag ({:action => 'import'}, :multipart => true) do %>
 		<h3>
 			<strong><%= label_tag :file, "Seleccione el archivo csv" %></strong>
 		</h3>

@@ -1,5 +1,5 @@
-<% form_for @member, :html => { :multipart => true } do |f| %>
-  <%= f.error_messages %>
+<%= form_for @member, :html => { :multipart => true } do |f| %>
+  <%= render "layouts/error_messages", :target => @member %>
   <p>
     <%= f.label :term_id, "Legislatura" %><br />
     <%= f.collection_select :term_id, Term.all, :id, :name %>

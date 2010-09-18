@@ -37,14 +37,14 @@
     </div>
     
     <div class="clear"></div>
-    <%= will_paginate @members, :previous_label => '&laquo; Anterior', :next_label => 'Siguiente &raquo;' %>
+    <%= will_paginate @members, :previous_label => 'Anterior', :next_label => 'Siguiente' %>
     
   </div>
   <div class="right">
     <div id="lateral" class="refinador">
       <h1>Busca noticias</h1>
       
-      <% form_tag news_index_path, :method => :get do %>
+      <%= form_tag news_index_path, :method => :get do %>
         <p>
           <%= text_field_tag :search, params[:search] %>
         </p>

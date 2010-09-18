@@ -1,7 +1,7 @@
-<% form_for @citizen, :url => citizen_path(@citizen), :html => { :multipart => true } do |f| %>
-  <%= f.error_messages :header_message => "¡Por favor intenta de nuevo!", :message => "Se encontraron los siguientes problemas:" %>
+<%= form_for @citizen, :url => citizen_path(@citizen), :html => { :multipart => true } do |f| %>
+  <%= render "layouts/error_messages", :target => @citizen %>
   
-  <% f.fields_for :profile do |p| %>
+  <%= fields_for @citizen.profile do |p| %>
     <table style="float: left;" width="500px">
       <tr>
         <td width="140px"><%= p.label :political_views, "Ideología Política" %></td>
@@ -28,8 +28,7 @@
       </tr>
       <tr>
         <td><%= p.label :birthdate, "Fecha de Nacimiento" %></td>
-        <% months = MONTHS; months.delete("") %>
-        <td><%= p.date_select :birthdate, :order => [:day, :month, :year], :start_year => Date.today.year-100, :end_year => Date.today.year-10, :default => Date.today-25.years, :use_month_names => months %></td>
+        <td><%= p.date_select :birthdate, :order => [:day, :month, :year], :start_year => Date.today.year-100, :end_year => Date.today.year-10, :default => Date.today-25.years, :use_month_names => t('date.month_names') %></td>
       </tr>
       <tr>
         <td colspan="2">

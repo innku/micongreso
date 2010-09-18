@@ -2,7 +2,7 @@
 
 <h3>Selecciona el servicio de correo</h3>
 
-<% form_tag contacts_path do %>
+<%= form_tag contacts_path do %>
   <p>
     <%= radio_button_tag :provider, "gmail", params[:provider] == "gmail" ? true : false %> <%= label_tag :provider_gmail, "Gmail" %>
     <%= radio_button_tag :provider, "hotmail", params[:provider] == "hotmail" ? true : false %>  <%= label_tag :provider_hotmail, "Hotmail" %>
