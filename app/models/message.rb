@@ -1,16 +1,14 @@
-class Message < ActiveRecord::Base
-  
-  include Authentication
-  
+class Message < ActiveRecord::Base  
   belongs_to  :member
   
-  validates_presence_of :text, :message => "^Te faltó escribir el mensaje"
-  validates_presence_of :name, :message => "^Te faltó escribir tu nombre"
+  validates_presence_of :text, :name
   
-  validates_presence_of   :email, :message => "^Te faltó escribir tu correo electrónico"
-  validates_format_of     :email, :with => Authentication.email_regex, :message => Authentication.bad_email_message
+  validates_presence_of   :email
+  validates_format_of     :email, :with => Authlogic::Regex.email
   
-  def after_create
-    UserMailer.deliver_message_to_member(self, self.member)
+  after_create :deliver_message
+  
+  def deliver_message
+    UserMailer.message_to_member(self, self.member).deliver
   end
 end

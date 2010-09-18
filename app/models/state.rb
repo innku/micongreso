@@ -26,7 +26,7 @@ class State < ActiveRecord::Base
         rate = 0
       else
         rate = (voted_for.to_f/total.to_f)*100.00
-        RAILS_DEFAULT_LOGGER.debug "for: #{voted_for}, against: #{voted_against}, neutral: #{voted_neutral}, total: #{total}, rate #{rate}"
+        Rails.logger.debug "for: #{voted_for}, against: #{voted_against}, neutral: #{voted_neutral}, total: #{total}, rate #{rate}"
       end
       codes_array << "['MX-#{state.short3}', '#{state.name}', #{rate}, #{voted_for}, #{voted_against}, #{voted_neutral}]"
     end

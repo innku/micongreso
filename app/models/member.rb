@@ -12,18 +12,18 @@ class Member < ActiveRecord::Base
     
   has_many    :messages,  :dependent => :destroy
   has_many    :assistances,  :dependent => :destroy
-  has_many    :absences, :class_name => 'Assistance', :conditions => ['assistances.assisted = ?', false]
+  has_many    :absences, :class_name => 'Assistance', :conditions => {:assisted => false}
   has_many    :bills
   
   attr_accessor :importing
   
   acts_as_voter
   
-  production = ENV['RAILS_ENV'] == 'production'
+  production = Rails.env.production?
   
   has_attached_file :picture, :styles => { :medium => "360x240>", :thumb => "150x100>" },
                             :storage => (production ? :s3 : :filesystem),
-                            :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
+                            :s3_credentials => "#{Rails.root}/config/s3.yml",
                             :path => (production ? ":attachment/:id/:style/:basename.:extension" : "public/system/:attachment/:id/:style/:basename.:extension"),
                             :bucket => $paperclip_bucket,
                             :default_url => "/images/missing.png"
@@ -32,23 +32,23 @@ class Member < ActiveRecord::Base
   validates_attachment_content_type :picture, :content_type => ['image/jpeg','image/jpg','image/jpeg','image/pjpeg','image/png','image/x-png','image/gif'], 
                                               :message => "^Solo están permitidas las imágenes tipo JPEG, PNG y GIF."
   
-  validates_presence_of   :name, :message => "^Por favor ingrese el nombre del diputado"
-  validates_uniqueness_of :name, :message => "^Ya se encuentra un diputado con este nombre", :unless => :is_importing?
+  validates_presence_of   :name, :email, :party_id, :state_id
+  validates_presence_of   :district_id, :if => :elected?
   
-  validates_presence_of   :email, :message => "^Por favor ingrese el correo electrónico del diputado"
-  validates_uniqueness_of :email, :message => "^Ya se encuentra un diputado con este correo", :unless => :is_importing?
-  validates_presence_of   :party_id, :message => "^Por favor seleccione el partido"
-  validates_presence_of   :state_id, :message => "^Por favor seleccione el estado"
-  validates_presence_of   :district_id, :message => "^Por favor ingrese el distrito del diputado", :if => :elected?
+  validates_uniqueness_of :name, :unless => :is_importing?
+  validates_uniqueness_of :email, :unless => :is_importing?
   
-  named_scope :incomplete, :conditions => ['complete = ?', false]
-  named_scope :complete, :conditions => ['complete = ?', true]
-  named_scope :duplicate, :conditions => ['duplicate = ?', true]
-  named_scope :included, :include => [:state, :district, :party]
-  named_scope :active, :conditions => ['status = ?', 'active']
-  named_scope :present_in_sitting, lambda { |sitting| { :include => :assistances, :conditions => ['assistances.sitting_id = ? AND assistances.assisted = ?', sitting.id, true] } }
-  named_scope :include_party, :include => :party
+  scope :incomplete, where('complete = ?', false)
+  scope :complete, where('complete = ?', true)
+  scope :duplicate, where('duplicate = ?', true)
+  scope :active, where('status = ?', 'active')
+  scope :include_party, includes(:party)
   
+  before_save :normalize_attributes
+  
+  def self.present_in_sitting(sitting)
+    where('assistances.sitting_id = ? AND assistances.assisted = ?', sitting.id, true).includes(:assistances)
+  end
   
   def self.find_by_email_or_name(string)
     member = find_by_email(string)
@@ -119,11 +119,11 @@ class Member < ActiveRecord::Base
   end
   
   def same_name_or_email?
-    member = Member.find(:first, :conditions => ["name = ? OR email = ?", self.name, self.email])
+    member = Member.where("name = ? OR email = ?", self.name, self.email).first
     return member ? true : false
   end
   
-  def before_save
+  def normalize_attributes
     self.complete = true if self.valid?
     self.district_id = nil if self.proportional?
   end

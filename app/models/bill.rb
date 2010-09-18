@@ -7,9 +7,7 @@ class Bill < ActiveRecord::Base
   
   belongs_to  :congress, :class_name => "State"
   
-  validates_presence_of :name, :message => "^Te faltó el título de la propuesta"
-  validates_presence_of :description, :message => "^Te faltó la descripción de la propuesta"
-  validates_presence_of :date, :message => "^Te faltó la fecha de presentación de la propuesta"
+  validates_presence_of :name, :description, :date
   
   attr_accessor :publish_bill_on_social_media
   attr_accessor :send_emails
@@ -18,24 +16,30 @@ class Bill < ActiveRecord::Base
   acts_as_voteable
   acts_as_commentable
   
-  accepts_nested_attributes_for :resources, :reject_if => lambda { |a| a[:url].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :resources, :reject_if => proc { |a| a[:url].blank? }, :allow_destroy => true
   
-  month_selector = Rails.env.production? ? "EXTRACT(MONTH FROM bills.date)" : "MONTH(bills.date)"
-  year_selector = Rails.env.production? ? "EXTRACT(YEAR FROM bills.date)" : "YEAR(bills.date)"
+  scope :voted, where("member_votes_for != ? OR member_votes_against != ? OR member_votes_neutral != ?",0,0,0).order("created_at DESC")
+  scope :recent, order("created_at DESC")
+  scope :active, where('vote_date >= ?', Date.today)
+  scope :closed, where('vote_date < ?', Date.today)
+  scope :most_viewed, order("total_views DESC")
+  scope :pending, where('status = ?', 'pending')
+  scope :single_voted, where('voted_on IS NOT NULL').order("voted_on DESC")
   
-  named_scope :voted, :conditions => ["member_votes_for != ? OR member_votes_against != ? OR member_votes_neutral != ?",0,0,0], :order => "created_at DESC"
-  named_scope :recent, :order => "created_at DESC"
-  named_scope :active, :conditions => ['vote_date >= ?', Date.today]
-  named_scope :closed, :conditions => ['vote_date < ?', Date.today]
-  named_scope :monthly, lambda { |*args| { :conditions => ["#{month_selector} = ? AND #{year_selector} = ?", args.first, args.last] } }
-  named_scope :last_month, :conditions => ['date >= ?', Date.today-1.months]
-  named_scope :most_viewed, :order => "total_views DESC"
-  named_scope :limit, :limit => 5
-  named_scope :pending, :conditions => ['status = ?', 'pending']
-  named_scope :single_voted, :conditions => ['voted_on IS NOT NULL'], :order => "voted_on DESC"
+  after_save :publish_bill, :deliver_emails
   
   def self.recent_popular
     last_month.most_viewed
+  end
+  
+  def self.last_month
+    where('date >= ?', Date.today-1.months)
+  end
+  
+  def self.monthly(month, year)
+    month_selector = Rails.env.production? ? "EXTRACT(MONTH FROM bills.date)" : "MONTH(bills.date)"
+    year_selector = Rails.env.production? ? "EXTRACT(YEAR FROM bills.date)" : "YEAR(bills.date)"
+    where("#{month_selector} = ? AND #{year_selector} = ?", month, year)
   end
   
   def approved?
@@ -120,23 +124,23 @@ class Bill < ActiveRecord::Base
   end
   
   def votes_for_party(party, vote)
-    Vote.count(:all, :joins => "INNER JOIN members ON members.id = votes.voter_id",
-                      :conditions => ["voteable_id = ? AND voteable_type = ? AND vote #{vote_sql(vote)} AND voter_type = ? AND members.party_id = ?", self.id, self.class.name, "Member", party.id])
+    Vote.joins("INNER JOIN members ON members.id = votes.voter_id").
+          where("voteable_id = ? AND voteable_type = ? AND vote #{vote_sql(vote)} AND voter_type = ? AND members.party_id = ?", self.id, self.class.name, "Member", party.id).count
   end
   
   def votes_for_state(state, vote)
-    Vote.count(:all, :joins => "INNER JOIN members ON members.id = votes.voter_id",
-                      :conditions => ["voteable_id = ? AND voteable_type = ? AND vote #{vote_sql(vote)} AND voter_type = ? AND members.state_id = ?", self.id, self.class.name, "Member", state.id])
+    Vote.joins("INNER JOIN members ON members.id = votes.voter_id").
+          where("voteable_id = ? AND voteable_type = ? AND vote #{vote_sql(vote)} AND voter_type = ? AND members.state_id = ?", self.id, self.class.name, "Member", state.id).count
   end
   
   def citizen_votes(vote)
-    Vote.count(:all, :joins => "INNER JOIN users ON users.id = votes.voter_id",
-                      :conditions => ["voteable_id = ? AND voteable_type = ? AND vote #{vote_sql(vote)} AND voter_type = ?", self.id, self.class.name, "User"])
+    Vote.joins("INNER JOIN users ON users.id = votes.voter_id").
+           where("voteable_id = ? AND voteable_type = ? AND vote #{vote_sql(vote)} AND voter_type = ?", self.id, self.class.name, "User").count
   end
   
   def citizen_votes_for_state(state, vote)
-    Vote.count(:all, :from => "(votes", :joins => "INNER JOIN users ON users.id = votes.voter_id) INNER JOIN cities ON cities.id = users.city_id",
-                      :conditions => ["voteable_id = ? AND voteable_type = ? AND vote #{vote_sql(vote)} AND voter_type = ? AND cities.state_id = ?", self.id, self.class.name, "User", state.id])
+    Vote.from("(votes").joins("INNER JOIN users ON users.id = votes.voter_id) INNER JOIN cities ON cities.id = users.city_id").
+           where("voteable_id = ? AND voteable_type = ? AND vote #{vote_sql(vote)} AND voter_type = ? AND cities.state_id = ?", self.id, self.class.name, "User", state.id).count
   end
   
   def citizen_votes_and_percents
@@ -164,13 +168,13 @@ class Bill < ActiveRecord::Base
   
   def deliver
     User.citizens.each do |citizen|
-      UserMailer.deliver_bill(citizen, self) if citizen.notify_me?(self.tags)
+      UserMailer.bill(citizen, self).deliver if citizen.notify_me?(self.tags)
     end
   end
   
   def test_deliver
     user = User.find_by_email("fedegl@gmail.com")
-    UserMailer.deliver_bill(user, self) if user.notify_me?(self.tags)
+    UserMailer.bill(user, self).deliver if user.notify_me?(self.tags)
   end
   
   def test
@@ -182,11 +186,13 @@ class Bill < ActiveRecord::Base
     self.send_later(:test_deliver)
   end
 
-  def after_save
+  def publish_bill
     if publish_bill_on_social_media.to_i == 1
       PingFM.post_to_social_media(self.name, "#{$global_url}/bills/#{self.id}")
     end
+  end
     
+  def deliver_emails
     if send_emails.to_i == 1
       if Rails.env.production?
         heroku = Heroku::Client.new("federico@innku.com", "ziggy1304")

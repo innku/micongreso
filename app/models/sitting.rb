@@ -6,12 +6,14 @@ class Sitting < ActiveRecord::Base
   has_many  :bills
   belongs_to  :term
   
-  accepts_nested_attributes_for :absences, :reject_if => lambda { |a| a[:member_name].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :assistances, :reject_if => lambda { |a| a[:member_name].blank? }, :allow_destroy => true
   
   attr_accessor :publish_assistances_on_social_media
-  
-  year_selector = Rails.env.production? ? "EXTRACT(YEAR FROM sittings.date)" : "YEAR(sittings.date)"
-  named_scope :year, lambda { |*args| { :conditions => ["#{year_selector} = ?", args.first] } }
+    
+  def self.year(year)
+    year_selector = Rails.env.production? ? "EXTRACT(YEAR FROM sittings.date)" : "YEAR(sittings.date)"
+    where("#{year_selector} = ?", year)
+  end
   
   def formatted_date
     if self.new_record?

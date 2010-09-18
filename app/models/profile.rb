@@ -2,11 +2,11 @@ class Profile < ActiveRecord::Base
   
   belongs_to  :user
   
-  production = Rails.env == 'production'
+  production = Rails.env.production?
   
   has_attached_file :avatar, :styles => { :medium => "192x192>", :small => "96x96>", :thumb => "40x40#" },
                             :storage => (production ? :s3 : :filesystem),
-                            :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
+                            :s3_credentials => "#{Rails.root}/config/s3.yml",
                             :path => (production ? ":attachment/:id/:style/:basename.:extension" : "public/system/:attachment/:id/:style/:basename.:extension"),
                             :bucket => $paperclip_bucket,
                             :default_url => "/images/missing.png"

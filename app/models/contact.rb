@@ -22,15 +22,15 @@ class Contact < ActiveRecord::Base
             contact = Contact.new(:name => c[0], :email => c[1])
             contact.user_id = user.id if user
             contact.save!
-            UserMailer.deliver_invitation(user, c[0], c[1])
+            UserMailer.invitation(user, c[0], c[1]).deliver
           end
         rescue Net::SMTPSyntaxError
-          RAILS_DEFAULT_LOGGER.debug "Net::SMTPSyntaxError para el correo: #{c[1]}"
+          Rails.logger.debug "Net::SMTPSyntaxError para el correo: #{c[1]}"
         end
       end
       return true
     rescue Contacts::AuthenticationError
-      RAILS_DEFAULT_LOGGER.debug "AuthenticationError: El login (#{login}) y/o la contraseña son incorrectos."
+      Rails.logger.debug "AuthenticationError: El login (#{login}) y/o la contraseña son incorrectos."
       return false
     end
   end
@@ -60,7 +60,7 @@ class Contact < ActiveRecord::Base
       end
       return true
     rescue Contacts::AuthenticationError
-      RAILS_DEFAULT_LOGGER.debug "AuthenticationError: El login (#{login}) y/o la contraseña son incorrectos."
+      Rails.logger.debug "AuthenticationError: El login (#{login}) y/o la contraseña son incorrectos."
       return false
     end
   end
@@ -70,7 +70,7 @@ class Contact < ActiveRecord::Base
       contact = Contact.find(contact_id.to_i)
       contact.invited_on = Time.now
       contact.save
-      UserMailer.deliver_invitation(options[:user], contact.name, contact.email, options[:message])
+      UserMailer.invitation(options[:user], contact.name, contact.email, options[:message]).deliver
     end
   end
   
