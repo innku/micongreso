@@ -22,7 +22,7 @@ task :import_members => :environment do
             when "octubre" then 10
             when "noviembre" then 11
             when "diciembre" then 12
-            else RAILS_DEFAULT_LOGGER.debug "Fecha erronea #{text}"
+            else Rails.logger.debug "Fecha erronea #{text}"
             end
     begin
       return Date.new(year.to_i, month, day.to_i)
@@ -40,7 +40,7 @@ task :import_members => :environment do
                when 5 then 5
                when 6 then 6
                when 12 then 7
-               else RAILS_DEFAULT_LOGGER.debug "Party ID erroneo: #{id}"
+               else Rails.logger.debug "Party ID erroneo: #{id}"
                end
     return party_id
   end

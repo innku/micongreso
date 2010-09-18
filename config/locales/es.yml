@@ -1,0 +1,99 @@
+es:
+  activerecord:
+    models:
+      assistance:             "Asistencia"
+      bill:                   "Propuesta"
+      city:                   "Ciudad"
+      comment:                "Comentario"
+      contact:                "Contacto"
+      district:               "Distrito"
+      member:                 "Diputado"
+      message:                "Mensaje"
+      news:                   "Noticia"
+      party:                  "Partido"
+      profile:                "Perfil"
+      region:                 "Region"
+      resource:               "Recurso"
+      section:                "Sección"
+      sitting:                "Sessión"
+      state:                  "Estado"
+      term:                   "Legislatura"
+      user:                   "Usuario"
+    attributes:
+      user:
+        email:                "correo electrónico"
+        password:             "contraseña"
+        password_confirmation:  "confirmación de la contraseña"
+        name:                 "Nombre"
+        city_id:              "Ciudad"
+        this:                 "este"
+
+    errors:
+      messages:
+        inclusion:    "no está incluido en la lista"
+        blank:        "no puede quedar en blanco"
+        too_short:    "muy corta"
+        confirmation: "no coincide con la confirmación"
+        record_invalid: "el registro es inválido"
+        taken:        "ya está tomado, por favor elegir uno distinto"
+  
+  errors: 
+    template:
+      body:         "Hay problemas con los siguientes campos:"
+      header:
+        one:        "1 error ha impedido que %{this} %{model} se guarde"
+        other:      "%{count} errores han impedido que %{this} %{model} se guarde"
+        
+  authlogic:
+    error_messages:
+      login_blank: no puede quedar en blanco
+      login_not_found: no es válido
+      login_invalid: solamente debes utilizar números, letras, espacios y .-_@
+      consecutive_failed_logins_limit_exceeded: Límite de intentos de login consecutivos ha sido excedido, la cuenta ha sido desactivada.
+      email_invalid: debe tener un formato correcto. ej. andres@gmail.com
+      password_blank: no puede estar en blanco
+      password_invalid: no es válida
+      not_active: Tu cuenta no esta activada
+      not_confirmed: Tu cuenta no ha sido confirmada
+      not_approved: Tu cuenta no ha sido aprovada
+      no_authentication_details: Por favor escriba el correo y contraseña.
+    models:
+      user_session: UserSession
+    attributes:
+      user_session:
+        login: login
+        email: Correo Electrónico
+        password: Contraseña
+        remember_me: Recuérdame
+  
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one:          "hace aprox %{count} hora"
+        other:        "hace aprox %{count} horas"
+      less_than_x_minutes:
+        one:          "hace menos de %{count} minuto"
+        other:        "hace menos de %{count} minutos"
+      x_minutes:
+        one:          "hace %{count} minuto"
+        other:        "hace %{count} minutos"
+      x_days:
+        one:          "hace 1 dia"
+        other:        "hace %{count} dias"
+        
+  date:
+    formats:
+      default: "%d/%m/%Y"
+      short: '%d de %B'
+      long: '%d de %B, %Y'
+    day_names: [Domingo, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado]
+    abbr_day_names: [Dom, Lun, Mar, Mie, Jue, Vie, Sab]
+    month_names: [~, Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre]
+    abbr_month_names: [~, Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic]
+  time:
+    formats:
+      default: "%a, %d %b %Y %H:%M:%S"
+      short: "%d %b %H:%M"
+      long: "%d de %B, %Y %H:%M"
+    am: "am"
+    pm: "pm"

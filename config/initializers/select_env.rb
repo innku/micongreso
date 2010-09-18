@@ -10,7 +10,7 @@ when 'staging'
   $paperclip_bucket = "diputado_test"
   $like = "LIKE"
 else
-  $global_url = "http://diputado.local"
+  $global_url = "http://localhost:3000"
   $paperclip_bucket = "diputado_dev"
   $like = "LIKE"
 end

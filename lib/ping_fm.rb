@@ -31,7 +31,7 @@ class PingFM
   end
   
   def self.post_to_social_media(text, url)
-    RAILS_DEFAULT_LOGGER.debug "Publicando post en twitter y facebook: #{truncate(text, :length => 120)} #{url}"
+    Rails.logger.debug "Publicando post en twitter y facebook: #{truncate(text, :length => 120)} #{url}"
     self.user_post("status", truncate(text) + " " + url)
   end
   
