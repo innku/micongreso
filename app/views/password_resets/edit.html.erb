@@ -1,0 +1,27 @@
+<%= form_for @user, :url => password_reset_path(@user.perishable_token) do |f| %>
+	<% if @user.errors.any? %>
+	  <div id="errorExplanation">
+	    <h2>Encontramos errores al cambiar tu contraseña</h2>
+			<ul>
+				<% @user.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+	  </div>
+	<% end %>
+	
+	<div class="msg info">
+		<p>Ingresa tu nueva contraseña.</p>
+	</div>
+	<p>
+		<%= f.label :password, "Nueva contraseña" %>
+		<%= f.password_field :password, :class => "input" %>
+	</p>
+	
+	<p>
+		<%= f.label :password_confirmation, "Confirma la nueva contraseña" %>
+		<%= f.password_field :password_confirmation, :class => "input" %>
+	</p>
+	
+  <%= f.submit "Cambiar contraseña", :class => "action" %>
+<% end %>

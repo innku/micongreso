@@ -1,0 +1,12 @@
+<%= form_tag password_resets_path do %>
+	
+	<div class="msg info">
+		<p>Te enviaremos un correo para confirmar el cambio de contraseña y después te vamos a pedir que ingreses una nueva.</p>
+	</div>
+	<p>
+		<%= label_tag :email, "Ingresa tu correo electrónico" %>
+		<%= text_field_tag :email %>
+	</p>
+	
+  <%= submit_tag "Recuperar contraseña", :class => "action" %>
+<% end %>
