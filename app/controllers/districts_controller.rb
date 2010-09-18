@@ -1,6 +1,6 @@
 class DistrictsController < ApplicationController
   
-  skip_before_filter  :login_required
+  skip_before_filter  :require_user
   
   def index
     respond_to do |wants|

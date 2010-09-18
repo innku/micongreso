@@ -1,6 +1,6 @@
 class ContactsController < ApplicationController
   
-  skip_before_filter :login_required, :only => [:create, :deliver]
+  skip_before_filter :require_user, :only => [:create, :deliver]
   
   def index
     @contacts = Contact.all

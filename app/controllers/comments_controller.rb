@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   
-  skip_before_filter  :login_required, :except => :destroy
+  skip_before_filter  :require_user, :except => :destroy
   
   def new
     @comment = Comment.new

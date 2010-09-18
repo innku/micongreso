@@ -1,17 +1,17 @@
 class SearchMembersController < ApplicationController
   
-  skip_before_filter :login_required
+  skip_before_filter :require_user
   
   def show
     @search_member = SearchMember.find(params[:id])
-    @members = Member.included.search(@search_member.conditions).paginate(:page => params[:page])
+    @members = @search_member.members.paginate(:page => params[:page])
     @parties = Party.all
     @states = State.all
   end
   
   def new
     @search_member = SearchMember.new
-    @members = Member.included.paginate(:page => params[:page])
+    @members = Member.includes(:state, :district, :party).paginate(:page => params[:page])
     @parties = Party.all
     @states = State.all
   end

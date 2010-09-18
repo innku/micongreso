@@ -1,6 +1,6 @@
 class NewsController < ApplicationController
   
-  skip_before_filter :login_required, :only => [:index, :show]
+  skip_before_filter :require_user, :only => [:index, :show]
   
   def index
     if params[:search]
@@ -13,7 +13,7 @@ class NewsController < ApplicationController
   
   def show
     @news = News.find(params[:id])
-    @related_news = News.find_tagged_with(@news.tags)-[@news]
+    @related_news = News.tagged_with(@news.tags)-[@news]
     @news.viewed!
   end
   
@@ -37,7 +37,7 @@ class NewsController < ApplicationController
   
   def update
     @news = News.find(params[:id])
-    params[:news][:tag_ids] ||= []
+    params[:news][:tag_list] ||= []
     if @news.update_attributes(params[:news])
       flash[:notice] = "La noticia se actualizó correctamente."
       redirect_to news_index_path

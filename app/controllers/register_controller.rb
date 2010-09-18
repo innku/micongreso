@@ -1,5 +1,8 @@
 class RegisterController < ApplicationController
   
+  skip_before_filter :require_user
+  before_filter :skip_active_verification
+  
   def profile
     @user = current_user
   end
@@ -27,4 +30,11 @@ class RegisterController < ApplicationController
     end
   end
   
+  def success
+  end
+  
+  def skip_active_verification
+    UserSession.disable_magic_states(true)
+    require_user
+  end
 end

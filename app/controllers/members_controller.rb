@@ -2,7 +2,7 @@ class MembersController < ApplicationController
   
   require 'fastercsv'
   
-  skip_before_filter :login_required, :only => [:show]
+  skip_before_filter :require_user, :only => [:show]
   
   def index
     respond_to do |wants|
@@ -36,7 +36,7 @@ class MembersController < ApplicationController
     @search_member = SearchMember.new
     @parties = Party.all
     @states = State.all
-    @bills = Bill.single_voted.limit
+    @bills = Bill.single_voted.limit(5)
   end
   
   def new

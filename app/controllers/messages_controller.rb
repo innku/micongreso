@@ -1,7 +1,7 @@
 class MessagesController < ApplicationController
   
   before_filter :find_member
-  skip_before_filter :login_required, :only => [:create]
+  skip_before_filter :require_user, :only => [:create]
   
   def index
     @messages = @member.messages

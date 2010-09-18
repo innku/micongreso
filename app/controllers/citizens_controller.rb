@@ -1,6 +1,6 @@
 class CitizensController < ApplicationController
   
-  skip_before_filter  :login_required, :only => [:new, :create]
+  skip_before_filter  :require_user, :only => [:new, :create]
   
   def index
     @citizens = User.citizens
@@ -17,8 +17,9 @@ class CitizensController < ApplicationController
   def create
     @citizen = User.new(params[:user])
     @citizen.make_citizen
+    UserSession.disable_magic_states(true)
     if @citizen.save
-      self.current_user = @citizen
+      UserMailer.signup_notification(@citizen).deliver
       redirect_to profile_path
     else
       render :action => 'new'
@@ -31,7 +32,7 @@ class CitizensController < ApplicationController
   
   def update
     @citizen = current_user
-    params[:user][:tag_ids] ||= []
+    params[:user][:tag_list] ||= []
     if @citizen.update_attributes(params[:user])
       flash[:notice] = "Se guardaron los cambios del usuario correctamente"
       redirect_to edit_citizen_path(@citizen, :tab => params[:tab])
