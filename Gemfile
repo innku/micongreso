@@ -20,6 +20,15 @@ gem 'vote_fu', :path => "/Users/fede/work/vote_fu"
 gem 'authlogic'
 gem 'cancan'
 
+group :development, :test do 
+	gem "rspec-rails", ">= 2.0.0.beta.20"
+	gem "cucumber-rails", ">= 0.3.2"
+	gem "database_cleaner"
+	gem "selenium-client"
+	gem "machinist", ">= 2.0.0.beta2"
+	gem "email_spec"
+end
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
