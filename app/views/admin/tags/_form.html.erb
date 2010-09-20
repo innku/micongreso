@@ -1,0 +1,8 @@
+<%= form_for @tag, :url => @tag.new_record? ? admin_tags_path : admin_tag_path(@tag) do |f| %>
+  <%= render "layouts/error_messages", :target => @tag %>
+  <p>
+    <%= f.label :name, "Nombre" %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p><%= f.submit "Guardar" %></p>
+<% end %>

@@ -1,0 +1,17 @@
+<% title "Partidos Políticos" %>
+
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th>Abreviación</th>
+  </tr>
+  <% for party in @parties %>
+    <tr>
+      <td><%=h party.name %></td>
+      <td><%=h party.abbr %></td>
+      <td><%= link_to "Editar", edit_admin_party_path(party) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "Nuevo Partido", new_admin_party_path %></p>

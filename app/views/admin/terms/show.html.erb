@@ -1,0 +1,20 @@
+<% title "Term" %>
+
+<p>
+  <strong>Name:</strong>
+  <%=h @term.name %>
+</p>
+<p>
+  <strong>Start Date:</strong>
+  <%=h @term.start_date %>
+</p>
+<p>
+  <strong>End Date:</strong>
+  <%=h @term.end_date %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_admin_term_path(@term) %> |
+  <%= link_to "Destroy", [:admin, @term], :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", admin_terms_path %>
+</p>

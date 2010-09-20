@@ -1,0 +1,19 @@
+<% title "Legislaturas" %>
+
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th>Inicio</th>
+    <th>Fin</th>
+  </tr>
+  <% for term in @terms %>
+    <tr>
+      <td><%= link_to term.name, [:admin, term] %></td>
+      <td><%= l term.start_date, :format => :long %></td>
+      <td><%= l term.end_date, :format => :long %></td>
+      <td><%= link_to "Editar", edit_admin_term_path(term) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "Nueva Legislatura", new_admin_term_path %></p>

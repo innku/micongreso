@@ -1,0 +1,46 @@
+<% title "Sesión" %>
+
+<p>
+  <strong>Nomnbre:</strong>
+  <%=h @sitting.name %>
+</p>
+<p>
+  <strong>Fecha:</strong>
+  <%=h @sitting.date.to_s(:es) %>
+</p>
+
+<h3>Ausencias</h3>
+
+<table>
+	<tr>
+		<th>Diputado</th>
+		<th>Justificada</th>
+		<th>Justificación</th>
+	</tr>
+	<% for assistance in @absences %>
+		<tr>
+			<td><%= assistance.member_name %></td>
+			<td><%= yes_or_no(assistance.justified) %></td>
+			<td><%= assistance.justification %></td>
+		</tr>
+	<% end %>
+</table>
+
+<h3>Propuestas a votarse</h3>
+
+<table>
+	<tr>
+		<th>Nombre</th>
+	</tr>
+	<% for bill in @sitting.bills %>
+		<tr>
+			<td><%= bill.name %></td>
+		</tr>
+	<% end %>
+</table>
+
+<p>
+  <%= link_to "Editar", edit_admin_sitting_path(@sitting) %> |
+  <%= link_to "Eliminar", [:admin, @sitting], :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "Regresar a Sesiones", admin_sittings_path %>
+</p>

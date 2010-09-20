@@ -1,0 +1,9 @@
+<% title "Edit Term" %>
+
+<%= render :partial => 'form' %>
+
+<p>
+  <%= link_to "Ver", [:admin, @term] %> |
+  <%= link_to "Eliminar", [:admin, @term], :method => :delete, :confirm => "¿Estas seguro que la quieres eliminar?" %> |
+  <%= link_to "View All", admin_terms_path %>
+</p>
