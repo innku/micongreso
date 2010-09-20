@@ -43,6 +43,7 @@ class Member < ActiveRecord::Base
   scope :duplicate, where('duplicate = ?', true)
   scope :active, where('status = ?', 'active')
   scope :include_party, includes(:party)
+  scope :name_like, lambda { |name| where("name #{$like} ?", "%#{name}%")}
   
   before_save :normalize_attributes
   

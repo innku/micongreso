@@ -1,62 +1,50 @@
 class UsersController < ApplicationController
   
-  skip_before_filter  :require_user, :only => [:resend_form, :resend]
-  
-  def index
-    @users = User.admins
-  end
+  skip_before_filter  :require_user, :only => [:new, :create, :resend_form, :resend]
   
   def new
     @user = User.new
   end
   
-  def edit
-    @user = User.find(params[:id])
-  end
- 
   def create
     @user = User.new(params[:user])
-    @user.role = (current_user && current_user.admin?) ? "admin" : "user"
+    @user.make_citizen
+    UserSession.disable_magic_states(true) # Do not verify that user has been activated
     if @user.save
-      redirect_to users_path
-      flash[:notice] = "Te acabamos de enviar un correo de activación, da clic en la liga del correo para completar el registro."
+      UserMailer.signup_notification(@user).deliver
+      redirect_to profile_path
     else
-      flash[:error]  = "Ocurrió un error, por favor inténtalo de nuevo."
       render :action => 'new'
     end
   end
   
+  def edit
+    @user = current_user
+  end
+  
   def update
-    @user = User.find(params[:id])
+    @user = current_user
+    params[:user][:tag_list] ||= []
     if @user.update_attributes(params[:user])
-      flash[:notice] = "Los datos del usuario se guardaron correctamente"
-      redirect_to users_path
+      flash[:notice] = "Se guardaron los cambios del usuario correctamente"
+      redirect_to edit_user_path(@user, :tab => params[:tab])
     else
-      render :action => "edit"
+      render :action => 'edit'
     end
   end
   
-  def destroy
-    @user = User.find(params[:id])
-    if (@user.admin? && User.admins.count > 1) || @user.citizen?
-      @user.destroy
-      flash[:notice] = "Has eliminado correctamente al usuario"
-    else
-      flash[:error] = "No puedes eliminar al último administrador"
-    end
-    redirect_to users_path
+  def resend_form
   end
   
   def resend
     user = User.find_by_email(params[:email])
-    if user
+    if user && user.activation_code
       flash[:notice] = "El correo de activación se te envió con éxito."
       UserMailer.signup_notification(user).deliver
       redirect_to login_path
     else
-      flash[:error] = "No encontramos un usuario con el correo que nos indicaste."
+      flash[:error] = "No encontramos un usuario con el correo que nos indicaste o tu usuario ya se encuentra activado."
       redirect_to resend_activation_form_path
     end
   end
-  
 end

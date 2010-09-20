@@ -1,21 +1,51 @@
-<h1>Editar Usuario</h1>
-
-<%= form_for @user do |f| -%>
-	<%= render "layouts/error_messages", :target => @user %>
-	
-	<p><%= f.label :name, "Nombre" %><br/>
-	<%= f.text_field :name %></p>
-
-	<p><%= f.label :email, "Correo Electrónico" %><br/>
-	<%= f.text_field :email %></p>
-
-	<p><%= f.label :password, "Contraseña" %><br/>
-	<%= f.password_field :password %></p>
-
-	<p><%= f.label :password_confirmation, "Confirmación de Contraseña" %><br/>
-	<%= f.password_field :password_confirmation %></p>
-
-	<p><%= submit_tag 'Guardar Usuario' %></p>
+<% content_for :jQuery do -%>
+  <%= stylesheet_link_tag 'jquery-ui-1.7.2' %>
 <% end -%>
 
-<%= link_to "Eliminar", @user, :method => :delete, :confirm => "¿Estas seguro que lo deseas eliminar?" %>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#user_tabs').tabs({selected: <%= selected_tab(params[:tab]) %>});
+  });
+</script>
+
+<% content_for :title do -%>
+  Mi Congreso - Mi Perfil
+<% end -%>
+
+<% content_for :body_class do -%>
+  class="user edit_citizen"
+<% end -%>
+
+<div id="rest">
+  
+  <h2 class="section">Mi Perfil</h2>
+  
+  <div class="left">
+    <div class="cien">
+      
+      <div id="user_tabs">
+        <ul id="menu_perfil">
+          <li><%= link_to "Datos Personales", "#user", :class => "tab" %></li>
+          <li><%= link_to "Perfil Ciudadano", "#profile", :class => "tab" %></li>
+          <li><%= link_to "Preferencias", "#notifications", :class => "tab" %></li>
+        </ul>
+        
+        <div id="user">
+          <%= render :partial => 'edit_form' %>
+        </div>
+
+        <div id="profile">
+          <%= render :partial => 'profile' %>
+        </div>
+
+        <div id="notifications">
+          <%= render :partial => 'notifications' %>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+

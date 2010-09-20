@@ -1,20 +1,14 @@
-<h1>Nuevo Usuario</h1>
-<% @user.password = @user.password_confirmation = nil %>
+<div id="rest">
+  <h2 class="section">Registro</h2>
+  
+  <div class="left">
+    <div class="propuestas">
+      <div id="interna" class="propuesta cien">
+        <%= render :partial => "form" %>
+      </div>
+    </div>
+  </div>
+  <div class="right"></div>
+</div>
 
-<%= form_for @user do |f| -%>
-	<%= render "layouts/error_messages", :target => @user %>
-	
-	<p><%= f.label :name, "Nombre" %><br/>
-	<%= f.text_field :name %></p>
 
-	<p><%= f.label :email, "Correo Electrónico" %><br/>
-	<%= f.text_field :email %></p>
-
-	<p><%= f.label :password, "Contraseña" %><br/>
-	<%= f.password_field :password %></p>
-
-	<p><%= f.label :password_confirmation, "Confirmación de Contraseña" %><br/>
-	<%= f.password_field :password_confirmation %></p>
-
-	<p><%= submit_tag 'Guardar Usuario' %></p>
-<% end -%>

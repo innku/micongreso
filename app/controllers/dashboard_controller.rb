@@ -7,8 +7,8 @@ class DashboardController < ApplicationController
       wants.html {
         @bills = Bill.limit(5).recent_popular
         @news = News.latest
-        @citizens = User.with_avatar.latest
-        @citizen = User.new
+        @users = User.with_avatar.latest
+        @user = User.new
       }
       wants.js {
         @bills = Bill.limit(5).send(params[:type])

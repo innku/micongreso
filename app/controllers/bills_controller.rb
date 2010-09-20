@@ -23,7 +23,7 @@ class BillsController < ApplicationController
   end
   
   def new
-    #3.times { @bill.resources.build }
+    3.times { @bill.resources.build }
   end
   
   def create

@@ -16,15 +16,15 @@ class User < ActiveRecord::Base
   
   validates_presence_of     :name
   
-  validates_presence_of     :city_id
+  validates_presence_of     :city_id, :if => :citizen?
   validate  :valid_district
 
   delegate :state, :to => :city
   delegate :district, :to => :section
   delegate :member, :to => :district
 
-  scope :citizens, where("role = ?", 'citizen')
-  scope :admins, where("role = ?", 'admin')
+  scope :citizen, where("role = ?", 'citizen')
+  scope :admin, where("role = ?", 'admin')
   scope :with_avatar, where('profiles.avatar_file_size > ?', 0).includes(:profile)
   scope :latest, order("users.created_at DESC").limit(21)
   
@@ -32,8 +32,8 @@ class User < ActiveRecord::Base
   
   accepts_nested_attributes_for :profile, :notification
   
-  attr_accessible :name, :email, :password, :password_confirmation, :ife_state_id
-  attr_accessible :city_id, :section_id, :congress_id, :city_name, :section_number, :tag_list, :notification_attributes
+  attr_accessible :name, :email, :password, :password_confirmation, :ife_state_id, :city_id, :section_id
+  attr_accessible :congress_id, :city_name, :section_number, :tag_list, :notification_attributes, :profile_attributes
   
   def city_name
     self.city.full_name if self.city
@@ -66,6 +66,10 @@ class User < ActiveRecord::Base
     unless self.section_number.blank?
       errors.add(:section_id, "^No encontramos la sección no. #{self.section_number} en el estado de #{self.state.name}") unless self.section
     end
+  end
+  
+  def self.last_admin?
+    admins.count <= 1
   end
   
   def active?

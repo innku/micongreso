@@ -21,10 +21,10 @@ es:
       user:                   "Usuario"
     attributes:
       user:
-        email:                "correo electrónico"
-        password:             "contraseña"
-        password_confirmation:  "confirmación de la contraseña"
-        name:                 "Nombre"
+        email:                "Correo electrónico"
+        password:             "Contraseña"
+        password_confirmation:  "Confirmación de la contraseña"
+        name:                 "Nombre Completo"
         city_id:              "Ciudad"
         this:                 "este"
 
@@ -86,6 +86,7 @@ es:
       default: "%d/%m/%Y"
       short: '%d de %B'
       long: '%d de %B, %Y'
+    order: [ :day, :month, :year]
     day_names: [Domingo, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado]
     abbr_day_names: [Dom, Lun, Mar, Mie, Jue, Vie, Sab]
     month_names: [~, Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre]

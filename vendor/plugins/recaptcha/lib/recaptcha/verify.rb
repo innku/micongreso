@@ -7,7 +7,7 @@ module Recaptcha
         options = {:model => options}
       end
       
-      env = options[:env] || ENV['RAILS_ENV']
+      env = options[:env] || Rails.env
       return true if SKIP_VERIFY_ENV.include? env
       model = options[:model]
       private_key = options[:private_key] || ENV['RECAPTCHA_PRIVATE_KEY']

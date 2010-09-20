@@ -32,7 +32,7 @@
           <div class="main_image"><%= @news.photo.url(:medium) %></div>
         <% end %>
         
-        <p><%= @news.body %></p>
+        <p><%=raw @news.body %></p>
         
         <div class="all_comments">
           <h3>Comentarios (<%= @news.comments.size %>)</h3>
@@ -41,7 +41,7 @@
           		<div class="comment">
           			<h4><%=h comment.title %></h4>
           			<p><%=h comment.comment %></p>
-          			<% if admin?(current_user) %>
+          			<% if can? :manage, News %>
           				<%= link_to "Eliminar", news_comment_path(@news, comment), :method => :delete, :confirm => "¿Esta seguro que lo desea eliminar?" %>
           			<% end %>
           		</div>
@@ -63,7 +63,7 @@
             			<%= f.text_area :comment, :rows => 6, :cols => 50, :class => "comment_input" %>
             		</p>
             		<p>
-            			<%= recaptcha_tags(:display => {:theme => "clean"}) %>
+            			<%=raw recaptcha_tags(:display => {:theme => "clean"}) %>
             		</p>
             		<p>
             			<%= f.submit "Enviar Comentario", :class => "action" %>
@@ -76,7 +76,7 @@
         </div>
         
         <p>
-        	<% if admin?(current_user) %>
+        	<% if can? :manage, News %>
         	  <%= link_to "Editar", edit_news_path(@news) %> |
         	  <%= link_to "Eliminar", @news, :confirm => 'Are you sure?', :method => :delete %> |
         	  <%= link_to "Regresar a noticias", news_index_path %>

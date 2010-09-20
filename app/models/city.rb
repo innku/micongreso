@@ -6,11 +6,11 @@ class City < ActiveRecord::Base
 	  where("cities.name = '#{name}' OR cities.city_name = '#{name}'")
 	end
 	
-	def self.like
+	def self.like(name)
 	  where("cities.name #{$like} '%%#{name}%%' OR cities.city_name #{$like} '%%#{name}%%'").includes(:state)
 	end
 	
-	def self.with_state_name
+	def self.with_state_name(state_name)
 	  where("states.name = '#{state_name}' or states.abbr = '#{state_name}' or states.short2='#{state_name}' or states.short3='#{state_name}'").includes(:state)
 	end
 	

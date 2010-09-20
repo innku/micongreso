@@ -27,6 +27,10 @@ class News < ActiveRecord::Base
   scope :ordered, order("created_at DESC")
   scope :latest, limit(5).order("created_at DESC")
   scope :popular, limit(5).order("views DESC")
+  
+  def self.title_or_body_like(query)
+    where("title #{$like} ? OR body #{$like} ?", "%#{query}%", "%#{query}%")
+  end
 
   def formatted_date
     if self.new_record?

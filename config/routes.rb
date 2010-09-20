@@ -1,21 +1,21 @@
 Micongreso::Application.routes.draw do
   
-  get "activations/create"
-
-  resources :terms
+  namespace :admin do
+    resources :terms
+    resources :states
+    resources :parties
+    resources :tags
+    resources :sittings
+    resources :users
+  end
+  
+  resources :cities
+  resources :regions
+  resources :districts
   
   resources :contacts do
     get :deliver, :on => :collection
   end
-  
-  resources :tags
-  resources :cities
-  resources :profiles
-  resources :regions
-  resources :districts
-  resources :sittings
-  resources :assistances
-  resources :views
   
   match '/bill/:bill_id/votes' => 'votes#update', :as => :update_bill_votes
   match '/bill/:bill_id/votes/edit' => 'votes#edit', :as => :edit_bill_votes
@@ -34,8 +34,6 @@ Micongreso::Application.routes.draw do
     get :group, :on => :collection
   end
   
-  resources :states
-  resources :parties
   resources :members do
     post :import, :on => :collection
     resources :messages
@@ -44,7 +42,7 @@ Micongreso::Application.routes.draw do
   match '/logout' => 'user_sessions#destroy', :as => :logout
   match '/login' => 'user_sessions#new', :as => :login
   match '/register' => 'users#create', :as => :register
-  match '/signup' => 'citizens#new', :as => :signup
+  match '/signup' => 'users#new', :as => :signup
   match '/conocenos' => 'dashboard#about', :as => :about_us
   match '/profile' => 'register#profile', :as => :profile
   match '/save_profile' => 'register#save_profile', :as => :save_profile
@@ -55,7 +53,6 @@ Micongreso::Application.routes.draw do
   resources :password_resets, :only => [ :new, :create, :edit, :update ]
   
   resources :users
-  resources :citizens
   resource :user_session
   
   match '/activate/:activation_code' => 'activations#create', :as => :activate

@@ -2,15 +2,15 @@
   <ul>
     <% if current_user && current_user.admin? %>
 		  <li><%= link_to "Inicio", root_path %></li>
-			<li><%= link_to "Usuarios", users_path %></li>
+			<li><%= link_to "Usuarios", admin_users_path %></li>
 			<li><%= link_to "Noticias", news_index_path %></li>
 			<li><%= link_to "Diputados", new_search_member_path %></li>
-			<li><%= link_to "Partidos", parties_path %></li>
-			<li><%= link_to "Estados", states_path %></li>
+			<li><%= link_to "Partidos", admin_parties_path %></li>
+			<li><%= link_to "Estados", admin_states_path %></li>
 			<li><%= link_to "Propuestas", bills_path %></li>
-			<li><%= link_to "Legislaturas", terms_path %></li>
-			<li><%= link_to "Sesiones", sittings_path %></li>
-			<li><%= link_to "Temas de Interés", tags_path %></li>
+			<li><%= link_to "Legislaturas", admin_terms_path %></li>
+			<li><%= link_to "Sesiones", admin_sittings_path %></li>
+			<li><%= link_to "Temas de Interés", admin_tags_path %></li>
     <% else %>
 			<li><%= link_to "Inicio", root_path %></li>
 			<li><%= link_to "Diputados", new_search_member_path %></li>
@@ -20,7 +20,7 @@
     <% end %>
     
     <% if current_user %>
-		  <li class="email"><%= link_to "Mi perfil", edit_citizen_path(current_user) %></li>
+		  <li class="email"><%= link_to "Mi perfil", edit_user_path(current_user) %></li>
 		  <li class="login"><%= link_to "Salir", logout_path %></li> 
 		<% else %>
 		  <li class="login">

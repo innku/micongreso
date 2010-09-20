@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = "No estas autorizado para acesar esta página"
-    redirect_to posts_path
+    redirect_to root_path
   end
 
   private

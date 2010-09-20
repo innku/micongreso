@@ -1,6 +1,7 @@
 class ContactsController < ApplicationController
   
   skip_before_filter :require_user, :only => [:create, :deliver]
+  authorize_resource
   
   def index
     @contacts = Contact.all
@@ -20,7 +21,7 @@ class ContactsController < ApplicationController
         if Contact.send_invitations(current_user, params[:provider], params[:login], params[:password])
           flash[:notice] = "Las invitaciones se enviaron correctamente a los contactos de su cuenta de correo."
           if current_user
-            redirect_to edit_citizen_path(current_user)
+            redirect_to edit_user_path(current_user)
           else
             redirect_to root_path
           end
@@ -43,9 +44,9 @@ class ContactsController < ApplicationController
   end
   
   def deliver
+    authorize! :deliver, :contacts
     respond_to do |wants|
       wants.js {
-        logger.warn "Mensaje: #{params[:message]}"
         Contact.deliver_invitations_later({:contact_ids => params[:contact_ids], :message => params[:message], :user => current_user})
       }
     end

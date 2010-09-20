@@ -10,12 +10,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100917072521) do
+ActiveRecord::Schema.define(:version => 20100920172339) do
 
   create_table "assistances", :force => true do |t|
     t.integer  "sitting_id"
     t.integer  "member_id"
-    t.boolean  "assisted"
+    t.boolean  "assisted",      :default => false
     t.boolean  "justified"
     t.text     "justification"
     t.datetime "created_at"

@@ -1,0 +1,50 @@
+<% content_for :jQuery do -%>
+  <%= javascript_include_tag 'jquery.tinyTips' %>
+	<%= javascript_include_tag 'jquery.autocomplete' %>
+<% end -%>
+
+<% content_for :body_class do -%>
+	class="user"
+<% end -%>
+
+<%= form_for @user do |f| %>
+  <%= render "layouts/error_messages", :target => @user %>
+
+  <p>
+    <strong><%= f.label :name, "Nombre Completo" %></strong><br />
+    <%= f.text_field :name, :class => "texto" %>
+  </p>
+  <p>
+    <strong><%= f.label :city_name, "Ciudad" %></strong><br />
+    <%= f.text_field :city_name, :class => "city_name texto" %>
+  </p>
+  <p>
+    <strong><%= f.label :section_number, "Sección" %></strong><br />
+    <%= f.text_field :section_number, :class => "texto" %>
+    <%= link_to "¿Qué es esto?", "#", :class => "what", :title => "hola" %>
+    <div class="clear"></div>
+  </p>
+  <p>
+    <strong><%= f.label :email, "Correo Electrónico" %></strong><br />
+    <%= f.text_field :email, :class => "texto" %>
+  </p>
+  <p class="password_fields">
+    <strong><%= f.label :password, "Nueva Contraseña" %></strong><br />
+    <%= f.password_field :password, :class => "texto", :id => "edit_password" %>
+  </p>
+  <p class="password_fields">
+    <strong><%= f.label :password_confirmation, "Confirmación de Contraseña" %></strong><br />
+    <%= f.password_field :password_confirmation, :class => "texto" %>
+  </p>
+  <p>
+    <%= link_to "Cambiar contraseña", "#", :id => "change_password" %>
+    <%= link_to "No Cambiar contraseña", "#", :id => "not_change_password", :style => "display: none;" %>
+  </p>
+  <p class="private" style="display: none;">
+    En Mi Congreso respetamos tu <%= link_to "privacidad", "#" %>
+  </p>
+  <p>
+    <%= hidden_field_tag :tab, 0 %>
+    <%= f.submit "Guardar", :class => "action" %>
+  </p>
+<% end %>

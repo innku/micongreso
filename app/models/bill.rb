@@ -28,6 +28,10 @@ class Bill < ActiveRecord::Base
   
   after_save :publish_bill, :deliver_emails
   
+  def self.name_or_description_like(query)
+    where("name #{$like} ? OR description #{$like} ?", "%#{query}%", "%#{query}%")
+  end
+  
   def self.recent_popular
     last_month.most_viewed
   end
@@ -167,8 +171,8 @@ class Bill < ActiveRecord::Base
   end
   
   def deliver
-    User.citizens.each do |citizen|
-      UserMailer.bill(citizen, self).deliver if citizen.notify_me?(self.tags)
+    User.citizens.each do |user|
+      UserMailer.bill(user, self).deliver if user.notify_me?(self.tags)
     end
   end
   

@@ -20,7 +20,6 @@ class DistrictsController < ApplicationController
             @member = @district.member
             if @member
               redirect_to @member
-              #flash[:notice] = "Si quieres conocer los diputados plurinominales de tu región <a href='/regions/#{@state.region.id}'>haz click aquí</a>"
             end
           else
             redirect_to root_path(:state_id => params[:state_id])
