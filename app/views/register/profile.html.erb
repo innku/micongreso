@@ -15,7 +15,7 @@
           <%= form_for @user, :url => save_profile_path, :html => { :multipart => true } do |f| %>
             <%= render "layouts/error_messages", :target => @user %>
 
-            <%= fields_for @user.profile do |p| %>
+            <%= f.fields_for :profile, @user.profile do |p| %>
               <table style="float: left;" width="500px">
                 <tr>
                   <td width="140px"><%= p.label :political_views, "Ideología Política" %></td>

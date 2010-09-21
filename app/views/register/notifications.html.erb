@@ -15,11 +15,10 @@
           <%= form_for @user, :url => save_notifications_path do |f| %>
             <%= render "layouts/error_messages", :target => @user %>
 
-            <%= fields_for @user.notification do |n| %>
+            <%= f.fields_for :notification, @user.notification do |n| %>
               <h4>¿Por cuáles medios deseas recibir notificaciones?</h4>
               <p>
-                <%= hidden_field_tag "user[notification_attributes][email]", false, :id => "user_hidden_email" %>
-                <%= check_box_tag "user[notification_attributes][email]", true, false, :id => "user_notification_attributes_email" %>
+                <%= n.check_box :email %>
                 <%= n.label :email, "Correo Electrónico" %>
               </p>
 
