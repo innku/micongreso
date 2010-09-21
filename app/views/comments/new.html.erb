@@ -19,7 +19,7 @@
         			<%= f.text_area :comment, :rows => 4, :cols => 40 %>
         		</p>
         		<p>
-        			<%= recaptcha_tags(:display => {:theme => "clean"}) %>
+        			<%=raw recaptcha_tags(:display => {:theme => "clean"}) %>
         		</p>
         		<p>
         			<%= f.submit "Enviar Comentario", :class => "action" %>
