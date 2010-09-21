@@ -39,17 +39,17 @@
 
 <% if current_user %>
   <div id="invite">
-    <h2 class="section">Con&oacute;ce las propuestas, &nbsp; ¡ Participa !</h2>
+    <h2 class="section">Conoce las propuestas, &nbsp; ¡ Participa !</h2>
     <%= link_to "Invita a tus amigos", "#invite_form", :class => "action invite_link" %>
   </div>
 <% else %>
   <div id="pitch"> 
   	<div class="left"> 
-  		<h1>Con&oacute;ce las propuestas,<br /> 
-  			da tu opini&oacute;n y sigue los pasos<br /> 
+  		<h1>Conoce las propuestas,<br /> 
+  			da tu opinión y sigue los pasos<br /> 
   			de tus diputados.</h1> 
-  		<p>&iquest;Sabes si tu diputado realmente te representa?<br /> 
-  		 Ub&iacute;calo, observa sus decisiones y compáralas<br /> 
+  		<p>¿Sabes si tu diputado realmente te representa?<br /> 
+  		 Ubícalo, observa sus decisiones y compáralas<br /> 
   		 con el voto ciudadano.</p>
 		 
   		<%= link_to "Comienza ahora", "#signup_form", :class => "action signup_link" %>
@@ -66,21 +66,21 @@
   				<a href="#signup_form" class="signup_link"> 
     				<%= image_tag("01.jpg", :alt => "") %>
     				<h2>Forma parte de Mi Congreso</h2> 
-    				<p>Reg&iacute;strate y opina sobre el M&eacute;xico que quieres ver</p> 
+    				<p>Regístrate y opina sobre el México que quieres ver</p> 
   				</a>
   			</li> 
   			<li class="center"> 
   				<a href="#invite_form" class="invite_link"> 
     				<%= image_tag("02.jpg", :alt => "") %> 
     				<h2>Invita a tus amigos</h2> 
-    				<p>Fomenta la participaci&oacute;n ciudadana</p> 
+    				<p>Fomenta la participación ciudadana</p> 
   				</a>
   			</li> 
   			<li>
   				<a href="/conocenos"> 
     				<%= image_tag("03.jpg") %> 
-    				<h2>&iquest;Quieres saber más?</h2> 
-    				<p>Con&oacute;ce más sobre esta iniciativa</p> 
+    				<h2>¿Quieres saber más?</h2> 
+    				<p>Conóce más sobre esta iniciativa</p> 
   				</a> 
   			</li> 
   		</ul> 
@@ -118,12 +118,12 @@
 		  <% if current_user && current_user.section %>
 		    <div id="diputado" class="escogido">
 		      <h2><%= current_user.member.name %></h2>
-  		    <%= image_tag(current_user.member.picture.url(:thumb)) %>
+  		    <%= image_tag(current_user.member.picture.url(:thumb), :height => "100px", :width => "82px") %>
   		    <%= link_to "Perfil de tu diputado", current_user.member %>
 		    </div>
 		  <% else %>
 		    <div id="diputado"> 
-    			<h2>&iquest;Sabes quién es<br />tu diputado?</h2> 
+    			<h2>¿Sabes quién es<br />tu diputado?</h2> 
     			<a id="search_link" href="#search_member">Descúbrelo ahora</a> 
     			<p>Comienza a seguirles la pista en las decisiones que toman</p> 
   			</div>

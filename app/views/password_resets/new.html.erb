@@ -1,12 +1,24 @@
-<%= form_tag password_resets_path do %>
-	
-	<div class="msg info">
-		<p>Te enviaremos un correo para confirmar el cambio de contraseña y después te vamos a pedir que ingreses una nueva.</p>
-	</div>
-	<p>
-		<%= label_tag :email, "Ingresa tu correo electrónico" %>
-		<%= text_field_tag :email %>
-	</p>
-	
-  <%= submit_tag "Recuperar contraseña", :class => "action" %>
-<% end %>
+<div id="rest">
+  <h2 class="section">Se me olvidó la contraseña</h2>
+  
+  <div class="left">
+    <div class="propuestas">
+      <div id="interna" class="propuesta cien">
+        <%= form_tag password_resets_path do %>
+					<div class="msg info">
+						<p>Te enviaremos un correo para confirmar el cambio de contraseña y después te vamos a pedir que ingreses una nueva.</p>
+					</div>
+					<p>
+						<%= label_tag :email, "Ingresa tu correo electrónico" %><br />
+						<%= text_field_tag :email, nil, :class => "input" %>
+					</p>
+
+				  <%= submit_tag "Recuperar contraseña", :class => "action" %>
+				<% end %>
+      </div>
+    </div>
+  </div>
+  <div class="right"></div>
+</div>
+
+

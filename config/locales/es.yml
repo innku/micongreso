@@ -138,7 +138,7 @@ es:
       email_invalid: debe tener un formato correcto. ej. andres@gmail.com
       password_blank: no puede estar en blanco
       password_invalid: no es válida
-      not_active: Tu cuenta no esta activada
+      not_active: Tu cuenta no esta activada, <a href='/resend_activation_form'>haz click aquí</a> para que te enviemos el correo de activación de nuevo.
       not_confirmed: Tu cuenta no ha sido confirmada
       not_approved: Tu cuenta no ha sido aprovada
       no_authentication_details: Por favor escriba el correo y contraseña.
