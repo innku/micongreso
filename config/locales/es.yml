@@ -20,6 +20,91 @@ es:
       term:                   "Legislatura"
       user:                   "Usuario"
     attributes:
+      assistance:
+        this:                 "esta"
+      bill:
+        name:                 "Nombre"
+        description:          "Descripción"
+        date:                 "Fecha de Introducción"
+        member_votes_for:     "Votos a favor"
+        member_votes_against: "Votos en contra"
+        member_votes_neutral: "Abstenciones"
+        total_views:          "Visitas Totales"
+        week_views:           "Visitas en la semana"
+        user_votes_for:       "Votos ciudadanos a favor"
+        user_votes_against:   "Votos ciudadanos en contra"
+        user_votes_neutral:   "Abstenciones ciudadanas"
+        vote_date:            "Fecha de Votación"
+        resolution:           "Resolución"
+        status:               "Estatus"
+        this:                 "esta"
+      city:
+        name:                 "Nombre"
+        this:                 "esta"
+      comment:
+        title:                "Título"
+        comment:              "Comentario"
+        this:                 "este"
+      contact:
+        name:                 "Nombre"
+        email:                "Correo Electrónico"
+        invited_on:           "Fecha de envío de invitación"
+        this:                 "este"
+      district:
+        number:               "Número"
+        this:                 "este"
+      member:
+        name:                 "Nombre"
+        email:                "Correo Electrónico"
+        commission:           "Comisión"
+        election:             "Tipo de Elección"
+        birthdate:            "Fecha de Nacimiento"
+        birthplace:           "Lugar de Nacimiento"
+        substitute:           "Suplente"
+        curul:                "Curul"
+        political_experience: "Experiencia Política"
+        private_experience:   "Experiencia Privada"
+        this:                 "este"
+      message:
+        text:                 "Mensaje"
+        name:                 "Nombre"
+        email:                "Correo Electrónico"
+        this:                 "este"
+      news:
+        title:                "Título"
+        abstract:             "Resumen"
+        body:                 "Cuerpo de la Noticia"
+        date:                 "Fecha de publicación"
+        source:               "Fuente"
+        views:                "Visitas"
+        this:                 "esta"
+      party:
+        name:                 "Nombre"
+        abbr:                 "Siglas"
+        this:                 "este"
+      profile:
+        this:                 "este"
+      region:
+        this:                 "esta"
+      resource:
+        name:                 "Nombre"
+        url:                  "Dirección"
+        this:                 "este"
+      section:
+        number:               "Número"
+        this:                 "esta"
+      sitting:
+        name:                 "Nombre"
+        date:                 "Fecha de Sesión"
+      state:
+        name:                 "Estado"
+        abbr:                 "Abreviación"
+        this:                 "este"
+      term:
+        name:                 "Nombre"
+        start_date:           "Fecha de inicio"
+        end_date:             "Fecha de final"
+        this:                 "esta"
       user:
         email:                "Correo electrónico"
         password:             "Contraseña"
