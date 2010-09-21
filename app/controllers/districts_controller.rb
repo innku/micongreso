@@ -10,7 +10,7 @@ class DistrictsController < ApplicationController
           redirect_to root_path(:state_id => params[:state_id])
           flash[:error] = "Por favor ingrese la sección que viene en su credencial de Elector"
         else
-          @section = @state.sections.find_by_number(params[:section])
+          @section = @state.sections.find_by_number(params[:section].to_i)
           if @section
             if current_user
               current_user.section = @section

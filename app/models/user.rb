@@ -52,8 +52,9 @@ class User < ActiveRecord::Base
   end
   
   def section_number=(number)
+    number = number ? number.to_i : 0
     if self.city
-      if number.blank?
+      if number == 0
         write_attribute(:section_id, nil)
       else
         self.section = self.state.sections.find_by_number(number)
