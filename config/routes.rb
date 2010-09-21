@@ -14,7 +14,7 @@ Micongreso::Application.routes.draw do
   resources :districts
   
   resources :contacts do
-    get :deliver, :on => :collection
+    post :deliver, :on => :collection
   end
   
   match '/bill/:bill_id/votes' => 'votes#update', :as => :update_bill_votes

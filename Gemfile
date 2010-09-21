@@ -15,7 +15,7 @@ gem "heroku"
 gem 'acts_as_commentable'
 gem 'acts-as-taggable-on'
 gem 'paperclip'
-gem 'delayed_job'
+gem "delayed_job",  :git => 'git://github.com/collectiveidea/delayed_job.git'
 gem 'vote_fu', :path => "/Users/fede/work/vote_fu"
 gem 'authlogic'
 gem 'cancan'

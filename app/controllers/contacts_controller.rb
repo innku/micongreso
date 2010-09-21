@@ -31,7 +31,7 @@ class ContactsController < ApplicationController
         end
       }
       wants.js {
-        token = User.make_token
+        token = Authlogic::Random.friendly_token
         session[:token] = token
         @success = Contact.save_contacts(current_user, params[:provider], params[:login], params[:password], token)
         if current_user

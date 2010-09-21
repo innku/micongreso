@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/collectiveidea/delayed_job.git
+  revision: 234fcf8a441e0b9890de05acb46845f4b997690b
+  specs:
+    delayed_job (2.1.0.pre2)
+      activesupport (~> 3.0)
+      daemons
+
 PATH
   remote: /Users/fede/work/vote_fu
   specs:
@@ -55,8 +63,6 @@ GEM
       cucumber (>= 0.8.0)
     daemons (1.1.0)
     database_cleaner (0.5.2)
-    delayed_job (2.0.3)
-      daemons
     diff-lcs (1.1.2)
     email_spec (1.0.0)
     erubis (2.6.6)
@@ -65,7 +71,7 @@ GEM
     gdata (1.1.1)
     gherkin (2.1.5)
       trollop (~> 1.16.2)
-    heroku (1.10.4)
+    heroku (1.10.5)
       json_pure (>= 1.2.0, < 1.5.0)
       launchy (~> 0.3.2)
       rest-client (~> 1.4.0)
@@ -82,7 +88,7 @@ GEM
       mime-types
       treetop (>= 1.4.5)
     mime-types (1.16)
-    mysql2 (0.2.3)
+    mysql2 (0.2.4)
     paperclip (2.3.3)
       activerecord
       activesupport
@@ -108,19 +114,21 @@ GEM
     rake (0.8.7)
     rest-client (1.4.2)
       mime-types (>= 1.16)
-    rspec (2.0.0.beta.20)
-      rspec-core (= 2.0.0.beta.20)
-      rspec-expectations (= 2.0.0.beta.20)
-      rspec-mocks (= 2.0.0.beta.20)
-    rspec-core (2.0.0.beta.20)
-    rspec-expectations (2.0.0.beta.20)
+    rspec (2.0.0.beta.22)
+      rspec-core (= 2.0.0.beta.22)
+      rspec-expectations (= 2.0.0.beta.22)
+      rspec-mocks (= 2.0.0.beta.22)
+    rspec-core (2.0.0.beta.22)
+    rspec-expectations (2.0.0.beta.22)
       diff-lcs (>= 1.1.2)
-    rspec-mocks (2.0.0.beta.20)
-    rspec-rails (2.0.0.beta.20)
-      rspec (= 2.0.0.beta.20)
+    rspec-mocks (2.0.0.beta.22)
+      rspec-core (= 2.0.0.beta.22)
+      rspec-expectations (= 2.0.0.beta.22)
+    rspec-rails (2.0.0.beta.22)
+      rspec (= 2.0.0.beta.22)
     selenium-client (1.2.18)
     term-ansicolor (1.0.5)
-    thor (0.14.0)
+    thor (0.14.1)
     treetop (1.4.8)
       polyglot (>= 0.3.1)
     trollop (1.16.2)
@@ -138,7 +146,7 @@ DEPENDENCIES
   contacts
   cucumber-rails (>= 0.3.2)
   database_cleaner
-  delayed_job
+  delayed_job!
   email_spec
   fastercsv
   heroku
