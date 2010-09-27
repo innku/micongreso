@@ -1,0 +1,14 @@
+<% if sponsor %>
+  <h4>Promotor</h4>
+
+  <%= image_tag(sponsor.picture.url(:thumb), :height => "100px", :width => "82px") %>
+  <div class="info">
+    <p><%= sponsor.name %></p>
+    <% if sponsor.district %>
+      <p>Distrito <%= sponsor.district_number %></p>
+    <% end %>
+    <p><%= sponsor.state_name %></p>
+    <p><%= sponsor.election %></p>
+  </div>
+<% end %>
+  

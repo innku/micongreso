@@ -2,12 +2,13 @@ class Bill < ActiveRecord::Base
     
   has_many  :views, :dependent => :destroy
   has_many  :resources, :dependent => :destroy
+  has_many  :actions
   belongs_to  :sitting
-  belongs_to  :member
+  belongs_to  :sponsor, :class_name => "Member", :foreign_key => "member_id"
   
   belongs_to  :congress, :class_name => "State"
   
-  validates_presence_of :name, :description, :date
+  validates_presence_of :name, :description
   
   attr_accessor :publish_bill_on_social_media
   attr_accessor :send_emails
@@ -20,11 +21,8 @@ class Bill < ActiveRecord::Base
   
   scope :voted, where("member_votes_for != ? OR member_votes_against != ? OR member_votes_neutral != ?",0,0,0).order("created_at DESC")
   scope :recent, order("created_at DESC")
-  scope :active, where('vote_date >= ?', Date.today)
-  scope :closed, where('vote_date < ?', Date.today)
   scope :most_viewed, order("total_views DESC")
   scope :pending, where('status = ?', 'pending')
-  scope :single_voted, where('voted_on IS NOT NULL').order("voted_on DESC")
   
   after_save :publish_bill, :deliver_emails
   
@@ -37,12 +35,12 @@ class Bill < ActiveRecord::Base
   end
   
   def self.last_month
-    where('date >= ?', Date.today-1.months)
+    where('created_at >= ?', Date.today-1.months)
   end
   
   def self.monthly(month, year)
-    month_selector = Rails.env.production? ? "EXTRACT(MONTH FROM bills.date)" : "MONTH(bills.date)"
-    year_selector = Rails.env.production? ? "EXTRACT(YEAR FROM bills.date)" : "YEAR(bills.date)"
+    month_selector = Rails.env.production? ? "EXTRACT(MONTH FROM bills.created_at)" : "MONTH(bills.created_at)"
+    year_selector = Rails.env.production? ? "EXTRACT(YEAR FROM bills.created_at)" : "YEAR(bills.created_at)"
     where("#{month_selector} = ? AND #{year_selector} = ?", month, year)
   end
   
@@ -59,8 +57,7 @@ class Bill < ActiveRecord::Base
   end
   
   def closed?
-    return false if self.vote_date.nil?
-    (self.vote_date < Date.today) && !self.pending?
+    self.status == "closed"
   end
   
   def update_votes(params)
@@ -80,38 +77,24 @@ class Bill < ActiveRecord::Base
     self.member_votes_for = self.votes_for_by("Member")
     self.member_votes_against = self.votes_against_by("Member")
     self.member_votes_neutral = self.votes_neutral_by("Member")
-    self.voted_on = Time.now
     self.save
   end
   
-  def formatted_date
-    if self.new_record?
-      Date.today.to_s(:es)
+  def update_users_votes_count!(vote)
+    if vote
+      self.user_votes_for += 1
     else
-      read_attribute(:date).to_s(:es)
+      self.user_votes_against += 1
     end
+    self.save!
   end
   
-  def formatted_date=(date)
+  def sponsor_name
+    self.sponsor.name if self.sponsor
   end
   
-  def formatted_vote_date
-    if self.new_record?
-      Date.today.to_s(:es)
-    else
-      read_attribute(:vote_date).to_s(:es) if read_attribute(:vote_date)
-    end
-  end
-  
-  def formatted_vote_date=(date)
-  end
-  
-  def member_name
-    self.member.name if self.member
-  end
-  
-  def member_name=(string)
-    self.member = Member.find_by_name(string)
+  def sponsor_name=(string)
+    self.sponsor = Member.find_by_name(string)
   end
   
   def general_votes?
@@ -145,6 +128,14 @@ class Bill < ActiveRecord::Base
   def citizen_votes_for_state(state, vote)
     Vote.from("(votes").joins("INNER JOIN users ON users.id = votes.voter_id) INNER JOIN cities ON cities.id = users.city_id").
            where("voteable_id = ? AND voteable_type = ? AND vote #{vote_sql(vote)} AND voter_type = ? AND cities.state_id = ?", self.id, self.class.name, "User", state.id).count
+  end
+  
+  def citizens_for_rate
+    (self.user_votes_for/self.total_citizen_votes)*100
+  end
+  
+  def total_citizen_votes
+    self.user_votes_for + self.user_votes_against + self.user_votes_neutral
   end
   
   def citizen_votes_and_percents

@@ -1,0 +1,8 @@
+<% if @bill.closed? && !@bill.resolution.blank? %>
+  <p><%= link_to "Ver resolución a propuesta", "", :id => "resolution_link" %></p>
+  
+  <div id="resolution" style="display: none;">
+    <h4>Resolución</h4>
+    <%=raw @bill.resolution %>
+  </div>
+<% end %>

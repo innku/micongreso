@@ -3,6 +3,8 @@ class BillsController < ApplicationController
   skip_before_filter  :require_user, :only => [:index, :show]
   load_and_authorize_resource :except => [:index, :show]
   
+  layout "application_new"
+  
   def index
     if params[:search]
       @bills = Bill.name_or_description_like(params[:search])

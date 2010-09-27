@@ -65,7 +65,7 @@
         	    <% vote = @member.vote_object(bill) %>
         	    <tr>
           	    <td><%= link_to(truncate(bill.name, :length => 80), bill) %></td>
-          	    <td><%=l bill.vote_date, :format => :long %></td>
+          	    <td><!-- Here goes vote date --></td> 
           	    <td><span class="<%= member_vote_class(vote).downcase %>"><%= member_vote(vote) %></span></td>
         	    </tr>
           	<% end %>

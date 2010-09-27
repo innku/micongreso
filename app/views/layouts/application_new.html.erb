@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title><%= h(yield(:title) || "Mi Congreso") %></title>
+    <%= stylesheet_link_tag 'diputadovirtual' %>
+    <%= yield(:head) %>
+
+		<%= javascript_include_tag 'jquery.js', 'jquery-ui.js', 'rails' %>
+		<%= yield(:jQuery) %>
+		<%= javascript_include_tag 'application' %>
+		<%= csrf_meta_tag %>
+		
+  </head>
+  <body <%= yield(:body_class) %> id="mi">
+
+    <div id="header"> 
+    	<div class="contenido"> 
+    		<div id="logo">
+    		  <%= link_to image_tag("logo.gif"), root_path %>
+    		</div> 
+    		<%= render :partial => "layouts/menu" %>
+    	</div>
+    </div>
+		
+    <div id="main">
+     	<div class="container">
+     	  <%- flash.each do |name, msg| -%>
+           <%= content_tag :div, msg, :id => "flash_#{name}", :class => "flash" %>
+         <%- end -%>
+         
+         <%= yield(:toolbar) %>
+
+         <%- if show_title? -%>
+           <h1><%=h yield(:title) %></h1>
+         <%- end -%>
+     	   
+				<div class="inner-container">
+					<%= yield %>
+				</div>
+      </div>
+    </div>
+    
+		<!--FOOTER-->
+		<div id="footer">
+			<div class="contenido">
+				<div class="lista_footer">
+  				<h2>Mi Congreso</h2>
+  				<ul>
+
+  					<li><a href="/conocenos">Acerca de Nosotros</a></li>
+  					<li style="display: none;"><a href="#">Preguntas Frecuentes</a></li>
+  					<li style="display: none;"><a href="#">Aviso legal</a></li>
+  				</ul>
+				</div>
+				
+				<div class="lista_footer">
+  				<h2>Síguenos</h2>
+
+  				<ul>
+  					<li><a href="http://twitter.com/micongresomx" target="_blank">Twitter</a></li>
+  					<li><a href="http://www.facebook.com/pages/Mi-Congreso-MX/108586009164833" target="_blank">Facebook</a></li>
+  					<li style="display: none;"><a href="#">Newsletter</a></li>
+  					<li style="display: none;"><a href="#">RSS</a></li>
+  				</ul>
+				</div>
+
+				<div class="lista_footer">
+  				<h2>Contáctanos</h2>
+  				<ul>
+  					<li><a href="mailto: info@micongreso.mx">info@micongreso.mx</a></li>
+  				</ul>
+				</div>
+
+				
+				<div class="lista_footer">
+  				<h2>Ligas de interés</h2>
+  				<ul>
+  					<li><a href="http://www.diputados.gob.mx" target="_blank">Cámara de Diputados</a></li>
+  					<li><a href="http://sil.gobernacion.gob.mx/portal" target="_blank">Sistema de Información Legislativa</a></li>
+  				</ul>
+				</div>
+
+			</div>
+		</div>
+
+  	
+  	<% if Rails.env.production? %>  	
+    	<script type="text/javascript">
+        var uservoiceOptions = {
+          /* required */
+          key: 'micongresomx',
+          host: 'micongresomx.uservoice.com', 
+          forum: '50993',
+          showTab: true,  
+          /* optional */
+          alignment: 'left',
+          background_color:'#696055', 
+          text_color: 'white',
+          hover_color: '#b63d46',
+          lang: 'es'
+        };
+
+        function _loadUserVoice() {
+          var s = document.createElement('script');
+          s.setAttribute('type', 'text/javascript');
+          s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+          document.getElementsByTagName('head')[0].appendChild(s);
+        }
+        _loadSuper = window.onload;
+        window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+      </script>
+  	
+    	<script type="text/javascript">      
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+      </script>
+    
+      <script type="text/javascript"> 
+        try{
+        var pageTracker = _gat._getTracker("UA-15807435-1");
+        pageTracker._trackPageview();
+        } catch(err) {}
+    	</script>
+  	<% end %>
+  </body>
+</html>

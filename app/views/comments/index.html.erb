@@ -1,0 +1,60 @@
+<% content_for :title do -%>
+  <%= truncate(@bill.name, :length => 60) %>
+<% end -%>
+
+<%= render :partial => "bills/toolbar" %>
+
+<div class="section s-70">
+  <div class="box big-header">
+    <h1><%= @bill.name %></h1>
+    
+    <div id="tabs">
+      <ul>
+        <li><%= link_to "Propuesta", @bill %></li>
+        <li><%= link_to "Actividad", bill_actions_path(@bill) %></li>
+        <li><%= link_to "Comentarios", bill_comments_path(@bill), :class => "active" %></li>
+      </ul>
+    </div>
+    
+    <div class="boxin">
+      <div class="content">
+        <div class="all_comments">
+          <h3>Comentarios (<%= @bill.comments.size %>)</h3>
+          <div class="comments">
+          	<% for comment in @bill.comments %>
+          		<div class="comment">
+          			<h4><%=h comment.title %></h4>
+          			<p><%=h comment.comment %></p>
+          			<% if can? :destroy, Comment %>
+          				<%= link_to "Eliminar", bill_comment_path(@bill, comment), :method => :delete, :confirm => "¿Esta seguro que lo desea eliminar?" %>
+          			<% end %>
+          		</div>
+          	<% end %>
+          </div>
+
+
+          <div id="comment_form">
+          	<h4>Envíanos tus comentarios:</h4>
+
+            <% if current_user %>
+              <%= render :partial => "comments/form" %>
+            <% else %>
+              <p>Para comentar sobre esta propuesta es necesario que te registres en mi congreso.</p>
+              <%= link_to "¡Regístrate y opina!", signup_path, :class => "action" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section s-30">
+	<div class="sidebar">
+		<div class="content">
+		  <%= render :partial => "bills/user_votes" %>
+ 		  <%= render :partial => "bills/views" %>
+ 		  <%= render :partial => "bills/resources" %>
+		</div>
+  </div>
+</div>

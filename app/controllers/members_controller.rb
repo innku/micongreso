@@ -36,7 +36,7 @@ class MembersController < ApplicationController
     @search_member = SearchMember.new
     @parties = Party.all
     @states = State.all
-    @bills = Bill.single_voted.limit(5)
+    @bills = Bill.voted.limit(5)
   end
   
   def new

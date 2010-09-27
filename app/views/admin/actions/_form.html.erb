@@ -1,0 +1,25 @@
+<% content_for :jQuery do -%>
+	<%= javascript_include_tag 'ui.datepicker-es' %>
+	<%= stylesheet_link_tag 'jquery-ui-1.7.2' %>
+<% end -%>
+
+<%= form_for [:admin, @bill, @action], :as => :action_object do |f| %>
+  <%= render "layouts/error_messages", :target => @action %>
+
+  <div class="field">
+    <%= f.label :action_type %><br />
+    <%= f.select :action_type, Action::TYPES %>
+  </div>
+  <div class="field">
+    <%= f.label :date %><br />
+    <%= f.text_field :formatted_date, :class => "input_text datepicker" %>
+    <%= f.text_field :date, :style => "display: none;" %>
+  </div>
+  <div class="field">
+    <%= f.label :text %><br />
+    <%= f.text_area :text, :cols => 60, :rows => 2 %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Guardar Acción", :class => "action" %>
+  </div>
+<% end %>

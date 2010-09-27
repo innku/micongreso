@@ -3,256 +3,95 @@
 <% end -%>
 
 <% content_for :head do -%>
-
-  <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-  <script type="text/javascript">
-    google.load('visualization', '1', {packages: ['geomap','columnchart']});
-    
-    var entidades = [<%= State.google_codes_and_votes(@bill) %>]
-    
-    function drawVisualization() {
-      var data = new google.visualization.DataTable();
-      data.addRows(entidades.length);
-      data.addColumn('string', 'Estado');
-      data.addColumn('number', '% Favor');
-      data.addColumn('string', 'Nombre');
-      
-      for ( var i=0;i<entidades.length;i++){
-        data.setValue(i,0,entidades[i][0]); //codigo entidad para mapa MX-
-        data.setValue(i,1,entidades[i][2]);            //valor
-        data.setValue(i,2,entidades[i][1]); //texto para mostrar
-      }
-      
-      var geomap = new google.visualization.GeoMap(
-          document.getElementById('citizen_votes_per_state'));
-      geomap.draw(data,{'region':'MX', 'colors': [0xFFFFFF, 0x81A05A]});
-    }
-    
-    google.setOnLoadCallback(drawVisualization);
-  </script>
-  
-  <script type="text/javascript">
-    google.load('visualization', '1', {packages: ['barchart']});
-    
-    var partidos = [<%= Party.votes_per_party(@bill) %>]
-    
-    function drawVisualization() {
-      // Create and populate the data table.
-      var data = new google.visualization.DataTable();
-      data.addColumn('string', 'Name');
-      data.addColumn('number', 'Favor');
-      data.addColumn('number', 'Contra');
-      data.addColumn('number', 'Abstencion');
-      data.addRows(partidos.length);
-      
-      for ( var i=0;i<partidos.length;i++){
-        data.setValue(i,0,partidos[i][0]); // Abreviación del partido
-        data.setValue(i,1,partidos[i][1]); // Votos a favor
-        data.setValue(i,2,partidos[i][2]); // Votos en contra
-        data.setValue(i,3,partidos[i][3]); // Abstenciones
-      }
-    
-      // Create and draw the visualization.
-      new google.visualization.BarChart(document.getElementById('votes_per_party')).
-        draw(data, {'isStacked':true, 'height': 200, 'colors': ['#81A05A', '#CC5477', '#CACAC2']});  
-    }
-    
-
-    google.setOnLoadCallback(drawVisualization);
-  </script>
+  <%= render :partial => "graphs_javascript" %>
 <% end -%>
 
-<div id="rest">
-  <h2 class="section">Propuestas</h2>
-  
-  <div class="left">
-    <div class="propuestas">
-      <div id="interna" class="propuesta">
+<% content_for :jQuery do -%>
+  <%= stylesheet_link_tag 'jquery-ui-1.7.2' %>
+<% end -%>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#graphs_tabs').tabs();
+  });
+</script>
+
+<%= render :partial => "toolbar" %>
+
+<div class="section s-70">
+  <div class="box big-header">
+    <h1><%= @bill.name %></h1>
+    
+    <div id="tabs">
+      <ul>
+        <li><%= link_to "Propuesta", @bill, :class => "active" %></li>
+        <li><%= link_to "Actividad", bill_actions_path(@bill) %></li>
+        <li><%= link_to "Comentarios", bill_comments_path(@bill) %></li>
+      </ul>
+    </div>
+    
+    <div class="boxin">
+      <div class="content">
         
-        <h1 class="close"><%= @bill.name %></h1>
-        
-        <ul class="status">
-					<li id="one" class="<%= bill_status_class(@bill, "approved") %>">Aprobada</li>
-					<li id="two" class="<%= bill_status_class(@bill, "rejected") %>">Rechazada</li>
-					<li id="three" class="<%= bill_status_class(@bill, "pending") %>">Pendiente</li>
-				</ul>
-				
-				<% if @bill.closed? && !@bill.resolution.blank? %>
-          <p><%= link_to "Ver resolución a propuesta", "", :id => "resolution_link" %></p>
-          
-          <div id="resolution" style="display: none;">
-            <h4>Resolución</h4>
-            <%= @bill.resolution %>
+        <div id="sponsor_and_activity">
+          <div id="sponsor">
+            <%= render :partial => "sponsor", :locals => {:sponsor => @bill.sponsor} %>
           </div>
-        <% end %>
-				
-				<p>
-				  <strong>Fecha de Presentación:</strong>
-          <%= l @bill.date, :format => :long %>
-				</p>
-				
-				<p class="fecha">
-          <strong>Fecha de Votación:</strong>
-					<% if @bill.vote_date %>
-          	<%= l @bill.vote_date, :format => :long %>
-					<% end %>
-        </p>
-        
-        <div id="description">
-          <%=raw @bill.description %>
           
-          <% if @bill.resources.any? %>
-            <h3>Recursos adicionales</h3>
-            <ul id="resources">
-              <% @bill.resources.each do |resource| %>
-                <li><%= link_to resource.name, resource.url %></li>
-              <% end %>
-            </ul>
-          <% end %>
+          <div id="activity">
+            <%= activity_bar(@bill) %>
+          </div>
         </div>
         
+  			<div id="description">
+  			  <h4>Descripción</h4>
+          <%=raw @bill.description %>
+        </div>
+
         <ul class="tags">
           <% @bill.tags.each do |tag| %>
             <li><%= tag.name %></li>
           <% end %>
         </ul>
-        
-        <% if @bill.member %>
-          <p>
-  				  <strong>Presentada por:</strong>
-            <%= @bill.member_name %>
-  				</p>
-  			<% end %>
-  			
+
         <div class="clear"></div>
-        
-        <% if admin?(current_user) %>
-          <p>
-          	<%= link_to "Editar", edit_bill_path(@bill) %> |
-          	<%= link_to "Eliminar", @bill, :confirm => 'Are you sure?', :method => :delete %> |
-        		<%= link_to "Editar votos", edit_bill_votes_path(@bill) %>
-        		<%= link_to "Regresar a todas las propuestas", bills_path %>
-          </p>
-        <% end %>
-        
-        <h3>Votaciones Totales</h3>
-        <ul class="graficas">
-      		<li class="ciudadana">
-      		  <span>Votaci&oacute;n ciudadana:</span>
-      		  <div class="votos inside">
-      		    <div class="barra favor" style="width: <%= @bill.citizen_votes_and_percents[3] %>%;">&nbsp; <%= show_votes?(0, @bill.citizen_votes_and_percents) %></div>
-      			  <div class="barra contra" style="width: <%= @bill.citizen_votes_and_percents[4] %>%;">&nbsp; <%= show_votes?(1, @bill.citizen_votes_and_percents) %></div>
-      			  <div class="barra neutral" style="width: <%= @bill.citizen_votes_and_percents[5] %>%;">&nbsp; <%= show_votes?(2, @bill.citizen_votes_and_percents) %></div>
-      		  </div>
-      		</li>
 
-      		<% if @bill.general_votes? %>
-      		  <li class="oficial">
-        		  <span>Votaci&oacute;n oficial:</span>
-        		  <div class="votos inside">
-        		    <div class="barra favor" style="width: <%= @bill.member_votes_and_percents[3] %>%;">&nbsp; <%= show_votes?(0, @bill.member_votes_and_percents) %></div>
-        			  <div class="barra contra" style="width: <%= @bill.member_votes_and_percents[4] %>%;">&nbsp; <%= show_votes?(1, @bill.member_votes_and_percents) %></div>
-        			  <div class="barra neutral" style="width: <%= @bill.member_votes_and_percents[5] %>%;">&nbsp; <%= show_votes?(2, @bill.member_votes_and_percents) %></div>
-        		  </div>
-      		  </li>
-        	<% end %>
-      	</ul>
-      	
-      	<ul id="bill_<%= @bill.id %>" class="links">
-      	  <% if current_user %>
-      			<% if current_user.voted_on?(@bill) %>
-      			  <li class="voted"><div class="<%= choice_class(current_user.vote_choice(@bill)) %>"><%= display_vote(current_user.vote_choice(@bill), @bill) %></div></li>
-      			<% else %>
-      			  <li><%= link_to "Vota a favor", bill_votes_path(@bill), :class => "vote si", 'data-vote' => 1, 'data-voteable' => "bill" %> </li>
-      			  <li><%= link_to "Vota en contra", bill_votes_path(@bill), :class => "vote no", 'data-vote' => 0, 'data-voteable' => "bill" %></li>
-      			  <li><%= link_to "Abstente", bill_votes_path(@bill), :class => "vote", 'data-vote' => -1, 'data-voteable' => "bill" %></li>
-      			<% end %>
-        	<% else %>
-      	    <li class="registro"><%= link_to "Regístrate para votar!", signup_path %></li>
-        	<% end %>
-      	</ul>
         
-        <div id="graficas">
-          <div class="graph">
-            <h3>Votaciones por Partido</h3>
-            <div id="votes_per_party" style="width: 580px; height: 200px;"></div>
-          </div>
+        <div id="graphs_tabs">
+          <ul id="jquery_tabs">
+            <li><%= link_to "Ciudadanos", "#citizens", :class => "tab" %></li>
+            <li><%= link_to "Partidos", "#parties", :class => "tab" %></li>
+            <li><%= link_to "Oficial", "#official", :class => "tab" %></li>
+          </ul>
           
-          <div class="graph">
+          <div id="citizens">
             <h3>Votaciones ciudadanas por Estado</h3>
-            <div id="citizen_votes_per_state" style="width: 549px; height: 300px;"></div>
-          </div>
-        </div>
-        
-        <div class="all_comments">
-          <h3>Comentarios (<%= @bill.comments.size %>)</h3>
-          <div class="comments">
-          	<% for comment in @bill.comments %>
-          		<div class="comment">
-          			<h4><%=h comment.title %></h4>
-          			<p><%=h comment.comment %></p>
-          			<% if admin?(current_user) %>
-          				<%= link_to "Eliminar", bill_comment_path(@bill, comment), :method => :delete, :confirm => "¿Esta seguro que lo desea eliminar?" %>
-          			<% end %>
-          		</div>
-          	<% end %>
+            <div id="citizen_votes_per_state" style="width: 600px; height: 400px;"></div>
           </div>
 
+          <div id="parties">
+            <h3>Votaciones por Partido</h3>
+            <div id="votes_per_party" style="width: 600px; height: 200px;"></div>
+          </div>
 
-          <div id="comment_form">
-          	<h4>Envíanos tus comentarios:</h4>
-            
-            <% if current_user %>
-            	<%= form_for [@bill, Comment.new] do |f| %>
-            		<%= render "layouts/error_messages", :target => @bill %>
-            		<p>
-            			<strong><%= f.label :title, "Título" %></strong> <br />
-            			<%= f.text_field :title, :class => "comment_input" %>
-            		</p>
-            		<p>
-            			<strong><%= f.label :comment, "Comentario" %></strong> <br />
-            			<%= f.text_area :comment, :rows => 6, :cols => 50, :class => "comment_input" %>
-            		</p>
-            		<p>
-            			<%=raw recaptcha_tags(:display => {:theme => "clean"}) %>
-            		</p>
-            		<p>
-            			<%= f.submit "Enviar Comentario", :class => "action" %>
-            		</p>
-            	<% end %>
-            <% else %>
-              <p>Para comentar sobre esta propuesta es necesario que te registres en mi congreso.</p>
-              
-              <%= link_to "¡Regístrate y opina!", signup_path, :class => "action" %>
-            <% end %>
+          <div id="official">
+            <h3>Votaciones oficiales</h3>
+            <div id="official_votes" style="width: 600px; height: 300px;"></div>
           </div>
         </div>
         
       </div>
     </div>
   </div>
-  
-  <div class="right">
-    <div id="lateral" class="refinador">
-      <h1>Busca propuestas</h1>
-      
-      <%= form_tag bills_path, :method => :get do %>
-        <p>
-          <%= text_field_tag :search, params[:search] %>
-        </p>
-        <p>
-          <%= submit_tag "Buscar", :class => "action" %>
-        </p>
-      <% end %>
-    </div>
-    <div id="related">
-      <h2>Propuestas Relacionadas</h2>
-      <ul class="list">
-        <% @related_bills.each do |bill| %>
-          <li><h3><%= link_to bill.name, bill %></h3></li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
 </div>
 
+<div class="section s-30">
+	<div class="sidebar">
+		<div class="content">
+		  
+		  <%= render "user_votes" %>
+		  <%= render "views" %>
+		  <%= render "resources" %>
+		</div>
+  </div>
+</div>

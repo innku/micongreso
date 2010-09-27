@@ -1,6 +1,7 @@
 es:
   activerecord:
     models:
+      action:                 "Acción"
       assistance:             "Asistencia"
       bill:                   "Propuesta"
       city:                   "Ciudad"
@@ -20,12 +21,16 @@ es:
       term:                   "Legislatura"
       user:                   "Usuario"
     attributes:
+      action:
+        action_type:          "Tipo"
+        date:                 "Fecha"
+        text:                 "Texto"
+        this:                 "esta"
       assistance:
         this:                 "esta"
       bill:
         name:                 "Nombre"
         description:          "Descripción"
-        date:                 "Fecha de Introducción"
         member_votes_for:     "Votos a favor"
         member_votes_against: "Votos en contra"
         member_votes_neutral: "Abstenciones"
@@ -34,7 +39,6 @@ es:
         user_votes_for:       "Votos ciudadanos a favor"
         user_votes_against:   "Votos ciudadanos en contra"
         user_votes_neutral:   "Abstenciones ciudadanas"
-        vote_date:            "Fecha de Votación"
         resolution:           "Resolución"
         status:               "Estatus"
         this:                 "esta"

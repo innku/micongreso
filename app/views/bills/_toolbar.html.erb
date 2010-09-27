@@ -1,0 +1,10 @@
+<%= content_for :toolbar do -%>
+  <% if can? :manage, Bill %>
+    <div id="toolbar">
+      <%= link_to "Editar", edit_bill_path(@bill) %> |
+    	<%= link_to "Eliminar", @bill, :confirm => 'Are you sure?', :method => :delete %> |
+  		<%= link_to "Editar votos", edit_bill_votes_path(@bill) %> | 
+  		<%= link_to "Acciones", admin_bill_actions_path(@bill) %>
+    </div>
+  <% end %>
+<% end -%>

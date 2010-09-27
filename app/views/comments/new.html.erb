@@ -1,32 +1,26 @@
-<div id="rest">
-  <h2 class="section">Comentarios</h2>
-  
-  <div class="left">
-    <div class="propuestas">
-      <div class="propuesta" id="interna">
-        <div id="comment_form">
-        	<h4>Envíanos tus comentarios:</h4>
-
-        	<%= form_for [@commentable, @comment] do |f| %>
-        		<%= render "layouts/error_messages", :target => @comment %>
-            
-        		<p>
-        			<%= f.label :title, "Título" %> <br />
-        			<%= f.text_field :title %>
-        		</p>
-        		<p>
-        			<%= f.label :comment, "Comentario" %> <br />
-        			<%= f.text_area :comment, :rows => 4, :cols => 40 %>
-        		</p>
-        		<p>
-        			<%=raw recaptcha_tags(:display => {:theme => "clean"}) %>
-        		</p>
-        		<p>
-        			<%= f.submit "Enviar Comentario", :class => "action" %>
-        		</p>
-        	<% end %>
-        </div>        
+<div class="section s-70">
+  <div class="box">
+    <div class="boxin">	
+      <h1>Comentarios</h1>
+      
+      <div id="comment_form">
+      	<h4>Envíanos tus comentarios:</h4>
+        
+        <% if current_user %>
+          <%= render :partial => "comments/form" %>
+        <% else %>
+          <p>Para comentar sobre esta propuesta es necesario que te registres en mi congreso.</p>
+          <%= link_to "¡Regístrate y opina!", signup_path, :class => "action" %>
+        <% end %>
       </div>
+      
     </div>
+  </div>
+</div>
+
+<div class="section s-30">
+	<div class="sidebar">
+		<div class="content">
+		</div>
   </div>
 </div>

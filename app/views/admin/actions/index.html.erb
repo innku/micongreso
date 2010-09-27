@@ -1,0 +1,38 @@
+<h2 class="section">Actividad de la Propuesta</h2>
+
+<div class="section s-70">
+  <div class="box big-header">
+    <h1><%= @bill.name %></h1>
+    
+    <div class="boxin">
+      <div class="content">
+        <table width="100%">
+          <tr>
+            <th>Tipo</th>
+            <th>Fecha</th>
+            <th>Texto</th>
+            <th></th>
+          </tr>
+
+        <% @actions.each do |action| %>
+          <tr>
+            <td><%= link_to action.action_type, edit_admin_bill_action_path(@bill, action) %></td>
+            <td><%= l action.date %></td>
+            <td><%= action.text %></td>
+            <td><%= link_to 'Eliminar', admin_bill_action_path(@bill, action), :confirm => 'Are you sure?', :method => :delete %></td>
+          </tr>
+        <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section s-30">
+  <div class="sidebar">
+    <div class="content">
+      <%= link_to 'Nueva Acción', new_admin_bill_action_path(@bill), :class => "action" %><br/><br/>
+      <%= link_to "Regresar a propuesta", bill_path(@bill), :style => "clear: both; display: block" %>
+    </div>
+  </div>
+</div>

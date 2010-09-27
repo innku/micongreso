@@ -1,0 +1,36 @@
+<div id="citizen_votes">
+  <div class="buttons">
+    <% if current_user %>
+      <%= link_to_user_vote(current_user, @bill, true) %>
+      <%= link_to_user_vote(current_user, @bill, false) %>
+    <% else %>
+      <% content_for :jQuery do -%>
+        <%= javascript_include_tag 'jquery.fancybox-1.3.1.pack' %>
+      <% end -%>
+
+      <% content_for :head do -%>
+        <%= stylesheet_link_tag 'jquery.fancybox-1.3.1' %>
+      <% end -%>
+
+      <%= link_to content_tag(:span, "Vota a favor"), "#signup_form", :class => "vote si signup_link"%>
+      <%= link_to content_tag(:span, "Vota en contra"), "#signup_form", :class => "vote no signup_link" %>
+
+      <script type="text/javascript">
+        $("a.signup_link").fancybox({'autoDimensions':false,'width':460,'height':530});
+      </script>
+
+  		<div style="display: none;">
+  		  <div id="signup_form" class="cien">
+  		    <% @user = User.new %>
+  		    <%= render :partial => '/users/form' %>
+  		  </div>
+  		</div>
+    <% end %>
+  </div>
+  
+  <div class="stats">
+    <p><%= number_to_percentage(@bill.citizens_for_rate, :precision => 0) %> Aprobación Ciudadana</p>
+    <p><%= @bill.user_votes_for %> A favor / <%= @bill.user_votes_against %> En contra</p>
+    
+  </div>
+</div>

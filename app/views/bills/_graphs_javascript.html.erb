@@ -1,0 +1,55 @@
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+  google.load('visualization', '1', {packages: ['geomap','columnchart']});
+  
+  var states = [<%= State.google_codes_and_votes(@bill) %>]
+  
+  function drawStatesMap() {
+    var data = new google.visualization.DataTable();
+    data.addRows(states.length);
+    data.addColumn('string', 'Estado');
+    data.addColumn('number', '% Favor');
+    data.addColumn('string', 'Nombre');
+    
+    for ( var i=0;i<states.length;i++){
+      data.setValue(i,0,states[i][0]); //codigo entidad para mapa MX-
+      data.setValue(i,1,states[i][2]);            //valor
+      data.setValue(i,2,states[i][1]); //texto para mostrar
+    }
+    
+    var geomap = new google.visualization.GeoMap(
+        document.getElementById('citizen_votes_per_state'));
+    geomap.draw(data,{'region':'MX', 'colors': [0xFFFFFF, 0x81A05A]});
+  }
+  
+  google.setOnLoadCallback(drawStatesMap);
+</script>
+
+<script type="text/javascript">
+  google.load('visualization', '1', {packages: ['barchart']});
+  
+  var parties = [<%= Party.votes_per_party(@bill) %>]
+  
+  function drawPartiesGraph() {
+    // Create and populate the data table.
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Name');
+    data.addColumn('number', 'Favor');
+    data.addColumn('number', 'Contra');
+    data.addColumn('number', 'Abstencion');
+    data.addRows(parties.length);
+    
+    for ( var i=0;i<parties.length;i++){
+      data.setValue(i,0,parties[i][0]); // Abreviación del partido
+      data.setValue(i,1,parties[i][1]); // Votos a favor
+      data.setValue(i,2,parties[i][2]); // Votos en contra
+      data.setValue(i,3,parties[i][3]); // Abstenciones
+    }
+  
+    // Create and draw the visualization.
+    new google.visualization.BarChart(document.getElementById('votes_per_party')).
+      draw(data, {'isStacked':true, 'height': 200, 'width': 600, 'colors': ['#81A05A', '#CC5477', '#CACAC2']});  
+  }
+  
+  google.setOnLoadCallback(drawPartiesGraph);
+</script>

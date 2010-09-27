@@ -21,7 +21,7 @@ class Member < ActiveRecord::Base
   
   production = Rails.env.production?
   
-  has_attached_file :picture, :styles => { :medium => "360x240>", :thumb => "150x100>" },
+  has_attached_file :picture, :styles => { :medium => "360x240>", :small => "150x100>", :thumb => "100x82>" },
                             :storage => (production ? :s3 : :filesystem),
                             :s3_credentials => "#{Rails.root}/config/s3.yml",
                             :path => (production ? ":attachment/:id/:style/:basename.:extension" : "public/system/:attachment/:id/:style/:basename.:extension"),
@@ -89,6 +89,10 @@ class Member < ActiveRecord::Base
   def state_name=(state_name)
     state = State.find_by_name(state_name)
     write_attribute(:state_id, state.id) if state
+  end
+  
+  def district_number
+    self.district.number if self.district
   end
   
   def district_number=(number)

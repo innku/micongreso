@@ -1,11 +1,14 @@
 Micongreso::Application.routes.draw do
-  
+
   namespace :admin do
-    resources :terms
-    resources :states
+    resources :bills do
+      resources :actions
+    end
     resources :parties
-    resources :tags
     resources :sittings
+    resources :states
+    resources :tags
+    resources :terms
     resources :users
   end
   
@@ -23,7 +26,7 @@ Micongreso::Application.routes.draw do
   match 'bills/archive/:month/:year' => 'bills#index', :as => :bills_archive
   
   resources :bills do
-    resources :comments, :votes
+    resources :comments, :votes, :actions
   end
   
   resources :news do

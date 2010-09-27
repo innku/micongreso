@@ -199,10 +199,10 @@ $(document).ready( function(){
 	}
 	
 	// Votos de los ciudadanos
-	$("a.vote").live('click', function(){
-		$.post($(this).attr("href"), { vote: $(this).attr('data-vote'), voteable: $(this).attr('data-voteable') }, null, "script");
-		return false;
-	});
+  // $("a.vote").live('click', function(){
+  //  $.post($(this).attr("href"), { vote: $(this).attr('data-vote'), voteable: $(this).attr('data-voteable') }, null, "script");
+  //  return false;
+  // });
 	
 	// Load districts into the select field when a state is selected
 	$("select#member_state_id").change(function(){

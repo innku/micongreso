@@ -1,0 +1,45 @@
+<%= render :partial => "bills/toolbar" %>
+
+<div class="section s-70">
+  <div class="box big-header">
+    <h1><%= @bill.name %></h1>
+    
+    <div id="tabs">
+      <ul>
+        <li><%= link_to "Propuesta", @bill %></li>
+        <li><%= link_to "Actividad", bill_actions_path(@bill), :class => "active" %></li>
+        <li><%= link_to "Comentarios", bill_comments_path(@bill) %></li>
+      </ul>
+    </div>
+    
+    <div class="boxin">
+      <div class="content">
+        <table width="100%">
+          <tr>
+            <th>Tipo</th>
+            <th>Fecha</th>
+            <th>Texto</th>
+          </tr>
+
+        <% @actions.each do |action| %>
+          <tr>
+            <td><%= link_to action.action_type, edit_admin_bill_action_path(@bill, action) %></td>
+            <td><%= l action.date %></td>
+            <td><%= action.text %></td>
+          </tr>
+        <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section s-30">
+  <div class="sidebar">
+    <div class="content">
+      <%= render :partial => "bills/user_votes" %>
+		  <%= render :partial => "bills/views" %>
+		  <%= render :partial => "bills/resources" %>
+    </div>
+  </div>
+</div>

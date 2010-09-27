@@ -94,6 +94,16 @@ class User < ActiveRecord::Base
     self.role = "citizen"
   end
   
+  def update_or_create_vote(voteable, vote_choice)
+    vote_object = self.vote_object(voteable)
+    if vote_object
+      vote_object.update_attributes(:vote => vote_choice)
+    else
+      vote_object = self.vote(voteable, vote_choice)
+    end
+    return vote_object
+  end
+  
   def notify_me?(tags)
     if email
       if self.notification.interest_topics

@@ -10,7 +10,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100921013831) do
+ActiveRecord::Schema.define(:version => 20100923220754) do
+
+  create_table "actions", :force => true do |t|
+    t.string   "action_type"
+    t.date     "date"
+    t.text     "text"
+    t.integer  "bill_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "assistances", :force => true do |t|
     t.integer  "sitting_id"
@@ -25,7 +34,6 @@ ActiveRecord::Schema.define(:version => 20100921013831) do
   create_table "bills", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.date     "date"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "member_votes_for",     :default => 0
@@ -36,10 +44,8 @@ ActiveRecord::Schema.define(:version => 20100921013831) do
     t.integer  "user_votes_for",       :default => 0
     t.integer  "user_votes_against",   :default => 0
     t.integer  "user_votes_neutral",   :default => 0
-    t.date     "vote_date"
     t.string   "status",               :default => "pending"
     t.integer  "sitting_id"
-    t.datetime "voted_on"
     t.integer  "member_id"
     t.text     "resolution"
     t.integer  "congress_id"

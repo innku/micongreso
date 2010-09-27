@@ -1,0 +1,15 @@
+<%= form_for [@bill, Comment.new] do |f| %>
+	<%= render "layouts/error_messages", :target => @bill %>
+	<p>
+		<strong><%= f.label :title, "Título" %></strong> <br />
+		<%= f.text_field :title, :class => "comment_input" %>
+	</p>
+	<p>
+		<strong><%= f.label :comment, "Comentario" %></strong> <br />
+		<%= f.text_area :comment, :rows => 6, :cols => 50, :class => "comment_input" %>
+	</p>
+	<%=raw recaptcha_tags(:display => {:theme => "clean"}) %>
+	<p>
+		<%= f.submit "Enviar Comentario", :class => "action" %>
+	</p>
+<% end %>

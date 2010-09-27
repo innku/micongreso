@@ -2,6 +2,13 @@ class CommentsController < ApplicationController
   
   skip_before_filter  :require_user, :except => :destroy
   
+  layout "application_new"
+  
+  def index
+    @bill = find_commentable
+    @comments = @bill.comments
+  end
+  
   def new
     @comment = Comment.new
   end

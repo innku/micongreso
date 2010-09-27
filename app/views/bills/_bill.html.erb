@@ -1,11 +1,12 @@
-<div class="propuesta"> 
+<div class="bill"> 
 	<div class="ribbon"> 
-		<p><%= bill.date.strftime("%d") %><br /><%= t('date.abbr_month_names')[bill.date.month] %></p>		
+		<p><!-- Día de introducción  --><br /><!-- Mes de introducción  --></p>	
+    
 	</div>
 	<h3><%= link_to bill.name, bill %></h3> 
 	<ul class="graficas">
 		<li class="ciudadana">
-		  <span>Votaci&oacute;n ciudadana:</span>
+		  <span>Votación ciudadana:</span>
 		  <div class="votos">
 		    <div class="barra favor" style="width: <%= bill.citizen_votes_and_percents[3] %>%;">&nbsp; <%= show_votes?(0, bill.citizen_votes_and_percents) %></div>
 			  <div class="barra contra" style="width: <%= bill.citizen_votes_and_percents[4] %>%;">&nbsp; <%= show_votes?(1, bill.citizen_votes_and_percents) %></div>
@@ -15,7 +16,7 @@
 		
 		<% if bill.general_votes? %>
 		  <li class="oficial">
-  		  <span>Votaci&oacute;n oficial:</span>
+  		  <span>Votación oficial:</span>
   		  <div class="votos">
   		    <div class="barra favor" style="width: <%= bill.member_votes_and_percents[3] %>%;">&nbsp; <%= show_votes?(0, bill.member_votes_and_percents) %></div>
   			  <div class="barra contra" style="width: <%= bill.member_votes_and_percents[4] %>%;">&nbsp; <%= show_votes?(1, bill.member_votes_and_percents) %></div>
@@ -28,7 +29,7 @@
 		    <li class="resultado_no">Rechazada</li> 
 		  <% end %>
   	<% else %>
-  	  <li class="resultados"><span>Fecha de Votación:</span> <%= vote_date(bill.vote_date) %></li>
+  	  <li class="resultados"></li>
   	<% end %>
 	</ul>
 	
