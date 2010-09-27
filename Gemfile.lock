@@ -6,8 +6,9 @@ GIT
       activesupport (~> 3.0)
       daemons
 
-PATH
-  remote: /Users/fede/work/vote_fu
+GIT
+  remote: git://github.com/fedegl/vote_fu.git
+  revision: c3c792c4a9fbe1854b4d3fe7f27babeff9a8c0cc
   specs:
     vote_fu (0.0.11)
 
