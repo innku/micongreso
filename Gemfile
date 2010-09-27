@@ -19,6 +19,7 @@ gem "delayed_job",  :git => 'git://github.com/collectiveidea/delayed_job.git'
 gem 'vote_fu', :git => 'git://github.com/fedegl/vote_fu.git'
 gem 'authlogic'
 gem 'cancan'
+gem 'aws-s3'
 
 group :development, :test do 
 	gem "rspec-rails", ">= 2.0.0.beta.20"

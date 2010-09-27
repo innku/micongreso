@@ -260,12 +260,12 @@ ActiveRecord::Schema.define(:version => 20100923220754) do
     t.string   "salt",              :limit => 128
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "activation_code",   :limit => 40
     t.string   "role"
     t.integer  "ife_state_id"
     t.integer  "city_id"
     t.integer  "section_id"
     t.integer  "congress_id"
-    t.string   "activation_code",   :limit => 40
     t.string   "persistence_token"
     t.string   "perishable_token"
   end
@@ -292,7 +292,6 @@ ActiveRecord::Schema.define(:version => 20100923220754) do
   end
 
   add_index "votes", ["voteable_id", "voteable_type"], :name => "fk_voteables"
-  add_index "votes", ["voter_id", "voter_type", "voteable_id", "voteable_type"], :name => "uniq_one_vote_only", :unique => true
   add_index "votes", ["voter_id", "voter_type"], :name => "fk_voters"
 
 end

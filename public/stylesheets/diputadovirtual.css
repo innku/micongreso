@@ -284,7 +284,7 @@ margin-left: 6px;
 #activity .action > div {padding: 5px 0px;}
 #activity .action > .name {padding: 18px 0;}
 #activity .action > .date {border-top: 1px solid #b4b6b6; height: 20px;}
-#activity .completed {border: 1px solid #81A15B; background: #eef6f2; color: #81A15B; -moz-box-shadow: 0px 1px 3px #81A15B;-webkit-box-shadow: 0px 1px 3px #81A15B;}
+#activity .completed {border: 1px solid #81A15B; background: #eef6f2 url(/images/check.png) no-repeat center center; color: #81A15B; -moz-box-shadow: 0px 1px 3px #81A15B;-webkit-box-shadow: 0px 1px 3px #81A15B;}
 #activity .completed > .date {border-top: 1px solid #81A15B;}
 
 #description {padding: 18px 0 0 0; clear: both;}
