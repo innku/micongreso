@@ -53,3 +53,66 @@
   
   google.setOnLoadCallback(drawPartiesGraph);
 </script>
+
+<% content_for :jQuery do -%>
+  <%= javascript_include_tag "highcharts", :cache => true %>
+<% end -%>
+
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function(){
+    pie = new Highcharts.Chart({
+      chart: {
+        renderTo: "official_votes"
+      },
+      title: {
+        text: null
+      },
+      plotOptions: {
+        pie: {
+          size: "160%",
+          allowPointSelect: true,
+          cursor: 'pointer',
+          center: [70, 100],
+          dataLabels: {
+             enabled: true,
+             formatter: function() {
+               if (this.y > 5) return this.point.name;
+             },
+             color: 'white',
+             style: {
+                font: '13px Trebuchet MS, Verdana, sans-serif'
+             }
+          }
+        }
+      },
+      legend: {
+         layout: 'vertical',
+         style: {
+            left: 'auto',
+            bottom: 'auto',
+            right: '80px',
+            top: '100px'
+         }
+      },
+      series: [{
+        type: 'pie',
+        data: [{
+          name: 'A favor',
+          color: '#89A54E',
+          y: <%= @bill.member_votes_for %>
+        }, {
+          name: 'En contra',
+          color: '#AA4643',
+          y: <%= @bill.member_votes_against %>
+        }, {
+          name: 'Abstenciones',
+          color: '#BBBBBB',
+          y: <%= @bill.member_votes_neutral %>
+        }]
+      }],
+      credits: {
+        enabled: false
+      }
+    });
+  });
+</script>

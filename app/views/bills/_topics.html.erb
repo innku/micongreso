@@ -1,0 +1,11 @@
+<% if @bill.tags.any? %>
+  <div id="topics" class="box">
+    <h4>Temas de Interés</h4>
+
+    <ul id="tags">
+      <% @bill.tags.each do |tag| %>
+        <li><%= link_to tag.name, bills_tag_path(tag)  %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

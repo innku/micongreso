@@ -21,7 +21,7 @@ class BillsController < ApplicationController
   def show
     @bill = Bill.find(params[:id])
     @bill.views.create
-    @related_bills = Bill.tagged_with(@bill.tags)-[@bill]
+    @lastest_action = @bill.actions.last
   end
   
   def new
@@ -31,7 +31,7 @@ class BillsController < ApplicationController
   def create
     if @bill.save
       flash[:notice] = "La propuesta se creó correctamente."
-      redirect_to bills_path
+      redirect_to @bill
     else
       render :action => 'new'
     end
@@ -44,7 +44,7 @@ class BillsController < ApplicationController
     params[:bill][:tag_list] ||= []
     if @bill.update_attributes(params[:bill])
       flash[:notice] = "La propuesta se actualizó correctamente."
-      redirect_to bills_path
+      redirect_to @bill
     else
       render :action => 'edit'
     end

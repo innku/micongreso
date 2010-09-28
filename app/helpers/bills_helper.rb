@@ -37,4 +37,10 @@ module BillsHelper
     date_html = content_tag(:div, date, :class => "date")
     content_tag(:div, content_tag(:div, name, :class => "name") + date_html, :class => css_class.join(" "))
   end
+  
+  def approval_rate(bill)
+    rate = bill.citizens_for_rate
+    css_class = rate >= 50 ? "positive" : "negative"
+    content_tag(:span, number_to_percentage(rate, :precision => 0), :class => css_class)
+  end
 end

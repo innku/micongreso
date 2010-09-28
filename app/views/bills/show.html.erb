@@ -2,7 +2,7 @@
   <%= truncate(@bill.name, :length => 60) %>
 <% end -%>
 
-<% content_for :head do -%>
+<% content_for :jQuery do -%>
   <%= render :partial => "graphs_javascript" %>
 <% end -%>
 
@@ -13,6 +13,11 @@
 <script type="text/javascript">
   $(document).ready(function(){
     $('#graphs_tabs').tabs();
+    <% if @bill.general_votes? %>
+      $('#graphs_tabs').tabs("option", "selected", 2);
+    <% else %>
+      $('#graphs_tabs').tabs("option", "disabled", [1,2]);
+    <% end %>
   });
 </script>
 
@@ -40,6 +45,12 @@
           
           <div id="activity">
             <%= activity_bar(@bill) %>
+            
+            <% if @latest_action %>
+              <div class="last">
+                <span><%= l @lastest_action.date %></span>
+              </div>
+            <% end %>
           </div>
         </div>
         
@@ -48,18 +59,12 @@
           <%=raw @bill.description %>
         </div>
 
-        <ul class="tags">
-          <% @bill.tags.each do |tag| %>
-            <li><%= tag.name %></li>
-          <% end %>
-        </ul>
-
         <div class="clear"></div>
 
         
         <div id="graphs_tabs">
           <ul id="jquery_tabs">
-            <li><%= link_to "Ciudadanos", "#citizens", :class => "tab" %></li>
+            <li><%= link_to "Ciudadana", "#citizens", :class => "tab" %></li>
             <li><%= link_to "Partidos", "#parties", :class => "tab" %></li>
             <li><%= link_to "Oficial", "#official", :class => "tab" %></li>
           </ul>
@@ -88,10 +93,7 @@
 <div class="section s-30">
 	<div class="sidebar">
 		<div class="content">
-		  
-		  <%= render "user_votes" %>
-		  <%= render "views" %>
-		  <%= render "resources" %>
+		  <%= render :partial => "bills/sidebar" %>
 		</div>
   </div>
 </div>

@@ -29,7 +29,7 @@
   </div>
   
   <div class="stats">
-    <p><%= number_to_percentage(@bill.citizens_for_rate, :precision => 0) %> Aprobación Ciudadana</p>
+    <p><%= approval_rate(@bill) %> Aprobación Ciudadana</p>
     <p><%= @bill.user_votes_for %> A favor / <%= @bill.user_votes_against %> En contra</p>
     
   </div>

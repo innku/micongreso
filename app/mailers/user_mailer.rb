@@ -17,7 +17,7 @@ class UserMailer < ActionMailer::Base
   
   def password_reset_instructions(user)
     @user = user
-    mail(:to => user.email, :subject => "MiCongreos - Generar nueva contraseña")
+    mail(:to => user.email, :subject => "MiCongreso - Generar nueva contraseña")
   end
   
   def message_to_member(message, member)

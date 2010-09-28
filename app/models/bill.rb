@@ -131,7 +131,7 @@ class Bill < ActiveRecord::Base
   end
   
   def citizens_for_rate
-    (self.user_votes_for/self.total_citizen_votes)*100
+    (self.user_votes_for.to_f/self.total_citizen_votes.to_f)*100
   end
   
   def total_citizen_votes

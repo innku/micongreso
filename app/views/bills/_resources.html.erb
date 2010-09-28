@@ -1,10 +1,10 @@
-<div id="resources">
-  <% if @bill.resources.any? %>
-    <h3>Recursos adicionales</h3>
+<% if @bill.resources.any? %>
+  <div id="resources" class="box">
+    <h4>Recursos adicionales</h4>
     <ul id="resources">
       <% @bill.resources.each do |resource| %>
         <li><%= link_to resource.name, resource.url %></li>
       <% end %>
     </ul>
-  <% end %>
-</div>
+  </div>
+<% end %>

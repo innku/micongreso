@@ -80,11 +80,22 @@ form h2 { text-transform: none !important;}
 }
 
 #mi #main .inner-container .boxin .content {padding: 25px 15px 15px 15px;}
-
 #mi #main .inner-container .big-header .boxin {margin-top: 0;}
-
 #mi #main .inner-container .sidebar {float: right; width: 100%;}
-#mi #main .inner-container .sidebar .content {margin: 5px 10px 0 15px;}
+#mi #main .inner-container .sidebar .content {margin: 5px 18px 0 27px;}
+#mi #main .inner-container .sidebar .content .box {
+	color: #2E2013;
+	border: 1px solid #abacaa;
+	background: #ECECE9;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	padding: 12px 9px;
+	margin: 9px 0;
+	width: auto;
+	float: none;
+}
+#mi #main .inner-container .sidebar .content .box p{margin: 6px 0;}
+#mi #main .inner-container .sidebar .content .box ul{padding: 0 18px;}
 
 /* Content Styles */
 
@@ -249,12 +260,14 @@ form h2 { text-transform: none !important;}
 
 .box > #tabs ul li a.active {background: #fff;}
 
+/* Sidebar votes */
+
 #main a.vote {
 	background: #EEE url(/images/deg.png) repeat-x;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border: #CCC 1px solid;
-	margin: 9px;
+	margin: 9px 0;
 	padding: 3px 9px;
 	display: block;
 	font-size: 16px;
@@ -263,6 +276,21 @@ form h2 { text-transform: none !important;}
 #main a span {padding-left: 26px;}
 #main a.si span {background: url(/images/si.gif) no-repeat 4px 2px;}
 #main a.no span {background: url(/images/no.gif) no-repeat 4px 3px;}
+
+#main .stats {
+	color: #2E2013;
+	border: 1px solid #d7d646;
+	background: #f9feed;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	padding: 12px 9px;
+}
+#main .stats p {margin: 0;}
+#main .stats p:first-child {font-size: 16px; margin-bottom: 6px;}
+#main .stats p:last-child {font-size: 12px; color: #5e5e5e;}
+#main .stats span {font-size: 18px; font-weight: bold;}
+#main .stats .positive {color: #008e29;}
+#main .stats .negative {color: #940d0a;}
 
 /* Sponsor and Activity bar */
 
@@ -277,9 +305,10 @@ background: #EEE;
 color: #b4b6b6;
 -moz-box-shadow: 0px 1px 3px #CCC;
 -webkit-box-shadow: 0px 1px 3px #CCC;
-margin-left: 6px;
+margin-left: 4px;
 -moz-border-radius: 5px;
 -webkit-border-radius: 5px;
+border: 1px solid #b4b6b6
 }
 #activity .action > div {padding: 5px 0px;}
 #activity .action > .name {padding: 18px 0;}
@@ -287,7 +316,7 @@ margin-left: 6px;
 #activity .completed {border: 1px solid #81A15B; background: #eef6f2 url(/images/check.png) no-repeat center center; color: #81A15B; -moz-box-shadow: 0px 1px 3px #81A15B;-webkit-box-shadow: 0px 1px 3px #81A15B;}
 #activity .completed > .date {border-top: 1px solid #81A15B;}
 
-#description {padding: 18px 0 0 0; clear: both;}
+#description {padding: 18px 0 18px 0; clear: both;}
 
 /*MENU*/
 #nav ul {-moz-border-radius:8px;-webkit-border-radius: 8px;background:none repeat scroll 0 0 #ECECE9;float:right;list-style-type:none;margin:18px 0 0;padding:5px;}
@@ -1545,7 +1574,7 @@ ul#jquery_tabs {
 	float: left;
 	width: 100%;
 	float: left;
-	background: #CCC;
+	background: #ECECE9;
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	height: 40px;
@@ -1557,6 +1586,7 @@ ul#jquery_tabs li {
 	float: left;
 	margin-left: 4px;
 	margin-top: 10px;
+	border: none !important;
 }
 ul#jquery_tabs li a {
 	background: #EEE;
@@ -1564,7 +1594,7 @@ ul#jquery_tabs li a {
 	display: block;
 	float: left;
 	font-size: 1em;
-	border: 1px solid #DDD;
+	border: 1px solid #CCCCCC;
 	border-bottom: 1px solid #EEE;
 	-moz-border-radius-topleft: 4px;
 	-moz-border-radius-topright: 4px;
