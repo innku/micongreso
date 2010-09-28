@@ -88,6 +88,11 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
+    
+    var votes_for = <%= @bill.member_votes_for %>
+    var votes_against = <%= @bill.member_votes_against %>
+    var votes_neutral = <%= @bill.member_votes_neutral %>
+    
     new Highcharts.Chart({
       chart: {
         renderTo: "official_votes"
@@ -127,15 +132,15 @@
         data: [{
           name: 'A favor',
           color: '#89A54E',
-          y: parseInt($('#official_votes').attr('data-for'))
+          y: votes_for
         }, {
           name: 'En contra',
           color: '#AA4643',
-          y: parseInt($('#official_votes').attr('data-against'))
+          y: votes_against
         }, {
           name: 'Abstenciones',
           color: '#BBBBBB',
-          y: parseInt($('#official_votes').attr('data-neutral'))
+          y: votes_neutral
         }]
       }],
       tooltip: {
