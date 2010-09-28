@@ -76,12 +76,17 @@
 
           <div id="official">
             <h3>Votaciones oficiales</h3>
-            <div id="official_votes" style="width: 600px; height: 300px;"></div>
+            <div id="official_votes" style="width: 600px; height: 300px;"
+                data-for="<%= @bill.member_votes_for %>"
+                data-against="<%= @bill.member_votes_against %>"
+                data-neutral="<%= @bill.member_votes_neutral %>">
+            </div>
           </div>
           
           <div id="parties">
             <h3>Votaciones por Partido</h3>
-            <div id="votes_per_party" style="width: 600px; height: 200px;"></div>
+            <div id="votes_per_party" style="width: 600px; height: 200px;">
+            </div>
           </div>
         </div>
         

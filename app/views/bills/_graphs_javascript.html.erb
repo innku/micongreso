@@ -69,7 +69,7 @@
       },
       plotOptions: {
         pie: {
-          size: "130%",
+          size: "160%",
           allowPointSelect: true,
           cursor: 'pointer',
           center: [100, 100],
@@ -99,15 +99,15 @@
         data: [{
           name: 'A favor',
           color: '#89A54E',
-          y: 25
+          y: parseInt($('#official_votes').attr('data-for'))
         }, {
           name: 'En contra',
           color: '#AA4643',
-          y: 25
+          y: parseInt($('#official_votes').attr('data-against'))
         }, {
           name: 'Abstenciones',
           color: '#BBBBBB',
-          y: 50
+          y: parseInt($('#official_votes').attr('data-neutral'))
         }]
       }],
       tooltip: {
