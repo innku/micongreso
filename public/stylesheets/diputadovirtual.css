@@ -82,7 +82,8 @@ form h2 { text-transform: none !important;}
 #mi #main .inner-container .boxin .content {padding: 25px 15px 15px 15px;}
 #mi #main .inner-container .big-header .boxin {margin-top: 0;}
 #mi #main .inner-container .sidebar {float: right; width: 100%;}
-#mi #main .inner-container .sidebar .content {margin: 5px 18px 0 27px;}
+#mi #main .inner-container .sidebar .content {margin: 5px 9px 0 9px;}
+#mi #main .inner-container .sidebar .padded {margin: 5px 18px 0 27px;}
 #mi #main .inner-container .sidebar .content .box {
 	color: #2E2013;
 	border: 1px solid #abacaa;

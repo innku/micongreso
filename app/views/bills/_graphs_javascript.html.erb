@@ -25,38 +25,66 @@
   google.setOnLoadCallback(drawStatesMap);
 </script>
 
-<script type="text/javascript">
-  google.load('visualization', '1', {packages: ['barchart']});
-  
-  var parties = [<%= Party.votes_per_party(@bill) %>]
-  
-  function drawPartiesGraph() {
-    // Create and populate the data table.
-    var data = new google.visualization.DataTable();
-    data.addColumn('string', 'Name');
-    data.addColumn('number', 'Favor');
-    data.addColumn('number', 'Contra');
-    data.addColumn('number', 'Abstencion');
-    data.addRows(parties.length);
-    
-    for ( var i=0;i<parties.length;i++){
-      data.setValue(i,0,parties[i][0]); // Abreviación del partido
-      data.setValue(i,1,parties[i][1]); // Votos a favor
-      data.setValue(i,2,parties[i][2]); // Votos en contra
-      data.setValue(i,3,parties[i][3]); // Abstenciones
-    }
-  
-    // Create and draw the visualization.
-    new google.visualization.BarChart(document.getElementById('votes_per_party')).
-      draw(data, {'isStacked':true, 'height': 200, 'width': 600, 'colors': ['#81A05A', '#CC5477', '#CACAC2']});  
-  }
-  
-  google.setOnLoadCallback(drawPartiesGraph);
-</script>
-
 <% content_for :jQuery do -%>
   <%= javascript_include_tag "highcharts" %>
 <% end -%>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    var parties = [<%= Party.votes_per_party(@bill) %>]
+    var party_names = $.map(parties, function(p) { return p[0]})
+    
+    new Highcharts.Chart({
+      chart: {
+        renderTo: "votes_per_party",
+        defaultSeriesType: 'bar'
+      },
+      title: {
+        text: null
+      },
+      xAxis: {
+        categories: party_names
+      },
+      yAxis: {
+         min: 0,
+         title: {
+            text: 'No. de Votos'
+         }
+      },
+      plotOptions: {
+         series: {
+            stacking: 'normal'
+         }
+      },
+      legend: {
+         backgroundColor: '#FFFFFF',
+         reversed: true
+      },
+      tooltip: {
+         formatter: function() {
+            return ''+
+                this.series.name +': '+ this.y +'';
+         }
+      },
+      series: [{
+        name: 'A favor',
+        color: '#89A54E',
+        data: $.map(parties, function(p) {return p[1]})
+      }, {
+        name: 'En contra',
+        color: '#AA4643',
+        data: $.map(parties, function(p) {return p[2]})
+      }, {
+        name: 'Abstenciones',
+        color: '#BBBBBB',
+        data: $.map(parties, function(p) {return p[3]})
+      }],
+      credits: {
+        enabled: false
+      }
+    });
+  });
+</script>
 
 <script type="text/javascript">
   $(document).ready(function(){
