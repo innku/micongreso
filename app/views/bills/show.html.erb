@@ -14,7 +14,7 @@
   $(document).ready(function(){
     $('#graphs_tabs').tabs();
     <% if @bill.general_votes? %>
-      $('#graphs_tabs').tabs("option", "selected", 2);
+      $('#graphs_tabs').tabs("option", "selected", 1);
     <% else %>
       $('#graphs_tabs').tabs("option", "disabled", [1,2]);
     <% end %>
@@ -64,9 +64,9 @@
         
         <div id="graphs_tabs">
           <ul id="jquery_tabs">
-            <li><%= link_to "Ciudadana", "#citizens", :class => "tab" %></li>
-            <li><%= link_to "Partidos", "#parties", :class => "tab" %></li>
+            <li><%= link_to "Ciudadanos", "#citizens", :class => "tab" %></li>
             <li><%= link_to "Oficial", "#official", :class => "tab" %></li>
+            <li><%= link_to "Legisladores", "#parties", :class => "tab" %></li>
           </ul>
           
           <div id="citizens">
@@ -74,14 +74,14 @@
             <div id="citizen_votes_per_state" style="width: 600px; height: 400px;"></div>
           </div>
 
-          <div id="parties">
-            <h3>Votaciones por Partido</h3>
-            <div id="votes_per_party" style="width: 600px; height: 200px;"></div>
-          </div>
-
           <div id="official">
             <h3>Votaciones oficiales</h3>
             <div id="official_votes" style="width: 600px; height: 300px;"></div>
+          </div>
+          
+          <div id="parties">
+            <h3>Votaciones por Partido</h3>
+            <div id="votes_per_party" style="width: 600px; height: 200px;"></div>
           </div>
         </div>
         

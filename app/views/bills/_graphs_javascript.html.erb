@@ -72,7 +72,7 @@
           size: "160%",
           allowPointSelect: true,
           cursor: 'pointer',
-          center: [70, 100],
+          center: [100, 100],
           dataLabels: {
              enabled: true,
              formatter: function() {
@@ -90,7 +90,7 @@
          style: {
             left: 'auto',
             bottom: 'auto',
-            right: '80px',
+            right: '90px',
             top: '100px'
          }
       },
@@ -110,6 +110,11 @@
           y: <%= @bill.member_votes_neutral %>
         }]
       }],
+      tooltip: {
+        formatter: function(){
+          return "<b>Porcentage:</b> "+ Highcharts.numberFormat(this.percentage,2) + " %<br/>" + "<b>Votos:</b> " + this.y
+        }
+      },
       credits: {
         enabled: false
       }
