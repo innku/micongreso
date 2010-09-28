@@ -7,7 +7,6 @@ gem 'rails', '3.0.0'
 
 gem 'mysql2'
 
-gem 'json_pure'
 gem 'hpricot'
 gem "fastercsv"
 gem "contacts"
