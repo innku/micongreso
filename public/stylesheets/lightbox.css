@@ -1,0 +1,110 @@
+* {
+	font-family: "union", palatino, georgia, times;
+}
+
+.cien form h2, h2.lightbox {
+  text-transform: uppercase;
+  color: #2E2013;
+  font-size: 1.3em;
+  letter-spacing: -.05em;
+  margin: 0;
+  border-bottom: 1px dotted #CCC;
+  padding: 10px 0px;
+  text-transform: none;
+}
+
+.cien form .texto {
+  border: 1px solid #CCC;
+  color: #444;
+  font-size: 14px;
+  padding: 8px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  background: #EEE;
+  margin: 0px;
+}
+
+.cien form input.texto {
+  width: 260px;
+}
+
+.cien form textarea.texto {
+  width: 540px;
+}
+
+#success {
+	text-align: center;
+	padding-top: 40px;
+}
+
+a.action, input.action {
+  background: #502628 url(/images/deg3.png) repeat-x top left;
+  color: #FFF;
+  font-size: 1em;
+  display: block;
+  float: left;
+  padding: 5px 15px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border: none;
+  border-bottom: 1px solid #502628;
+  _border: 1px solid #502628;
+  text-shadow: -1px -1px 1px #502628;
+  -moz-box-shadow: 1px 0px 3px #CCC;
+  -webkit-box-shadow: 1px 0px 3px #CCC;
+}
+
+a.action:hover, input.action:hover {
+  background: #502628 url(/images/deg3.png) repeat-x 0 -34px;
+  text-shadow: #170707 -1px -1px 1px;
+}
+
+/*-------------------------------------------------
+VALIDATION ERRORS
+-------------------------------------------------*/
+
+.fieldWithErrors {
+display: inline;
+}
+
+#errorExplanation {
+font-family:"union",palatino,georgia,times !important;
+width: 400px;
+border: 2px solid #b63d46;
+padding: 0px;
+padding-bottom: 12px;
+margin: 10px 0 20px 0;
+background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+text-align: left;
+font-weight: bold;
+padding: 5px 5px 5px 15px;
+font-size: 12px !important;
+margin: 0;
+background-color: #b63d46;
+color: #fff !important;
+}
+
+#errorExplanation p {
+color: #333;
+margin-bottom: 0;
+padding: 8px;
+}
+
+#errorExplanation ul {
+margin: 9px 18px 2px 0px;
+padding-left: 27px;
+}
+
+#errorExplanation ul li {
+font-size: 12px;
+list-style: disc;
+}
+
+#errorExplanation ul li a {
+text-decoration: underline;
+font-weight: bold;
+color: #b63d46;
+}

@@ -33,7 +33,7 @@
       <div class="content">
         
         <div id="votaciones">
-        	<h3>Últimas votaciones</h3>
+        	<h3>Votaciones Recientes</h3>
         	<table class="resultados" cellspacing="0" cellpadding="0" border="0" width="100%">
         	  <tr>
               <th>Propuesta</th>
@@ -51,13 +51,22 @@
         </div>
         
         <div id="assistances">
-          <p class="faltas">
-            <strong>Asistencias:</strong> <%= @member.assistances.present.count %> de <%= @member.assistances.count %> (Faltas <%= number_to_percentage((@member.absences.count.to_f/@member.assistances.count.to_f)*100, :precision => 0) %>)
-          </p>
+          <h3>Asistencia a sesiones <span><%= total_assistances(@member) %></span></h3>
+          
+          <table class="resultados" cellspacing="0" cellpadding="0" border="0" width="100%">
+        	  <tr>
+              <th width="120">Sesión</th>
+              <th width="70">Assistencia</th>
+        	  </tr>
+        	  <% @assistances.each do |assistance| %>
+        	    <tr>
+          	    <td><%= l assistance.sitting.date.to_date, :format => :short %></td> 
+          	    <td><%= display_assistance(assistance) %></td>
+        	    </tr>
+          	<% end %>
+        	</table>
         </div>
-        
-        <%= render :partial => "members/comment_form" %>
-        
+                
       </div>
     </div>
   </div>

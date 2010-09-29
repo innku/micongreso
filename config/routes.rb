@@ -39,7 +39,9 @@ Micongreso::Application.routes.draw do
   
   resources :members do
     post :import, :on => :collection
-    resources :messages
+    resources :messages do
+      get :success, :on => :member
+    end
   end
 
   match '/logout' => 'user_sessions#destroy', :as => :logout

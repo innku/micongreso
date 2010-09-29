@@ -1,3 +1,21 @@
+<% content_for :jQuery do -%>
+  <%= javascript_include_tag 'jquery.fancybox-1.3.1.pack' %>
+<% end -%>
+
+<% content_for :head do -%>
+  <%= stylesheet_link_tag 'jquery.fancybox-1.3.1' %>
+<% end -%>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("a.send_message").fancybox({
+    	'type' : 'iframe',
+    	'height': <%= message_form_height(current_user) %>,
+    	'width': 580
+    });
+  });
+</script>
+
 <div class="box">
   <h4>Datos Personales</h4>
   
@@ -14,4 +32,17 @@
       <p><%= l @member.birthdate, :format => :long %></p>
     </div>
   <% end %>
+</div>
+
+<div class="box">
+  <h4>Contacto</h4>
+  
+  <div>
+    <p>Correo Electrónico</p>
+    <p><%= @member.email %></p>
+  </div>
+  
+  <%= link_to "Envíale un mensaje", new_member_message_path(@member), :class => "action send_message iframe" %>
+  <div class="clear"></div>
+
 </div>

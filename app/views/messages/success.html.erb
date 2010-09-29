@@ -1,0 +1,16 @@
+<%= stylesheet_link_tag 'lightbox' %>
+<%= javascript_include_tag 'jquery.js', 'application' %>
+
+<script type="text/javascript" charset="utf-8">
+  window.setTimeout(close_fancybox, 2000);
+  
+  function close_fancybox() {
+    parent.$.fancybox.close();
+  }
+</script>
+
+<div id="success">
+  <%= image_tag("success.png") %>
+  <h2 class="lightbox">¡Mensaje enviado!</h2>
+  <p>El diputado recibirá un mensaje en su correo electrónico.</p>
+</div>

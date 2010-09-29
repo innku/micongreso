@@ -1,13 +1,4 @@
-<div id="rest">
-  <h2 class="section">Enviar Mensaje a diputado</h2>
-  
-  <div class="left">
-    <div class="propuestas">
-      <div class="propuesta" id="interna">
-        <%= render :partial => 'form' %>
-        
-        <%= link_to "Regresar a perfil de diputado", @member %>
-      </div>
-    </div>
-  </div>
-</div>
+<%= stylesheet_link_tag 'lightbox' %>
+<%= javascript_include_tag 'jquery.js', 'application' %>
+
+<%= render :partial => 'form' %>

@@ -29,15 +29,11 @@ class MembersController < ApplicationController
   end
   
   def show
-    if current_user
-      @message = Message.new(:name => current_user.name, :email => current_user.email)
-    else
-      @message = Message.new
-    end
-    @search_member = SearchMember.new
-    @parties = Party.all
-    @states = State.all
+    options = {}
+    options = {:name => current_user.name, :email => current_user.email} if current_user
+    @message = Message.new(options)
     @votes = @member.votes.limit(5)
+    @assistances = @member.assistances.limit(5).includes(:sitting)
   end
   
   def new

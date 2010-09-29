@@ -87,7 +87,9 @@ form h2 { text-transform: none !important;}
 	width: 100%;
 }
 
-#mi #main .inner-container .boxin .content {padding: 25px 15px 15px 15px;}
+#mi #main .inner-container .boxin .content {padding: 15px;}
+#mi #main .inner-container .boxin .content > div {margin: 0 0 18px 0}
+#mi #main .inner-container .boxin .content > div h3 {margin: 0 0 9px 0;}
 #mi #main .inner-container .big-header .boxin {margin-top: 0;}
 #mi #main .inner-container .sidebar {float: right; width: 100%;}
 #mi #main .inner-container .sidebar .content {margin: 5px 9px 0 9px;}
@@ -200,7 +202,7 @@ form h2 { text-transform: none !important;}
 
 /* Bills List */
 
-#mi #main .bills {
+.bills {
 	float: left;
 	background: #ECECE9;
 	-moz-border-radius: 5px;
@@ -208,7 +210,7 @@ form h2 { text-transform: none !important;}
 	padding: 5px;
 	margin-bottom: 15px;
 }
-#mi #main .bill {
+.bill {
 	padding: 15px;
 	-moz-box-shadow: 0px 1px 3px #CCCBC4;
 	-webkit-box-shadow: 0px 1px 3px #CCCBC4;
@@ -219,16 +221,16 @@ form h2 { text-transform: none !important;}
 	-moz-border-radius: 2px;
 	-webkit-border-radius: 2px;
 }
-#mi #main .bill h3 {
+.bill h3 {
 	color: #2F2114;
 	font-size: 1.2em;
 	font-weight: normal;
 	margin: 5px 0px;
 }
-#mi #main .bill .notes {float: left;clear: both; width: 100%;}
-#mi #main .bill .notes .type {float: left; font-weight: bold; padding: 3px; margin-right: 6px;}
-#mi #main .bill .notes .date {float: left; padding: 3px;}
-#mi #main .bill .notes .views {float: right; padding: 3px;}
+.bill .notes {float: left;clear: both; width: 100%;}
+.bill .notes .type {float: left; font-weight: bold; padding: 3px; margin-right: 6px;}
+.bill .notes .date {float: left; padding: 3px;}
+.bill .notes .views {float: right; padding: 3px;}
 
 #mi #main #graphs_tabs > div {height: 440px;}
 
@@ -306,8 +308,8 @@ form h2 { text-transform: none !important;}
 #main .stats p:first-child {font-size: 16px; margin-bottom: 6px;}
 #main .stats p:last-child {font-size: 12px; color: #5e5e5e;}
 #main .stats span {font-size: 18px; font-weight: bold;}
-#main .stats .positive {color: #008e29;}
-#main .stats .negative {color: #940d0a;}
+.positive {color: #008e29;}
+.negative {color: #940d0a;}
 
 /* Sponsor and Activity bar */
 
@@ -428,8 +430,10 @@ letter-spacing:-0.05em;
 }
 
 #invite a.action {
+font-size: 14px;
 float: right;
-margin: 6px 6px 0 0;
+margin: 11px 11px 0 0;
+padding: 6px 18px;
 }
 /*REST*/
 #rest {
@@ -1380,7 +1384,7 @@ padding: 5px 0px;
 margin-right: 10px;
 }
 #votaciones span.favor {
-color: #627B46;
+color: #008e29;
 font-weight: bold;
 }
 #votaciones span.contra {

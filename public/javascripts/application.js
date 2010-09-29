@@ -12,7 +12,7 @@ $(document).ready( function(){
 	  settings.data = settings.data || "";
 	  settings.data += (settings.data ? "&" : "") + "authenticity_token=" + encodeURIComponent(AUTH_TOKEN);
 	});
-	
+		
 	$("a[href='#']").click(function(){
 	  return false;
 	})
