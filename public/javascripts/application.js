@@ -21,7 +21,7 @@ $(document).ready( function(){
 	  $(".tabs ul li a").removeClass("active");
     $("a[href='"+$(this).attr("href")+"']").addClass("active");
 	  $.get($(this).attr("href"), null, null, 'script');
-	  $(".propuesta").hide();
+	  $(".bill").hide();
 	  $("#spinner").show();
 	  return false;
 	})

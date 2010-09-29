@@ -19,7 +19,7 @@
 	      <td><%=h member.state.name if member.state %></td>
 	      <td><%=h member.district.number if member.district %></td>
 	      <td> 
-					<% if admin?(current_user) %>
+					<% if can? :manage, Member %>
 						<%= link_to "Editar", edit_member_path(member) %>
 						<%= link_to "Eliminar", member, :method => :delete, :confirm => "¿Estas seguro que lo quieres eliminar?" %>
 					<% end %>
@@ -75,7 +75,7 @@
       <td><%=h member.state.name %></td>
       <td><%=h member.district.number if member.district %></td>
       <td> 
-				<% if admin?(current_user) %>
+				<% if can? :manage, Member %>
 					<%= link_to "Editar", edit_member_path(member) %>
 					<%= link_to "Eliminar", member, :method => :delete, :confirm => "¿Estas seguro que lo quieres eliminar?" %>
 				<% end %>

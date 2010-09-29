@@ -26,6 +26,8 @@
       <%= render :partial => 'bill', :collection => @bills %>
     </div>
   </div>
+  
+  <%= will_paginate @members, :previous_label => 'Anterior', :next_label => 'Siguiente' %>
 
   <% if admin?(current_user) %>
     <ul class="links">

@@ -1,4 +1,8 @@
 <div class="bill"> 
+	<div class="ribbon"> 
+		<p><!-- Día de introducción  --><br /><!-- Mes de introducción  --></p>	
+    
+	</div>
 	<h3><%= link_to bill.name, bill %></h3> 
 	<ul class="graficas">
 		<li class="ciudadana">
@@ -19,15 +23,28 @@
   			  <div class="barra neutral" style="width: <%= bill.member_votes_and_percents[5] %>%;">&nbsp; <%= show_votes?(2, bill.member_votes_and_percents) %></div>
   		  </div>
 		  </li>
+		  <% if bill.approved? %>
+		    <li class="resultado_si">Aprobada</li> 
+		  <% elsif bill.rejected? %>
+		    <li class="resultado_no">Rechazada</li> 
+		  <% end %>
+  	<% else %>
+  	  <li class="resultados"></li>
   	<% end %>
 	</ul>
 	
-	<div class="notes">
-	  <% if bill.latest_action %>
-  	  <div class="type"><%= t("."+bill.latest_action.action_type) %></div>
-  	  <div class="date"><%= l bill.latest_action.date, :format => :long %></div>
-	  <% end %>
-	  <div class="views">Visitas: <%= bill.total_views %></div>
-	</div>
-  
+	<ul id="bill_<%= bill.id %>" class="links">
+	  <% if current_user %>
+	    <% vote_object = current_user.vote_object(bill) %>
+			<% if vote_object %>
+			  <li class="voted"><div class="<%= choice_class(vote_object.vote) %>"><%= display_vote(vote_object.vote, bill) %></div></li>
+			<% else %>
+			  <li><%= link_to "Vota a favor", bill_votes_path(bill), :class => "vote si", 'data-vote' => 1, 'data-voteable' => "bill" %> </li>
+			  <li><%= link_to "Vota en contra", bill_votes_path(bill), :class => "vote no", 'data-vote' => 0, 'data-voteable' => "bill" %></li>
+			  <li><%= link_to "Abstente", bill_votes_path(bill), :class => "vote", 'data-vote' => -1, 'data-voteable' => "bill" %></li>
+			<% end %>
+  	<% else %>
+	    <li class="registro"><%= link_to "Regístrate para votar!", signup_path %></li>
+  	<% end %>
+	</ul>
 </div>

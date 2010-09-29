@@ -2,6 +2,8 @@ class MembersController < ApplicationController
   
   require 'fastercsv'
   
+  layout "application_new"
+  
   skip_before_filter :require_user, :only => [:show]
   load_and_authorize_resource
   
@@ -16,7 +18,6 @@ class MembersController < ApplicationController
         @members = Member.name_like(params[:q]) if params[:q]
       }
     end
-
   end
   
   def import
@@ -36,7 +37,7 @@ class MembersController < ApplicationController
     @search_member = SearchMember.new
     @parties = Party.all
     @states = State.all
-    @bills = Bill.voted.limit(5)
+    @votes = @member.votes.limit(5)
   end
   
   def new

@@ -61,7 +61,7 @@ module ApplicationHelper
   end
 
   def tab_class(params, type)
-    return "active" if params.blank? && type == "recent_popular"
+    return "active" if params.blank? && type == "most_viewed"
     "active" if params == type
   end
 

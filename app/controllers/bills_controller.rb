@@ -14,7 +14,7 @@ class BillsController < ApplicationController
     elsif params[:month] && params[:year]
       @bills = Bill.monthly(params[:month], params[:year])
     else
-      @bills = Bill.recent
+      @bills = Bill.recent.paginate(:page => params[:page], :per_page => 20)
     end
   end
   

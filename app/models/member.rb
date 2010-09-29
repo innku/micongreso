@@ -19,7 +19,8 @@ class Member < ActiveRecord::Base
   
   acts_as_voter
   
-  production = Rails.env.production?
+  #production = Rails.env.production?
+  production = true
   
   has_attached_file :picture, :styles => { :medium => "360x240>", :small => "150x100>", :thumb => "100x82>" },
                             :storage => (production ? :s3 : :filesystem),

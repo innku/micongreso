@@ -1,4 +1,11 @@
 es:
+  bills:
+    bill:
+      presentation:           "Presentación"
+      discussion:             "Discusión"
+      approval_congress:      "Aprobación"
+      signature:              "Promulgación"
+  
   activerecord:
     models:
       action:                 "Acción"

@@ -1,0 +1,36 @@
+<div id="comment_form" class="cien">
+	<h3>Enviar mensaje a diputado</h3>
+
+	<%= form_for [@member, @message] do |f| %>
+		<%= render "layouts/error_messages", :target => @message %>
+    
+    <% if current_user %>
+      <p>
+        <%= f.hidden_field :name %>
+        <%= f.hidden_field :email %>
+      </p>
+    <% else %>
+  		<div style="float: left; width: 50%; margin-right: 10px">
+  		  <p>
+    			<strong><%= f.label :name, "Nombre" %></strong><br />
+    			<%= f.text_field :name, :class => "texto" %>
+  			</p>
+  		</div>
+  		<div style="float: left; width: 40%">
+  		  <p>
+  		    <strong><%= f.label :email, "Correo electrónico" %></strong><br />
+    			<%= f.text_field :email, :class => "texto" %>
+  		  </p>
+  		</div>
+  	<% end %>
+  	<p>
+			<%= f.text_area :text, :rows => 6, :class => "comment_input texto" %>
+		</p>
+		<p style="clear: both;">
+			<%=raw recaptcha_tags(:display => {:theme => "clean"}) %>
+		</p>
+		<p>
+			<%= f.submit "Enviar mensaje", :class => "action" %>
+		</p>
+	<% end %>
+</div>

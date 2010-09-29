@@ -1,0 +1,17 @@
+<div class="box">
+  <h4>Datos Personales</h4>
+  
+  <% if @member.birthplace %>
+    <div>
+      <p>Lugar de Nacimiento:</p>
+      <p><%= @member.birthplace %></p>
+    </div>
+  <% end %>
+  
+  <% if @member.birthdate %>
+    <div>
+      <p>Fecha de Nacimiento:</p>
+      <p><%= l @member.birthdate, :format => :long %></p>
+    </div>
+  <% end %>
+</div>

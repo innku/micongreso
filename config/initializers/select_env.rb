@@ -11,6 +11,6 @@ when 'staging'
   $like = "LIKE"
 else
   $global_url = "http://localhost:3000"
-  $paperclip_bucket = "diputado_dev"
+  $paperclip_bucket = "diputado"
   $like = "LIKE"
 end

@@ -5,7 +5,6 @@ class Bill < ActiveRecord::Base
   has_many  :actions
   belongs_to  :sitting
   belongs_to  :sponsor, :class_name => "Member", :foreign_key => "member_id"
-  
   belongs_to  :congress, :class_name => "State"
   
   validates_presence_of :name, :description
@@ -159,6 +158,10 @@ class Bill < ActiveRecord::Base
   def update_week_views!
     self.week_views = self.views.last_week.count
     self.save
+  end
+  
+  def latest_action
+    self.actions.last if self.actions.any?
   end
   
   def deliver

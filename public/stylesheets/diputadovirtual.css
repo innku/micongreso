@@ -22,6 +22,14 @@ form h2 { text-transform: none !important;}
 #mi #main h4 {
 	margin: 0 0 6px;
 }
+#mi #main h5 {
+	margin: 3px;
+	color: #2E2013;
+	font-family: "union", palatino, georgia, times;
+	font-size: 12px;
+	letter-spacing: -.05em;
+	font-weight: normal;
+}
 
 /* LAYOUT CONTENIDO */
 #mi #main {
@@ -95,8 +103,11 @@ form h2 { text-transform: none !important;}
 	width: auto;
 	float: none;
 }
+#mi #main .inner-container .sidebar .content .box h4 {margin-bottom: 12px;}
 #mi #main .inner-container .sidebar .content .box p{margin: 6px 0;}
 #mi #main .inner-container .sidebar .content .box ul{padding: 0 18px;}
+#mi #main .inner-container .sidebar .content .box div p:first-child {font-size: 11px; margin: 0;}
+#mi #main .inner-container .sidebar .content .box div p:last-child {font-size: 13px; font-weight: bold; margin: 3px 0 9px 0;}
 
 /* Content Styles */
 
@@ -153,7 +164,6 @@ form h2 { text-transform: none !important;}
 }
 
 /* Search box */
-
 #mi #main .search_box {
 	background: #CCCBC5;
 	-moz-border-radius: 5px;
@@ -162,7 +172,6 @@ form h2 { text-transform: none !important;}
 	padding: 10px;
 	float: left;
 }
-
 #mi #main .search_box h1 {
 	color: #696055;
 	font-family: "union", palatino, georgia, times;
@@ -171,7 +180,6 @@ form h2 { text-transform: none !important;}
 	margin: 0px;
 	border-bottom: #A1A09B solid 1px;
 }
-
 #mi #main .search_box form input[type=text] {
 	border: #A1A09B solid 1px;
 	-moz-border-radius: 3px;
@@ -182,7 +190,6 @@ form h2 { text-transform: none !important;}
 	float: left;
 	width: 160px;
 }
-
 #mi #main .search_box form input.action {
 	border: none;
 	padding: 2px 10px;
@@ -190,7 +197,6 @@ form h2 { text-transform: none !important;}
 	margin-top: 10px;
 	margin-right: 0px;
 }
-
 
 /* Bills List */
 
@@ -200,9 +206,8 @@ form h2 { text-transform: none !important;}
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	padding: 5px;
+	margin-bottom: 15px;
 }
-
-
 #mi #main .bill {
 	padding: 15px;
 	-moz-box-shadow: 0px 1px 3px #CCCBC4;
@@ -214,22 +219,33 @@ form h2 { text-transform: none !important;}
 	-moz-border-radius: 2px;
 	-webkit-border-radius: 2px;
 }
-
 #mi #main .bill h3 {
 	color: #2F2114;
 	font-size: 1.2em;
 	font-weight: normal;
 	margin: 5px 0px;
 }
+#mi #main .bill .notes {float: left;clear: both; width: 100%;}
+#mi #main .bill .notes .type {float: left; font-weight: bold; padding: 3px; margin-right: 6px;}
+#mi #main .bill .notes .date {float: left; padding: 3px;}
+#mi #main .bill .notes .views {float: right; padding: 3px;}
 
 #mi #main #graphs_tabs > div {height: 440px;}
 
 
 /* Large Header */
 
-#mi #main .box > h1 {
-	margin: 18px;
+#mi #main .box > h1 {margin: 18px;}
+#mi #main .box > h1.slim {margin: 18px 18px 6px 18px;}
+#mi #main .box > ul.details {
+	font-family: georgia;
+	font-size: 13px;
+	font-weight: bold;
+	font-style: italic;
+	margin: 0 0 18px 0;
+	list-style-type: disc;
 }
+#mi #main .box > ul.details li {display: inline;}
 
 /* Tabs */
 .box > #tabs {
@@ -318,6 +334,7 @@ border: 1px solid #b4b6b6
 #activity .completed > .date {border-top: 1px solid #81A15B;}
 
 #description {padding: 18px 0 18px 0; clear: both;}
+
 
 /*MENU*/
 #nav ul {-moz-border-radius:8px;-webkit-border-radius: 8px;background:none repeat scroll 0 0 #ECECE9;float:right;list-style-type:none;margin:18px 0 0;padding:5px;}
@@ -412,7 +429,7 @@ letter-spacing:-0.05em;
 
 #invite a.action {
 float: right;
-margin: 10px 10px 0 0;
+margin: 6px 6px 0 0;
 }
 /*REST*/
 #rest {
@@ -618,6 +635,7 @@ ul.graficas {
 	float: left;
 	padding-left: 30px;
 }
+body.dashboard .graficas li {width:  550px;}
 .ciudadana {
 	background: #F4F4F3 url(/images/ciud.jpg) no-repeat 5px 5px;
 }
@@ -660,6 +678,7 @@ float: left;
 width: 460px;
 color: #fff;
 }
+body.dashboard .votos{width: 430px;}
 
 .votos .barra {
 float: left;
@@ -1250,17 +1269,28 @@ float: left;
 .dipufoto {
 float: left;
 border: #EEE solid 1px;
-margin: 0px 20px 15px 0px;
+margin: 18px 20px 18px 18px;
 background: #FFF;
-padding: 2px;
+padding: 0;
 position: relative;
+height: 100px;
+width: 82px;
+overflow: visible;
+	-moz-box-shadow: 0px 1px 3px #CCCBC4;
+	-webkit-box-shadow: 0px 1px 3px #CCCBC4;
 }
 .dipufoto .partido {
 position: absolute;
-bottom: 10px;
-left: -5px;
+bottom: -5px;
+right: -5px;
 width: 30px;
 height: 30px;
+}
+
+.dipufoto img {
+	padding: 0;
+	margin: 0;
+	border: none;
 }
 /*NOTAS*/
 .main_image {
@@ -2158,6 +2188,7 @@ PAGINATION
 .pagination {
 background: white;
 margin: 14px 6px;
+clear: both;
 /* self-clearing method: */ }
 .pagination a, .pagination span {
 padding: .2em .5em;
