@@ -32,60 +32,7 @@
     <div class="boxin">
       <div class="content">
         
-        <div id="proposed_bills">
-          <h3>Propuestas Presentadas <%= sponsored_bills_stats(@member) %></h3>
-          
-          <% if @bills.any? %>
-            <table class="resultados" cellspacing="0" cellpadding="0" border="0" width="100%">
-          	  <tr>
-                <th>Propuesta</th>
-          	  </tr>
-              <% @bills.each do |bill| %>
-                <tr>
-            	    <td><%= link_to(truncate(bill.name, :length => 100), bill) %></td>
-          	    </tr>
-              <% end %>
-            </table>
-          <% else %>
-            <h5>No ha presentado propuesta alguna</h5>
-          <% end %>
-          
-        </div>
-        
-        <div id="votaciones">
-        	<h3>Votaciones Recientes</h3>
-        	<table class="resultados" cellspacing="0" cellpadding="0" border="0" width="100%">
-        	  <tr>
-              <th>Propuesta</th>
-              <th width="120">Fecha</th>
-              <th width="70">Voto</th>
-        	  </tr>
-        	  <% @votes.each do |vote| %>
-        	    <tr>
-          	    <td><%= link_to(truncate(vote.voteable.name, :length => 60), vote.voteable) %></td>
-          	    <td><%= l vote.created_at.to_date, :format => :short %></td> 
-          	    <td><span class="<%= member_vote_class(vote).downcase %>"><%= member_vote(vote) %></span></td>
-        	    </tr>
-          	<% end %>
-        	</table>
-        </div>
-        
-        <div id="assistances">
-          <h3>Asistencia a sesiones <span><%= total_assistances(@member) %></span></h3>
-          
-          <table class="resultados" cellspacing="0" cellpadding="0" border="0" width="100%">
-        	  <tr>
-              <th width="120">Sesión</th>
-              <th width="70">Assistencia</th>
-        	  </tr>
-        	  <% @assistances.each do |assistance| %>
-        	    <tr>
-          	    <td><%= l assistance.sitting.date.to_date, :format => :long %></td> 
-          	    <td><%= display_assistance(assistance) %></td>
-        	    </tr>
-          	<% end %>
-        	</table>
-        </div>
+
                 
       </div>
     </div>
@@ -95,6 +42,7 @@
 <div class="section s-30">
 	<div class="sidebar">
 		<div class="content padded">
+		  <%= render :partial => "members/sidebar" %>
 		</div>
   </div>
 </div>
