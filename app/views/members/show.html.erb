@@ -71,6 +71,7 @@
         </div>
         
         <div id="assistances">
+          <h3>Asistencia a sesiones <span><%= total_assistances(@member) %></span></h3>
           
           <table class="resultados" cellspacing="0" cellpadding="0" border="0" width="100%">
         	  <tr>
@@ -80,7 +81,6 @@
         	  <% @assistances.each do |assistance| %>
         	    <tr>
           	    <td><%= l assistance.sitting.date.to_date, :format => :long %></td> 
-          	    <td><%= display_assistance(assistance) %></td>
         	    </tr>
           	<% end %>
         	</table>
