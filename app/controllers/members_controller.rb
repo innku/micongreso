@@ -34,6 +34,7 @@ class MembersController < ApplicationController
     @message = Message.new(options)
     @votes = @member.votes.limit(5)
     @assistances = @member.assistances.limit(5).includes(:sitting)
+    @bills = @member.bills.limit(3)
   end
   
   def new

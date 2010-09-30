@@ -5,6 +5,12 @@ es:
       discussion:             "Discusión"
       approval_congress:      "Aprobación"
       signature:              "Promulgación"
+  actions:
+    index:
+      presentation:           "Presentación"
+      discussion:             "Entra a Discusión"
+      approval_congress:      "Aprobación por Diputados"
+      signature:              "Promulgación"
   
   activerecord:
     models:

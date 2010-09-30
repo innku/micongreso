@@ -315,8 +315,13 @@ form h2 { text-transform: none !important;}
 
 #sponsor_and_activity {}
 #sponsor {float: left;}
-#sponsor img {float: left; margin-right: 9px;}
+#sponsor img {float: left; margin-right: 9px; border: 1px ;
+	border: #EEE solid 1px;
+	-moz-box-shadow: 0px 1px 3px #CCCBC4;
+	-webkit-box-shadow: 0px 1px 3px #CCCBC4;
+}
 #sponsor .info {float: left; width: 150px; font-size: 11px;}
+#sponsor .info a {text-decoration: underline;}
 #sponsor .info p {margin: 0 0 3px 0;}
 #activity {float: left; width: 394px;}
 #activity .action {float: left; width: 92px; text-align: center;

@@ -23,4 +23,8 @@ module MembersHelper
     percentage = number_to_percentage((absences.to_f/assistances.to_f)*100, :precision => 0)
     content_tag(:span, "#{assistances} de #{total_sessions} (Faltas #{percentage})")
   end
+  
+  def sponsored_bills_stats(member)
+    content_tag(:span, "(#{member.bills.count})")
+  end
 end

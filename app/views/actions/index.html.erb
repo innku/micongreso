@@ -16,15 +16,15 @@
       <div class="content">
         <table width="100%">
           <tr>
-            <th>Tipo</th>
-            <th>Fecha</th>
+            <th width="120px">Tipo</th>
+            <th width="150px">Fecha</th>
             <th>Texto</th>
           </tr>
 
         <% @actions.each do |action| %>
           <tr>
-            <td><%= link_to action.action_type, edit_admin_bill_action_path(@bill, action) %></td>
-            <td><%= l action.date %></td>
+            <td><%= t("."+action.action_type) %></td>
+            <td><%= l action.date, :format => :long %></td>
             <td><%= action.text %></td>
           </tr>
         <% end %>
