@@ -75,10 +75,13 @@
           
           <table class="resultados" cellspacing="0" cellpadding="0" border="0" width="100%">
         	  <tr>
-              <th width="120">Sesión</th>
               <th width="70">Assistencia</th>
         	  </tr>
-
+        	  <% @assistances.each do |assistance| %>
+        	    <tr>
+          	    <td><%= display_assistance(assistance) %></td>
+        	    </tr>
+          	<% end %>
         	</table>
         </div>
                 
