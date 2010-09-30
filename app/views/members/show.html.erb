@@ -32,29 +32,7 @@
     <div class="boxin">
       <div class="content">
         
-        <div id="proposed_bills">
-          <h3>Propuestas Presentadas <%= sponsored_bills_stats(@member) %></h3>
-          
-          
-        </div>
-        
-        <div id="votaciones">
-        	<h3>Votaciones Recientes</h3>
-        	<table class="resultados" cellspacing="0" cellpadding="0" border="0" width="100%">
-        	  <tr>
-              <th>Propuesta</th>
-              <th width="120">Fecha</th>
-              <th width="70">Voto</th>
-        	  </tr>
-        	  <% @votes.each do |vote| %>
-        	    <tr>
-          	    <td><%= link_to(truncate(vote.voteable.name, :length => 60), vote.voteable) %></td>
-          	    <td><%= l vote.created_at.to_date, :format => :short %></td> 
-          	    <td><span class="<%= member_vote_class(vote).downcase %>"><%= member_vote(vote) %></span></td>
-        	    </tr>
-          	<% end %>
-        	</table>
-        </div>
+
         
         <div id="assistances">
           <h3>Asistencia a sesiones <span><%= total_assistances(@member) %></span></h3>
