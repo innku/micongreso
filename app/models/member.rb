@@ -47,6 +47,7 @@ class Member < ActiveRecord::Base
   scope :name_like, lambda { |name| where("name #{$like} ?", "%#{name}%")}
   
   before_save :normalize_attributes
+  before_validation :clean_twitter_user
   
   def self.present_in_sitting(sitting)
     where('assistances.sitting_id = ? AND assistances.assisted = ?', sitting.id, true).includes(:assistances)
@@ -132,5 +133,9 @@ class Member < ActiveRecord::Base
   def normalize_attributes
     self.complete = true if self.valid?
     self.district_id = nil if self.proportional?
+  end
+  
+  def clean_twitter_user
+    self.twitter_user = read_attribute(:twitter_user).gsub(/@/, "")
   end
 end
