@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100923220754) do
+ActiveRecord::Schema.define(:version => 20101004151740) do
 
   create_table "actions", :force => true do |t|
     t.string   "action_type"
@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(:version => 20100923220754) do
     t.integer  "term_id"
     t.string   "status",               :default => "active"
     t.integer  "congress_id"
+    t.string   "twitter_user"
   end
 
   create_table "messages", :force => true do |t|

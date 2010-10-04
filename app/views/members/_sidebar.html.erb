@@ -46,5 +46,38 @@
   
   <%= link_to "Envíale un mensaje", new_member_message_path(@member), :class => "action send_message iframe" %>
   <div class="clear"></div>
-
 </div>
+
+<% unless @member.twitter_user.blank? %>
+  <script src="http://widgets.twimg.com/j/2/widget.js"></script>
+  <script>
+  new TWTR.Widget({
+    version: 2,
+    type: 'profile',
+    rpp: 4,
+    interval: 6000,
+    width: 238,
+    height: 230,
+    theme: {
+      shell: {
+        background: '#cccbc4',
+        color: '#630630'
+      },
+      tweets: {
+        background: '#ECECE9',
+        color: '#2e2013',
+        links: '#b63d45'
+      }
+    },
+    features: {
+      scrollbar: false,
+      loop: false,
+      live: true,
+      hashtags: true,
+      timestamp: true,
+      avatars: false,
+      behavior: 'all'
+    }
+  }).render().setUser('<%= @member.twitter_user %>').start();
+  </script>
+<% end %>
