@@ -13,7 +13,8 @@ class NewsController < ApplicationController
   
   def show
     @news = News.find(params[:id])
-    @related_news = News.tagged_with(@news.tags)-[@news]
+    @related_news = News.tagged_with(@news.tags)
+    @related_news -= [@news] if @related_news.any?
     @news.viewed!
   end
   

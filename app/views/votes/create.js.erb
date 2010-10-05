@@ -1,6 +1,10 @@
-<% if @show %>
-  $("#citizen_votes a").removeClass("voted");
-  $("#citizen_votes a.<%= vote_link_class(@vote) %>").addClass("voted");
-<% else %>
-  $("#<%= @voteable.class.name.downcase %>_<%= @voteable.id %>").html('<li class="voted"><div class="<%= choice_class(current_user.vote_choice(@voteable)) %>"><%= display_vote(current_user.vote_choice(@voteable), @voteable) %></div></li>');
+<% if @voteable.class.name == "News" %>
+  $("div.like").html('<%= link_to_like(@voteable, current_user) %>');
+<% elsif @voteable.class.name == "Bill"  %>
+  <% if @show %>
+    $("#citizen_votes a").removeClass("voted");
+    $("#citizen_votes a.<%= vote_link_class(@vote) %>").addClass("voted");
+  <% else %>
+    $("#<%= @voteable.class.name.downcase %>_<%= @voteable.id %>").html('<li class="voted"><div class="<%= choice_class(current_user.vote_choice(@voteable)) %>"><%= display_vote(current_user.vote_choice(@voteable), @voteable) %></div></li>');
+  <% end %>
 <% end %>

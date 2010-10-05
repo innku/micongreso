@@ -2,6 +2,14 @@
   Noticias
 <% end -%>
 
+<% content_for :toolbar do -%>
+  <% if can? :create, News %>
+    <div id="toolbar">
+  	  <%= link_to "Nueva Noticia", new_news_path %>
+  	</div>
+  <% end %>
+<% end -%>
+
 <div id="rest">
   <h2 class="section">Noticias</h2>
   
@@ -15,21 +23,8 @@
       		  <% end %>
       		  <p class="news_date"><%=h news.date %></p>
       			<h2><%= link_to news.title, news %></h2>
-      			<% if admin?(current_user) %>
-      				<span><%= link_to "Edit", edit_news_path(news) %></span>
-      			<% end %>
             
             <p><%=h news.abstract %></p>
-            
-      			<% if current_user %>
-      			  <ul id="news_<%= news.id %>" class="links">
-      			   	<% if current_user.voted_on?(news) %>
-          			  Me gusta
-          			<% else %>
-          			  <%= link_to "Me gusta", news_votes_path(news), :class => "vote", 'data-vote' => 1, 'data-voteable' => "news" %> 
-          			<% end %>
-      			  </ul>
-      			<% end %>
       		</div>
       	</div>
       <% end %>
@@ -67,7 +62,3 @@
 		</div>
   </div>
 </div>
-
-<% if admin?(current_user) %>
-	<p><%= link_to "Nueva Noticia", new_news_path %></p>
-<% end %>

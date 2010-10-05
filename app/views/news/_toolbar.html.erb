@@ -1,0 +1,9 @@
+<%= content_for :toolbar do -%>
+  <% if can? :manage, News %>
+    <div id="toolbar">
+  	  <%= link_to "Editar", edit_news_path(@news) %> |
+  	  <%= link_to "Eliminar", @news, :confirm => 'Are you sure?', :method => :delete %> |
+  	  <%= link_to "Regresar a noticias", news_index_path %>
+    </div>
+  <% end %>
+<% end -%>

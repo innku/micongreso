@@ -85,4 +85,18 @@ module ApplicationHelper
   def bill_status_class(bill, status)
     "selected" if bill.status == status
   end
+  
+  def link_to_like(voteable, user)
+    choice = true
+    text = "Me gusta"
+    vote_object = user.vote_object(voteable) if user
+    if vote_object
+      if vote_object.vote == true
+        choice = false
+        text = "Ya no me gusta"
+      end
+    end
+    
+    link_to content_tag(:span, text), send("#{voteable.class.name.downcase}_votes_path", voteable, :vote => choice.to_s), :class => "vote like", :remote => true, :method => :post
+  end
 end

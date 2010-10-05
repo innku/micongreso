@@ -156,7 +156,7 @@ form h2 { text-transform: none !important;}
 
 /* Admin Toolbar */
 
-#mi #main #toolbar {
+#toolbar {
 	border:4px solid #B63D46;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -295,6 +295,8 @@ form h2 { text-transform: none !important;}
 #main a span {padding-left: 26px;}
 #main a.si span {background: url(/images/si.gif) no-repeat 4px 2px;}
 #main a.no span {background: url(/images/no.gif) no-repeat 4px 3px;}
+#main a.like {width: 120px;}
+#main a.like span {padding: 0;}
 
 #main .stats {
 	color: #2E2013;
