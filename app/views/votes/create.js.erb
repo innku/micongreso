@@ -1,5 +1,8 @@
 <% if @voteable.class.name == "News" %>
   $("div.like").html('<%= link_to_like(@voteable, current_user) %>');
+<% elsif @voteable.class.name == "Comment" %>
+  $("#comment_<%= @voteable.id %> .title a.vote").remove();
+  $("#comment_<%= @voteable.id %> .title").prepend('<%= link_to_like(@voteable, current_user, :text => false, :icon => true, :only_positive => true) %>');
 <% elsif @voteable.class.name == "Bill"  %>
   <% if @show %>
     $("#citizen_votes a").removeClass("voted");

@@ -32,6 +32,10 @@ Micongreso::Application.routes.draw do
   resources :news do
     resources :comments, :votes
   end
+  
+  resources :comments do
+    resources :votes
+  end
     
   resources :search_members do
     get :group, :on => :collection

@@ -86,17 +86,21 @@ module ApplicationHelper
     "selected" if bill.status == status
   end
   
-  def link_to_like(voteable, user)
-    choice = true
-    text = "Me gusta"
+  def link_to_like(voteable, user, options={})
+    choice = options[:choice] || true
+    text = options[:text] || "Me gusta"
+    css_clases = ["vote", "like"]
+    css_clases += options[:class].split(" ") if options[:class]
     vote_object = user.vote_object(voteable) if user
-    if vote_object
-      if vote_object.vote == true
-        choice = false
-        text = "Ya no me gusta"
-      end
+    if vote_object && vote_object.vote == true
+      choice = false
+      text = "Ya no me gusta"
+      css_clases << "voted" if options[:only_positive]
     end
     
-    link_to content_tag(:span, text), send("#{voteable.class.name.downcase}_votes_path", voteable, :vote => choice.to_s), :class => "vote like", :remote => true, :method => :post
+    css_clases << "si" if options[:icon]
+    text = "" if options[:text] == false
+    
+    link_to content_tag(:span, text), send("#{voteable.class.name.downcase}_votes_path", voteable, :vote => choice.to_s), :class => css_clases.join(" "), :remote => true, :method => :post
   end
 end

@@ -1,0 +1,11 @@
+<div class="comment" id="comment_<%= comment.id %>">
+  <div class="title">
+    <h4><%=h comment.title %></h4>
+    <%= link_to_like(comment, current_user, :text => false, :icon => true, :only_positive => true) %>
+    <% if can? :manage, Comment %>
+  		<%= link_to "Eliminar", comment_votes_path(comment), :method => :delete, :confirm => "¿Esta seguro que lo desea eliminar?" %>
+  	<% end %>
+  	<div class="clear"></div>
+  </div>
+	<p><%=h comment.comment %></p>
+</div>

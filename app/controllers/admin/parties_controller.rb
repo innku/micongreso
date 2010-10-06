@@ -1,8 +1,7 @@
 module Admin
   class PartiesController < BaseController
     
-    load_and_authorize_resource :project
-    load_and_authorize_resource :task, :through => :project
+    load_and_authorize_resource
     
     def index
       @parties = Party.all

@@ -21,7 +21,7 @@ class News < ActiveRecord::Base
                             :default_url => "/images/missing_news.png"
 
   validates_attachment_size         :photo, :less_than => 10.megabytes
-  validates_attachment_content_type :photo, :content_type => ['image/jpeg','image/jpg','image/jpeg','image/pjpeg','image/png','image/x-png','image/gif']
+  validates_attachment_content_type :photo, :content_type => ['image/jpeg','image/jpg','image/jpeg','image/pjpeg','image/png','image/x-png','image/gif'], :allow_nil => true
   
   scope :ordered, order("created_at DESC")
   scope :latest, limit(5).order("created_at DESC")

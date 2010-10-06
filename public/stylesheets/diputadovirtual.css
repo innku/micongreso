@@ -1189,10 +1189,10 @@ clear: both;
 }
 /*COMMENTS*/
 .all_comments {
-width: 100%;
-float: left;
-padding: 0px;
-margin: 0px;
+	width: 100%;
+	float: left;
+	padding: 0px;
+	margin: 0px;
 }
 #interna h3 {
 font-family: "union", palatino, georgia, times;
@@ -1203,31 +1203,63 @@ color: #333;
 border-top: #EEE 3px solid;
 padding: 10px 0px;
 }
+
 .all_comments .comment {
-padding: 10px;
-border: 1px solid #EEE;
-margin-top: 10px;
--moz-border-radius: 10px;
--webkit-border-radius: 10px;
-background: #FFF8F7;
+	font-family: georgia;
+	font-style: italic;
+	padding: 2px;
+	border: 1px solid #EEE;
+	margin-top: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	background: #FFF8F7;
+	float: left;
+	width: 100%;
 }
-.all_comments .comment {
-font-family: georgia;
-font-style: italic;
+.all_comments .comment .title {
+	background: #d7c7c2;
+	border: 1px solid #d7a993;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
 }
 .comment h4 {
-margin: 5px 0 0 0;
-color: #663300 !important;
-font-size: 1.2em;
-border: none;
-padding: 0px;
-text-transform: none;
+	margin: 5px 0 0 0;
+	color: #663300 !important;
+	font-size: 1.2em;
+	border: none !important;
+	padding: 3px 9px;
+	text-transform: none;
+	float: left;
 }
+.comment .title a {
+	float: right;
+	margin: 3px 6px !important;
+	width: 12px !important;
+	height: 15px;
+	
+}
+
+.comment .title a span {
+	width: 12px !important;
+	height: 15px !important;
+	display: block;
+}
+
+.comment .title a.si span {
+	background: url(/images/si.gif) no-repeat 0px 0px !important;
+	padding: 0 !important;
+}
+
+.comment p {
+	padding: 3px 9px !important;
+}
+
 .all_comments #comment_form {
-float: left;
-width: 100%;
-margin: 20px 0px;
+	float: left;
+	width: 100%;
+	margin: 20px 0px;
 }
+
 #interna h4 {
 margin: 0px;
 color: #666;

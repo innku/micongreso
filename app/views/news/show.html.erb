@@ -27,51 +27,12 @@
         <% end %>
         
         <% if @news.photo? %>
-          <div class="main_image"><%= @news.photo.url(:medium) %></div>
+          <div class="main_image"><%= image_tag(@news.photo.url(:medium)) %></div>
         <% end %>
         
         <p><%=raw @news.body %></p>
         
-        <div class="all_comments">
-          <h3>Comentarios (<%= @news.comments.size %>)</h3>
-          <div class="comments">
-          	<% for comment in @news.comments %>
-          		<div class="comment">
-          			<h4><%=h comment.title %></h4>
-          			<p><%=h comment.comment %></p>
-          			<% if can? :manage, News %>
-          				<%= link_to "Eliminar", news_comment_path(@news, comment), :method => :delete, :confirm => "¿Esta seguro que lo desea eliminar?" %>
-          			<% end %>
-          		</div>
-          	<% end %>
-          </div>
-          <div id="comment_form">
-            <h4>Envíanos tus comentarios:</h4>
-            
-            <p>Para comentar sobre esta noticia es necesario que te registres en mi congreso.</p>
-            <% if current_user %>
-            	<%= form_for [@news, Comment.new] do |f| %>
-            		<%= render "layouts/error_messages", :target => Comment.new %>
-            		<p>
-            			<strong><%= f.label :title, "Título" %></strong> <br />
-            			<%= f.text_field :title, :class => "comment_input" %>
-            		</p>
-            		<p>
-            			<strong><%= f.label :comment, "Comentario" %></strong> <br />
-            			<%= f.text_area :comment, :rows => 6, :cols => 50, :class => "comment_input" %>
-            		</p>
-            		<p>
-            			<%=raw recaptcha_tags(:display => {:theme => "clean"}) %>
-            		</p>
-            		<p>
-            			<%= f.submit "Enviar Comentario", :class => "action" %>
-            		</p>
-            	<% end %>
-            <% else %>
-              <%= link_to "¡Regístrate y opina!", signup_path, :class => "action" %>
-            <% end %>
-          </div>
-        </div>
+        <%= render :partial => "comments/comments", :locals => {:commentable => @news} %>
       </div>
     </div>
   </div>

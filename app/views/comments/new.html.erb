@@ -1,19 +1,21 @@
+<h2 class="section">Comentarios</h2>
+
 <div class="section s-70">
   <div class="box">
-    <div class="boxin">	
-      <h1>Comentarios</h1>
-      
-      <div id="comment_form">
-      	<h4>Envíanos tus comentarios:</h4>
-        
-        <% if current_user %>
-          <%= render :partial => "comments/form" %>
-        <% else %>
-          <p>Para comentar sobre esta propuesta es necesario que te registres en mi congreso.</p>
-          <%= link_to "¡Regístrate y opina!", signup_path, :class => "action" %>
-        <% end %>
+    <div class="boxin">
+      <div class="content">
+
+        <div id="comment_form">
+        	<h4>Envíanos tus comentarios:</h4>
+
+          <% if current_user %>
+            <%= render :partial => "comments/form" %>
+          <% else %>
+            <p>Para comentar sobre esta propuesta es necesario que te registres en mi congreso.</p>
+            <%= link_to "¡Regístrate y opina!", signup_path, :class => "action" %>
+          <% end %>
+        </div>
       </div>
-      
     </div>
   </div>
 </div>

@@ -28,6 +28,8 @@ class VotesController < ApplicationController
       @voteable = Bill.find(params[:bill_id])
     elsif params[:news_id]
       @voteable = News.find(params[:news_id])
+    elsif params[:comment_id]
+      @voteable = Comment.find(params[:comment_id])
     end
   end
 

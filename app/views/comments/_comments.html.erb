@@ -1,0 +1,18 @@
+<div class="all_comments">
+  <h3>Comentarios (<%= commentable.comments.size %>)</h3>
+  <div class="comments">
+  	<%= render :partial => commentable.comments %>
+  </div>
+
+  <div id="comment_form">
+  	<h4>Envíanos tus comentarios:</h4>
+
+    <% if current_user %>
+      <% @commentable = commentable unless @commentable %>
+      <%= render :partial => "comments/form" %>
+    <% else %>
+      <p>Para comentar sobre esta propuesta es necesario que te registres en mi congreso.</p>
+      <%= link_to "¡Regístrate y opina!", signup_path, :class => "action" %>
+    <% end %>
+  </div>
+</div>

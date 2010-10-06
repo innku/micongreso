@@ -1,5 +1,6 @@
-<%= form_for [@bill, Comment.new] do |f| %>
-	<%= render "layouts/error_messages", :target => @bill %>
+<% @comment = Comment.new unless @comment %>
+<%= form_for [@commentable, @comment] do |f| %>
+	<%= render "layouts/error_messages", :target => @comment %>
 	<p>
 		<strong><%= f.label :title, "Título" %></strong> <br />
 		<%= f.text_field :title, :class => "comment_input" %>
